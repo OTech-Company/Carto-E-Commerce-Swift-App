@@ -11,6 +11,12 @@ import SwiftUI
 struct CartoApp: App {
     let persistenceController = PersistenceController.shared
 
+
+    init() {
+        let container = AppContainer()
+        ServiceLocator.shared.register(container: container)
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
