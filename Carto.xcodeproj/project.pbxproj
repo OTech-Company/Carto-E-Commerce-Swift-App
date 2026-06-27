@@ -203,7 +203,6 @@
 		6FB176ED2FEFE3140008DDDC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FB1761D2FEFE3140008DDDC /* Localizable.strings */; };
 		D9EB9A7B2FEFD04E005CE9A4 /* CartoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A7A2FEFD04E005CE9A4 /* CartoApp.swift */; };
 		D9EB9A7D2FEFD04E005CE9A4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A7C2FEFD04E005CE9A4 /* ContentView.swift */; };
-		D9EB9A7F2FEFD058005CE9A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9A7E2FEFD058005CE9A4 /* Assets.xcassets */; };
 		D9EB9A822FEFD058005CE9A4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9A812FEFD058005CE9A4 /* Preview Assets.xcassets */; };
 		D9EB9A842FEFD058005CE9A4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A832FEFD058005CE9A4 /* Persistence.swift */; };
 		D9EB9A872FEFD058005CE9A4 /* Carto.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A852FEFD058005CE9A4 /* Carto.xcdatamodeld */; };
@@ -427,7 +426,6 @@
 		D9EB9A772FEFD04D005CE9A4 /* Carto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Carto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9EB9A7A2FEFD04E005CE9A4 /* CartoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoApp.swift; sourceTree = "<group>"; };
 		D9EB9A7C2FEFD04E005CE9A4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		D9EB9A7E2FEFD058005CE9A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D9EB9A812FEFD058005CE9A4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D9EB9A832FEFD058005CE9A4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		D9EB9A862FEFD058005CE9A4 /* Carto.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Carto.xcdatamodel; sourceTree = "<group>"; };
@@ -1434,7 +1432,6 @@
 				6FB1762A2FEFE3140008DDDC /* Utils */,
 				D9EB9A7A2FEFD04E005CE9A4 /* CartoApp.swift */,
 				D9EB9A7C2FEFD04E005CE9A4 /* ContentView.swift */,
-				D9EB9A7E2FEFD058005CE9A4 /* Assets.xcassets */,
 				D9EB9A832FEFD058005CE9A4 /* Persistence.swift */,
 				D9EB9A852FEFD058005CE9A4 /* Carto.xcdatamodeld */,
 				D9EB9A802FEFD058005CE9A4 /* Preview Content */,
@@ -1572,7 +1569,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9EB9A822FEFD058005CE9A4 /* Preview Assets.xcassets in Resources */,
-				D9EB9A7F2FEFD058005CE9A4 /* Assets.xcassets in Resources */,
 				6FB176EC2FEFE3140008DDDC /* Assets.xcassets in Resources */,
 				6FB176ED2FEFE3140008DDDC /* Localizable.strings in Resources */,
 			);
