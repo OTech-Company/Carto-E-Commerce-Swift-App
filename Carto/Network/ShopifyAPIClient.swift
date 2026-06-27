@@ -1,7 +1,6 @@
 import Foundation
 import Combine
 
-// Central network client — all features call this, nothing else
 final class ShopifyAPIClient {
 
     static let shared = ShopifyAPIClient()
@@ -10,10 +9,9 @@ final class ShopifyAPIClient {
 
     private init() {
         self.session = .shared
-        self.requestBuilder = ShopifyRequest(token: Constants.shopifyAccessToken)
+        self.requestBuilder = ShopifyRequest(token: NetworkConstants.shopifyAccessToken)
     }
 
-    // Async/await — primary API for all ViewModels
     func request<T: Decodable>(
         endpoint: ShopifyEndpoint,
         body: [String: Any]? = nil,

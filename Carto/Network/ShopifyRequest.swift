@@ -1,9 +1,8 @@
 import Foundation
 
-// Builds a URLRequest from any ShopifyEndpoint
 struct ShopifyRequest {
 
-    private let baseURL = "https://YOUR-STORE.myshopify.com/api/2024-01"
+    private let baseURL = NetworkConstants.baseURL
     private let token: String
 
     init(token: String) {
@@ -20,7 +19,6 @@ struct ShopifyRequest {
             throw NetworkError.invalidURL
         }
 
-        // Attach query params if any
         if let params = queryParams {
             components.queryItems = params.map {
                 URLQueryItem(name: $0.key, value: $0.value)
@@ -33,10 +31,9 @@ struct ShopifyRequest {
 
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.httpMethod
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(token, forHTTPHeaderField: "X-Shopify-Storefront-Access-Token")
+        request.setValue(NetworkConstants.contentType, forHTTPHeaderField: "Content-Type")
+        request.setValue(token, forHTTPHeaderField: NetworkConstants.accessTokenHeader)
 
-        // Attach body for POST/PUT requests
         if let body = body {
             request.httpBody = try? JSONSerialization.data(withJSONObject: body)
         }
