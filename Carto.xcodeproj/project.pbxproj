@@ -205,7 +205,6 @@
 		D9EB9A7D2FEFD04E005CE9A4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A7C2FEFD04E005CE9A4 /* ContentView.swift */; };
 		D9EB9A822FEFD058005CE9A4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9A812FEFD058005CE9A4 /* Preview Assets.xcassets */; };
 		D9EB9A842FEFD058005CE9A4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A832FEFD058005CE9A4 /* Persistence.swift */; };
-		D9EB9A872FEFD058005CE9A4 /* Carto.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A852FEFD058005CE9A4 /* Carto.xcdatamodeld */; };
 		D9EB9A912FEFD058005CE9A4 /* CartoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A902FEFD058005CE9A4 /* CartoTests.swift */; };
 		D9EB9A9B2FEFD058005CE9A4 /* CartoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A9A2FEFD058005CE9A4 /* CartoUITests.swift */; };
 		D9EB9A9D2FEFD058005CE9A4 /* CartoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A9C2FEFD058005CE9A4 /* CartoUITestsLaunchTests.swift */; };
@@ -428,7 +427,6 @@
 		D9EB9A7C2FEFD04E005CE9A4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D9EB9A812FEFD058005CE9A4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D9EB9A832FEFD058005CE9A4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		D9EB9A862FEFD058005CE9A4 /* Carto.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Carto.xcdatamodel; sourceTree = "<group>"; };
 		D9EB9A8C2FEFD058005CE9A4 /* CartoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CartoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9EB9A902FEFD058005CE9A4 /* CartoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoTests.swift; sourceTree = "<group>"; };
 		D9EB9A962FEFD058005CE9A4 /* CartoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CartoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1433,7 +1431,6 @@
 				D9EB9A7A2FEFD04E005CE9A4 /* CartoApp.swift */,
 				D9EB9A7C2FEFD04E005CE9A4 /* ContentView.swift */,
 				D9EB9A832FEFD058005CE9A4 /* Persistence.swift */,
-				D9EB9A852FEFD058005CE9A4 /* Carto.xcdatamodeld */,
 				D9EB9A802FEFD058005CE9A4 /* Preview Content */,
 			);
 			path = Carto;
@@ -1790,7 +1787,6 @@
 				6FB176E92FEFE3140008DDDC /* ProductReviewSummaryView.swift in Sources */,
 				6FB176EA2FEFE3140008DDDC /* ProfileView.swift in Sources */,
 				6FB176EB2FEFE3140008DDDC /* ProductImageCell.swift in Sources */,
-				D9EB9A872FEFD058005CE9A4 /* Carto.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2117,16 +2113,6 @@
 				6FB1762B2FEFE3140008DDDC /* Carto.xcdatamodel */,
 			);
 			currentVersion = 6FB1762B2FEFE3140008DDDC /* Carto.xcdatamodel */;
-			path = Carto.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		D9EB9A852FEFD058005CE9A4 /* Carto.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				D9EB9A862FEFD058005CE9A4 /* Carto.xcdatamodel */,
-			);
-			currentVersion = D9EB9A862FEFD058005CE9A4 /* Carto.xcdatamodel */;
 			path = Carto.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
