@@ -52,7 +52,6 @@
 		6FB176562FEFE3140008DDDC /* CategoriesProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175562FEFE3140008DDDC /* CategoriesProductsViewModel.swift */; };
 		6FB176572FEFE3140008DDDC /* BrandsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175412FEFE3140008DDDC /* BrandsHeaderView.swift */; };
 		6FB176582FEFE3140008DDDC /* AuthForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175362FEFE3140008DDDC /* AuthForgotPasswordViewModel.swift */; };
-		6FB176592FEFE3140008DDDC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175772FEFE3140008DDDC /* HomeView.swift */; };
 		6FB1765A2FEFE3140008DDDC /* ShopifyAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB176152FEFE3140008DDDC /* ShopifyAPIClient.swift */; };
 		6FB1765B2FEFE3140008DDDC /* CartItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB176052FEFE3140008DDDC /* CartItemEntity.swift */; };
 		6FB1765C2FEFE3140008DDDC /* CategoriesSubcategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1754F2FEFE3140008DDDC /* CategoriesSubcategoryListView.swift */; };
@@ -143,7 +142,6 @@
 		6FB176B12FEFE3140008DDDC /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175182FEFE3140008DDDC /* String+Extensions.swift */; };
 		6FB176B22FEFE3140008DDDC /* AdsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175262FEFE3140008DDDC /* AdsViewModel.swift */; };
 		6FB176B32FEFE3140008DDDC /* OrderTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175882FEFE3140008DDDC /* OrderTrackingView.swift */; };
-		6FB176B42FEFE3140008DDDC /* HomeBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175792FEFE3140008DDDC /* HomeBannerView.swift */; };
 		6FB176B52FEFE3140008DDDC /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175102FEFE3140008DDDC /* NavigationRouter.swift */; };
 		6FB176B62FEFE3140008DDDC /* AuthLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175372FEFE3140008DDDC /* AuthLoginViewModel.swift */; };
 		6FB176B72FEFE3140008DDDC /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB176222FEFE3140008DDDC /* CoreDataStack.swift */; };
@@ -201,12 +199,13 @@
 		6FB176EB2FEFE3140008DDDC /* ProductImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175A32FEFE3140008DDDC /* ProductImageCell.swift */; };
 		6FB176EC2FEFE3140008DDDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB1761A2FEFE3140008DDDC /* Assets.xcassets */; };
 		6FB176ED2FEFE3140008DDDC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FB1761D2FEFE3140008DDDC /* Localizable.strings */; };
+		D5547BEE2FEFE7D2008564EF /* HomeBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5547BED2FEFE7D2008564EF /* HomeBannerView.swift */; };
+		D5547BF02FEFF96C008564EF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5547BEF2FEFF96C008564EF /* HomeView.swift */; };
+		D5547BF22FEFFB6B008564EF /* ADEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5547BF12FEFFB51008564EF /* ADEntity.swift */; };
 		D9EB9A7B2FEFD04E005CE9A4 /* CartoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A7A2FEFD04E005CE9A4 /* CartoApp.swift */; };
 		D9EB9A7D2FEFD04E005CE9A4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A7C2FEFD04E005CE9A4 /* ContentView.swift */; };
-		D9EB9A7F2FEFD058005CE9A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9A7E2FEFD058005CE9A4 /* Assets.xcassets */; };
 		D9EB9A822FEFD058005CE9A4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9EB9A812FEFD058005CE9A4 /* Preview Assets.xcassets */; };
 		D9EB9A842FEFD058005CE9A4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A832FEFD058005CE9A4 /* Persistence.swift */; };
-		D9EB9A872FEFD058005CE9A4 /* Carto.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A852FEFD058005CE9A4 /* Carto.xcdatamodeld */; };
 		D9EB9A912FEFD058005CE9A4 /* CartoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A902FEFD058005CE9A4 /* CartoTests.swift */; };
 		D9EB9A9B2FEFD058005CE9A4 /* CartoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A9A2FEFD058005CE9A4 /* CartoUITests.swift */; };
 		D9EB9A9D2FEFD058005CE9A4 /* CartoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A9C2FEFD058005CE9A4 /* CartoUITestsLaunchTests.swift */; };
@@ -297,8 +296,6 @@
 		6FB175732FEFE3140008DDDC /* HomeBrandCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBrandCardCell.swift; sourceTree = "<group>"; };
 		6FB175742FEFE3140008DDDC /* HomeCategoryChipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategoryChipCell.swift; sourceTree = "<group>"; };
 		6FB175752FEFE3140008DDDC /* HomeProductCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProductCardCell.swift; sourceTree = "<group>"; };
-		6FB175772FEFE3140008DDDC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		6FB175792FEFE3140008DDDC /* HomeBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBannerView.swift; sourceTree = "<group>"; };
 		6FB1757A2FEFE3140008DDDC /* HomeFeaturedSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeaturedSectionView.swift; sourceTree = "<group>"; };
 		6FB1757D2FEFE3140008DDDC /* HomeBannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBannerViewModel.swift; sourceTree = "<group>"; };
 		6FB1757E2FEFE3140008DDDC /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -424,13 +421,14 @@
 		6FB176282FEFE3140008DDDC /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		6FB176292FEFE3140008DDDC /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		6FB1762B2FEFE3140008DDDC /* Carto.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Carto.xcdatamodel; sourceTree = "<group>"; };
+		D5547BED2FEFE7D2008564EF /* HomeBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBannerView.swift; sourceTree = "<group>"; };
+		D5547BEF2FEFF96C008564EF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		D5547BF12FEFFB51008564EF /* ADEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADEntity.swift; sourceTree = "<group>"; };
 		D9EB9A772FEFD04D005CE9A4 /* Carto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Carto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9EB9A7A2FEFD04E005CE9A4 /* CartoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoApp.swift; sourceTree = "<group>"; };
 		D9EB9A7C2FEFD04E005CE9A4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		D9EB9A7E2FEFD058005CE9A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D9EB9A812FEFD058005CE9A4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D9EB9A832FEFD058005CE9A4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		D9EB9A862FEFD058005CE9A4 /* Carto.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Carto.xcdatamodel; sourceTree = "<group>"; };
 		D9EB9A8C2FEFD058005CE9A4 /* CartoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CartoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9EB9A902FEFD058005CE9A4 /* CartoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoTests.swift; sourceTree = "<group>"; };
 		D9EB9A962FEFD058005CE9A4 /* CartoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CartoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -850,7 +848,7 @@
 		6FB175782FEFE3140008DDDC /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				6FB175772FEFE3140008DDDC /* HomeView.swift */,
+				D5547BEF2FEFF96C008564EF /* HomeView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -858,8 +856,8 @@
 		6FB1757B2FEFE3140008DDDC /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				6FB175792FEFE3140008DDDC /* HomeBannerView.swift */,
 				6FB1757A2FEFE3140008DDDC /* HomeFeaturedSectionView.swift */,
+				D5547BED2FEFE7D2008564EF /* HomeBannerView.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -1300,6 +1298,7 @@
 		6FB176122FEFE3140008DDDC /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				D5547BF12FEFFB51008564EF /* ADEntity.swift */,
 				6FB176012FEFE3140008DDDC /* AddressEntity.swift */,
 				6FB176022FEFE3140008DDDC /* AppUserEntity.swift */,
 				6FB176032FEFE3140008DDDC /* BannerEntity.swift */,
@@ -1351,13 +1350,6 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		6FB1761C2FEFE3140008DDDC /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
 		6FB1761E2FEFE3140008DDDC /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -1370,7 +1362,6 @@
 			isa = PBXGroup;
 			children = (
 				6FB1761B2FEFE3140008DDDC /* Assets */,
-				6FB1761C2FEFE3140008DDDC /* Fonts */,
 				6FB1761E2FEFE3140008DDDC /* Localization */,
 			);
 			path = Resources;
@@ -1434,9 +1425,7 @@
 				6FB1762A2FEFE3140008DDDC /* Utils */,
 				D9EB9A7A2FEFD04E005CE9A4 /* CartoApp.swift */,
 				D9EB9A7C2FEFD04E005CE9A4 /* ContentView.swift */,
-				D9EB9A7E2FEFD058005CE9A4 /* Assets.xcassets */,
 				D9EB9A832FEFD058005CE9A4 /* Persistence.swift */,
-				D9EB9A852FEFD058005CE9A4 /* Carto.xcdatamodeld */,
 				D9EB9A802FEFD058005CE9A4 /* Preview Content */,
 			);
 			path = Carto;
@@ -1572,7 +1561,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9EB9A822FEFD058005CE9A4 /* Preview Assets.xcassets in Resources */,
-				D9EB9A7F2FEFD058005CE9A4 /* Assets.xcassets in Resources */,
 				6FB176EC2FEFE3140008DDDC /* Assets.xcassets in Resources */,
 				6FB176ED2FEFE3140008DDDC /* Localizable.strings in Resources */,
 			);
@@ -1610,6 +1598,7 @@
 				6FB176312FEFE3140008DDDC /* CouponCodeFieldView.swift in Sources */,
 				6FB176322FEFE3140008DDDC /* ShoppingCartCoordinator.swift in Sources */,
 				6FB176332FEFE3140008DDDC /* ProductDTO.swift in Sources */,
+				D5547BF22FEFFB6B008564EF /* ADEntity.swift in Sources */,
 				6FB176342FEFE3140008DDDC /* PaymentDTO.swift in Sources */,
 				6FB176352FEFE3140008DDDC /* CartViewModel.swift in Sources */,
 				6FB176362FEFE3140008DDDC /* HomeFeaturedSectionViewModel.swift in Sources */,
@@ -1647,7 +1636,6 @@
 				6FB176562FEFE3140008DDDC /* CategoriesProductsViewModel.swift in Sources */,
 				6FB176572FEFE3140008DDDC /* BrandsHeaderView.swift in Sources */,
 				6FB176582FEFE3140008DDDC /* AuthForgotPasswordViewModel.swift in Sources */,
-				6FB176592FEFE3140008DDDC /* HomeView.swift in Sources */,
 				6FB1765A2FEFE3140008DDDC /* ShopifyAPIClient.swift in Sources */,
 				6FB1765B2FEFE3140008DDDC /* CartItemEntity.swift in Sources */,
 				6FB1765C2FEFE3140008DDDC /* CategoriesSubcategoryListView.swift in Sources */,
@@ -1693,6 +1681,7 @@
 				6FB176842FEFE3140008DDDC /* FavoriteItemMO.swift in Sources */,
 				6FB176852FEFE3140008DDDC /* AuthHeaderView.swift in Sources */,
 				6FB176862FEFE3140008DDDC /* PaymentConfirmationView.swift in Sources */,
+				D5547BF02FEFF96C008564EF /* HomeView.swift in Sources */,
 				6FB176872FEFE3140008DDDC /* PaymentConfirmationViewModel.swift in Sources */,
 				6FB176882FEFE3140008DDDC /* ProductReviewsView.swift in Sources */,
 				6FB176892FEFE3140008DDDC /* CouponEntity.swift in Sources */,
@@ -1738,7 +1727,6 @@
 				6FB176B12FEFE3140008DDDC /* String+Extensions.swift in Sources */,
 				6FB176B22FEFE3140008DDDC /* AdsViewModel.swift in Sources */,
 				6FB176B32FEFE3140008DDDC /* OrderTrackingView.swift in Sources */,
-				6FB176B42FEFE3140008DDDC /* HomeBannerView.swift in Sources */,
 				6FB176B52FEFE3140008DDDC /* NavigationRouter.swift in Sources */,
 				6FB176B62FEFE3140008DDDC /* AuthLoginViewModel.swift in Sources */,
 				6FB176B72FEFE3140008DDDC /* CoreDataStack.swift in Sources */,
@@ -1765,6 +1753,7 @@
 				6FB176CC2FEFE3140008DDDC /* SearchResultsViewModel.swift in Sources */,
 				6FB176CD2FEFE3140008DDDC /* PaymentCoordinator.swift in Sources */,
 				6FB176CE2FEFE3140008DDDC /* ProductVariantsViewModel.swift in Sources */,
+				D5547BEE2FEFE7D2008564EF /* HomeBannerView.swift in Sources */,
 				6FB176CF2FEFE3140008DDDC /* LanguageSettingsView.swift in Sources */,
 				6FB176D02FEFE3140008DDDC /* SearchResultsView.swift in Sources */,
 				6FB176D12FEFE3140008DDDC /* CouponEntryViewModel.swift in Sources */,
@@ -1794,7 +1783,6 @@
 				6FB176E92FEFE3140008DDDC /* ProductReviewSummaryView.swift in Sources */,
 				6FB176EA2FEFE3140008DDDC /* ProfileView.swift in Sources */,
 				6FB176EB2FEFE3140008DDDC /* ProductImageCell.swift in Sources */,
-				D9EB9A872FEFD058005CE9A4 /* Carto.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2121,16 +2109,6 @@
 				6FB1762B2FEFE3140008DDDC /* Carto.xcdatamodel */,
 			);
 			currentVersion = 6FB1762B2FEFE3140008DDDC /* Carto.xcdatamodel */;
-			path = Carto.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		D9EB9A852FEFD058005CE9A4 /* Carto.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				D9EB9A862FEFD058005CE9A4 /* Carto.xcdatamodel */,
-			);
-			currentVersion = D9EB9A862FEFD058005CE9A4 /* Carto.xcdatamodel */;
 			path = Carto.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
