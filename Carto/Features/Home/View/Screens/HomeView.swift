@@ -7,6 +7,15 @@
 
 import SwiftUI
 
+struct ProductEntity2: Identifiable {
+    let id = UUID()
+    let name: String
+    let description: String
+    let price: Double
+    let imageName: String
+    let rate: Double
+}
+
 struct HomeView: View {
 
     //=============================Dummy data ===================================
@@ -28,29 +37,29 @@ struct HomeView: View {
         ),
     ]
 
-    let products: [ProductEntity] = [
-        ProductEntity(
+    let products: [ProductEntity2] = [
+        ProductEntity2(
             name: "Product 1",
             description: "Description 1",
             price: 10.0,
             imageName: "Green 1",
             rate: 3.4
         ),
-        ProductEntity(
+        ProductEntity2(
             name: "Product 2",
             description: "Description 2",
             price: 10.0,
             imageName: "Green 1",
             rate: 3.4
         ),
-        ProductEntity(
+        ProductEntity2(
             name: "Product 3",
             description: "Description 3",
             price: 10.0,
             imageName: "Green 1",
             rate: 3.4
         ),
-        ProductEntity(
+        ProductEntity2(
             name: "Product 4",
             description: "Description 4",
             price: 10.0,

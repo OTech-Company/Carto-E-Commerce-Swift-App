@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeProductCardCell: View {
-    let product: ProductEntity
+    let product: ProductEntity2
     let onTab: () -> Void
     let onAddToFav: () -> Void
     
