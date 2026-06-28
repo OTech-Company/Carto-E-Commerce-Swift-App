@@ -55,6 +55,8 @@ struct HomeView: View {
         ),
     ]
 
+    let brandsLogos = ["brand1", "brand2", "brand3", "brand4"]
+
     @State private var currentIndex: Int = 0
 
     let timer = Timer.publish(
@@ -70,7 +72,7 @@ struct HomeView: View {
 
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(alignment: .leading) {
                 TabView(selection: $currentIndex) {
                     ForEach(0..<ads.count) { index in
                         HomeBannerView(ad: ads[index])
@@ -87,14 +89,33 @@ struct HomeView: View {
                     }
                 }
 
+                Text("Brands")
+                    .font(.system(size: 28, weight: .bold))
+                    .foregroundColor(Color("PrimaryColor"))
+
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 16) {
+                        ForEach(brandsLogos, id: \.self) { image in
+                            HomeBrandView(barndLogo: image)
+                        }
+                    }.padding(.vertical, 12)
+                        .padding(.horizontal, 4)
+                }
+                
+                Spacer(minLength: 20)
+                
+                Text("Top Rated")
+                    .font(.system(size: 28, weight: .bold))
+                    .foregroundColor(Color("PrimaryColor"))
+
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(products, id: \.id) { product in
                         HomeProductCardCell(product: product) {
 
                         }
                     }
-                }.padding(.horizontal, 16)
-            }
+                }
+            }.padding(.horizontal, 16)
         }
     }
 }

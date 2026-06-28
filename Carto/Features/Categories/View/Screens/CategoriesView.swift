@@ -1,5 +1,5 @@
 //
-//  ProfileView.swift
+//  CategoriesView.swift
 //  Carto
 //
 //  Created by Nadin Ahmed on 28/06/2026.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct ProfileView: View {
+struct CategoriesView: View {
     var body: some View {
-        Text("Profile")
+        Text("Categories")
     }
 }
 
 #Preview {
-    ProfileView()
+    CategoriesView()
 }

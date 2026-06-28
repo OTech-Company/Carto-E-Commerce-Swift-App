@@ -36,7 +36,6 @@ struct HomeBannerView: View {
                 .frame(width: 200, height: 200)
                 .offset(x: 100, y: 0)
         }
-        .padding(.horizontal)
     }
 }
 

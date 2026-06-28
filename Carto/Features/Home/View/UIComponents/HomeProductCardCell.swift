@@ -13,6 +13,15 @@ struct HomeProductCardCell: View {
 
     var body: some View {
         VStack(alignment: .center, spacing: 16) {
+            HStack(alignment: .bottom){
+                Spacer()
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+                Text("3.4")
+                    .font(.system(size: 16))
+                    .foregroundColor(Color("PrimaryColor"))
+            }
+            
             Image(product.imageName)
                 .resizable()
                 .scaledToFit()
