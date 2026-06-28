@@ -1,16 +1,16 @@
-//
-//  ProductEntity.swift
-//  Carto
-//
-//  Created by Nadin Ahmed on 27/06/2026.
-//
-import SwiftUI
-
-struct ProductEntity: Identifiable {
-    let id = UUID()
-    let name: String
+struct ProductEntity {
+    let id: String
+    let title: String
     let description: String
+    let brand: String
+    let category: String
     let price: Double
-    let imageName: String
-    let rate: Double
+    let compareAtPrice: Double?
+    let images: [String]          // image URLs
+    let variants: [VariantEntity]
+    let tags: [String]
+    let rating: Double?
+    let reviewCount: Int
 }
+
+
