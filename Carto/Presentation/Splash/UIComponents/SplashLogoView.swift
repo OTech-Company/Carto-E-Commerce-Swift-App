@@ -20,3 +20,4 @@ struct SplashLogoView: View {
             .animation(.spring(response: 0.5, dampingFraction: 0.7), value: visible)
     }
 }
+

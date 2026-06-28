@@ -69,14 +69,14 @@ class SplashPhysicsScene: SKScene {
     private func runSequence() {
         let spawnBottom = SKAction.run { [weak self] in self?.spawnItem(zone: .bottom) }
         let phase1 = SKAction.repeat(
-            SKAction.sequence([spawnBottom, SKAction.wait(forDuration: 0.20)]), count: 5
+            SKAction.sequence([spawnBottom, SKAction.wait(forDuration: 0.20)]), count: 10
         )
 
 //        let dropLogo = SKAction.run { [weak self] in self?.spawnLogo() }
 
         let spawnTop = SKAction.run { [weak self] in self?.spawnItem(zone: .top) }
         let phase3 = SKAction.repeat(
-            SKAction.sequence([spawnTop, SKAction.wait(forDuration: 0.18)]), count: 5
+            SKAction.sequence([spawnTop, SKAction.wait(forDuration: 0.18)]), count: 10
         )
 
         run(SKAction.sequence([
