@@ -4,9 +4,10 @@ struct OnboardingScreen: View {
 
     var onGetStarted: () -> Void = {}
 
-    @State private var currentIndex = 0
-    @State private var imageVisible = false
-    @State private var textVisible  = false
+    @State private var currentIndex  = 0
+    @State private var imageVisible  = false
+    @State private var textVisible   = false
+    @State private var showBags      = false   // ← new
 
     private let screen = UIScreen.main.bounds
 
@@ -14,24 +15,30 @@ struct OnboardingScreen: View {
         ZStack {
             Color(hex: "#2B7FD4").ignoresSafeArea()
 
-            if OnboardingData.pages[currentIndex].imageOnTop {
-                OnboardingLayoutTop(
-                    page: OnboardingData.pages[currentIndex],
-                    imageVisible: imageVisible,
-                    textVisible: textVisible,
-                    currentIndex: currentIndex,
-                    totalPages: OnboardingData.pages.count,
-                    onNext: handleNext
-                )
+            if showBags {
+                // MARK: - Bags transition screen
+                BagsTransitionView(onFinished: onGetStarted)
             } else {
-                OnboardingLayoutBottom(
-                    page: OnboardingData.pages[currentIndex],
-                    imageVisible: imageVisible,
-                    textVisible: textVisible,
-                    currentIndex: currentIndex,
-                    totalPages: OnboardingData.pages.count,
-                    onNext: handleNext
-                )
+                // MARK: - Normal onboarding pages
+                if OnboardingData.pages[currentIndex].imageOnTop {
+                    OnboardingLayoutTop(
+                        page: OnboardingData.pages[currentIndex],
+                        imageVisible: imageVisible,
+                        textVisible: textVisible,
+                        currentIndex: currentIndex,
+                        totalPages: OnboardingData.pages.count,
+                        onNext: handleNext
+                    )
+                } else {
+                    OnboardingLayoutBottom(
+                        page: OnboardingData.pages[currentIndex],
+                        imageVisible: imageVisible,
+                        textVisible: textVisible,
+                        currentIndex: currentIndex,
+                        totalPages: OnboardingData.pages.count,
+                        onNext: handleNext
+                    )
+                }
             }
         }
         .onAppear { triggerAnimations() }
@@ -39,7 +46,11 @@ struct OnboardingScreen: View {
 
     // MARK: - Actions
     private func handleNext() {
-        guard currentIndex < OnboardingData.pages.count - 1 else { onGetStarted(); return }
+        guard currentIndex < OnboardingData.pages.count - 1 else {
+            // Last page — show bags transition instead of going directly
+            withAnimation(.easeInOut(duration: 0.3)) { showBags = true }
+            return
+        }
         withAnimation { imageVisible = false; textVisible = false }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
             currentIndex += 1
@@ -58,5 +69,7 @@ struct OnboardingScreen: View {
 }
 
 #Preview {
-    OnboardingScreen()
+
+    OnboardingScreen( )
+
 }
