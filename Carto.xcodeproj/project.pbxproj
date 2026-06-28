@@ -16,9 +16,8 @@
 		6F5DA40E2FF13A56002F500B /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA40D2FF13A54002F500B /* Color+Hex.swift */; };
 		6F5DA4102FF13BA9002F500B /* BagsTransitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA40F2FF13B9F002F500B /* BagsTransitionView.swift */; };
 		6F5DA4142FF14181002F500B /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA4132FF14181002F500B /* SplashScreen.swift */; };
-		6F5DA4172FF1419E002F500B /* SplashItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA4162FF1419E002F500B /* SplashItem.swift */; };
-		6F5DA4192FF141BA002F500B /* ProductSplashImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA4182FF141BA002F500B /* ProductSplashImage.swift */; };
 		6F5DA41B2FF141C3002F500B /* SplashLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA41A2FF141C3002F500B /* SplashLogoView.swift */; };
+		6F5DA41D2FF1975C002F500B /* SplashPhysicsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA41C2FF1975C002F500B /* SplashPhysicsScene.swift */; };
 		6FB1762C2FEFE3140008DDDC /* ProductReviewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175B42FEFE3140008DDDC /* ProductReviewsViewModel.swift */; };
 		6FB1762D2FEFE3140008DDDC /* ShopifyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB176172FEFE3140008DDDC /* ShopifyRequest.swift */; };
 		6FB1762E2FEFE3140008DDDC /* ProductVariantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175A52FEFE3140008DDDC /* ProductVariantCell.swift */; };
@@ -250,9 +249,8 @@
 		6F5DA40D2FF13A54002F500B /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		6F5DA40F2FF13B9F002F500B /* BagsTransitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BagsTransitionView.swift; sourceTree = "<group>"; };
 		6F5DA4132FF14181002F500B /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
-		6F5DA4162FF1419E002F500B /* SplashItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashItem.swift; sourceTree = "<group>"; };
-		6F5DA4182FF141BA002F500B /* ProductSplashImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSplashImage.swift; sourceTree = "<group>"; };
 		6F5DA41A2FF141C3002F500B /* SplashLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashLogoView.swift; sourceTree = "<group>"; };
+		6F5DA41C2FF1975C002F500B /* SplashPhysicsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPhysicsScene.swift; sourceTree = "<group>"; };
 		6FB1750B2FEFE3140008DDDC /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		6FB1750C2FEFE3140008DDDC /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		6FB1750D2FEFE3140008DDDC /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
@@ -502,9 +500,8 @@
 		6F5DA4152FF14192002F500B /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				6F5DA41C2FF1975C002F500B /* SplashPhysicsScene.swift */,
 				6F5DA41A2FF141C3002F500B /* SplashLogoView.swift */,
-				6F5DA4182FF141BA002F500B /* ProductSplashImage.swift */,
-				6F5DA4162FF1419E002F500B /* SplashItem.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -1742,7 +1739,6 @@
 				6FB1766B2FEFE3140008DDDC /* AuthPasswordField.swift in Sources */,
 				6F5DA4042FF139BA002F500B /* OnboardingHeadlineBlock.swift in Sources */,
 				6FB1766C2FEFE3140008DDDC /* CartFooterView.swift in Sources */,
-				6F5DA4172FF1419E002F500B /* SplashItem.swift in Sources */,
 				6FB1766D2FEFE3140008DDDC /* ProductReviewCell.swift in Sources */,
 				6FB1766E2FEFE3140008DDDC /* SettingsCell.swift in Sources */,
 				6FB1766F2FEFE3140008DDDC /* ProductEntity.swift in Sources */,
@@ -1798,7 +1794,6 @@
 				6FB1769D2FEFE3140008DDDC /* AdBannerView.swift in Sources */,
 				6FB1769E2FEFE3140008DDDC /* BrandsListView.swift in Sources */,
 				6FB1769F2FEFE3140008DDDC /* FavoritesView.swift in Sources */,
-				6F5DA4192FF141BA002F500B /* ProductSplashImage.swift in Sources */,
 				6FB176A02FEFE3140008DDDC /* OrderDTO.swift in Sources */,
 				6FB176A12FEFE3140008DDDC /* PaymentMethodCell.swift in Sources */,
 				6FB176A22FEFE3140008DDDC /* HomeProductCardCell.swift in Sources */,
@@ -1818,6 +1813,7 @@
 				6FB176AD2FEFE3140008DDDC /* PaymentMethodsView.swift in Sources */,
 				6FB176AE2FEFE3140008DDDC /* AuthOptionCell.swift in Sources */,
 				6FB176AF2FEFE3140008DDDC /* SearchView.swift in Sources */,
+				6F5DA41D2FF1975C002F500B /* SplashPhysicsScene.swift in Sources */,
 				6FB176B02FEFE3140008DDDC /* CartStorage.swift in Sources */,
 				6FB176B12FEFE3140008DDDC /* String+Extensions.swift in Sources */,
 				6FB176B22FEFE3140008DDDC /* AdsViewModel.swift in Sources */,
