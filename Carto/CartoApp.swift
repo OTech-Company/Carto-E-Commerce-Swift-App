@@ -9,9 +9,6 @@ import SwiftUI
 
 @main
 struct CartoApp: App {
-    let persistenceController = PersistenceController.shared
-
-
     init() {
         let container = AppContainer()
         ServiceLocator.shared.register(container: container)
@@ -19,8 +16,7 @@ struct CartoApp: App {
     
     var body: some Scene {
         WindowGroup {
-//            MainView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            SplashView()
         }
     }
 }
