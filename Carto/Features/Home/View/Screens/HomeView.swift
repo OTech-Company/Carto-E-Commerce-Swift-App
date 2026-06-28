@@ -33,25 +33,29 @@ struct HomeView: View {
             name: "Product 1",
             description: "Description 1",
             price: 10.0,
-            imageName: "Green 1"
+            imageName: "Green 1",
+            rate: 3.4
         ),
         ProductEntity(
             name: "Product 2",
             description: "Description 2",
             price: 10.0,
-            imageName: "Green 1"
+            imageName: "Green 1",
+            rate: 3.4
         ),
         ProductEntity(
             name: "Product 3",
             description: "Description 3",
             price: 10.0,
-            imageName: "Green 1"
+            imageName: "Green 1",
+            rate: 3.4
         ),
         ProductEntity(
             name: "Product 4",
             description: "Description 4",
             price: 10.0,
-            imageName: "Green 1"
+            imageName: "Green 1",
+            rate: 3.4
         ),
     ]
 

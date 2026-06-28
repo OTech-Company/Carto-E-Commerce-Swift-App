@@ -17,7 +17,7 @@ struct HomeProductCardCell: View {
                 Spacer()
                 Image(systemName: "star.fill")
                     .foregroundColor(.yellow)
-                Text("3.4")
+                Text("\(product.rate)")
                     .font(.system(size: 16))
                     .foregroundColor(Color("PrimaryColor"))
             }

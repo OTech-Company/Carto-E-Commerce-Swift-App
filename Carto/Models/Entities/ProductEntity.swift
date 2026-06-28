@@ -12,4 +12,5 @@ struct ProductEntity: Identifiable {
     let description: String
     let price: Double
     let imageName: String
+    let rate: Double
 }
