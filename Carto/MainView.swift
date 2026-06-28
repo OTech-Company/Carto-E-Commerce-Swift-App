@@ -21,10 +21,10 @@ struct MainView: View {
                     Text("Categories")
                 }
 
-            CartView()
+            FavoritesView()
                 .tabItem {
-                    Image(systemName: "cart.fill")
-                    Text("Cart")
+                    Image(systemName: "heart.fill")
+                    Text("Favourits")
                 }
 
             ProfileView()

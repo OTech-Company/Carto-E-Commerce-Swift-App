@@ -77,13 +77,21 @@ struct HomeView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
+                HStack {
+                    Spacer()
+                    Button(action: {}) {
+                        Image(systemName: "cart.fill")
+                            .font(.system(size: 24))
+                            .foregroundStyle(Color("PrimaryColor"))
+                    }
+                }
                 TabView(selection: $currentIndex) {
                     ForEach(0..<ads.count) { index in
                         HomeBannerView(ad: ads[index])
                             .tag(index)
                     }
                 }
-                .frame(height: 250)
+                .frame(height: 200)
                 .tabViewStyle(
                     PageTabViewStyle(indexDisplayMode: .automatic)
                 )
@@ -105,18 +113,20 @@ struct HomeView: View {
                     }.padding(.vertical, 12)
                         .padding(.horizontal, 4)
                 }
-                
+
                 Spacer(minLength: 20)
-                
+
                 Text("Top Rated")
                     .font(.system(size: 28, weight: .bold))
                     .foregroundColor(Color("PrimaryColor"))
 
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(products, id: \.id) { product in
-                        HomeProductCardCell(product: product) {
-
-                        }
+                        HomeProductCardCell(
+                            product: product,
+                            onTab: {},
+                            onAddToFav: {}
+                        )
                     }
                 }
             }.padding(.horizontal, 16)

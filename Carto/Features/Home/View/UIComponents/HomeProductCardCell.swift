@@ -10,6 +10,8 @@ import SwiftUI
 struct HomeProductCardCell: View {
     let product: ProductEntity
     let onTab: () -> Void
+    let onAddToFav: () -> Void
+    
 
     var body: some View {
         VStack(alignment: .center, spacing: 16) {
@@ -34,8 +36,8 @@ struct HomeProductCardCell: View {
 
                 Spacer()
 
-                Button(action: onTab) {
-                    Image(systemName: "arrowshape.right.circle.fill")
+                Button(action: onAddToFav) {
+                    Image(systemName: "heart")
                         .font(.system(size: 24))
                         .foregroundStyle(Color("PrimaryColor"))
                 }
@@ -47,6 +49,9 @@ struct HomeProductCardCell: View {
         .background(Color("CardBGColor"))
         .cornerRadius(20)
         .shadow(radius: 3)
+        .onTapGesture {
+            onTab()
+        }
     }
 }
 //
