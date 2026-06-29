@@ -9,7 +9,6 @@
 extension ProductDTO {
 
     func toDomain() -> ProductInfo {
-
         ProductInfo(
             id: id,
             title: title,

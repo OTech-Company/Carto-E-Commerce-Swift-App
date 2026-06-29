@@ -9,14 +9,14 @@ import Foundation
 
 struct ProductsInfoUseCase{
     
-    private let repository: ProductsInfoRepository
+    private let repository: ProductsRepositoryProtocol
     
-    init(repository: ProductsInfoRepository) {
+    init(repository: ProductsRepositoryProtocol) {
         self.repository = repository
     }
 
     func execute(productId: String) async throws -> ProductInfo {
-        try await repository.getProductsInfo(productId: productId)
+        try await repository.getProductInfo(productId: productId)
     }
     
 }
