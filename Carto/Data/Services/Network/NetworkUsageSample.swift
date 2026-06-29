@@ -6,7 +6,13 @@ enum NetworkUsageSample {
     // MARK: - REST sample
     static func fetchProducts() async {
         do {
-            let products: ShopifyResponse<[ProductDTO]> = try await ShopifyAPIClient.shared.requestREST(
+            // Shopify Admin REST returns a top-level `products` key (not `data`).
+            // Decode into a small wrapper matching the Admin REST response.
+            struct AdminProductsResponse: Decodable {
+                let products: [ProductDTO]?
+            }
+
+            let response: AdminProductsResponse = try await ShopifyAPIClient.shared.requestREST(
                 endpoint: .products,
                 queryParams: [
                     "limit": "50",
@@ -14,8 +20,9 @@ enum NetworkUsageSample {
                 ]
             )
 
-            print("Fetched products:", products.data?.count ?? 0)
+            print("Fetched products:", response.products?.count ?? 0)
         } catch {
+            // If this is a NetworkError we provide a friendlier message (see NetworkError.errorDescription).
             print("REST error:", error.localizedDescription)
         }
     }

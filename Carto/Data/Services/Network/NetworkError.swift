@@ -1,6 +1,6 @@
 import Foundation
 
-enum NetworkError: Error {
+enum NetworkError: Error, LocalizedError {
     case invalidURL
     case noInternet
     case requestFailed(Int)        // HTTP status code
@@ -23,5 +23,11 @@ enum NetworkError: Error {
         case .graphQL(let errors):  return errors.joined(separator: "\n")
         case .unknown(let e):       return e.localizedDescription
         }
+    }
+
+    // Conform to LocalizedError so `error.localizedDescription` (and errorDescription)
+    // returns the user-friendly message above instead of the generic NSError text.
+    var errorDescription: String? {
+        return localizedDescription
     }
 }

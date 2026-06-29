@@ -6,6 +6,7 @@ final class ShopifyAPIClient {
     static let shared = ShopifyAPIClient()
     private let session: URLSession
     private let requestBuilder: ShopifyRequest
+    private let enableLogging = true
 
     private init() {
         self.session = .shared
@@ -24,6 +25,15 @@ final class ShopifyAPIClient {
             queryParams: queryParams
         )
 
+        if enableLogging {
+            debugPrint("---- REST Request ----")
+            debugPrint(urlRequest.httpMethod ?? "", urlRequest.url?.absoluteString ?? "")
+            debugPrint("Headers:", urlRequest.allHTTPHeaderFields ?? [:])
+            if let body = urlRequest.httpBody, let s = String(data: body, encoding: .utf8) {
+                debugPrint("Body:", s)
+            }
+        }
+
         let (data, response) = try await session.data(for: urlRequest)
 
         guard let http = response as? HTTPURLResponse else {
@@ -38,8 +48,18 @@ final class ShopifyAPIClient {
         default:        throw NetworkError.requestFailed(http.statusCode)
         }
 
+        if enableLogging {
+            if let s = String(data: data, encoding: .utf8) {
+                debugPrint("---- REST Response (status:\(http.statusCode)) ----")
+                debugPrint(s)
+            }
+        }
+
         do {
-            return try JSONDecoder().decode(T.self, from: data)
+            let decoder = JSONDecoder()
+            // Accept snake_case keys commonly returned by REST admin endpoints
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            return try decoder.decode(T.self, from: data)
         } catch {
             throw NetworkError.decodingFailed(error)
         }
@@ -60,6 +80,15 @@ final class ShopifyAPIClient {
             useStorefrontToken: useStorefrontToken
         )
 
+        if enableLogging {
+            debugPrint("---- GraphQL Request ----")
+            debugPrint(urlRequest.httpMethod ?? "", urlRequest.url?.absoluteString ?? "")
+            debugPrint("Headers:", urlRequest.allHTTPHeaderFields ?? [:])
+            if let body = urlRequest.httpBody, let s = String(data: body, encoding: .utf8) {
+                debugPrint("Body:", s)
+            }
+        }
+
         let (data, response) = try await session.data(for: urlRequest)
 
         guard let http = response as? HTTPURLResponse else {
@@ -74,8 +103,20 @@ final class ShopifyAPIClient {
         default:        throw NetworkError.requestFailed(http.statusCode)
         }
 
+        if enableLogging {
+            if let s = String(data: data, encoding: .utf8) {
+                debugPrint("---- GraphQL Response (status:\(http.statusCode)) ----")
+                debugPrint(s)
+            }
+        }
+
         do {
-            let decoded = try JSONDecoder().decode(GraphQLResponse<ResponseData>.self, from: data)
+            let decoder = JSONDecoder()
+            // GraphQL responses generally use camelCase matching Swift property names,
+            // but convertFromSnakeCase is harmless if snake_case appears.
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+            let decoded = try decoder.decode(GraphQLResponse<ResponseData>.self, from: data)
 
             if let errors = decoded.errors, !errors.isEmpty {
                 throw NetworkError.graphQL(errors.map { $0.message })
