@@ -12,7 +12,3 @@ struct CategoriesView: View {
         Text("Categories")
     }
 }
-
-#Preview {
-    CategoriesView()
-}

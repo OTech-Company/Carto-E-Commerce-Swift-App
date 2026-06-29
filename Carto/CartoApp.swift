@@ -6,17 +6,17 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct CartoApp: App {
     init() {
-        let container = AppContainer()
-        ServiceLocator.shared.register(container: container)
+        FirebaseApp.configure()
     }
     
     var body: some Scene {
         WindowGroup {
-            SplashView()
+            LoginView(viewModel: AuthLoginViewModel(validator: AuthValidator()))
         }
     }
 }
