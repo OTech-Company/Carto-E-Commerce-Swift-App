@@ -7,12 +7,11 @@
 
 
 extension ProductDTO {
-
     func toDomain() -> ProductInfo {
         ProductInfo(
             id: id,
             title: title,
-            price: Double(variants?.first?.price ?? "0") ?? 0,
+            price: Double(variants?.first?.price.amount ?? "0") ?? 0,
             discount: "",
             imageURL: images?.first?.src ?? "",
             sizes: options?.first(where: { $0.name.lowercased() == "size" })?.values ?? [],

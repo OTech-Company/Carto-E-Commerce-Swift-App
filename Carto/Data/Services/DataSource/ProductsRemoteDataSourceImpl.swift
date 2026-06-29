@@ -4,36 +4,51 @@
 //
 //  Created by Manona on 29/06/2026.
 //
+//
+//  ProductsInfoRemoteDataSource.swift
+//  Carto
+//
+//  Created by Manona on 29/06/2026.
+//
 
 import Foundation
 
 class ProductsRemoteDataSourceImpl: ProductsRemoteDataSource {
 
     func getProductInfo(productId: String) async throws -> ProductDTO {
-
-        ProductDTO(
+        
+        return ProductDTO(
             id: productId,
             title: "Air Max 200 SE",
-            descriptionHtml: "Nike Air Max",
+            description: "A comfortable pair of sneakers.",
+            descriptionHtml: "<p>Nike Air Max</p>",
             vendor: "Nike",
             productType: "Shoes",
-            tags: [],
+            tags: ["running", "sport"],
+            availableForSale: true,
+            priceRange: PriceRangeDTO(
+                minVariantPrice: MoneyDTO(amount: "30.99", currencyCode: "USD"),
+                maxVariantPrice: MoneyDTO(amount: "34.99", currencyCode: "USD")
+            ),
+            compareAtPriceRange: nil,
             images: [
                 ImageDTO(
-                    id: nil,
+                    id: "img1",
                     src: "shoes",
-                    altText: nil
+                    altText: "Air Max Side View"
                 )
             ],
             variants: [
                 VariantDTO(
                     id: "1",
                     title: "Default",
-                    price: "30.99",
-                    compareAtPrice: "34.99",
+                    price: MoneyDTO(amount: "30.99", currencyCode: "USD"),
+                    compareAtPrice: MoneyDTO(amount: "34.99", currencyCode: "USD"),
                     availableForSale: true,
-                    sku: nil,
-                    selectedOptions: nil
+                    quantityAvailable: 10,
+                    sku: "AIR-MAX-200-SE",
+                    selectedOptions: nil,
+                    image: nil
                 )
             ],
             options: [
