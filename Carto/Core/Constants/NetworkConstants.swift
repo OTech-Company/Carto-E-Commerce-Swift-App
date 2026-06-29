@@ -17,7 +17,8 @@ enum NetworkConstants {
     static let shopifyAccessToken = "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"
 
     /// Storefront token used for GraphQL requests.
-    static let storefrontAccessToken = "YOUR_STOREFRONT_ACCESS_TOKEN_HERE"
+    /// Get this from: Shopify Admin > Apps and channels > your-app > Storefront access tokens
+    static let storefrontAccessToken = "shpat_your_storefront_token_here"
 
     static let apiKey = "e09603df792c6c18ca12a848660db059"
     static let apiSecretKey = "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"

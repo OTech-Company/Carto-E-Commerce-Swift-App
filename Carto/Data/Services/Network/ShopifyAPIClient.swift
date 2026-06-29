@@ -61,6 +61,31 @@ final class ShopifyAPIClient {
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             return try decoder.decode(T.self, from: data)
         } catch {
+            // Attempt a best-effort fallback: if the server wrapped the payload in a
+            // top-level key (e.g. { "products": [...] } or { "product": { ... } }),
+            // try to extract the first value and decode T from it.
+            if let jsonObj = try? JSONSerialization.jsonObject(with: data, options: []),
+               let dict = jsonObj as? [String: Any] {
+                for (_, value) in dict {
+                    if JSONSerialization.isValidJSONObject(value),
+                       let vdata = try? JSONSerialization.data(withJSONObject: value, options: []) {
+                        if let decoded = try? JSONDecoder().decode(T.self, from: vdata) {
+                            if enableLogging {
+                                debugPrint("Decoded T from first-level wrapper key")
+                            }
+                            return decoded
+                        }
+                    }
+                }
+            }
+
+            if enableLogging {
+                debugPrint("Decoding failed for REST response:", error)
+                if let s = String(data: data, encoding: .utf8) {
+                    debugPrint("Raw response:", s)
+                }
+            }
+
             throw NetworkError.decodingFailed(error)
         }
     }
