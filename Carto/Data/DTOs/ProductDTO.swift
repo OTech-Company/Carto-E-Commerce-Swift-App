@@ -1,8 +1,17 @@
+//
+//  ProductDTO.swift
+//  Carto
+//
+//  Created by Manona on 28/06/2026.
+//
+
+import Foundation
+
 struct ProductDTO: Codable {
     let id: String
     let title: String
     let descriptionHtml: String?
-    let vendor: String?          // Brand name from Shopify
+    let vendor: String?
     let productType: String?
     let tags: [String]?
     let images: [ImageDTO]?
