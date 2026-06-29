@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ProductsRepositoryImpl: ProductsRepositoryProtocol {
+class ProductsRepositoryImpl: ProductsRepository {
 
     private let remoteDataSource: ProductsRemoteDataSource
 

@@ -9,9 +9,9 @@ import Foundation
 
 struct ProductsInfoUseCase{
     
-    private let repository: ProductsRepositoryProtocol
+    private let repository: ProductsRepository
     
-    init(repository: ProductsRepositoryProtocol) {
+    init(repository: ProductsRepository) {
         self.repository = repository
     }
 
