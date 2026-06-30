@@ -23,7 +23,8 @@ final class AuthRegisterViewModel: ObservableObject {
     @Published var passwordErrorMessage: String?
 
     @Published var isLoading = false
-    
+    @Published var generalErrorMessage: String?
+
     // MARK: - Validation
 
     var isRegisterEnabled: Bool {
@@ -38,17 +39,27 @@ final class AuthRegisterViewModel: ObservableObject {
     }
 
     // MARK: - Dependencies
+
     private let validator: AuthValidatorProtocol
+    private let repository: AuthenticationRepositoryProtocol
+    private let appViewModel: AppViewModel
     
     // MARK: - Initialization
-    init(validator: AuthValidatorProtocol) {
+    
+    init(
+        validator: AuthValidatorProtocol,
+        repository: AuthenticationRepositoryProtocol,
+        appViewModel: AppViewModel
+    ) {
         self.validator = validator
+        self.repository = repository
+        self.appViewModel = appViewModel
     }
-
 
     func validateFirstName() {
         do {
             try validator.validateName(name: firstName)
+            firstNameErrorMessage = nil
         } catch let validationError as AuthValidationError {
             firstNameErrorMessage = validationError.localizedDescription
         } catch {
@@ -59,6 +70,7 @@ final class AuthRegisterViewModel: ObservableObject {
     func validateLastName() {
         do {
             try validator.validateName(name: lastName)
+            lastNameErrorMessage = nil
         } catch let validationError as AuthValidationError {
             lastNameErrorMessage = validationError.localizedDescription
         } catch {
@@ -98,28 +110,51 @@ final class AuthRegisterViewModel: ObservableObject {
 
         guard isRegisterEnabled else { return }
 
-        // Register with Firebase
-    }
-
-    func signInWithGoogle() async {
         isLoading = true
+        generalErrorMessage = nil
 
-        do {
-            try await Task.sleep(for: .seconds(2))
-
-            isLoading = false
-            print("Done")
-        } catch {
+        Task {
+            do {
+                let input = RegisterInput(
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    password: password
+                )
+                let user = try await repository.register(input: input)
+                await appViewModel.restoreSession()
+                print(appViewModel.sessionState.canAddToCart)
+                
+            } catch let error as AuthError {
+                generalErrorMessage = error.errorDescription
+                
+            } catch {
+                generalErrorMessage = "Something went wrong. Please try again."
+                isLoading = false
+            }
             isLoading = false
         }
     }
 
-    func signInWithApple() {
-        // Apple Sign Up
+    func signInWithGoogle() {
+       //
     }
-    
+
+    func signInWithApple() {
+        //
+    }
+
     func continueAsGuest() {
-        // Guest Sign In
+        Task{
+            isLoading = true
+            do {
+                try await Task.sleep(for: .seconds(1))
+                repository.continueAsGuest()
+                await appViewModel.restoreSession()
+                isLoading = false
+            } catch {
+                isLoading = false
+            }
+        }
     }
 }
-
