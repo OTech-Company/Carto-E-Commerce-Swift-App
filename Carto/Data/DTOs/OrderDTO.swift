@@ -1,46 +1,41 @@
-// MARK: - Core Order Structures (REST Admin API Compliant)
-struct OrderListResponse: Decodable {
-    let orders: [OrderDTO]?
-}
+import Foundation
 
-struct OrderDTO: Decodable { // Changed from Codable to Decodable
-    let id: Int // Changed from String to Int to prevent REST type mismatch
-    let orderNumber: Int
-    let processedAt: String
-    let financialStatus: String           // paid, pending, refunded, unknown
-    let fulfillmentStatus: String?        // fulfilled, unfulfilled, scheduled, etc.
-    
-    // Shopify REST Admin passes currency totals directly as flat price strings
-    let totalPrice: String?
-    let subtotalPrice: String?
-    let totalDiscounts: String?
-    let currency: String?                 // e.g., "USD"
-    
-    let discountApplications: [DiscountApplicationDTO]?
-    let lineItems: [OrderLineItemDTO]?
-    let shippingAddress: AddressDTO?
+// MARK: - Core Order DTO structures (No explicit CodingKeys)
+struct OrderDTO: Decodable {
+    let id: Int
+    let orderNumber: Int         // Decodes from "order_number" automatically
+    let processedAt: String?     // Decodes from "processed_at" automatically
+    let financialStatus: String?  // Decodes from "financial_status" automatically
+    let fulfillmentStatus: String?// Decodes from "fulfillment_status" automatically
+    let totalPrice: String?      // Decodes from "total_price" automatically
+    let subtotalPrice: String?   // Decodes from "subtotal_price" automatically
+    let totalDiscounts: String?  // Decodes from "total_discounts" automatically
+    let currency: String?
+    let discountApplications: [DiscountApplicationDTO]? // Decodes from "discount_applications"
+    let lineItems: [OrderLineItemDTO]?                  // Decodes from "line_items"
+    let shippingAddress: AddressDTO?                    // Decodes from "shipping_address"
 }
 
 struct OrderLineItemDTO: Decodable {
     let id: Int
     let title: String
     let quantity: Int
-    let price: String? // Shopify REST returns variant cost as a string "price"
-    let variantId: Int? // References the corresponding Variant identifier
+    let price: String?
+    let variantId: Int?          // Decodes from "variant_id" automatically
     let sku: String?
 }
 
 struct DiscountApplicationDTO: Decodable {
     let type: String?
-    let value: String?                     // Can be a percentage like "10.0" or a fixed price
-    let valueType: String?                 // "percentage" or "fixed_amount"
+    let value: String?
+    let valueType: String?       // Decodes from "value_type" automatically
     let code: String?
 }
 
 struct AddressDTO: Decodable {
-    let id: Int? // Changed from String to Int
-    let firstName: String?
-    let lastName: String?
+    let id: Int?
+    let firstName: String?       // Decodes from "first_name" automatically
+    let lastName: String?        // Decodes from "last_name" automatically
     let address1: String?
     let address2: String?
     let city: String?
