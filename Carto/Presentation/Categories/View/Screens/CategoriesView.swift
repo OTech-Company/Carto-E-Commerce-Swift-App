@@ -26,6 +26,8 @@ struct CategoryListView: View {
         GridItem(.flexible(), spacing: 16)
     ]
     
+
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
@@ -70,6 +72,7 @@ struct CategoryListView: View {
             .background(Color(.systemGroupedBackground).opacity(0.3))
             .task {
                 await viewModel.loadCategories()
+                await viewModel.loadSubcategories(for: "347833073708")
             }
             .onAppear {
                 Task { await viewModel.loadCategories() }
@@ -77,3 +80,4 @@ struct CategoryListView: View {
         }
     }
 }
+

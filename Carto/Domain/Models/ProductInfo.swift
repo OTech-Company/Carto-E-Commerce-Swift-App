@@ -16,3 +16,37 @@ struct ProductInfo{
     let sizes: [String]
     let colors: [String]
 }
+
+extension ProductInfo {
+    init(from dto: ProductDTO) {
+        // Map ID safely as a String representation
+        self.id = String(dto.id)
+        self.title = dto.title
+        
+        // Extract the first variant for price calculations
+        let firstVariant = dto.variants?.first
+        
+        // Parse baseline price string (e.g. "30.99") into Double safely
+        let rawPrice = Double(firstVariant?.price ?? "") ?? 0.0
+        self.price = rawPrice
+        
+        // Calculate dynamic discount percentage if compareAtPrice exists
+        if let compareStr = firstVariant?.compareAtPrice,
+           let comparePrice = Double(compareStr), comparePrice > rawPrice {
+            let savings = ((comparePrice - rawPrice) / comparePrice) * 100
+            self.discount = "\(Int(round(savings)))% OFF"
+        } else {
+            self.discount = ""
+        }
+        
+        // Fallback placeholder image URL if list is empty
+        self.imageURL = dto.images?.first?.src ?? ""
+        
+        // Dynamic Extraction of Variant Selection Attributes
+        self.sizes = dto.options?
+            .first(where: { $0.name.lowercased() == "size" })?.values ?? []
+            
+        self.colors = dto.options?
+            .first(where: { $0.name.lowercased() == "color" })?.values ?? []
+    }
+}

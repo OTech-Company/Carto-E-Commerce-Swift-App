@@ -9,4 +9,6 @@ import Foundation
 
 protocol CategoryRepositoryProtocol {
     func fetchCategories() async throws -> [Category]
+    func fetchSubcategoriesWithImages(forCollectionId collectionId: String) async throws -> [Subcategory]
+    func fetchAllAvailableSubcategories() async throws -> [String] 
 }

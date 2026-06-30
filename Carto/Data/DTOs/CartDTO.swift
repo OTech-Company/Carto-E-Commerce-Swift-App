@@ -1,38 +1,33 @@
-struct CartDTO: Codable {
-    let id: String
-    let checkoutUrl: String
-    let totalQuantity: Int?               // NEW: total items in cart
-    let discountCodes: [DiscountCodeDTO]? // NEW: applied discount codes
-    let lines: [CartLineDTO]?
-    let cost: CartCostDTO
+//
+//  OrderAndCartDTOs.swift
+//  Carto
+//
+//  Created by Osama Abdellatif on 30/06/2026.
+//
+
+import Foundation
+
+
+
+// MARK: - Core Cart Structures (REST Admin API Compliant)
+struct CartDTO: Decodable {
+    let id: String // Note: Shopify persistent client-side cart tokens can be alpha-numeric hashes
+    let token: String?
+    let note: String?
+    let attributes: [String: String]?
+    let originalTotalPrice: Int?          // Shopify REST returns cart totals in cents or flat numbers
+    let totalPrice: Int?
+    let items: [CartLineDTO]?              // Replaces 'lines' to match REST keys natively
 }
 
-struct CartLineDTO: Codable {
-    let id: String
+struct CartLineDTO: Decodable {
+    let id: Int // Specific line item tracker number
+    let productId: Int?
+    let variantId: Int?
+    let title: String?
     let quantity: Int
-    let cost: CartLineCostDTO?            // NEW: line-level costs
-    let merchandise: VariantDTO?          // Product variant details
-}
-
-struct CartLineCostDTO: Codable {        // NEW: line-level pricing
-    let totalAmount: MoneyDTO
-    let amountPerQuantity: MoneyDTO?
-    let compareAtAmountPerQuantity: MoneyDTO?
-}
-
-struct CartCostDTO: Codable {
-    let subtotalAmount: MoneyDTO
-    let totalAmount: MoneyDTO
-    let totalTaxAmount: MoneyDTO?
-    let checkoutChargeAmount: MoneyDTO?  // NEW: additional checkout charges if any
-}
-
-struct DiscountCodeDTO: Codable {       // NEW: discount information
-    let code: String
-    let applicable: Bool
-}
-
-struct MoneyDTO: Codable {
-    let amount: String
-    let currencyCode: String
+    let price: Int?                        // Price in cents or flat number representation
+    let sku: String?
+    let vendor: String?
+    let handle: String?
 }

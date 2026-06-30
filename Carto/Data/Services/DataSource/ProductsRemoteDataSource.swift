@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ProductsRemoteDataSource {
-    func getProductInfo(productId: String) async throws -> ProductDTO
+    func getProductInfo(productId: Int) async throws -> ProductDTO
 }
