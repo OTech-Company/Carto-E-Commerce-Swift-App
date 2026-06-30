@@ -40,6 +40,14 @@ final class CategoryListViewModel: ObservableObject {
         }
     }
     
+    func loadSubCategories() async {
+        do {
+            let subcategories = try await getCategoryUseCase.execute()
+            
+        } catch {
+            state = .error(error.localizedDescription)
+        }
+    }
     // Dynamic background loading for subcategories when a parent card appears or is tapped
     func loadSubcategories(for collectionId: String) async {
         guard subcategoriesByCollection[collectionId] == nil else { return } // Already cached

@@ -20,8 +20,12 @@ struct ProductInfo{
 extension ProductInfo {
     init(from dto: ProductDTO) {
         // Map ID safely as a String representation
-        self.id = String(dto.id)
-        self.title = dto.title
+        if let numericId = dto.id {
+                    self.id = String(numericId)
+                } else {
+                    self.id = "0" 
+                }
+        self.title = dto.title ?? "Untitled Product"
         
         // Extract the first variant for price calculations
         let firstVariant = dto.variants?.first

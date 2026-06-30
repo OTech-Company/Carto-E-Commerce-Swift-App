@@ -72,7 +72,12 @@ struct CategoryListView: View {
             .background(Color(.systemGroupedBackground).opacity(0.3))
             .task {
                 await viewModel.loadCategories()
+                print("======")
+                await viewModel.loadSubCategories()
+                print("======")
                 await viewModel.loadSubcategories(for: "347833073708")
+                await viewModel.loadSubcategories(for: "347833565228")
+
             }
             .onAppear {
                 Task { await viewModel.loadCategories() }

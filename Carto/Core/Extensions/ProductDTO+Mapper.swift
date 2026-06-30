@@ -8,8 +8,8 @@ import Foundation
 
 extension Product {
     init(from dto: ProductDTO) {
-        self.id = dto.id
-        self.title = dto.title
+        self.id = dto.id ?? 0
+        self.title = dto.title ?? "Untitled Product"
         self.description = dto.bodyHtml ?? ""
         self.vendor = dto.vendor ?? "unknown brand"
         self.productType = dto.productType ?? ""

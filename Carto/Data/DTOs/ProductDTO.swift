@@ -25,8 +25,8 @@ struct ProductDetailResponse: Decodable {
 // MARK: - Product DTO
 struct ProductDTO: Decodable {
     /// Changed to Int to resolve the 64-bit number decoding mismatch
-    let id: Int
-    let title: String
+    let id: Int?
+    let title: String?
     let bodyHtml: String?
     let vendor: String?
     let productType: String?
