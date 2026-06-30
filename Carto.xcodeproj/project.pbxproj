@@ -39,6 +39,10 @@
 		6F5DA4362FF1C6B9002F500B /* AuthenticationRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA4352FF1C6AE002F500B /* AuthenticationRepositoryProtocol.swift */; };
 		6F5DA4382FF1C7AC002F500B /* AuthenticationRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA4372FF1C79E002F500B /* AuthenticationRepositoryImpl.swift */; };
 		6F5DA43B2FF2C62B002F500B /* NetworkUsageSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA43A2FF2C62B002F500B /* NetworkUsageSample.swift */; };
+		6F5DA43D2FF3DEF4002F500B /* CategoryRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA43C2FF3DEE2002F500B /* CategoryRepositoryProtocol.swift */; };
+		6F5DA43F2FF3DF37002F500B /* CategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA43E2FF3DF2A002F500B /* CategoryUseCase.swift */; };
+		6F5DA4412FF3E6A5002F500B /* CategoryRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA4402FF3E69C002F500B /* CategoryRepositoryImpl.swift */; };
+		6F5DA4432FF3F381002F500B /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA4422FF3F379002F500B /* CategoryListViewModel.swift */; };
 		6FB1762D2FEFE3140008DDDC /* ShopifyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB176172FEFE3140008DDDC /* ShopifyRequest.swift */; };
 		6FB1762F2FEFE3140008DDDC /* CartHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175E32FEFE3140008DDDC /* CartHeaderView.swift */; };
 		6FB176312FEFE3140008DDDC /* CouponCodeFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175602FEFE3140008DDDC /* CouponCodeFieldView.swift */; };
@@ -75,7 +79,6 @@
 		6FB176532FEFE3140008DDDC /* OrderDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1758D2FEFE3140008DDDC /* OrderDetailViewModel.swift */; };
 		6FB176542FEFE3140008DDDC /* AdsPlacementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1751D2FEFE3140008DDDC /* AdsPlacementView.swift */; };
 		6FB176552FEFE3140008DDDC /* OrderItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175842FEFE3140008DDDC /* OrderItemCell.swift */; };
-		6FB176562FEFE3140008DDDC /* CategoriesProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175562FEFE3140008DDDC /* CategoriesProductsViewModel.swift */; };
 		6FB176572FEFE3140008DDDC /* BrandsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175412FEFE3140008DDDC /* BrandsHeaderView.swift */; };
 		6FB176582FEFE3140008DDDC /* AuthForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175362FEFE3140008DDDC /* AuthForgotPasswordViewModel.swift */; };
 		6FB176592FEFE3140008DDDC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175772FEFE3140008DDDC /* HomeView.swift */; };
@@ -111,7 +114,6 @@
 		6FB1767C2FEFE3140008DDDC /* AppUserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB176022FEFE3140008DDDC /* AppUserEntity.swift */; };
 		6FB1767D2FEFE3140008DDDC /* Carto.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175EE2FEFE3140008DDDC /* Carto.xcdatamodeld */; };
 		6FB1767F2FEFE3140008DDDC /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1757E2FEFE3140008DDDC /* HomeCoordinator.swift */; };
-		6FB176802FEFE3140008DDDC /* CategoriesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175552FEFE3140008DDDC /* CategoriesListViewModel.swift */; };
 		6FB176812FEFE3140008DDDC /* BillingSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175992FEFE3140008DDDC /* BillingSummaryView.swift */; };
 		6FB176832FEFE3140008DDDC /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175702FEFE3140008DDDC /* FavoritesViewModel.swift */; };
 		6FB176842FEFE3140008DDDC /* FavoriteItemMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175EF2FEFE3140008DDDC /* FavoriteItemMO.swift */; };
@@ -130,7 +132,6 @@
 		6FB176942FEFE3140008DDDC /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1750D2FEFE3140008DDDC /* UIConstants.swift */; };
 		6FB176952FEFE3140008DDDC /* CouponsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175652FEFE3140008DDDC /* CouponsCoordinator.swift */; };
 		6FB176972FEFE3140008DDDC /* AuthForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1752B2FEFE3140008DDDC /* AuthForgotPasswordView.swift */; };
-		6FB176992FEFE3140008DDDC /* CategoriesSubcategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175572FEFE3140008DDDC /* CategoriesSubcategoryViewModel.swift */; };
 		6FB1769A2FEFE3140008DDDC /* SearchFiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175BA2FEFE3140008DDDC /* SearchFiltersView.swift */; };
 		6FB1769B2FEFE3140008DDDC /* CartSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175E62FEFE3140008DDDC /* CartSummaryViewModel.swift */; };
 		6FB1769C2FEFE3140008DDDC /* FavoriteItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB176082FEFE3140008DDDC /* FavoriteItemEntity.swift */; };
@@ -182,7 +183,6 @@
 		6FB176D12FEFE3140008DDDC /* CouponEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175642FEFE3140008DDDC /* CouponEntryViewModel.swift */; };
 		6FB176D22FEFE3140008DDDC /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB176292FEFE3140008DDDC /* Validator.swift */; };
 		6FB176D32FEFE3140008DDDC /* APIResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175F32FEFE3140008DDDC /* APIResponseDTO.swift */; };
-		6FB176D52FEFE3140008DDDC /* CategoriesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175542FEFE3140008DDDC /* CategoriesCoordinator.swift */; };
 		6FB176D62FEFE3140008DDDC /* CouponBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1755F2FEFE3140008DDDC /* CouponBadgeView.swift */; };
 		6FB176D72FEFE3140008DDDC /* ThemeSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175D92FEFE3140008DDDC /* ThemeSettingsViewModel.swift */; };
 		6FB176D82FEFE3140008DDDC /* AdsPromotionalBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1751E2FEFE3140008DDDC /* AdsPromotionalBannerView.swift */; };
@@ -263,6 +263,10 @@
 		6F5DA4352FF1C6AE002F500B /* AuthenticationRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepositoryProtocol.swift; sourceTree = "<group>"; };
 		6F5DA4372FF1C79E002F500B /* AuthenticationRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepositoryImpl.swift; sourceTree = "<group>"; };
 		6F5DA43A2FF2C62B002F500B /* NetworkUsageSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUsageSample.swift; sourceTree = "<group>"; };
+		6F5DA43C2FF3DEE2002F500B /* CategoryRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepositoryProtocol.swift; sourceTree = "<group>"; };
+		6F5DA43E2FF3DF2A002F500B /* CategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryUseCase.swift; sourceTree = "<group>"; };
+		6F5DA4402FF3E69C002F500B /* CategoryRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepositoryImpl.swift; sourceTree = "<group>"; };
+		6F5DA4422FF3F379002F500B /* CategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
 		6FB1750B2FEFE3140008DDDC /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		6FB1750C2FEFE3140008DDDC /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		6FB1750D2FEFE3140008DDDC /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
@@ -307,10 +311,6 @@
 		6FB1754A2FEFE3140008DDDC /* CategoriesProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesProductCell.swift; sourceTree = "<group>"; };
 		6FB1754B2FEFE3140008DDDC /* CategoriesSubcategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesSubcategoryCell.swift; sourceTree = "<group>"; };
 		6FB175512FEFE3140008DDDC /* CategoriesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesHeaderView.swift; sourceTree = "<group>"; };
-		6FB175542FEFE3140008DDDC /* CategoriesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCoordinator.swift; sourceTree = "<group>"; };
-		6FB175552FEFE3140008DDDC /* CategoriesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListViewModel.swift; sourceTree = "<group>"; };
-		6FB175562FEFE3140008DDDC /* CategoriesProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesProductsViewModel.swift; sourceTree = "<group>"; };
-		6FB175572FEFE3140008DDDC /* CategoriesSubcategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesSubcategoryViewModel.swift; sourceTree = "<group>"; };
 		6FB1755A2FEFE3140008DDDC /* CouponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCell.swift; sourceTree = "<group>"; };
 		6FB1755C2FEFE3140008DDDC /* AppliedCouponsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppliedCouponsView.swift; sourceTree = "<group>"; };
 		6FB1755D2FEFE3140008DDDC /* CouponEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponEntryView.swift; sourceTree = "<group>"; };
@@ -476,6 +476,7 @@
 		6D7A45922FF2864700E2805D /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				6F5DA43E2FF3DF2A002F500B /* CategoryUseCase.swift */,
 				6D7A45902FF2862C00E2805D /* ProductInfoUseCase.swift */,
 			);
 			path = UseCases;
@@ -534,6 +535,7 @@
 		6F5DA42D2FF1C3EC002F500B /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				6F5DA4402FF3E69C002F500B /* CategoryRepositoryImpl.swift */,
 				6F5DA4372FF1C79E002F500B /* AuthenticationRepositoryImpl.swift */,
 				6D7A45962FF2890000E2805D /* ProductsRepositoryImpl.swift */,
 			);
@@ -574,6 +576,7 @@
 		6F5DA4342FF1C69F002F500B /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				6F5DA43C2FF3DEE2002F500B /* CategoryRepositoryProtocol.swift */,
 				6F5DA4352FF1C6AE002F500B /* AuthenticationRepositoryProtocol.swift */,
 				6D7A458E2FF283DC00E2805D /* ProductsRepositoryProtocol.swift */,
 			);
@@ -829,10 +832,7 @@
 		6FB175582FEFE3140008DDDC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				6FB175542FEFE3140008DDDC /* CategoriesCoordinator.swift */,
-				6FB175552FEFE3140008DDDC /* CategoriesListViewModel.swift */,
-				6FB175562FEFE3140008DDDC /* CategoriesProductsViewModel.swift */,
-				6FB175572FEFE3140008DDDC /* CategoriesSubcategoryViewModel.swift */,
+				6F5DA4422FF3F379002F500B /* CategoryListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1699,6 +1699,7 @@
 				6FB1763C2FEFE3140008DDDC /* View+Extensions.swift in Sources */,
 				6FB1763D2FEFE3140008DDDC /* CategoriesProductCell.swift in Sources */,
 				6FB1763E2FEFE3140008DDDC /* OrdersCoordinator.swift in Sources */,
+				6F5DA43D2FF3DEF4002F500B /* CategoryRepositoryProtocol.swift in Sources */,
 				6FB1763F2FEFE3140008DDDC /* CartView.swift in Sources */,
 				6FB176402FEFE3140008DDDC /* ShippingTrackingEntity.swift in Sources */,
 				6F5DA4082FF139D2002F500B /* OnboardingLayoutTop.swift in Sources */,
@@ -1712,6 +1713,7 @@
 				6FB1764A2FEFE3140008DDDC /* CouponEntryView.swift in Sources */,
 				6F5DA4022FF139AC002F500B /* OnboardingControlsRow.swift in Sources */,
 				6FB1764B2FEFE3140008DDDC /* SearchFilterChipView.swift in Sources */,
+				6F5DA43F2FF3DF37002F500B /* CategoryUseCase.swift in Sources */,
 				6FB1764C2FEFE3140008DDDC /* SettingsView.swift in Sources */,
 				6FB1764D2FEFE3140008DDDC /* VariantEntity.swift in Sources */,
 				6FB1764E2FEFE3140008DDDC /* BannerDTO.swift in Sources */,
@@ -1726,7 +1728,6 @@
 				6D7A458D2FF2833400E2805D /* ProductInfo.swift in Sources */,
 				6FB176542FEFE3140008DDDC /* AdsPlacementView.swift in Sources */,
 				6FB176552FEFE3140008DDDC /* OrderItemCell.swift in Sources */,
-				6FB176562FEFE3140008DDDC /* CategoriesProductsViewModel.swift in Sources */,
 				6FB176572FEFE3140008DDDC /* BrandsHeaderView.swift in Sources */,
 				6FB176582FEFE3140008DDDC /* AuthForgotPasswordViewModel.swift in Sources */,
 				6FB176592FEFE3140008DDDC /* HomeView.swift in Sources */,
@@ -1766,7 +1767,6 @@
 				6FB1767C2FEFE3140008DDDC /* AppUserEntity.swift in Sources */,
 				6FB1767D2FEFE3140008DDDC /* Carto.xcdatamodeld in Sources */,
 				6FB1767F2FEFE3140008DDDC /* HomeCoordinator.swift in Sources */,
-				6FB176802FEFE3140008DDDC /* CategoriesListViewModel.swift in Sources */,
 				6FB176812FEFE3140008DDDC /* BillingSummaryView.swift in Sources */,
 				6FB176832FEFE3140008DDDC /* FavoritesViewModel.swift in Sources */,
 				6FB176842FEFE3140008DDDC /* FavoriteItemMO.swift in Sources */,
@@ -1787,7 +1787,6 @@
 				6FB176F22FF0089C0008DDDC /* OnboardingScreen.swift in Sources */,
 				6FB176952FEFE3140008DDDC /* CouponsCoordinator.swift in Sources */,
 				6FB176972FEFE3140008DDDC /* AuthForgotPasswordView.swift in Sources */,
-				6FB176992FEFE3140008DDDC /* CategoriesSubcategoryViewModel.swift in Sources */,
 				6F5DA4252FF1BE83002F500B /* ADEntity.swift in Sources */,
 				6FB1769A2FEFE3140008DDDC /* SearchFiltersView.swift in Sources */,
 				6FB1769B2FEFE3140008DDDC /* CartSummaryViewModel.swift in Sources */,
@@ -1851,8 +1850,8 @@
 				6FB176D22FEFE3140008DDDC /* Validator.swift in Sources */,
 				6F5DA42B2FF1BF17002F500B /* CategoriesView.swift in Sources */,
 				6FB176D32FEFE3140008DDDC /* APIResponseDTO.swift in Sources */,
-				6FB176D52FEFE3140008DDDC /* CategoriesCoordinator.swift in Sources */,
 				6FB176D62FEFE3140008DDDC /* CouponBadgeView.swift in Sources */,
+				6F5DA4412FF3E6A5002F500B /* CategoryRepositoryImpl.swift in Sources */,
 				6FB176D72FEFE3140008DDDC /* ThemeSettingsViewModel.swift in Sources */,
 				6FB176D82FEFE3140008DDDC /* AdsPromotionalBannerView.swift in Sources */,
 				6FB176D92FEFE3140008DDDC /* CartSummaryView.swift in Sources */,
@@ -1874,6 +1873,7 @@
 				6FB176E52FEFE3140008DDDC /* NotificationSettingEntity.swift in Sources */,
 				6FB176E62FEFE3140008DDDC /* SearchDTO.swift in Sources */,
 				6FB176E72FEFE3140008DDDC /* OrderListViewModel.swift in Sources */,
+				6F5DA4432FF3F381002F500B /* CategoryListViewModel.swift in Sources */,
 				6F5DA4382FF1C7AC002F500B /* AuthenticationRepositoryImpl.swift in Sources */,
 				6FB176E82FEFE3140008DDDC /* CartDTO.swift in Sources */,
 				6D7A45862FF280CA00E2805D /* SwipeToAddView.swift in Sources */,

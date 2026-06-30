@@ -13,8 +13,8 @@ final class AppContainer {
 //    let productRepository: ProductRepository
 //    let brandRepository: BrandRepository
 //    let categoryRepository: CategoryRepository
-//    let cartRepository: CartRepository
-//    let orderRepository: OrderRepository
+    let categoryRepository: CategoryRepositoryProtocol
+    //    let orderRepository: OrderRepository
 //    let favoritesRepository: FavoritesRepository
 //    let searchRepository: SearchRepository
 //    let couponRepository: CouponRepository
@@ -26,6 +26,7 @@ final class AppContainer {
         self.apiClient      = ShopifyAPIClient.shared
 //        self.storageManager = StorageManager.shared
 
+        self.categoryRepository = CategoryRepository()
 //        // 2. Repositories — inject apiClient + storageManager into each
 //        self.authRepository     = AuthRepository(apiClient: apiClient)
 //        self.productRepository  = ProductRepository(apiClient: apiClient)

@@ -33,9 +33,9 @@ class ProductsRemoteDataSourceImpl: ProductsRemoteDataSource {
             compareAtPriceRange: nil,
             images: [
                 ImageDTO(
-                    id: "img1",
+//                    id: "img1",
                     src: "shoes",
-                    altText: "Air Max Side View"
+//                    altText: "Air Max Side View"
                 )
             ],
             variants: [
