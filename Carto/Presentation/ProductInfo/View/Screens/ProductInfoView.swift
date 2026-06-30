@@ -36,7 +36,7 @@ struct ProductsInfoView: View {
                     Spacer().frame(height: 20)
 
                     Button {} label: {
-                        Image(systemName: "bookmark")
+                        Image(systemName: "heart")
                             .foregroundColor(.black)
                             .frame(width: 44, height: 44)
                             .background(Color.white)
