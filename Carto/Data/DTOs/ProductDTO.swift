@@ -92,44 +92,44 @@ extension VariantDTO {
     }
 }
 
-struct ImageDTO: Codable {
-    let id: String?
-    let src: String
-    let altText: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case id, src
-        case altText = "altText"
-        case alt = "alt"
-        case alt_text = "alt_text"
-    }
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decodeIfPresent(String.self, forKey: .id)
-        src = try container.decode(String.self, forKey: .src)
-
-        // Accept multiple possible alt text keys used by REST/GraphQL
-        altText = try container.decodeIfPresent(String.self, forKey: .altText)
-            ?? container.decodeIfPresent(String.self, forKey: .alt)
-            ?? container.decodeIfPresent(String.self, forKey: .alt_text)
-    }
-
-    // Keep a memberwise initializer for places that construct ProductDTO in tests
-    init(id: String? = nil, src: String, altText: String? = nil) {
-        self.id = id
-        self.src = src
-        self.altText = altText
-    }
-
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
-        try container.encode(src, forKey: .src)
-        // Prefer GraphQL-style key when encoding
-        try container.encodeIfPresent(altText, forKey: .altText)
-    }
-}
+//struct ImageDTO: Codable {
+//    let id: String?
+//    let src: String
+//    let altText: String?
+//    
+//    enum CodingKeys: String, CodingKey {
+//        case id, src
+//        case altText = "altText"
+//        case alt = "alt"
+//        case alt_text = "alt_text"
+//    }
+//
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        id = try container.decodeIfPresent(String.self, forKey: .id)
+//        src = try container.decode(String.self, forKey: .src)
+//
+//        // Accept multiple possible alt text keys used by REST/GraphQL
+//        altText = try container.decodeIfPresent(String.self, forKey: .altText)
+//            ?? container.decodeIfPresent(String.self, forKey: .alt)
+//            ?? container.decodeIfPresent(String.self, forKey: .alt_text)
+//    }
+//
+//    // Keep a memberwise initializer for places that construct ProductDTO in tests
+//    init(id: String? = nil, src: String, altText: String? = nil) {
+//        self.id = id
+//        self.src = src
+//        self.altText = altText
+//    }
+//
+//    func encode(to encoder: Encoder) throws {
+//        var container = encoder.container(keyedBy: CodingKeys.self)
+//        try container.encodeIfPresent(id, forKey: .id)
+//        try container.encode(src, forKey: .src)
+//        // Prefer GraphQL-style key when encoding
+//        try container.encodeIfPresent(altText, forKey: .altText)
+//    }
+//}
 
 struct ProductOptionDTO: Codable {
     let name: String
