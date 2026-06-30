@@ -10,13 +10,24 @@ import Firebase
 
 @main
 struct CartoApp: App {
+
+    @StateObject private var appViewModel: AppViewModel
+
     init() {
         FirebaseApp.configure()
+
+        let container = AppContainer()
+        ServiceLocator.shared.register(container: container)
+
+        _appViewModel = StateObject(
+            wrappedValue: AppViewModel(repository: ServiceLocator.shared.resolveAuthRepository())
+        )
     }
-    
+
     var body: some Scene {
         WindowGroup {
-            LoginView(viewModel: AuthLoginViewModel(validator: AuthValidator()))
+            LoginView(viewModel: AuthLoginViewModel(validator: AuthValidator(),repository: ServiceLocator.shared.resolveAuthRepository(),appViewModel: appViewModel))
+                .environmentObject(appViewModel)
         }
     }
 }
