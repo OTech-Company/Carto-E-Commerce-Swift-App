@@ -1,42 +1,50 @@
-struct OrderDTO: Codable {
-    let id: String
+// MARK: - Core Order Structures (REST Admin API Compliant)
+struct OrderListResponse: Decodable {
+    let orders: [OrderDTO]?
+}
+
+struct OrderDTO: Decodable { // Changed from Codable to Decodable
+    let id: Int // Changed from String to Int to prevent REST type mismatch
     let orderNumber: Int
     let processedAt: String
     let financialStatus: String           // paid, pending, refunded, unknown
-    let fulfillmentStatus: String?        // fulfilled, unfulfilled, scheduled, partial, unknown
-    let currentTotalPrice: MoneyDTO       // CHANGED: was String, now Money
-    let currentSubtotalPrice: MoneyDTO?   // NEW: before taxes/shipping
-    let currentTotalDiscounts: MoneyDTO?  // NEW: total discount amount
-    let discountApplications: [DiscountApplicationDTO]? // NEW: discount breakdown
+    let fulfillmentStatus: String?        // fulfilled, unfulfilled, scheduled, etc.
+    
+    // Shopify REST Admin passes currency totals directly as flat price strings
+    let totalPrice: String?
+    let subtotalPrice: String?
+    let totalDiscounts: String?
+    let currency: String?                 // e.g., "USD"
+    
+    let discountApplications: [DiscountApplicationDTO]?
     let lineItems: [OrderLineItemDTO]?
     let shippingAddress: AddressDTO?
 }
 
-struct OrderLineItemDTO: Codable {
+struct OrderLineItemDTO: Decodable {
+    let id: Int
     let title: String
     let quantity: Int
-    let originalTotalPrice: MoneyDTO     // CHANGED: was price, now proper Money object
-    let variant: VariantDTO?              // NEW: includes product details
+    let price: String? // Shopify REST returns variant cost as a string "price"
+    let variantId: Int? // References the corresponding Variant identifier
+    let sku: String?
 }
 
-struct DiscountApplicationDTO: Codable { // NEW: discount details on order
+struct DiscountApplicationDTO: Decodable {
+    let type: String?
+    let value: String?                     // Can be a percentage like "10.0" or a fixed price
+    let valueType: String?                 // "percentage" or "fixed_amount"
     let code: String?
-    let value: DiscountValueDTO?
 }
 
-struct DiscountValueDTO: Codable {       // NEW: discount can be percentage or fixed amount
-    let percentage: Double?
-    let amount: MoneyDTO?
-}
-
-struct AddressDTO: Codable {
-    let id: String?                       // NEW: address ID from Shopify
+struct AddressDTO: Decodable {
+    let id: Int? // Changed from String to Int
     let firstName: String?
     let lastName: String?
     let address1: String?
-    let address2: String?                 // NEW: apartment/suite number
+    let address2: String?
     let city: String?
-    let province: String?                 // NEW: state/province
+    let province: String?
     let country: String?
     let zip: String?
     let phone: String?

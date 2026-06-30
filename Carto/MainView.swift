@@ -41,7 +41,7 @@ extension MainView {
     func makeCategoryListScreen() -> some View {
         let repository = ServiceLocator.shared.resolveCategoryRepository()
         let useCase = GetCategoryUseCase(repository: repository)
-        let viewModel = CategoryListViewModel(getCategoryUseCase: useCase)
+        let viewModel = CategoryListViewModel(getCategoryUseCase: useCase, fetchSubcategoriesUseCase: useCase)
         
         if #available(iOS 17.0, *) {
             CategoryListView(viewModel: viewModel)
