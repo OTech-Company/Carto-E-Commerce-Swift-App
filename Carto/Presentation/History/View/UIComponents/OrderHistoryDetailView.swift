@@ -1,13 +1,5 @@
 //
-//  OrderDetailView.swift
-//  Carto
-//
-//  Created by Osama Hosam on 01/07/2026.
-//
-
-
-//
-//  OrderDetailView.swift
+//  OrderHistoryDetailView.swift
 //  Carto
 //
 //  Created by Osama Abdellatif on 01/07/2026.
@@ -79,14 +71,24 @@ struct OrderHistoryDetailView: View {
                     LazyVStack(spacing: 12) {
                         ForEach(order.items) { item in
                             HStack(spacing: 16) {
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(Color(white: 0.95))
-                                    .frame(width: 56, height: 56)
-                                    .overlay(
-                                        Image(systemName: "tag")
-                                            .foregroundColor(.gray.opacity(0.5))
-                                            .font(.system(size: 16))
-                                    )
+                                if let imageUrlString = item.imageUrl, let url = URL(string: imageUrlString) {
+                                    AsyncImage(url: url) { phase in
+                                        switch phase {
+                                        case .success(let image):
+                                            image
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                                .frame(width: 56, height: 56)
+                                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                                        case .failure, .empty:
+                                            itemFallbackPlaceholder
+                                        @unknown default:
+                                            itemFallbackPlaceholder
+                                        }
+                                    }
+                                } else {
+                                    itemFallbackPlaceholder
+                                }
                                 
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(item.title)
@@ -104,7 +106,7 @@ struct OrderHistoryDetailView: View {
                                 Text("$\(item.price)")
                                     .font(.system(size: 15, weight: .bold))
                                     .foregroundColor(.black)
-                             }
+                            }
                             .padding()
                             .background(Color.white)
                             .cornerRadius(12)
@@ -118,5 +120,16 @@ struct OrderHistoryDetailView: View {
         }
         .navigationTitle("Order \(order.orderNumber)")
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private var itemFallbackPlaceholder: some View {
+        RoundedRectangle(cornerRadius: 8)
+            .fill(Color(white: 0.95))
+            .frame(width: 56, height: 56)
+            .overlay(
+                Image(systemName: "tag")
+                    .foregroundColor(.gray.opacity(0.5))
+                    .font(.system(size: 16))
+            )
     }
 }

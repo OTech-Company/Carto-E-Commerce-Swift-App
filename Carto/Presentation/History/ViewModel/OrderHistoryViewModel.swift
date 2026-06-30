@@ -10,19 +10,16 @@ import Foundation
 @MainActor
 final class OrderHistoryViewModel: ObservableObject {
     
-    // MARK: - Published States
     @Published private(set) var orders: [OrderEntity] = []
     @Published private(set) var isLoading: Bool = false
     @Published var errorMessage: String? = nil
     
-    // MARK: - Dependencies
     private let getOrderHistoryUseCase: GetOrderHistoryUseCase
     
     init(getOrderHistoryUseCase: GetOrderHistoryUseCase) {
         self.getOrderHistoryUseCase = getOrderHistoryUseCase
     }
     
-    // MARK: - Intentions / Actions
     func fetchOrders() async {
         isLoading = true
         errorMessage = nil

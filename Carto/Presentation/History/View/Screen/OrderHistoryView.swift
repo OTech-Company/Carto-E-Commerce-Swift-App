@@ -34,7 +34,6 @@ struct OrderHistoryView: View {
                                         .font(.system(size: 16, weight: .medium))
                                         .foregroundColor(selectedTab == tab ? .black : .gray)
                                     
-                                    // Underline selection tracker indicator
                                     Rectangle()
                                         .fill(selectedTab == tab ? Color.black : Color.clear)
                                         .frame(height: 2)
@@ -49,7 +48,6 @@ struct OrderHistoryView: View {
                     Divider()
                         .background(Color.black.opacity(0.08))
                     
-                    // Main Content Canvas
                     Group {
                         if viewModel.isLoading && viewModel.orders.isEmpty {
                             ProgressView()
@@ -68,7 +66,6 @@ struct OrderHistoryView: View {
             }
             .navigationTitle("History")
             .navigationBarTitleDisplayMode(.large)
-            // Native structural routing map bind link destination
             .navigationDestination(for: OrderEntity.self) { order in
                 OrderHistoryDetailView(order: order)
             }
@@ -78,7 +75,6 @@ struct OrderHistoryView: View {
         }
     }
     
-    // MARK: - Local Filter Logic
     private var filteredOrders: [OrderEntity] {
         switch selectedTab {
         case .active:
@@ -88,17 +84,14 @@ struct OrderHistoryView: View {
         }
     }
     
-    // MARK: - Subviews
-    
     private var orderListView: some View {
         ScrollView {
             LazyVStack(spacing: 16) {
                 ForEach(filteredOrders) { order in
-                    // NavigationLink wraps the layout card securely
                     NavigationLink(value: order) {
                         OrderCardRow(order: order)
                     }
-                    .buttonStyle(PlainButtonStyle()) // Eliminates automatic text blue highlight tinting
+                    .buttonStyle(PlainButtonStyle())
                 }
             }
             .padding(.horizontal, 16)
@@ -128,71 +121,5 @@ struct OrderHistoryView: View {
                 .font(.subheadline)
             Spacer()
         }
-    }
-}
-
-// MARK: - Supporting Elevated Product Card Component (Fixed Scope Error)
-
-struct OrderCardRow: View {
-    let order: OrderEntity
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack(alignment: .top, spacing: 16) {
-                // Mock Image Placeholder box matching the item layout
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(Color(white: 0.95))
-                    .frame(width: 84, height: 84)
-                    .overlay(
-                        Image(systemName: "tag")
-                            .foregroundColor(.gray.opacity(0.6))
-                            .font(.system(size: 24))
-                    )
-                
-                // Item Descriptive Information Block
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(order.items.first?.title ?? "Carto Premium Product")
-                        .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(.black)
-                        .lineLimit(1)
-                    
-                    Text("Order #\(order.orderNumber)")
-                        .font(.system(size: 14))
-                        .foregroundColor(.gray)
-                    
-                    Text(order.fulfillmentStatus == .fulfilled ? "Delivered" : "In Progress")
-                        .font(.system(size: 14))
-                        .foregroundColor(.gray)
-                        .padding(.bottom, 2)
-                    
-                    Text("$\(order.totalPrice)")
-                        .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(.black)
-                }
-                
-                Spacer()
-            }
-            
-            // Primary Functional Blue Action Button
-            Button {
-                // Action logic to handle item re-ordering
-            } label: {
-                Text("Reorder")
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 44)
-                    .background(Color.blue)
-                    .cornerRadius(10)
-            }
-        }
-        .padding(.all, 16)
-        .background(Color.white)
-        .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.02), radius: 6, x: 0, y: 3)
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(Color.black.opacity(0.06), lineWidth: 1)
-        )
     }
 }

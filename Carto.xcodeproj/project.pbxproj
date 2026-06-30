@@ -26,7 +26,8 @@
 		6F4BA23F2FF455C1007AA5B1 /* GetOrderHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4BA23E2FF455C1007AA5B1 /* GetOrderHistoryUseCase.swift */; };
 		6F4BA2442FF45647007AA5B1 /* OrderHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4BA2432FF45647007AA5B1 /* OrderHistoryViewModel.swift */; };
 		6F4BA2462FF4565B007AA5B1 /* OrderHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4BA2452FF4565B007AA5B1 /* OrderHistoryView.swift */; };
-		6F4BA2482FF469AB007AA5B1 /* OrdersHistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4BA2472FF469AB007AA5B1 /* OrdersHistoryDetailView.swift */; };
+		6F4BA24B2FF46E68007AA5B1 /* OrderCardRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4BA24A2FF46E68007AA5B1 /* OrderCardRow.swift */; };
+		6F4BA24D2FF46E78007AA5B1 /* OrderHistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4BA24C2FF46E78007AA5B1 /* OrderHistoryDetailView.swift */; };
 		6F5DA4022FF139AC002F500B /* OnboardingControlsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA4012FF139AC002F500B /* OnboardingControlsRow.swift */; };
 		6F5DA4042FF139BA002F500B /* OnboardingHeadlineBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA4032FF139BA002F500B /* OnboardingHeadlineBlock.swift */; };
 		6F5DA4062FF139C4002F500B /* OnboardingLayoutBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA4052FF139C4002F500B /* OnboardingLayoutBottom.swift */; };
@@ -256,7 +257,8 @@
 		6F4BA23E2FF455C1007AA5B1 /* GetOrderHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOrderHistoryUseCase.swift; sourceTree = "<group>"; };
 		6F4BA2432FF45647007AA5B1 /* OrderHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryViewModel.swift; sourceTree = "<group>"; };
 		6F4BA2452FF4565B007AA5B1 /* OrderHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryView.swift; sourceTree = "<group>"; };
-		6F4BA2472FF469AB007AA5B1 /* OrdersHistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersHistoryDetailView.swift; sourceTree = "<group>"; };
+		6F4BA24A2FF46E68007AA5B1 /* OrderCardRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCardRow.swift; sourceTree = "<group>"; };
+		6F4BA24C2FF46E78007AA5B1 /* OrderHistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryDetailView.swift; sourceTree = "<group>"; };
 		6F5DA4012FF139AC002F500B /* OnboardingControlsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingControlsRow.swift; sourceTree = "<group>"; };
 		6F5DA4032FF139BA002F500B /* OnboardingHeadlineBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingHeadlineBlock.swift; sourceTree = "<group>"; };
 		6F5DA4052FF139C4002F500B /* OnboardingLayoutBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLayoutBottom.swift; sourceTree = "<group>"; };
@@ -523,8 +525,8 @@
 		6F4BA2412FF45635007AA5B1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6F4BA2472FF469AB007AA5B1 /* OrdersHistoryDetailView.swift */,
-				6F4BA2452FF4565B007AA5B1 /* OrderHistoryView.swift */,
+				6F4BA24E2FF47331007AA5B1 /* Screen */,
+				6F4BA2492FF46E61007AA5B1 /* UIComponents */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -535,6 +537,23 @@
 				6F4BA2432FF45647007AA5B1 /* OrderHistoryViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6F4BA2492FF46E61007AA5B1 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				6F4BA24C2FF46E78007AA5B1 /* OrderHistoryDetailView.swift */,
+				6F4BA24A2FF46E68007AA5B1 /* OrderCardRow.swift */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		6F4BA24E2FF47331007AA5B1 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				6F4BA2452FF4565B007AA5B1 /* OrderHistoryView.swift */,
+			);
+			path = Screen;
 			sourceTree = "<group>";
 		};
 		6F5DA3FF2FF13970002F500B /* UIComponents */ = {
@@ -1723,7 +1742,6 @@
 				6F5DA4452FF407B1002F500B /* CustomCategoryNavigationBar.swift in Sources */,
 				6FB176332FEFE3140008DDDC /* ProductDTO.swift in Sources */,
 				6FB176342FEFE3140008DDDC /* PaymentDTO.swift in Sources */,
-				6F4BA2482FF469AB007AA5B1 /* OrdersHistoryDetailView.swift in Sources */,
 				6FB176352FEFE3140008DDDC /* CartViewModel.swift in Sources */,
 				6F4BA2462FF4565B007AA5B1 /* OrderHistoryView.swift in Sources */,
 				6FB176362FEFE3140008DDDC /* HomeFeaturedSectionViewModel.swift in Sources */,
@@ -1856,6 +1874,7 @@
 				6F5DA41D2FF1975C002F500B /* SplashPhysicsScene.swift in Sources */,
 				6FB176B12FEFE3140008DDDC /* String+Extensions.swift in Sources */,
 				6FB176B22FEFE3140008DDDC /* AdsViewModel.swift in Sources */,
+				6F4BA24D2FF46E78007AA5B1 /* OrderHistoryDetailView.swift in Sources */,
 				6FB176B32FEFE3140008DDDC /* OrderTrackingView.swift in Sources */,
 				6FB176B42FEFE3140008DDDC /* HomeBannerView.swift in Sources */,
 				6FB176B52FEFE3140008DDDC /* NavigationRouter.swift in Sources */,
@@ -1885,6 +1904,7 @@
 				6FB176CF2FEFE3140008DDDC /* LanguageSettingsView.swift in Sources */,
 				6FB176D02FEFE3140008DDDC /* SearchResultsView.swift in Sources */,
 				6FB176D12FEFE3140008DDDC /* CouponEntryViewModel.swift in Sources */,
+				6F4BA24B2FF46E68007AA5B1 /* OrderCardRow.swift in Sources */,
 				6D7A459F2FF2939700E2805D /* ProductsRemoteDataSource.swift in Sources */,
 				6FB176D22FEFE3140008DDDC /* Validator.swift in Sources */,
 				6F5DA42B2FF1BF17002F500B /* CategoriesView.swift in Sources */,

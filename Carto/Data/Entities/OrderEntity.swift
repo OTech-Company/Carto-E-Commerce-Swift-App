@@ -26,6 +26,7 @@ struct OrderItemEntity: Identifiable, Codable, Hashable {
     let title: String
     let quantity: Int
     let price: String
+    let imageUrl: String? // Added here so your subview can read item images
     
     // Hash based on the unique line item database id
     func hash(into hasher: inout Hasher) {
@@ -47,6 +48,7 @@ struct OrderEntity: Identifiable, Codable, Hashable {
     let fulfillmentStatus: OrderFulfillmentStatus
     let itemCount: Int
     let items: [OrderItemEntity]
+    let imageUrl: String?
     
     // Hash based on the unique order database id
     func hash(into hasher: inout Hasher) {
@@ -100,7 +102,8 @@ extension OrderDTO {
                 id: dto.id,
                 title: dto.title,
                 quantity: dto.quantity,
-                price: dto.price ?? "0.00"
+                price: dto.price ?? "0.00",
+                imageUrl: nil 
             )
         } ?? []
         
@@ -115,7 +118,8 @@ extension OrderDTO {
             financialStatus: mappedFinancial,
             fulfillmentStatus: mappedFulfillment,
             itemCount: totalItemsPurchased,
-            items: mappedItems
+            items: mappedItems,
+            imageUrl: nil
         )
     }
 }
