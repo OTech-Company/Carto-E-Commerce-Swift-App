@@ -35,12 +35,12 @@ struct OrderCardRow: View {
                 
                 // Item Descriptive Information Block
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(order.items.first?.title ?? "Carto Premium Product")
+                    Text("Order #\(order.orderNumber)")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.black)
                         .lineLimit(1)
                     
-                    Text("Order #\(order.orderNumber)")
+                    Text(order.formattedDate)
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
                     
