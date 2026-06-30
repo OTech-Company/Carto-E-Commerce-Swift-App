@@ -26,7 +26,7 @@ struct AuthValidator: AuthValidatorProtocol {
             throw AuthValidationError.emptyPassword
         }
         
-        guard !password.isStrongPassword else {
+        guard password.isStrongPassword else {
             throw AuthValidationError.weakPassword
         }
     }
