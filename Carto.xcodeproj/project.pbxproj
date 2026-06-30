@@ -26,6 +26,7 @@
 		6F4BA23F2FF455C1007AA5B1 /* GetOrderHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4BA23E2FF455C1007AA5B1 /* GetOrderHistoryUseCase.swift */; };
 		6F4BA2442FF45647007AA5B1 /* OrderHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4BA2432FF45647007AA5B1 /* OrderHistoryViewModel.swift */; };
 		6F4BA2462FF4565B007AA5B1 /* OrderHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4BA2452FF4565B007AA5B1 /* OrderHistoryView.swift */; };
+		6F4BA2482FF469AB007AA5B1 /* OrdersHistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4BA2472FF469AB007AA5B1 /* OrdersHistoryDetailView.swift */; };
 		6F5DA4022FF139AC002F500B /* OnboardingControlsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA4012FF139AC002F500B /* OnboardingControlsRow.swift */; };
 		6F5DA4042FF139BA002F500B /* OnboardingHeadlineBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA4032FF139BA002F500B /* OnboardingHeadlineBlock.swift */; };
 		6F5DA4062FF139C4002F500B /* OnboardingLayoutBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA4052FF139C4002F500B /* OnboardingLayoutBottom.swift */; };
@@ -255,6 +256,7 @@
 		6F4BA23E2FF455C1007AA5B1 /* GetOrderHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOrderHistoryUseCase.swift; sourceTree = "<group>"; };
 		6F4BA2432FF45647007AA5B1 /* OrderHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryViewModel.swift; sourceTree = "<group>"; };
 		6F4BA2452FF4565B007AA5B1 /* OrderHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryView.swift; sourceTree = "<group>"; };
+		6F4BA2472FF469AB007AA5B1 /* OrdersHistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersHistoryDetailView.swift; sourceTree = "<group>"; };
 		6F5DA4012FF139AC002F500B /* OnboardingControlsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingControlsRow.swift; sourceTree = "<group>"; };
 		6F5DA4032FF139BA002F500B /* OnboardingHeadlineBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingHeadlineBlock.swift; sourceTree = "<group>"; };
 		6F5DA4052FF139C4002F500B /* OnboardingLayoutBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLayoutBottom.swift; sourceTree = "<group>"; };
@@ -521,6 +523,7 @@
 		6F4BA2412FF45635007AA5B1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6F4BA2472FF469AB007AA5B1 /* OrdersHistoryDetailView.swift */,
 				6F4BA2452FF4565B007AA5B1 /* OrderHistoryView.swift */,
 			);
 			path = View;
@@ -1720,6 +1723,7 @@
 				6F5DA4452FF407B1002F500B /* CustomCategoryNavigationBar.swift in Sources */,
 				6FB176332FEFE3140008DDDC /* ProductDTO.swift in Sources */,
 				6FB176342FEFE3140008DDDC /* PaymentDTO.swift in Sources */,
+				6F4BA2482FF469AB007AA5B1 /* OrdersHistoryDetailView.swift in Sources */,
 				6FB176352FEFE3140008DDDC /* CartViewModel.swift in Sources */,
 				6F4BA2462FF4565B007AA5B1 /* OrderHistoryView.swift in Sources */,
 				6FB176362FEFE3140008DDDC /* HomeFeaturedSectionViewModel.swift in Sources */,

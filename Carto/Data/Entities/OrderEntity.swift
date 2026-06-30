@@ -1,6 +1,43 @@
+//
+//  OrderEntity.swift
+//  Carto
+//
+//  Created by Osama Abdellatif on 01/07/2026.
+//
+
 import Foundation
 
-struct OrderEntity: Identifiable {
+enum OrderFinancialStatus: String, Codable, Hashable {
+    case paid = "Paid"
+    case pending = "Pending"
+    case refunded = "Refunded"
+    case unknown = "Unknown"
+}
+
+enum OrderFulfillmentStatus: String, Codable, Hashable {
+    case fulfilled = "Fulfilled"
+    case unfulfilled = "Unfulfilled"
+    case partial = "Partially Fulfilled"
+    case restocked = "Restocked"
+}
+
+struct OrderItemEntity: Identifiable, Codable, Hashable {
+    let id: Int
+    let title: String
+    let quantity: Int
+    let price: String
+    
+    // Hash based on the unique line item database id
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: OrderItemEntity, rhs: OrderItemEntity) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+struct OrderEntity: Identifiable, Codable, Hashable {
     let id: Int
     let orderNumber: String
     let formattedDate: String
@@ -10,38 +47,22 @@ struct OrderEntity: Identifiable {
     let fulfillmentStatus: OrderFulfillmentStatus
     let itemCount: Int
     let items: [OrderItemEntity]
+    
+    // Hash based on the unique order database id
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: OrderEntity, rhs: OrderEntity) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
-
-struct OrderItemEntity: Identifiable {
-    let id: Int
-    let title: String
-    let quantity: Int
-    let price: String
-}
-
-enum OrderFinancialStatus: String {
-    case paid = "Paid"
-    case pending = "Pending"
-    case refunded = "Refunded"
-    case unknown = "Unknown"
-}
-
-enum OrderFulfillmentStatus: String {
-    case fulfilled = "Fulfilled"
-    case unfulfilled = "Unfulfilled"
-    case partial = "Partially Fulfilled"
-    case restocked = "Restocked"
-}
-
-
-import Foundation
 
 extension OrderDTO {
     func toDomain() -> OrderEntity {
         // Safe Date Parsing Strategy
         var displayDate = "Unknown Date"
         if let processedAt = self.processedAt {
-            // Shopify timezone layout handles standard ISO strings or custom offsets
             let formatter = ISO8601DateFormatter()
             formatter.formatOptions = [.withInternetDateTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
             
@@ -51,7 +72,6 @@ extension OrderDTO {
                 outputFormatter.timeStyle = .none
                 displayDate = outputFormatter.string(from: date)
             } else {
-                // Fail-safe manual fallback formatting split if custom offsets act up
                 let components = processedAt.components(separatedBy: "T")
                 if let firstComponent = components.first {
                     displayDate = firstComponent
@@ -59,7 +79,6 @@ extension OrderDTO {
             }
         }
         
-        // Financial status safety mapping (handling "paid", "pending", "refunded")
         let mappedFinancial = OrderFinancialStatus(rawValue: self.financialStatus?.capitalized ?? "") ?? .unknown
         
         // Fulfillment status safety mapping
@@ -67,7 +86,7 @@ extension OrderDTO {
         switch self.fulfillmentStatus?.lowercased() {
         case "fulfilled":
             mappedFulfillment = .fulfilled
-        case "partial":
+        case "partial", "partially_fulfilled":
             mappedFulfillment = .partial
         case "restocked":
             mappedFulfillment = .restocked
@@ -89,7 +108,7 @@ extension OrderDTO {
         
         return OrderEntity(
             id: self.id,
-            orderNumber: "#\(self.orderNumber)",
+            orderNumber: self.orderNumber.description,
             formattedDate: displayDate,
             totalPrice: self.totalPrice ?? "0.00",
             currency: self.currency ?? "USD",

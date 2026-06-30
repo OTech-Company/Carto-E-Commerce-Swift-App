@@ -1,10 +1,3 @@
-////
-////  ProductDTO.swift
-////  Carto
-////
-////  Created by Manona on 28/06/2026.
-////
-//
 //  ProductDTO.swift
 //  Carto
 //
