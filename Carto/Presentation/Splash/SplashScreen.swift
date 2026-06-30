@@ -36,9 +36,9 @@ struct SplashView: View {
                 }
             }.task {
 //                 This runs automatically when the view appears
-                await NetworkUsageSample.fetchProductWithGraphQL(id: "606300000000000000000001")
-                print("=====================")
-               await NetworkUsageSample.fetchProducts()
+//                await NetworkUsageSample.fetchProductWithGraphQL(id: "1")
+//                print("=====================")
+//               await NetworkUsageSample.fetchProducts()
             }
             .onAppear {
                 // Animate logo entrance

@@ -10,29 +10,28 @@ final class CategoryRepository: CategoryRepositoryProtocol {
     
     func fetchCategories() async throws -> [Category] {
         do {
-           
+            // 1. Define the wrapper using CAMEL CASE to perfectly match `.convertFromSnakeCase`
             struct CategoriesResponse: Decodable {
-                let custom_collections: [CategoryDTO]?
+                let customCollections: [CategoryDTO]?
             }
             
+            // 2. Call the client
             let response: CategoriesResponse = try await ShopifyAPIClient.shared.requestREST(
                 endpoint: .categories
             )
             
-            let dtos = response.custom_collections ?? []
-            let domainCategories = dtos.map { Category(from: $0) }
+            // 3. Extract using camelCase
+            let dtos = response.customCollections ?? []
             
             print("=================")
-            print(dtos)
-
+            print("Successfully Decoded DTOs Count: \(dtos.count)")
             print("=================")
-            print(domainCategories)
-            return domainCategories
-        } catch let decodingError as DecodingError {
-            print("❌ JSON Decoding failed explicitly: \(decodingError)")
-            throw decodingError
+            
+            // Map directly to domain models
+            return dtos.map { Category(from: $0) }
+            
         } catch {
-            print("❌ REST parsing/network error:", error)
+            print("❌ Repository Error:", error)
             throw error
         }
     }
