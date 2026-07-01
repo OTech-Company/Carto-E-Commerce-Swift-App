@@ -6,7 +6,7 @@
 //
 import Foundation
 
-final class CategoryRepository: CategoryRepositoryProtocol {
+final class CategoryRepositoryImpl: CategoryRepositoryProtocol {
     
     func fetchCategories() async throws -> [Category] {
         do {
@@ -100,4 +100,32 @@ final class CategoryRepository: CategoryRepositoryProtocol {
             throw error
         }
     }
+    
+    func fetchCategoryProducts(categoryId: String) async throws -> [Product]{
+        do {
+
+            struct CategoryPoductsResponse: Decodable {
+                let products: [ProductDTO]?
+            }
+            
+            // Call the client
+            let response: CategoryProductsResponse = try await ShopifyAPIClient.shared.requestREST(
+                endpoint: .productsByCategory(id: categoryId)
+            )
+            
+            let dtos = response.products ?? []
+            
+            print("=================")
+            print("Successfully Decoded DTOs Count: \(dtos.count)")
+            print("=================")
+            
+            // Map directly to domain models
+            return dtos.map { Product(from: $0) }
+            
+        } catch {
+            print("❌ Repository Error:", error)
+            throw error
+        }
+    }
+
 }

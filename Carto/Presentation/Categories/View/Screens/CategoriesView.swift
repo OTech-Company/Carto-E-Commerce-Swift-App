@@ -60,7 +60,19 @@ struct CategoryListView: View {
                         ScrollView {
                             LazyVGrid(columns: columns, spacing: 16) {
                                 ForEach(displayCategories) { category in
-                                    CategoryCardView(category: category)
+                                    NavigationLink {
+                                        CategoryProductsView(
+                                            categoryId: String(category.id),
+                                            viewModel: CategoryProductsViewModel(
+                                                getCategoryUseCase: GetCategoryUseCase(
+                                                    repository: CategoryRepositoryImpl()
+                                                )
+                                            )
+                                        )
+                                    } label: {
+                                        CategoryCardView(category: category)
+                                    }
+                                    .buttonStyle(.plain)
                                 }
                             }
                             .padding(.horizontal, 16)
