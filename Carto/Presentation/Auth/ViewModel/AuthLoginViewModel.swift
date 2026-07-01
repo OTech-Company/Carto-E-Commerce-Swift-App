@@ -31,19 +31,18 @@ final class AuthLoginViewModel: ObservableObject {
 
     private let validator: AuthValidatorProtocol
     private let repository: AuthenticationRepositoryProtocol
-    private let appViewModel: AppViewModel
+    private let authSession: AuthSession
     private let router: AuthRouter
 
     init(
         validator: AuthValidatorProtocol,
         repository: AuthenticationRepositoryProtocol,
-        appViewModel: AppViewModel
-        ,
+        authSession: AuthSession,
         router: AuthRouter
     ) {
         self.validator = validator
         self.repository = repository
-        self.appViewModel = appViewModel
+        self.authSession = authSession
         self.router = router
     }
 
@@ -84,8 +83,7 @@ final class AuthLoginViewModel: ObservableObject {
         Task {
             do {
                 let user = try await repository.login(email: email, password: password)
-                await appViewModel.restoreSession()
-                if (!user.isEmailVerified) {
+                if !user.isEmailVerified {
                     router.showVerification(email: user.email)
                 }
             } catch let error as AuthError {
@@ -99,12 +97,10 @@ final class AuthLoginViewModel: ObservableObject {
 
     func continueAsGuest() {
         isLoading = true
-        Task{
+        Task {
             do {
                 try await Task.sleep(for: .seconds(1))
                 repository.continueAsGuest()
-                await appViewModel.restoreSession()
-                // navigate to home
             } catch {
                 generalErrorMessage = error.localizedDescription
             }

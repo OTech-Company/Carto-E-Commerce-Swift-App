@@ -22,13 +22,10 @@ struct CartoApp: App {
     var body: some Scene {
         WindowGroup {
             switch appViewModel.sessionState {
-                
             case .loading:
                 SplashView()
-
             case .unauthenticated:
                 AuthCoordinator(container: DIContainer.shared)
-
             case .guest,
                  .authenticated:
                 MainView()

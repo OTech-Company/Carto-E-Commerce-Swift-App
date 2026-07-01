@@ -11,17 +11,17 @@ import Foundation
 final class VerificationSuccessViewModel: ObservableObject {
 
     private let router: AuthRouter
-    private let appViewModel: AppViewModel
+    private let authSession: AuthSession
 
     init(
         router: AuthRouter,
-        appViewModel: AppViewModel
+        authSession: AuthSession
     ) {
         self.router = router
-        self.appViewModel = appViewModel
+        self.authSession = authSession
     }
 
     func onGetStartedClicked() async {
-        await appViewModel.restoreSession()
+        _ = authSession.currentUser
     }
 }

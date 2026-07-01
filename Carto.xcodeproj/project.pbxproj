@@ -212,6 +212,9 @@
 		D93C19A02FF547F000C51109 /* CategoryRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93C199F2FF547F000C51109 /* CategoryRepositoryImpl.swift */; };
 		D93C19A22FF5486100C51109 /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93C19A12FF5486100C51109 /* CategoryListViewModel.swift */; };
 		D93C19A82FF548FF00C51109 /* SubCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93C19A72FF548FF00C51109 /* SubCategories.swift */; };
+		D93C19AA2FF58C1900C51109 /* AuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93C19A92FF58C1800C51109 /* AuthSession.swift */; };
+		D9976F0D2FF307D100CEBF9C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D9976F0C2FF307D100CEBF9C /* FirebaseAuth */; };
+		D9976F0F2FF307D100CEBF9C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D9976F0E2FF307D100CEBF9C /* FirebaseFirestore */; };
 		D9976F142FF30D4D00CEBF9C /* AuthValidatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9976F122FF30D4D00CEBF9C /* AuthValidatorProtocol.swift */; };
 		D9976F152FF30D4D00CEBF9C /* AuthValidatorImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9976F132FF30D4D00CEBF9C /* AuthValidatorImpl.swift */; };
 		D9976F172FF30D5500CEBF9C /* AuthValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9976F162FF30D5500CEBF9C /* AuthValidationError.swift */; };
@@ -467,6 +470,7 @@
 		D93C199F2FF547F000C51109 /* CategoryRepositoryImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryRepositoryImpl.swift; sourceTree = "<group>"; };
 		D93C19A12FF5486100C51109 /* CategoryListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
 		D93C19A72FF548FF00C51109 /* SubCategories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCategories.swift; sourceTree = "<group>"; };
+		D93C19A92FF58C1800C51109 /* AuthSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSession.swift; sourceTree = "<group>"; };
 		D9976F122FF30D4D00CEBF9C /* AuthValidatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthValidatorProtocol.swift; sourceTree = "<group>"; };
 		D9976F132FF30D4D00CEBF9C /* AuthValidatorImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthValidatorImpl.swift; sourceTree = "<group>"; };
 		D9976F162FF30D5500CEBF9C /* AuthValidationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthValidationError.swift; sourceTree = "<group>"; };
@@ -663,6 +667,7 @@
 		6F5DA4302FF1C5D7002F500B /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				D93C19AB2FF5986F00C51109 /* Session */,
 				6FB1762A2FEFE3140008DDDC /* Utils */,
 				6FB1751A2FEFE3140008DDDC /* Extensions */,
 				6FB1750E2FEFE3140008DDDC /* Constants */,
@@ -1631,10 +1636,12 @@
 			sourceTree = "<group>";
 		};
 		D9976EFE2FF3040D00CEBF9C /* SharedComponents */ = {
+		D93C19AB2FF5986F00C51109 /* Session */ = {
 			isa = PBXGroup;
 			children = (
+				D93C19A92FF58C1800C51109 /* AuthSession.swift */,
 			);
-			path = SharedComponents;
+			path = Session;
 			sourceTree = "<group>";
 		};
 		D9976F0A2FF3045100CEBF9C /* UseCases */ = {
@@ -2082,6 +2089,7 @@
 				6FB176C22FEFE3140008DDDC /* PaymentMethodCardView.swift in Sources */,
 				6FB176C32FEFE3140008DDDC /* SearchResultCell.swift in Sources */,
 				6FB176C42FEFE3140008DDDC /* AuthRegisterViewModel.swift in Sources */,
+				D93C19AA2FF58C1900C51109 /* AuthSession.swift in Sources */,
 				6FB176C52FEFE3140008DDDC /* BrandsCoordinator.swift in Sources */,
 				6FB176C62FEFE3140008DDDC /* ProfileViewModel.swift in Sources */,
 				D93C199C2FF547A200C51109 /* SubCategoryRepositoryProtocol.swift in Sources */,

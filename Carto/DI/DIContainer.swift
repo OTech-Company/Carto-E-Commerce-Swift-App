@@ -12,28 +12,22 @@ final class DIContainer {
     static let shared = DIContainer()
 
     let authRepository: AuthenticationRepositoryProtocol
-    
+    let authSession: AuthSession
     let validator: AuthValidatorProtocol
-
     let appViewModel: AppViewModel
-
 
     private init() {
         authRepository = AuthenticationRepositoryImpl()
-        
+        authSession = AuthSession()
         validator = AuthValidatorImpl()
-
-
-
-        appViewModel = AppViewModel(
-            repository: authRepository
-        )
+        appViewModel = AppViewModel(authSession: authSession)
     }
+
     func makeLoginViewModel(router: AuthRouter) -> AuthLoginViewModel {
         AuthLoginViewModel(
             validator: validator,
             repository: authRepository,
-            appViewModel: appViewModel,
+            authSession: authSession,
             router: router
         )
     }
@@ -42,7 +36,7 @@ final class DIContainer {
         AuthRegisterViewModel(
             validator: validator,
             repository: authRepository,
-            appViewModel: appViewModel,
+            authSession: authSession,
             router: router
         )
     }
@@ -51,7 +45,7 @@ final class DIContainer {
         VerificationViewModel(
             userEmail: userEmail,
             repository: authRepository,
-            appViewModel: appViewModel,
+            authSession: authSession,
             router: router
         )
     }
@@ -59,7 +53,7 @@ final class DIContainer {
     func makeVerificationSuccessViewModel(router: AuthRouter) -> VerificationSuccessViewModel {
         VerificationSuccessViewModel(
             router: router,
-            appViewModel: appViewModel
+            authSession: authSession
         )
     }
 }

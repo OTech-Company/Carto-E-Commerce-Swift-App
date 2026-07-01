@@ -6,23 +6,23 @@
 //
 
 import Foundation
+import Combine
 
 @MainActor
 final class AppViewModel: ObservableObject {
 
     @Published private(set) var sessionState: SessionState = .loading
 
-    private let repository: AuthenticationRepositoryProtocol
+    private var cancellables = Set<AnyCancellable>()
+    private let authSession: AuthSession
 
-    init(repository: AuthenticationRepositoryProtocol) {
-        self.repository = repository
-        Task{
-            try await Task.sleep(nanoseconds: 3_000_000_000)
-            await restoreSession()
-        }
-    }
-
-    func restoreSession() async {
-        sessionState = await repository.restoreSession()
+    init(authSession: AuthSession) {
+        self.authSession = authSession
+        authSession.sessionPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] sessionState in
+                self?.sessionState = sessionState
+            }
+            .store(in: &cancellables)
     }
 }

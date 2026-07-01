@@ -20,18 +20,18 @@ final class VerificationViewModel: ObservableObject {
     
     private var timer: Timer?
     private let repository: AuthenticationRepositoryProtocol
-    private let appViewModel: AppViewModel
+    private let authSession: AuthSession
     private let router: AuthRouter
 
     init(
         userEmail: String,
         repository: AuthenticationRepositoryProtocol,
-        appViewModel: AppViewModel,
+        authSession: AuthSession,
         router: AuthRouter
     ) {
         self.userEmail = userEmail
         self.repository = repository
-        self.appViewModel = appViewModel
+        self.authSession = authSession
         self.router = router
     }
 
@@ -43,7 +43,6 @@ final class VerificationViewModel: ObservableObject {
             let isVerified = await repository.checkEmailVerified()
 
             if isVerified {
-                await appViewModel.restoreSession()
                 router.showVerificationSuccess()
             } else {
                 warningMessage = "Your email hasn't been verified yet."
