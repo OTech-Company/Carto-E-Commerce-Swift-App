@@ -15,7 +15,7 @@ extension String {
     }
 
     var isStrongPassword: Bool {
-        let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+        let regex = /^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!.@$%^&*-]).{8,}$/
         return wholeMatch(of: regex) != nil
     }
 

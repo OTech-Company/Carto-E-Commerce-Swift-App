@@ -32,15 +32,19 @@ final class AuthLoginViewModel: ObservableObject {
     private let validator: AuthValidatorProtocol
     private let repository: AuthenticationRepositoryProtocol
     private let appViewModel: AppViewModel
+    private let router: AuthRouter
 
     init(
         validator: AuthValidatorProtocol,
         repository: AuthenticationRepositoryProtocol,
         appViewModel: AppViewModel
+        ,
+        router: AuthRouter
     ) {
         self.validator = validator
         self.repository = repository
         self.appViewModel = appViewModel
+        self.router = router
     }
 
     // MARK: - Validation
@@ -81,9 +85,9 @@ final class AuthLoginViewModel: ObservableObject {
             do {
                 let user = try await repository.login(email: email, password: password)
                 await appViewModel.restoreSession()
-                print(appViewModel.sessionState.canBrowseProducts)
-                print(appViewModel.sessionState.canWriteReview)
-                print(user.isEmailVerified)
+                if (!user.isEmailVerified) {
+                    router.showVerification(email: user.email)
+                }
             } catch let error as AuthError {
                 generalErrorMessage = error.errorDescription
             } catch {
@@ -94,18 +98,17 @@ final class AuthLoginViewModel: ObservableObject {
     }
 
     func continueAsGuest() {
+        isLoading = true
         Task{
-            isLoading = true
             do {
                 try await Task.sleep(for: .seconds(1))
                 repository.continueAsGuest()
                 await appViewModel.restoreSession()
-                print(appViewModel.sessionState.canBrowseProducts)
-                print(appViewModel.sessionState.canWriteReview)
-                isLoading = false
+                // navigate to home
             } catch {
                 generalErrorMessage = error.localizedDescription
             }
+            isLoading = false
         }
     }
 
@@ -113,4 +116,11 @@ final class AuthLoginViewModel: ObservableObject {
         //
     }
     
+    func signUpTapped() {
+        router.showRegister()
+    }
+
+    func forgotPasswordTapped() {
+        // navigate to forget password
+    }
 }

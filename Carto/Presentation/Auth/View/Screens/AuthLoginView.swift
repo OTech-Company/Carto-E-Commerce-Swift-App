@@ -132,11 +132,12 @@ struct LoginView: View {
                             .font(.system(size: 14))
                             .foregroundColor(.gray)
                         
-                        NavigationLink(destination: RegisterView(viewModel: AuthRegisterViewModel(validator: AuthValidator(), repository: ServiceLocator.shared.resolveAuthRepository(), appViewModel: appViewModel))) {
+                        Button(action: { viewModel.signUpTapped()}) {
                             Text("Sign up")
                                 .font(.system(size: 14, weight: .bold))
                                 .foregroundColor(Color(hex: "FF5A00"))
                         }
+                        .disabled(viewModel.isLoading)
                     }
                     .disabled(viewModel.isLoading)
                     .padding(.bottom, 24)

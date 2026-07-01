@@ -12,22 +12,27 @@ import Firebase
 struct CartoApp: App {
 
     @StateObject private var appViewModel: AppViewModel
-
     init() {
         FirebaseApp.configure()
 
-        let container = AppContainer()
-        ServiceLocator.shared.register(container: container)
-
-        _appViewModel = StateObject(
-            wrappedValue: AppViewModel(repository: ServiceLocator.shared.resolveAuthRepository())
-        )
+        let container = DIContainer.shared
+        _appViewModel = StateObject(wrappedValue: container.appViewModel)
     }
 
     var body: some Scene {
         WindowGroup {
-            LoginView(viewModel: AuthLoginViewModel(validator: AuthValidator(),repository: ServiceLocator.shared.resolveAuthRepository(),appViewModel: appViewModel))
-                .environmentObject(appViewModel)
+            switch appViewModel.sessionState {
+                
+            case .loading:
+                SplashView()
+
+            case .unauthenticated:
+                AuthCoordinator(container: DIContainer.shared)
+
+            case .guest,
+                 .authenticated:
+                MainView()
+            }
         }
     }
 }

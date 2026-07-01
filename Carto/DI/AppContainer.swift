@@ -1,12 +1,56 @@
 import Foundation
 
-final class AppContainer {
+@MainActor
+final class DIContainer {
+    static let shared = DIContainer()
 
-    // MARK: - Network
-    let apiClient: ShopifyAPIClient
     let authRepository: AuthenticationRepositoryProtocol
-    init() {
-        self.apiClient      = ShopifyAPIClient.shared
-        self.authRepository = AuthenticationRepositoryImpl()
+    
+    let validator: AuthValidatorProtocol
+
+    let appViewModel: AppViewModel
+
+    private init() {
+        authRepository = AuthenticationRepositoryImpl()
+        
+        validator = AuthValidatorImpl()
+
+        appViewModel = AppViewModel(
+            repository: authRepository
+        )
+    }
+
+    func makeLoginViewModel(router: AuthRouter) -> AuthLoginViewModel {
+        AuthLoginViewModel(
+            validator: validator,
+            repository: authRepository,
+            appViewModel: appViewModel,
+            router: router
+        )
+    }
+    
+    func makeRegisterViewModel(router: AuthRouter) -> AuthRegisterViewModel {
+        AuthRegisterViewModel(
+            validator: validator,
+            repository: authRepository,
+            appViewModel: appViewModel,
+            router: router
+        )
+    }
+
+    func makeVerificationViewModel(userEmail: String, router: AuthRouter) -> VerificationViewModel {
+        VerificationViewModel(
+            userEmail: userEmail,
+            repository: authRepository,
+            appViewModel: appViewModel,
+            router: router
+        )
+    }
+
+    func makeVerificationSuccessViewModel(router: AuthRouter) -> VerificationSuccessViewModel {
+        VerificationSuccessViewModel(
+            router: router,
+            appViewModel: appViewModel
+        )
     }
 }

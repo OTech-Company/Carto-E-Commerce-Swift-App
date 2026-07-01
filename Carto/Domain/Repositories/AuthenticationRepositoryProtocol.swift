@@ -14,4 +14,5 @@ protocol AuthenticationRepositoryProtocol {
     func continueAsGuest()
     func signOut()
     func sendEmailVerification() async throws
+    func checkEmailVerified() async -> Bool
 }

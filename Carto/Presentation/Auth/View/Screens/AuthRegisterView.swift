@@ -2,7 +2,6 @@ import SwiftUI
 
 struct RegisterView: View {
     @StateObject var viewModel: AuthRegisterViewModel
-    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var appViewModel: AppViewModel
     @State private var rememberMe = false
     
@@ -103,9 +102,9 @@ struct RegisterView: View {
                     
                     if let generalErrorMessage = viewModel.generalErrorMessage {
                         Text(generalErrorMessage)
-                          .font(.system(size: 13))
-                          .foregroundColor(.red)
-                          .padding(.horizontal, 24)
+                            .font(.system(size: 13))
+                            .foregroundColor(.red)
+                            .padding(.horizontal, 24)
                     }
                     
                     HStack(spacing: 16) {
@@ -145,7 +144,7 @@ struct RegisterView: View {
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
                     
-                    Button(action: { dismiss() }) {
+                    Button(action: { viewModel.signInTapped()}) {
                         Text("Sign in")
                             .font(.system(size: 14, weight: .bold))
                             .foregroundColor(Color(hex: "FF5A00"))

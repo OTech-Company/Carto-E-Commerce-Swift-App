@@ -48,7 +48,6 @@
 		6FB176362FEFE3140008DDDC /* HomeFeaturedSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1757F2FEFE3140008DDDC /* HomeFeaturedSectionViewModel.swift */; };
 		6FB176372FEFE3140008DDDC /* CartItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175DC2FEFE3140008DDDC /* CartItemCell.swift */; };
 		6FB176382FEFE3140008DDDC /* BannerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB176032FEFE3140008DDDC /* BannerEntity.swift */; };
-		6FB176392FEFE3140008DDDC /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175142FEFE3140008DDDC /* ServiceLocator.swift */; };
 		6FB1763A2FEFE3140008DDDC /* LanguageSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175D42FEFE3140008DDDC /* LanguageSettingsViewModel.swift */; };
 		6FB1763B2FEFE3140008DDDC /* BrandDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175F62FEFE3140008DDDC /* BrandDTO.swift */; };
 		6FB1763C2FEFE3140008DDDC /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175192FEFE3140008DDDC /* View+Extensions.swift */; };
@@ -204,6 +203,27 @@
 		D9976F172FF30D5500CEBF9C /* AuthValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9976F162FF30D5500CEBF9C /* AuthValidationError.swift */; };
 		D9976F192FF30D9500CEBF9C /* SocialIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9976F182FF30D9400CEBF9C /* SocialIconButton.swift */; };
 		D9976F1B2FF3147B00CEBF9C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9976F1A2FF3147B00CEBF9C /* GoogleService-Info.plist */; };
+		D9BFC72E2FF4265100ADA52F /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7262FF4265100ADA52F /* FirebaseAuthService.swift */; };
+		D9BFC72F2FF4265100ADA52F /* FirebaseAuthServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7272FF4265100ADA52F /* FirebaseAuthServiceProtocol.swift */; };
+		D9BFC7302FF4265100ADA52F /* FirestoreUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7292FF4265100ADA52F /* FirestoreUserService.swift */; };
+		D9BFC7312FF4265100ADA52F /* FirestoreUserServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC72A2FF4265100ADA52F /* FirestoreUserServiceProtocol.swift */; };
+		D9BFC7322FF4265100ADA52F /* GuestSessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC72C2FF4265100ADA52F /* GuestSessionStore.swift */; };
+		D9BFC7332FF4265100ADA52F /* GuestSessionStoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC72D2FF4265100ADA52F /* GuestSessionStoreProtocol.swift */; };
+		D9BFC7362FF4268100ADA52F /* FirebaseUserMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7352FF4268100ADA52F /* FirebaseUserMapper.swift */; };
+		D9BFC7382FF4268D00ADA52F /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7372FF4268D00ADA52F /* AuthError.swift */; };
+		D9BFC73A2FF426AB00ADA52F /* UserFirestoreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7392FF426AB00ADA52F /* UserFirestoreDTO.swift */; };
+		D9BFC73E2FF426C200ADA52F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC73B2FF426C100ADA52F /* User.swift */; };
+		D9BFC73F2FF426C200ADA52F /* SessionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC73C2FF426C200ADA52F /* SessionState.swift */; };
+		D9BFC7402FF426C200ADA52F /* RegisterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC73D2FF426C200ADA52F /* RegisterInput.swift */; };
+		D9BFC7422FF426EB00ADA52F /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7412FF426EB00ADA52F /* AppViewModel.swift */; };
+		D9BFC7442FF4272500ADA52F /* FirebaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7432FF4272500ADA52F /* FirebaseUser.swift */; };
+		D9BFC7462FF4361D00ADA52F /* VerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7452FF4361D00ADA52F /* VerificationView.swift */; };
+		D9BFC7482FF4364000ADA52F /* VerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7472FF4364000ADA52F /* VerificationViewModel.swift */; };
+		D9BFC74A2FF4369600ADA52F /* VerificationSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7492FF4369600ADA52F /* VerificationSuccessView.swift */; };
+		D9BFC74D2FF4DAB700ADA52F /* AuthRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC74C2FF4DAB700ADA52F /* AuthRoute.swift */; };
+		D9BFC74F2FF4DB2200ADA52F /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC74E2FF4DB2200ADA52F /* AuthRouter.swift */; };
+		D9BFC7512FF4DB6800ADA52F /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7502FF4DB6800ADA52F /* AuthCoordinator.swift */; };
+		D9BFC7532FF510F400ADA52F /* VerificationSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7522FF510F300ADA52F /* VerificationSuccessViewModel.swift */; };
 		D9EB9A7B2FEFD04E005CE9A4 /* CartoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A7A2FEFD04E005CE9A4 /* CartoApp.swift */; };
 		D9EB9A842FEFD058005CE9A4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A832FEFD058005CE9A4 /* Persistence.swift */; };
 		D9EB9A912FEFD058005CE9A4 /* CartoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A902FEFD058005CE9A4 /* CartoTests.swift */; };
@@ -267,7 +287,6 @@
 		6FB175102FEFE3140008DDDC /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		6FB175112FEFE3140008DDDC /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		6FB175132FEFE3140008DDDC /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
-		6FB175142FEFE3140008DDDC /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		6FB175162FEFE3140008DDDC /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		6FB175172FEFE3140008DDDC /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		6FB175182FEFE3140008DDDC /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -424,6 +443,27 @@
 		D9976F162FF30D5500CEBF9C /* AuthValidationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthValidationError.swift; sourceTree = "<group>"; };
 		D9976F182FF30D9400CEBF9C /* SocialIconButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialIconButton.swift; sourceTree = "<group>"; };
 		D9976F1A2FF3147B00CEBF9C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D9BFC7262FF4265100ADA52F /* FirebaseAuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
+		D9BFC7272FF4265100ADA52F /* FirebaseAuthServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAuthServiceProtocol.swift; sourceTree = "<group>"; };
+		D9BFC7292FF4265100ADA52F /* FirestoreUserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreUserService.swift; sourceTree = "<group>"; };
+		D9BFC72A2FF4265100ADA52F /* FirestoreUserServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreUserServiceProtocol.swift; sourceTree = "<group>"; };
+		D9BFC72C2FF4265100ADA52F /* GuestSessionStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestSessionStore.swift; sourceTree = "<group>"; };
+		D9BFC72D2FF4265100ADA52F /* GuestSessionStoreProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestSessionStoreProtocol.swift; sourceTree = "<group>"; };
+		D9BFC7352FF4268100ADA52F /* FirebaseUserMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseUserMapper.swift; sourceTree = "<group>"; };
+		D9BFC7372FF4268D00ADA52F /* AuthError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		D9BFC7392FF426AB00ADA52F /* UserFirestoreDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFirestoreDTO.swift; sourceTree = "<group>"; };
+		D9BFC73B2FF426C100ADA52F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D9BFC73C2FF426C200ADA52F /* SessionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionState.swift; sourceTree = "<group>"; };
+		D9BFC73D2FF426C200ADA52F /* RegisterInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterInput.swift; sourceTree = "<group>"; };
+		D9BFC7412FF426EB00ADA52F /* AppViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		D9BFC7432FF4272500ADA52F /* FirebaseUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseUser.swift; sourceTree = "<group>"; };
+		D9BFC7452FF4361D00ADA52F /* VerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationView.swift; sourceTree = "<group>"; };
+		D9BFC7472FF4364000ADA52F /* VerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationViewModel.swift; sourceTree = "<group>"; };
+		D9BFC7492FF4369600ADA52F /* VerificationSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationSuccessView.swift; sourceTree = "<group>"; };
+		D9BFC74C2FF4DAB700ADA52F /* AuthRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRoute.swift; sourceTree = "<group>"; };
+		D9BFC74E2FF4DB2200ADA52F /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
+		D9BFC7502FF4DB6800ADA52F /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		D9BFC7522FF510F300ADA52F /* VerificationSuccessViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationSuccessViewModel.swift; sourceTree = "<group>"; };
 		D9EB9A772FEFD04D005CE9A4 /* Carto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Carto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9EB9A7A2FEFD04E005CE9A4 /* CartoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoApp.swift; sourceTree = "<group>"; };
 		D9EB9A832FEFD058005CE9A4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -464,6 +504,9 @@
 		6D7A458B2FF282B400E2805D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D9BFC73D2FF426C200ADA52F /* RegisterInput.swift */,
+				D9BFC73C2FF426C200ADA52F /* SessionState.swift */,
+				D9BFC73B2FF426C100ADA52F /* User.swift */,
 				6D7A458C2FF2833400E2805D /* ProductInfo.swift */,
 			);
 			path = Models;
@@ -504,6 +547,7 @@
 		6F5DA42C2FF1C3E2002F500B /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				D9BFC7342FF4268100ADA52F /* Mapper */,
 				6F5DA42E2FF1C43A002F500B /* Services */,
 				6F5DA42D2FF1C3EC002F500B /* Repositories */,
 				6FB176002FEFE3140008DDDC /* DTOs */,
@@ -524,6 +568,9 @@
 		6F5DA42E2FF1C43A002F500B /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				D9BFC7252FF4265100ADA52F /* Firebase */,
+				D9BFC7282FF4265100ADA52F /* Firestore */,
+				D9BFC72B2FF4265100ADA52F /* UserDefults */,
 				6D7A45992FF28BCF00E2805D /* DataSource */,
 				6FB176192FEFE3140008DDDC /* Network */,
 				6FB175F22FEFE3140008DDDC /* CoreData */,
@@ -587,7 +634,6 @@
 			isa = PBXGroup;
 			children = (
 				6FB175132FEFE3140008DDDC /* AppContainer.swift */,
-				6FB175142FEFE3140008DDDC /* ServiceLocator.swift */,
 			);
 			path = DI;
 			sourceTree = "<group>";
@@ -664,6 +710,8 @@
 			children = (
 				6FB1752C2FEFE3140008DDDC /* AuthLoginView.swift */,
 				6FB1752D2FEFE3140008DDDC /* AuthRegisterView.swift */,
+				D9BFC7452FF4361D00ADA52F /* VerificationView.swift */,
+				D9BFC7492FF4369600ADA52F /* VerificationSuccessView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -689,8 +737,10 @@
 		6FB1753A2FEFE3140008DDDC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				D9BFC7522FF510F300ADA52F /* VerificationSuccessViewModel.swift */,
 				6FB175372FEFE3140008DDDC /* AuthLoginViewModel.swift */,
 				6FB175382FEFE3140008DDDC /* AuthRegisterViewModel.swift */,
+				D9BFC7472FF4364000ADA52F /* VerificationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -698,6 +748,7 @@
 		6FB1753B2FEFE3140008DDDC /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				D9BFC74B2FF4DA9100ADA52F /* Coordinator */,
 				6FB175342FEFE3140008DDDC /* View */,
 				6FB1753A2FEFE3140008DDDC /* ViewModel */,
 			);
@@ -1340,6 +1391,8 @@
 		6FB176002FEFE3140008DDDC /* DTOs */ = {
 			isa = PBXGroup;
 			children = (
+				D9BFC7432FF4272500ADA52F /* FirebaseUser.swift */,
+				D9BFC7392FF426AB00ADA52F /* UserFirestoreDTO.swift */,
 				6FB175F32FEFE3140008DDDC /* APIResponseDTO.swift */,
 				6FB175F42FEFE3140008DDDC /* AuthDTO.swift */,
 				6FB175F52FEFE3140008DDDC /* BannerDTO.swift */,
@@ -1491,9 +1544,55 @@
 		D9976F112FF30CA700CEBF9C /* Errors */ = {
 			isa = PBXGroup;
 			children = (
+				D9BFC7372FF4268D00ADA52F /* AuthError.swift */,
 				D9976F162FF30D5500CEBF9C /* AuthValidationError.swift */,
 			);
 			path = Errors;
+			sourceTree = "<group>";
+		};
+		D9BFC7252FF4265100ADA52F /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				D9BFC7262FF4265100ADA52F /* FirebaseAuthService.swift */,
+				D9BFC7272FF4265100ADA52F /* FirebaseAuthServiceProtocol.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		D9BFC7282FF4265100ADA52F /* Firestore */ = {
+			isa = PBXGroup;
+			children = (
+				D9BFC7292FF4265100ADA52F /* FirestoreUserService.swift */,
+				D9BFC72A2FF4265100ADA52F /* FirestoreUserServiceProtocol.swift */,
+			);
+			path = Firestore;
+			sourceTree = "<group>";
+		};
+		D9BFC72B2FF4265100ADA52F /* UserDefults */ = {
+			isa = PBXGroup;
+			children = (
+				D9BFC72C2FF4265100ADA52F /* GuestSessionStore.swift */,
+				D9BFC72D2FF4265100ADA52F /* GuestSessionStoreProtocol.swift */,
+			);
+			path = UserDefults;
+			sourceTree = "<group>";
+		};
+		D9BFC7342FF4268100ADA52F /* Mapper */ = {
+			isa = PBXGroup;
+			children = (
+				D9BFC7352FF4268100ADA52F /* FirebaseUserMapper.swift */,
+			);
+			path = Mapper;
+			sourceTree = "<group>";
+		};
+		D9BFC74B2FF4DA9100ADA52F /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				D9BFC74C2FF4DAB700ADA52F /* AuthRoute.swift */,
+				D9BFC74E2FF4DB2200ADA52F /* AuthRouter.swift */,
+				D9BFC7502FF4DB6800ADA52F /* AuthCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		D9EB9A6E2FEFD04D005CE9A4 = {
@@ -1527,6 +1626,7 @@
 				6FB175152FEFE3140008DDDC /* DI */,
 				6FB1761F2FEFE3140008DDDC /* Resources */,
 				D9EB9A7A2FEFD04E005CE9A4 /* CartoApp.swift */,
+				D9BFC7412FF426EB00ADA52F /* AppViewModel.swift */,
 				6F5DA4262FF1BEA6002F500B /* MainView.swift */,
 				D9EB9A832FEFD058005CE9A4 /* Persistence.swift */,
 			);
@@ -1702,7 +1802,6 @@
 				6FB176372FEFE3140008DDDC /* CartItemCell.swift in Sources */,
 				6FB176382FEFE3140008DDDC /* BannerEntity.swift in Sources */,
 				6F5DA4272FF1BEA6002F500B /* MainView.swift in Sources */,
-				6FB176392FEFE3140008DDDC /* ServiceLocator.swift in Sources */,
 				6FB1763A2FEFE3140008DDDC /* LanguageSettingsViewModel.swift in Sources */,
 				6FB1763B2FEFE3140008DDDC /* BrandDTO.swift in Sources */,
 				6FB1763C2FEFE3140008DDDC /* View+Extensions.swift in Sources */,
@@ -1712,6 +1811,8 @@
 				6FB176402FEFE3140008DDDC /* ShippingTrackingEntity.swift in Sources */,
 				6F5DA4082FF139D2002F500B /* OnboardingLayoutTop.swift in Sources */,
 				6FB176422FEFE3140008DDDC /* SearchViewModel.swift in Sources */,
+				D9BFC7302FF4265100ADA52F /* FirestoreUserService.swift in Sources */,
+				D9BFC7362FF4268100ADA52F /* FirebaseUserMapper.swift in Sources */,
 				6D7A458F2FF283DC00E2805D /* ProductsRepositoryProtocol.swift in Sources */,
 				6FB176432FEFE3140008DDDC /* FavoritesItemCell.swift in Sources */,
 				6FB176442FEFE3140008DDDC /* ShopifyResponse.swift in Sources */,
@@ -1722,27 +1823,33 @@
 				6F5DA4022FF139AC002F500B /* OnboardingControlsRow.swift in Sources */,
 				6FB1764B2FEFE3140008DDDC /* SearchFilterChipView.swift in Sources */,
 				6FB1764C2FEFE3140008DDDC /* SettingsView.swift in Sources */,
+				D9BFC72F2FF4265100ADA52F /* FirebaseAuthServiceProtocol.swift in Sources */,
 				6FB1764D2FEFE3140008DDDC /* VariantEntity.swift in Sources */,
 				6FB1764E2FEFE3140008DDDC /* BannerDTO.swift in Sources */,
 				6FB1764F2FEFE3140008DDDC /* CartQuantityEditorView.swift in Sources */,
 				D9976F192FF30D9500CEBF9C /* SocialIconButton.swift in Sources */,
+				D9BFC73F2FF426C200ADA52F /* SessionState.swift in Sources */,
 				6FB176502FEFE3140008DDDC /* AuthTextField.swift in Sources */,
 				6D7A45882FF2818B00E2805D /* ProductInfoView.swift in Sources */,
+				D9BFC7322FF4265100ADA52F /* GuestSessionStore.swift in Sources */,
 				6D7A45912FF2862C00E2805D /* ProductInfoUseCase.swift in Sources */,
 				6FB176512FEFE3140008DDDC /* AppCoordinator.swift in Sources */,
 				6FB176522FEFE3140008DDDC /* CachedProductMO.swift in Sources */,
 				6FB176532FEFE3140008DDDC /* OrderDetailViewModel.swift in Sources */,
+				D9BFC7382FF4268D00ADA52F /* AuthError.swift in Sources */,
 				6D7A459B2FF28C0D00E2805D /* ProductsRemoteDataSourceImpl.swift in Sources */,
 				6D7A458D2FF2833400E2805D /* ProductInfo.swift in Sources */,
 				6FB176542FEFE3140008DDDC /* AdsPlacementView.swift in Sources */,
 				6FB176552FEFE3140008DDDC /* OrderItemCell.swift in Sources */,
 				6FB176562FEFE3140008DDDC /* CategoriesProductsViewModel.swift in Sources */,
 				6FB176572FEFE3140008DDDC /* BrandsHeaderView.swift in Sources */,
+				D9BFC7532FF510F400ADA52F /* VerificationSuccessViewModel.swift in Sources */,
 				6FB176592FEFE3140008DDDC /* HomeView.swift in Sources */,
 				6FB1765A2FEFE3140008DDDC /* ShopifyAPIClient.swift in Sources */,
 				6FB1765B2FEFE3140008DDDC /* CartItemEntity.swift in Sources */,
 				6FB1765E2FEFE3140008DDDC /* NetworkError.swift in Sources */,
 				6FB1765F2FEFE3140008DDDC /* ThemeSettingsView.swift in Sources */,
+				D9BFC7442FF4272500ADA52F /* FirebaseUser.swift in Sources */,
 				6FB176602FEFE3140008DDDC /* SettingsViewModel.swift in Sources */,
 				6FB176612FEFE3140008DDDC /* UserSessionMO.swift in Sources */,
 				6FB176622FEFE3140008DDDC /* SettingsMO.swift in Sources */,
@@ -1763,6 +1870,7 @@
 				6F5DA4102FF13BA9002F500B /* BagsTransitionView.swift in Sources */,
 				6FB176742FEFE3140008DDDC /* AdCell.swift in Sources */,
 				6F5DA4362FF1C6B9002F500B /* AuthenticationRepositoryProtocol.swift in Sources */,
+				D9BFC74F2FF4DB2200ADA52F /* AuthRouter.swift in Sources */,
 				6FB176762FEFE3140008DDDC /* PaymentMethodsViewModel.swift in Sources */,
 				6FB176772FEFE3140008DDDC /* CouponCell.swift in Sources */,
 				6D7A45802FF27F0900E2805D /* HeaderView.swift in Sources */,
@@ -1774,7 +1882,9 @@
 				6FB1767D2FEFE3140008DDDC /* Carto.xcdatamodeld in Sources */,
 				6FB1767F2FEFE3140008DDDC /* HomeCoordinator.swift in Sources */,
 				6FB176802FEFE3140008DDDC /* CategoriesListViewModel.swift in Sources */,
+				D9BFC7422FF426EB00ADA52F /* AppViewModel.swift in Sources */,
 				6FB176812FEFE3140008DDDC /* BillingSummaryView.swift in Sources */,
+				D9BFC73E2FF426C200ADA52F /* User.swift in Sources */,
 				6FB176832FEFE3140008DDDC /* FavoritesViewModel.swift in Sources */,
 				6FB176842FEFE3140008DDDC /* FavoriteItemMO.swift in Sources */,
 				6FB176862FEFE3140008DDDC /* PaymentConfirmationView.swift in Sources */,
@@ -1786,19 +1896,25 @@
 				6FB1768C2FEFE3140008DDDC /* CategoryDTO.swift in Sources */,
 				6FB1768D2FEFE3140008DDDC /* OrderListView.swift in Sources */,
 				6FB1768E2FEFE3140008DDDC /* OrderCell.swift in Sources */,
+				D9BFC74D2FF4DAB700ADA52F /* AuthRoute.swift in Sources */,
 				6FB1768F2FEFE3140008DDDC /* CategoryEntity.swift in Sources */,
 				6FB176912FEFE3140008DDDC /* Route.swift in Sources */,
 				6FB176942FEFE3140008DDDC /* UIConstants.swift in Sources */,
 				6FB176F22FF0089C0008DDDC /* OnboardingScreen.swift in Sources */,
+				D9BFC7402FF426C200ADA52F /* RegisterInput.swift in Sources */,
 				D9976F152FF30D4D00CEBF9C /* AuthValidatorImpl.swift in Sources */,
 				6FB176952FEFE3140008DDDC /* CouponsCoordinator.swift in Sources */,
 				6FB176992FEFE3140008DDDC /* CategoriesSubcategoryViewModel.swift in Sources */,
 				6F5DA4252FF1BE83002F500B /* ADEntity.swift in Sources */,
+				D9BFC7512FF4DB6800ADA52F /* AuthCoordinator.swift in Sources */,
+				D9BFC7332FF4265100ADA52F /* GuestSessionStoreProtocol.swift in Sources */,
 				6FB1769A2FEFE3140008DDDC /* SearchFiltersView.swift in Sources */,
+				D9BFC7462FF4361D00ADA52F /* VerificationView.swift in Sources */,
 				6FB1769B2FEFE3140008DDDC /* CartSummaryViewModel.swift in Sources */,
 				6F5DA4142FF14181002F500B /* SplashScreen.swift in Sources */,
 				6FB1769C2FEFE3140008DDDC /* FavoriteItemEntity.swift in Sources */,
 				6FB1769D2FEFE3140008DDDC /* AdBannerView.swift in Sources */,
+				D9BFC7482FF4364000ADA52F /* VerificationViewModel.swift in Sources */,
 				6FB1769E2FEFE3140008DDDC /* BrandsListView.swift in Sources */,
 				6FB1769F2FEFE3140008DDDC /* FavoritesView.swift in Sources */,
 				6FB176A02FEFE3140008DDDC /* OrderDTO.swift in Sources */,
@@ -1806,6 +1922,7 @@
 				6F5DA40A2FF139DB002F500B /* OnboardingData.swift in Sources */,
 				6F5DA40C2FF13A49002F500B /* View+OutlinedText.swift in Sources */,
 				6FB176A42FEFE3140008DDDC /* AdsCoordinator.swift in Sources */,
+				D9BFC73A2FF426AB00ADA52F /* UserFirestoreDTO.swift in Sources */,
 				6FB176A52FEFE3140008DDDC /* Date+Extensions.swift in Sources */,
 				6FB176A62FEFE3140008DDDC /* ReviewEntity.swift in Sources */,
 				6FB176A72FEFE3140008DDDC /* BrandEntity.swift in Sources */,
@@ -1846,6 +1963,7 @@
 				6FB176CD2FEFE3140008DDDC /* PaymentCoordinator.swift in Sources */,
 				6D7A45822FF2800100E2805D /* SizeView.swift in Sources */,
 				6D7A45972FF2890000E2805D /* ProductsRepositoryImpl.swift in Sources */,
+				D9BFC7312FF4265100ADA52F /* FirestoreUserServiceProtocol.swift in Sources */,
 				6FB176CF2FEFE3140008DDDC /* LanguageSettingsView.swift in Sources */,
 				6FB176D02FEFE3140008DDDC /* SearchResultsView.swift in Sources */,
 				6FB176D12FEFE3140008DDDC /* CouponEntryViewModel.swift in Sources */,
@@ -1855,6 +1973,7 @@
 				6FB176D32FEFE3140008DDDC /* APIResponseDTO.swift in Sources */,
 				6FB176D52FEFE3140008DDDC /* CategoriesCoordinator.swift in Sources */,
 				6FB176D62FEFE3140008DDDC /* CouponBadgeView.swift in Sources */,
+				D9BFC74A2FF4369600ADA52F /* VerificationSuccessView.swift in Sources */,
 				6FB176D72FEFE3140008DDDC /* ThemeSettingsViewModel.swift in Sources */,
 				6FB176D82FEFE3140008DDDC /* AdsPromotionalBannerView.swift in Sources */,
 				6FB176D92FEFE3140008DDDC /* CartSummaryView.swift in Sources */,
@@ -1863,6 +1982,7 @@
 				6D7A45952FF2882600E2805D /* ProductDTO+Mapper.swift in Sources */,
 				6F5DA4222FF1BE6D002F500B /* HomeProductCardCell.swift in Sources */,
 				6F5DA4232FF1BE6D002F500B /* HomeBrandView.swift in Sources */,
+				D9BFC72E2FF4265100ADA52F /* FirebaseAuthService.swift in Sources */,
 				6FB176DC2FEFE3140008DDDC /* BrandsDetailView.swift in Sources */,
 				6FB176DD2FEFE3140008DDDC /* SearchFiltersViewModel.swift in Sources */,
 				6D7A45842FF2804700E2805D /* ColorView.swift in Sources */,

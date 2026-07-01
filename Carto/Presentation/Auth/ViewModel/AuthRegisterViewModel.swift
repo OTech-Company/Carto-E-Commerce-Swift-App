@@ -21,9 +21,9 @@ final class AuthRegisterViewModel: ObservableObject {
     @Published var lastNameErrorMessage: String?
     @Published var emailErrorMessage: String?
     @Published var passwordErrorMessage: String?
-
-    @Published var isLoading = false
     @Published var generalErrorMessage: String?
+    
+    @Published var isLoading = false
 
     // MARK: - Validation
 
@@ -43,17 +43,20 @@ final class AuthRegisterViewModel: ObservableObject {
     private let validator: AuthValidatorProtocol
     private let repository: AuthenticationRepositoryProtocol
     private let appViewModel: AppViewModel
+    private let router: AuthRouter
     
     // MARK: - Initialization
     
     init(
         validator: AuthValidatorProtocol,
         repository: AuthenticationRepositoryProtocol,
-        appViewModel: AppViewModel
+        appViewModel: AppViewModel,
+        router: AuthRouter
     ) {
         self.validator = validator
         self.repository = repository
         self.appViewModel = appViewModel
+        self.router = router
     }
 
     func validateFirstName() {
@@ -121,16 +124,15 @@ final class AuthRegisterViewModel: ObservableObject {
                     email: email,
                     password: password
                 )
-                let user = try await repository.register(input: input)
+                _ = try await repository.register(input: input)
+                try? await repository.sendEmailVerification()
                 await appViewModel.restoreSession()
-                print(appViewModel.sessionState.canAddToCart)
-                
+                router.showVerification(email: email)
             } catch let error as AuthError {
                 generalErrorMessage = error.errorDescription
                 
             } catch {
                 generalErrorMessage = "Something went wrong. Please try again."
-                isLoading = false
             }
             isLoading = false
         }
@@ -156,5 +158,9 @@ final class AuthRegisterViewModel: ObservableObject {
                 isLoading = false
             }
         }
+    }
+    
+    func signInTapped () {
+        router.showLogin()
     }
 }

@@ -120,12 +120,18 @@ final class AuthenticationRepositoryImpl: AuthenticationRepositoryProtocol {
     }
 
     func continueAsGuest() {
-
+        
         guestSessionStore.setGuest(true)
     }
 
     // MARK: - Email Verification
 
+    func checkEmailVerified() async -> Bool {
+        guard let firebaseUser = Auth.auth().currentUser else { return false }
+        try? await firebaseUser.reload()
+        return firebaseUser.isEmailVerified
+    }
+    
     func sendEmailVerification() async throws {
 
         try await firebaseAuthService.sendEmailVerification()

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AuthValidator: AuthValidatorProtocol {
+struct AuthValidatorImpl: AuthValidatorProtocol {
 
     func validateEmail(email: String) throws {
 

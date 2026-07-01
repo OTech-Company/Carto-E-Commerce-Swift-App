@@ -8,6 +8,7 @@
 import Foundation
 
 enum SessionState {
+    case loading
     case unauthenticated
     case guest
     case authenticated(User)
@@ -19,29 +20,28 @@ extension SessionState {
 
     var canAddToCart: Bool {
         switch self {
-        case .unauthenticated: return false
-        case .guest:           return true
+        case .unauthenticated, .guest, .loading: return false
         case .authenticated:   return true
         }
     }
 
     var canCheckout: Bool {
         switch self {
-        case .unauthenticated, .guest: return false
+        case .unauthenticated, .guest, .loading: return false
         case .authenticated:           return true
         }
     }
 
     var canWriteReview: Bool {
         switch self {
-        case .unauthenticated, .guest: return false
+        case .unauthenticated, .guest, .loading: return false
         case .authenticated:           return true
         }
     }
 
     var canSaveWishlist: Bool {
         switch self {
-        case .unauthenticated, .guest: return false
+        case .unauthenticated, .guest, .loading: return false
         case .authenticated:           return true
         }
     }

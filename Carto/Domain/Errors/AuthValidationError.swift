@@ -12,6 +12,7 @@ enum AuthValidationError: LocalizedError {
     case invalidEmail
     case emptyPassword
     case weakPassword
+    case shortPassword
     case passwordsDoNotMatch
     case emptyName
     case invalidName
@@ -26,9 +27,12 @@ enum AuthValidationError: LocalizedError {
 
         case .emptyPassword:
             return "Password is required."
-
+        
+        case .shortPassword:
+            return "Password must be at least 8 characters"
+            
         case .weakPassword:
-            return "Password must be at least 8 characters."
+            return "Must include an uppercase letter, a number, and a symbol."
 
         case .passwordsDoNotMatch:
             return "Passwords do not match."
