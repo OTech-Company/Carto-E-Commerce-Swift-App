@@ -71,8 +71,8 @@ struct HomeView: View {
     let brandsLogos = ["brand1", "brand2", "brand3", "brand4"]
 
     @State private var currentIndex: Int = 0
-    //@StateObject private var viewModel = HomeViewModel()
-
+    @StateObject private var viewModel = DIContainer.shared.makeHomeViewModel()
+    
     let timer = Timer.publish(
         every: 3,
         on: .main,
@@ -115,14 +115,7 @@ struct HomeView: View {
                     .font(.system(size: 28, weight: .bold))
                     .foregroundColor(Color("PrimaryColor"))
 
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 16) {
-                        ForEach(brandsLogos, id: \.self) { image in
-                            HomeBrandView(barndLogo: image)
-                        }
-                    }.padding(.vertical, 12)
-                        .padding(.horizontal, 4)
-                }
+                HomeBrandView(viewModel: viewModel.brandVM, brandsLogos: brandsLogos)
 
                 Spacer(minLength: 20)
 
@@ -140,6 +133,8 @@ struct HomeView: View {
                     }
                 }
             }.padding(.horizontal, 16)
+        }.task {
+            await viewModel.loadAllData()
         }
     }
 }
