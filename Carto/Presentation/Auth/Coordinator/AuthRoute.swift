@@ -12,4 +12,6 @@ enum AuthRoute: Hashable {
     case register
     case verification(email: String)
     case verificationSuccess
+    case forgotPassword
+    case forgotPasswordSuccess
 }

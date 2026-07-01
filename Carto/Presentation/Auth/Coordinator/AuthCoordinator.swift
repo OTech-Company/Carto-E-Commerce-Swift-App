@@ -48,6 +48,16 @@ struct AuthCoordinator: View {
                     VerificationSuccessView(
                         viewModel: container.makeVerificationSuccessViewModel(router: router)
                     )
+
+                case .forgotPassword:
+                    ForgotPasswordView(
+                        viewModel: container.makeForgotPasswordViewModel(router: router)
+                    )
+
+                case .forgotPasswordSuccess:
+                    ForgotPasswordSuccessView(
+                        viewModel: container.makeForgotPasswordSuccessViewModel(router: router)
+                    )
                 }
             }
         }

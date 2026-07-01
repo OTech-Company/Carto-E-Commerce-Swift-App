@@ -42,4 +42,12 @@ extension AuthRouter {
     func showVerificationSuccess() {
         push(.verificationSuccess)
     }
+
+    func showForgotPassword() {
+        push(.forgotPassword)
+    }
+
+    func showForgotPasswordSuccess() {
+        push(.forgotPasswordSuccess)
+    }
 }

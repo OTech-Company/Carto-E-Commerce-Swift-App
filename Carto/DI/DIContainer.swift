@@ -56,4 +56,16 @@ final class DIContainer {
             authSession: authSession
         )
     }
+
+    func makeForgotPasswordViewModel(router: AuthRouter) -> ForgotPasswordViewModel {
+        ForgotPasswordViewModel(
+            validator: validator,
+            repository: authRepository,
+            router: router
+        )
+    }
+
+    func makeForgotPasswordSuccessViewModel(router: AuthRouter) -> ForgotPasswordSuccessViewModel {
+        ForgotPasswordSuccessViewModel(router: router)
+    }
 }

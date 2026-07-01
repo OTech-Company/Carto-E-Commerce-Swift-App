@@ -117,6 +117,6 @@ final class AuthLoginViewModel: ObservableObject {
     }
 
     func forgotPasswordTapped() {
-        // navigate to forget password
+        router.showForgotPassword()
     }
 }

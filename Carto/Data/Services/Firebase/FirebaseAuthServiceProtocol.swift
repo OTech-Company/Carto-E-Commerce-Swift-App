@@ -14,4 +14,5 @@ protocol FirebaseAuthServiceProtocol {
     func updateDisplayName(name: String) async throws
     func signOut() throws
     func sendEmailVerification() async throws
+    func sendPasswordReset(email: String) async throws
 }
