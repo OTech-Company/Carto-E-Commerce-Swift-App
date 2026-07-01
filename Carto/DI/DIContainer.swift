@@ -57,8 +57,4 @@ final class DIContainer {
             router: router
         )
     }
-
-    func makeForgotPasswordSuccessViewModel(router: AuthRouter) -> ForgotPasswordSuccessViewModel {
-        ForgotPasswordSuccessViewModel(router: router)
-    }
 }

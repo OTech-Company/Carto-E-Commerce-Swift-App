@@ -50,9 +50,7 @@ struct AuthCoordinator: View {
                     )
 
                 case .forgotPasswordSuccess:
-                    ForgotPasswordSuccessView(
-                        viewModel: container.makeForgotPasswordSuccessViewModel(router: router)
-                    )
+                    ForgotPasswordSuccessView(authRouter: router)
                 }
             }
         }

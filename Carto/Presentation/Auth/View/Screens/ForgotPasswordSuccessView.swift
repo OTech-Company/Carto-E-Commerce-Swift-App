@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct ForgotPasswordSuccessView: View {
-    @StateObject private var viewModel: ForgotPasswordSuccessViewModel
-
-    init(viewModel: ForgotPasswordSuccessViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+    private var authRouter: AuthRouter
+    
+    init(authRouter:AuthRouter) {
+        self.authRouter = authRouter
     }
-
+    
     var body: some View {
         ZStack {
             Color(hex: "FAFAFA")
@@ -34,7 +34,7 @@ struct ForgotPasswordSuccessView: View {
                         .padding(.horizontal, 24)
                 }
 
-                Button(action: { viewModel.backToSignIn() }) {
+                Button(action: { authRouter.popToRoot() }) {
                     Text("Back to Sign In")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.white)

@@ -213,7 +213,6 @@
 		D93C19A22FF5486100C51109 /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93C19A12FF5486100C51109 /* CategoryListViewModel.swift */; };
 		D93C19A82FF548FF00C51109 /* SubCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93C19A72FF548FF00C51109 /* SubCategories.swift */; };
 		D93C19AA2FF58C1900C51109 /* AuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93C19A92FF58C1800C51109 /* AuthSession.swift */; };
-		D93C19AE2FF5B17600C51109 /* ForgotPasswordSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93C19AC2FF5B17500C51109 /* ForgotPasswordSuccessViewModel.swift */; };
 		D93C19AF2FF5B17600C51109 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93C19AD2FF5B17600C51109 /* ForgotPasswordViewModel.swift */; };
 		D93C19B22FF5B18300C51109 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93C19B02FF5B18200C51109 /* ForgotPasswordView.swift */; };
 		D93C19B32FF5B18300C51109 /* ForgotPasswordSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93C19B12FF5B18300C51109 /* ForgotPasswordSuccessView.swift */; };
@@ -473,7 +472,6 @@
 		D93C19A12FF5486100C51109 /* CategoryListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
 		D93C19A72FF548FF00C51109 /* SubCategories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCategories.swift; sourceTree = "<group>"; };
 		D93C19A92FF58C1800C51109 /* AuthSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSession.swift; sourceTree = "<group>"; };
-		D93C19AC2FF5B17500C51109 /* ForgotPasswordSuccessViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordSuccessViewModel.swift; sourceTree = "<group>"; };
 		D93C19AD2FF5B17600C51109 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		D93C19B02FF5B18200C51109 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		D93C19B12FF5B18300C51109 /* ForgotPasswordSuccessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordSuccessView.swift; sourceTree = "<group>"; };
@@ -835,7 +833,6 @@
 		6FB1753A2FEFE3140008DDDC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				D93C19AC2FF5B17500C51109 /* ForgotPasswordSuccessViewModel.swift */,
 				D93C19AD2FF5B17600C51109 /* ForgotPasswordViewModel.swift */,
 				6FB175372FEFE3140008DDDC /* AuthLoginViewModel.swift */,
 				6FB175382FEFE3140008DDDC /* AuthRegisterViewModel.swift */,
@@ -2150,7 +2147,6 @@
 				6D7A45862FF280CA00E2805D /* SwipeToAddView.swift in Sources */,
 				6FB176EA2FEFE3140008DDDC /* ProfileView.swift in Sources */,
 				D93C19A82FF548FF00C51109 /* SubCategories.swift in Sources */,
-				D93C19AE2FF5B17600C51109 /* ForgotPasswordSuccessViewModel.swift in Sources */,
 				6D7A459D2FF28DF900E2805D /* ProductInfoViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
