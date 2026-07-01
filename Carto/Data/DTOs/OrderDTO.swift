@@ -1,5 +1,10 @@
 import Foundation
 
+
+struct OrdersResponse: Decodable {
+    let orders: [OrderDTO]?
+}
+
 // MARK: - Core Order DTO structures (No explicit CodingKeys)
 struct OrderDTO: Decodable {
     let id: Int
