@@ -6,7 +6,7 @@
 //
 import Foundation
 
-final class OrderRepository: OrderRepositoryProtocol {
+final class OrderRepositoryImpl: OrderRepositoryProtocol {
     
     func fetchOrderHistory() async throws -> [OrderEntity] {
         do {
