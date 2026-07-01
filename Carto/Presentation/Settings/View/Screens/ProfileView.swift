@@ -12,7 +12,3 @@ struct ProfileView: View {
         Text("Profile")
     }
 }
-
-#Preview {
-    ProfileView()
-}

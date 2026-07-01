@@ -12,7 +12,3 @@ struct CartView: View {
         Text("Cart")
     }
 }
-
-#Preview {
-//    CategoriesView()
-}
