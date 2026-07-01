@@ -14,6 +14,8 @@ final class AppContainer {
 //    let brandRepository: BrandRepository
 //    let categoryRepository: CategoryRepository
     let categoryRepository: CategoryRepositoryProtocol
+    let orderRepository: OrderRepositoryProtocol
+
     //    let orderRepository: OrderRepository
 //    let favoritesRepository: FavoritesRepository
 //    let searchRepository: SearchRepository
@@ -27,6 +29,8 @@ final class AppContainer {
 //        self.storageManager = StorageManager.shared
 
         self.categoryRepository = CategoryRepository()
+        self.orderRepository = OrderRepository()
+
 //        // 2. Repositories — inject apiClient + storageManager into each
 //        self.authRepository     = AuthRepository(apiClient: apiClient)
 //        self.productRepository  = ProductRepository(apiClient: apiClient)

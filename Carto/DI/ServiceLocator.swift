@@ -20,7 +20,12 @@ final class ServiceLocator {
             }
             return repo
         }
-    
+    func resolveOrderRepository() -> OrderRepositoryProtocol {
+            guard let repo = container?.orderRepository else {
+                fatalError("AppContainer not registered. Call ServiceLocator.shared.register() first.")
+            }
+            return repo
+        }
 //    // MARK: - Resolvers — one per repository
 //    func resolveAuthRepository() -> AuthRepository {
 //        guard let repo = container?.authRepository else {
