@@ -46,7 +46,6 @@ struct SplashView: View {
                     logoVisible = true
                 }
                 
-                // Move to content view after splash duration
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                     withAnimation(.easeInOut(duration: 0.5)) {
                         isActive = true
@@ -55,28 +54,3 @@ struct SplashView: View {
             }
         }
     }
-
-
-// MARK: - Preview
-#Preview {
-    GeometryReader { geometry in
-        ZStack {
-            SpriteView(
-                scene: {
-                    let scene = SplashPhysicsScene()
-                    scene.safeAreaInsets = geometry.safeAreaInsets
-                    return scene
-                }(),
-                options: [.allowsTransparency]
-            )
-            .ignoresSafeArea()
-            .background(Color(red: 0.96, green: 0.96, blue: 0.96))
-            
-            SplashLogoView(visible: true)
-        }
-    }
-}
-
-#Preview {
-    SplashView()
-}
