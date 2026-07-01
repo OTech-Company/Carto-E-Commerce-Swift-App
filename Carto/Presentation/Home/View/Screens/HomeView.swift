@@ -71,6 +71,7 @@ struct HomeView: View {
     let brandsLogos = ["brand1", "brand2", "brand3", "brand4"]
 
     @State private var currentIndex: Int = 0
+    //@StateObject private var viewModel = HomeViewModel()
 
     let timer = Timer.publish(
         every: 3,
