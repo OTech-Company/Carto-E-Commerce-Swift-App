@@ -1,56 +1,44 @@
 import Foundation
 
-@MainActor
-final class DIContainer {
-    static let shared = DIContainer()
+final class AppContainer {
 
-    let authRepository: AuthenticationRepositoryProtocol
-    
-    let validator: AuthValidatorProtocol
+    // MARK: - Network
+    let apiClient: ShopifyAPIClient
 
-    let appViewModel: AppViewModel
+//    // MARK: - Storage
+//    let storageManager: StorageManager
 
-    private init() {
-        authRepository = AuthenticationRepositoryImpl()
-        
-        validator = AuthValidatorImpl()
+//    // MARK: - Repositories — one per feature
+//    let authRepository: AuthRepository
+//    let productRepository: ProductRepository
+//    let brandRepository: BrandRepository
+//    let categoryRepository: CategoryRepository
+    let categoryRepository: CategoryRepositoryProtocol
+    //    let orderRepository: OrderRepository
+//    let favoritesRepository: FavoritesRepository
+//    let searchRepository: SearchRepository
+//    let couponRepository: CouponRepository
+//    let paymentRepository: PaymentRepository
+//    let adsRepository: AdsRepository
+//    let settingsRepository: SettingsRepository
 
-        appViewModel = AppViewModel(
-            repository: authRepository
-        )
-    }
+    init() {
+        self.apiClient      = ShopifyAPIClient.shared
+//        self.storageManager = StorageManager.shared
 
-    func makeLoginViewModel(router: AuthRouter) -> AuthLoginViewModel {
-        AuthLoginViewModel(
-            validator: validator,
-            repository: authRepository,
-            appViewModel: appViewModel,
-            router: router
-        )
-    }
-    
-    func makeRegisterViewModel(router: AuthRouter) -> AuthRegisterViewModel {
-        AuthRegisterViewModel(
-            validator: validator,
-            repository: authRepository,
-            appViewModel: appViewModel,
-            router: router
-        )
-    }
-
-    func makeVerificationViewModel(userEmail: String, router: AuthRouter) -> VerificationViewModel {
-        VerificationViewModel(
-            userEmail: userEmail,
-            repository: authRepository,
-            appViewModel: appViewModel,
-            router: router
-        )
-    }
-
-    func makeVerificationSuccessViewModel(router: AuthRouter) -> VerificationSuccessViewModel {
-        VerificationSuccessViewModel(
-            router: router,
-            appViewModel: appViewModel
-        )
+        self.categoryRepository = CategoryRepository()
+//        // 2. Repositories — inject apiClient + storageManager into each
+//        self.authRepository     = AuthRepository(apiClient: apiClient)
+//        self.productRepository  = ProductRepository(apiClient: apiClient)
+//        self.brandRepository    = BrandRepository(apiClient: apiClient)
+//        self.categoryRepository = CategoryRepository(apiClient: apiClient)
+//        self.cartRepository     = CartRepository(apiClient: apiClient, storage: storageManager)
+//        self.orderRepository    = OrderRepository(apiClient: apiClient)
+//        self.favoritesRepository = FavoritesRepository(storage: storageManager)
+//        self.searchRepository   = SearchRepository(apiClient: apiClient)
+//        self.couponRepository   = CouponRepository(apiClient: apiClient)
+//        self.paymentRepository  = PaymentRepository(apiClient: apiClient)
+//        self.adsRepository      = AdsRepository(apiClient: apiClient)
+//        self.settingsRepository = SettingsRepository(storage: storageManager)
     }
 }

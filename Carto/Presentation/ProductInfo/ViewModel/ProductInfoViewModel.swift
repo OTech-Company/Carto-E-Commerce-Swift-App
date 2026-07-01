@@ -2,17 +2,17 @@
 //  ProductsInfoViewModel.swift
 //  Carto
 //
-//  Created by Manona on 28/06/2026.
+//  Created by Osama Abdellatif on 30/06/2026.
 //
 
 import Foundation
 import Combine
 
 @MainActor
-class ProductsInfoViewModel: ObservableObject {
+final class ProductsInfoViewModel: ObservableObject {
 
-    @Published private var product: ProductInfo?
-    @Published private var isLoading = false
+    @Published private(set) var product: ProductInfo?
+    @Published private(set) var isLoading = false
     @Published var errorMessage: String?
 
     private let useCase: ProductsInfoUseCase
@@ -21,8 +21,9 @@ class ProductsInfoViewModel: ObservableObject {
         self.useCase = useCase
     }
 
-    func fetchProduct(productId: String) async {
+    func fetchProduct(productId: Int) async {
         isLoading = true
+        errorMessage = nil 
 
         do {
             product = try await useCase.execute(productId: productId)

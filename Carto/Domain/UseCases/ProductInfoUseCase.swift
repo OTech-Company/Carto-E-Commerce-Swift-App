@@ -15,7 +15,7 @@ struct ProductsInfoUseCase{
         self.repository = repository
     }
 
-    func execute(productId: String) async throws -> ProductInfo {
+    func execute(productId: Int) async throws -> ProductInfo {
         try await repository.getProductInfo(productId: productId)
     }
     

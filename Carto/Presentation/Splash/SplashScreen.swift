@@ -31,7 +31,14 @@ struct SplashView: View {
                     
                     // Static Logo Overlay without physics
                     SplashLogoView(visible: logoVisible)
+                    
+                
                 }
+            }.task {
+//                 This runs automatically when the view appears
+//                await NetworkUsageSample.fetchProductWithGraphQL(id: "1")
+//                print("=====================")
+//               await NetworkUsageSample.fetchProducts()
             }
             .onAppear {
                 // Animate logo entrance
