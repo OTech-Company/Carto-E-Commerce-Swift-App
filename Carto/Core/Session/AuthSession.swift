@@ -79,4 +79,8 @@ final class AuthSession: ObservableObject {
         )
         return FirebaseUserMapper.toDomain(authResult: authUser, firestoreData: dto)
     }
+    
+    func refreshSession() async {
+        await handleAuthStateChange(firebaseUser: Auth.auth().currentUser)
+    }
 }

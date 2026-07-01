@@ -240,11 +240,9 @@
 		D9BFC7442FF4272500ADA52F /* FirebaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7432FF4272500ADA52F /* FirebaseUser.swift */; };
 		D9BFC7462FF4361D00ADA52F /* VerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7452FF4361D00ADA52F /* VerificationView.swift */; };
 		D9BFC7482FF4364000ADA52F /* VerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7472FF4364000ADA52F /* VerificationViewModel.swift */; };
-		D9BFC74A2FF4369600ADA52F /* VerificationSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7492FF4369600ADA52F /* VerificationSuccessView.swift */; };
 		D9BFC74D2FF4DAB700ADA52F /* AuthRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC74C2FF4DAB700ADA52F /* AuthRoute.swift */; };
 		D9BFC74F2FF4DB2200ADA52F /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC74E2FF4DB2200ADA52F /* AuthRouter.swift */; };
 		D9BFC7512FF4DB6800ADA52F /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7502FF4DB6800ADA52F /* AuthCoordinator.swift */; };
-		D9BFC7532FF510F400ADA52F /* VerificationSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BFC7522FF510F300ADA52F /* VerificationSuccessViewModel.swift */; };
 		D9EB9A7B2FEFD04E005CE9A4 /* CartoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A7A2FEFD04E005CE9A4 /* CartoApp.swift */; };
 		D9EB9A842FEFD058005CE9A4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A832FEFD058005CE9A4 /* Persistence.swift */; };
 		D9EB9A912FEFD058005CE9A4 /* CartoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EB9A902FEFD058005CE9A4 /* CartoTests.swift */; };
@@ -500,11 +498,9 @@
 		D9BFC7432FF4272500ADA52F /* FirebaseUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseUser.swift; sourceTree = "<group>"; };
 		D9BFC7452FF4361D00ADA52F /* VerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationView.swift; sourceTree = "<group>"; };
 		D9BFC7472FF4364000ADA52F /* VerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationViewModel.swift; sourceTree = "<group>"; };
-		D9BFC7492FF4369600ADA52F /* VerificationSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationSuccessView.swift; sourceTree = "<group>"; };
 		D9BFC74C2FF4DAB700ADA52F /* AuthRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRoute.swift; sourceTree = "<group>"; };
 		D9BFC74E2FF4DB2200ADA52F /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
 		D9BFC7502FF4DB6800ADA52F /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
-		D9BFC7522FF510F300ADA52F /* VerificationSuccessViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationSuccessViewModel.swift; sourceTree = "<group>"; };
 		D9EB9A772FEFD04D005CE9A4 /* Carto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Carto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9EB9A7A2FEFD04E005CE9A4 /* CartoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoApp.swift; sourceTree = "<group>"; };
 		D9EB9A832FEFD058005CE9A4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -814,7 +810,6 @@
 				6FB1752C2FEFE3140008DDDC /* AuthLoginView.swift */,
 				6FB1752D2FEFE3140008DDDC /* AuthRegisterView.swift */,
 				D9BFC7452FF4361D00ADA52F /* VerificationView.swift */,
-				D9BFC7492FF4369600ADA52F /* VerificationSuccessView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -842,7 +837,6 @@
 			children = (
 				D93C19AC2FF5B17500C51109 /* ForgotPasswordSuccessViewModel.swift */,
 				D93C19AD2FF5B17600C51109 /* ForgotPasswordViewModel.swift */,
-				D9BFC7522FF510F300ADA52F /* VerificationSuccessViewModel.swift */,
 				6FB175372FEFE3140008DDDC /* AuthLoginViewModel.swift */,
 				6FB175382FEFE3140008DDDC /* AuthRegisterViewModel.swift */,
 				D9BFC7472FF4364000ADA52F /* VerificationViewModel.swift */,
@@ -1985,7 +1979,6 @@
 				6FB176542FEFE3140008DDDC /* AdsPlacementView.swift in Sources */,
 				6FB176552FEFE3140008DDDC /* OrderItemCell.swift in Sources */,
 				6FB176572FEFE3140008DDDC /* BrandsHeaderView.swift in Sources */,
-				D9BFC7532FF510F400ADA52F /* VerificationSuccessViewModel.swift in Sources */,
 				6FB176592FEFE3140008DDDC /* HomeView.swift in Sources */,
 				6FB1765A2FEFE3140008DDDC /* ShopifyAPIClient.swift in Sources */,
 				6FB1765B2FEFE3140008DDDC /* CartItemEntity.swift in Sources */,
@@ -2127,7 +2120,6 @@
 				6F5DA42B2FF1BF17002F500B /* CategoriesView.swift in Sources */,
 				6FB176D32FEFE3140008DDDC /* APIResponseDTO.swift in Sources */,
 				6FB176D62FEFE3140008DDDC /* CouponBadgeView.swift in Sources */,
-				D9BFC74A2FF4369600ADA52F /* VerificationSuccessView.swift in Sources */,
 				6FB176D72FEFE3140008DDDC /* ThemeSettingsViewModel.swift in Sources */,
 				6FB176D82FEFE3140008DDDC /* AdsPromotionalBannerView.swift in Sources */,
 				6F4BA23B2FF44B2C007AA5B1 /* OrderRepositoryProtocol.swift in Sources */,

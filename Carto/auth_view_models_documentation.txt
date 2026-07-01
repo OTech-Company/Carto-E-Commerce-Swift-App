@@ -1,0 +1,90 @@
+Auth Verification and Forgot Password View Models
+
+1) Verification Flow
+
+VerificationViewModel
+Purpose:
+Handles the email verification screen logic.
+
+Responsibilities:
+- Stores the user email
+- Checks whether the email has been verified
+- Resends verification email
+- Manages loading state
+- Shows validation/server messages
+- Handles resend cooldown timer
+- Navigates back through AuthRouter
+
+Dependencies:
+- AuthenticationRepositoryProtocol
+- AuthSession
+- AuthRouter
+
+Main actions:
+- checkVerificationStatus()
+- resendVerificationEmail()
+- goBack()
+
+VerificationSuccessViewModel
+Purpose:
+Handles the success screen shown after email verification.
+
+Responsibilities:
+- Holds navigation dependencies
+- Provides the “Get Started” action
+
+Dependencies:
+- AuthRouter
+- AuthSession
+
+Main action:
+- onGetStartedClicked()
+
+Note:
+Right now, this action is minimal and does not perform navigation logic beyond accessing session state.
+
+2) Forgot Password Flow
+
+ForgotPasswordViewModel
+Purpose:
+Handles the forgot password screen logic.
+
+Responsibilities:
+- Stores email input
+- Validates email format
+- Requests password reset email
+- Manages loading state
+- Shows validation/server errors
+- Navigates to success screen
+- Navigates back to sign in
+
+Dependencies:
+- AuthValidatorProtocol
+- AuthenticationRepositoryProtocol
+- AuthRouter
+
+Main actions:
+- validateEmail()
+- sendResetLink()
+- navigateToSignIn()
+
+ForgotPasswordSuccessViewModel
+Purpose:
+Handles the success screen shown after the reset email is sent.
+
+Responsibilities:
+- Provides navigation back to sign in
+
+Dependencies:
+- AuthRouter
+
+Main action:
+- backToSignIn()
+
+3) Navigation Summary
+
+These view models use AuthRouter for coordinator-based navigation:
+- showLogin()
+- showVerificationSuccess()
+- showForgotPasswordSuccess()
+- pop()

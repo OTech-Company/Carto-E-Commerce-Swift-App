@@ -21,7 +21,20 @@ struct CartoApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AuthCoordinator(container: DIContainer.shared)
+            switch appViewModel.sessionState {
+            case .loading:
+                SplashView()
+            case .unauthenticated:
+                AuthCoordinator(container: DIContainer.shared)
+            case .guest:
+                MainView()
+            case .authenticated(let user):
+                if user.isEmailVerified {
+                    MainView()
+                } else {
+                    AuthCoordinator(container: DIContainer.shared)
+                }
+            }
         }
     }
 }

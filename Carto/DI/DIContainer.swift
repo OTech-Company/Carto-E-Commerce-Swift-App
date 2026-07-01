@@ -50,13 +50,6 @@ final class DIContainer {
         )
     }
 
-    func makeVerificationSuccessViewModel(router: AuthRouter) -> VerificationSuccessViewModel {
-        VerificationSuccessViewModel(
-            router: router,
-            authSession: authSession
-        )
-    }
-
     func makeForgotPasswordViewModel(router: AuthRouter) -> ForgotPasswordViewModel {
         ForgotPasswordViewModel(
             validator: validator,

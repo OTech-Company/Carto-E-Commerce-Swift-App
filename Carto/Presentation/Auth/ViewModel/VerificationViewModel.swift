@@ -41,9 +41,9 @@ final class VerificationViewModel: ObservableObject {
 
         Task {
             let isVerified = await repository.checkEmailVerified()
-
             if isVerified {
-                router.showVerificationSuccess()
+                warningMessage = nil
+                await authSession.refreshSession()
             } else {
                 warningMessage = "Your email hasn't been verified yet."
             }
