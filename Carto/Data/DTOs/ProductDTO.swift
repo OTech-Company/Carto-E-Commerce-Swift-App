@@ -15,6 +15,10 @@ struct ProductDetailResponse: Decodable {
     let product: ProductDTO?
 }
 
+struct CategoryPoductsResponse: Decodable {
+    let products: [ProductDTO]?
+}
+
 // MARK: - Product DTO
 struct ProductDTO: Decodable {
     /// Changed to Int to resolve the 64-bit number decoding mismatch

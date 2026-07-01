@@ -23,4 +23,7 @@ final class GetCategoryUseCase{
     func execute(collectionId: String) async throws -> [Subcategory] {
         return try await repository.fetchSubcategoriesWithImages(forCollectionId: collectionId)
     }
+    func execute(categoryId: String) async throws -> [Product] {
+        return try await repository.fetchCategoryProducts(categoryId: categoryId)
+    }
 }

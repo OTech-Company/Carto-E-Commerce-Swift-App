@@ -42,7 +42,7 @@ final class CategoryListViewModel: ObservableObject {
     
     func loadSubCategories() async {
         do {
-            let subcategories = try await getCategoryUseCase.execute()
+            _ = try await getCategoryUseCase.execute()
             
         } catch {
             state = .error(error.localizedDescription)
