@@ -17,40 +17,84 @@ struct FilterSheetView: View {
             ScrollView {
 
                 VStack(alignment: .leading, spacing: 20) {
+                    
+                    if !viewModel.productTypes.isEmpty {
 
-                    Text("Brands")
-                        .font(.headline)
+                        Text("Product Type")
+                            .font(.headline)
 
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 110))]) {
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
 
-                        ForEach(viewModel.brands, id: \.self) { brand in
+                            ForEach(viewModel.productTypes, id: \.self) { type in
 
-                            Button {
+                                Button {
 
-                                if viewModel.selectedBrands.contains(brand) {
-                                    viewModel.selectedBrands.remove(brand)
-                                } else {
-                                    viewModel.selectedBrands.insert(brand)
-                                }
+                                    if viewModel.selectedProductType == type {
+                                        viewModel.selectedProductType = nil
+                                    } else {
+                                        viewModel.selectedProductType = type
+                                    }
 
-                            } label: {
+                                    viewModel.updateAvailableFilters()
 
-                                HStack {
+                                } label: {
 
-                                    Image(systemName:
-                                            viewModel.selectedBrands.contains(brand)
-                                          ? "checkmark.square.fill"
-                                          : "square")
-
-                                    Text(brand)
+                                    Text(type)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical, 8)
+                                        .background(
+                                            viewModel.selectedProductType == type
+                                            ? Color.black
+                                            : Color.gray.opacity(0.15)
+                                        )
+                                        .foregroundStyle(
+                                            viewModel.selectedProductType == type
+                                            ? .white
+                                            : .black
+                                        )
+                                        .clipShape(RoundedRectangle(cornerRadius: 8))
                                 }
                             }
-                            .foregroundStyle(.primary)
                         }
+
+                        Divider()
                     }
-
-                    Divider()
-
+                    
+                    if !viewModel.brands.isEmpty {
+                        
+                        Text("Brands")
+                            .font(.headline)
+                        
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 110))]) {
+                            
+                            ForEach(viewModel.brands, id: \.self) { brand in
+                                
+                                Button {
+                                    
+                                    if viewModel.selectedBrands.contains(brand) {
+                                        viewModel.selectedBrands.remove(brand)
+                                    } else {
+                                        viewModel.selectedBrands.insert(brand)
+                                    }
+                                    
+                                } label: {
+                                    
+                                    HStack {
+                                        
+                                        Image(systemName:
+                                                viewModel.selectedBrands.contains(brand)
+                                              ? "checkmark.square.fill"
+                                              : "square")
+                                        
+                                        Text(brand)
+                                    }
+                                }
+                                .foregroundStyle(.primary)
+                            }
+                        }
+                        
+                        Divider()
+                    }
                     Text("Price Range")
                         .font(.headline)
 
@@ -66,39 +110,93 @@ struct FilterSheetView: View {
 
                     Divider()
 
-                    Text("Sizes")
-                        .font(.headline)
+                    if !viewModel.availableSizes.isEmpty {
 
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))]) {
+                        Text("Sizes")
+                            .font(.headline)
 
-                        ForEach(viewModel.sizes, id: \.self) { size in
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))]) {
 
-                            Button(size) {
+                            ForEach(viewModel.availableSizes, id: \.self) { size in
 
-                                if viewModel.selectedSizes.contains(size) {
-                                    viewModel.selectedSizes.remove(size)
-                                } else {
-                                    viewModel.selectedSizes.insert(size)
+                                Button {
+
+                                    if viewModel.selectedSizes.contains(size) {
+                                        viewModel.selectedSizes.remove(size)
+                                    } else {
+                                        viewModel.selectedSizes.insert(size)
+                                    }
+
+                                } label: {
+
+                                    Text(size)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical, 8)
+                                        .background(
+                                            viewModel.selectedSizes.contains(size)
+                                            ? .black
+                                            : Color.gray.opacity(0.15)
+                                        )
+                                        .foregroundStyle(
+                                            viewModel.selectedSizes.contains(size)
+                                            ? .white
+                                            : .black
+                                        )
+                                        .clipShape(RoundedRectangle(cornerRadius: 8))
                                 }
-
                             }
-                            .padding(.horizontal,12)
-                            .padding(.vertical,8)
-                            .background(
-                                viewModel.selectedSizes.contains(size)
-                                ? Color.black
-                                : Color.gray.opacity(0.15)
-                            )
-                            .foregroundStyle(
-                                viewModel.selectedSizes.contains(size)
-                                ? .white
-                                : .black
-                            )
-                            .clipShape(RoundedRectangle(cornerRadius: 8))
                         }
-                    }
 
-                    Divider()
+                        Divider()
+                    }
+                    
+                    if !viewModel.availableColors.isEmpty {
+
+                        Text("Colors")
+                            .font(.headline)
+
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
+
+                            ForEach(viewModel.availableColors, id: \.self) { color in
+
+                                Button {
+
+                                    if viewModel.selectedColors.contains(color) {
+                                        viewModel.selectedColors.remove(color)
+                                    } else {
+                                        viewModel.selectedColors.insert(color)
+                                    }
+
+                                } label: {
+
+                                    HStack(spacing: 8) {
+
+                                        Circle()
+                                            .fill(color.swiftUIColor)
+                                            .frame(width: 18, height: 18)
+
+                                        Text(color)
+                                            .font(.caption)
+                                    }
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 8)
+                                    .background(
+                                        viewModel.selectedColors.contains(color)
+                                        ? Color.black
+                                        : Color.gray.opacity(0.15)
+                                    )
+                                    .foregroundStyle(
+                                        viewModel.selectedColors.contains(color)
+                                        ? .white
+                                        : .black
+                                    )
+                                    .clipShape(Capsule())
+                                }
+                            }
+                        }
+
+                        Divider()
+                    }
 
                     Button {
 
@@ -115,11 +213,31 @@ struct FilterSheetView: View {
                             .foregroundStyle(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
+                    
                 }
                 .padding()
             }
             .navigationTitle("Filters")
             .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+}
+
+extension String {
+    var swiftUIColor: Color {
+        switch lowercased() {
+        case "black": return .black
+        case "white": return .white
+        case "blue": return .blue
+        case "red": return .red
+        case "green": return .green
+        case "yellow": return .yellow
+        case "gray", "grey": return .gray
+        case "brown": return .brown
+        case "pink": return .pink
+        case "purple": return .purple
+        case "orange": return .orange
+        default: return .gray
         }
     }
 }

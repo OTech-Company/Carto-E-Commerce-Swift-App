@@ -13,13 +13,20 @@ final class CategoryProductsViewModel: ObservableObject {
     @Published var products: [Product] = []
     @Published var filteredProducts: [Product] = []
 
+    @Published var productTypes: [String] = []
+    @Published var selectedProductType: String?
+
+    @Published var availableSizes: [String] = []
+    @Published var availableColors: [String] = []
+
+    
     @Published var brands: [String] = []
     @Published var colors: [String] = []
     @Published var sizes: [String] = []
 
-    @Published var selectedBrands: Set<String> = []
     @Published var selectedColors: Set<String> = []
     @Published var selectedSizes: Set<String> = []
+    @Published var selectedBrands: Set<String> = []
 
     @Published var minPrice: Double = 0
     @Published var maxPrice: Double = 1000
@@ -53,6 +60,7 @@ final class CategoryProductsViewModel: ObservableObject {
             products = loadedProducts
             filteredProducts = loadedProducts
 
+            print(products)
             // Available brands
             brands = Array(
                 Set(loadedProducts.map(\.vendor))
@@ -80,6 +88,10 @@ final class CategoryProductsViewModel: ObservableObject {
                 )
             ).sorted()
 
+            productTypes = Array(
+                Set(products.map(\.productType))
+            ).sorted()
+            
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -155,4 +167,47 @@ final class CategoryProductsViewModel: ObservableObject {
             return true
         }
     }
+    
+    func updateAvailableFilters() {
+
+        let filteredProducts: [Product]
+
+        if let selectedProductType {
+
+            filteredProducts = products.filter {
+                $0.productType == selectedProductType
+            }
+
+        } else {
+
+            filteredProducts = products
+        }
+
+        availableSizes = Array(
+            Set(
+                filteredProducts.compactMap {
+
+                    $0.options.indices.contains(0)
+                    ? $0.options[0].values.first
+                    : nil
+                }
+            )
+        )
+        .filter { !$0.isEmpty }
+        .sorted()
+
+        availableColors = Array(
+            Set(
+                filteredProducts.compactMap {
+
+                    $0.options.indices.contains(1)
+                    ? $0.options[1].values.first
+                    : nil
+                }
+            )
+        )
+        .filter { !$0.isEmpty }
+        .sorted()
+    }
+    
 }

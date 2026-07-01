@@ -11,11 +11,10 @@ import SwiftUI
 struct ProductCardView: View {
 
     let product: Product
-
     var body: some View {
 
         VStack(alignment: .leading) {
-
+            
             AsyncImage(url: URL(string: product.mainImageUrl ?? "")) { image in
 
                 image
