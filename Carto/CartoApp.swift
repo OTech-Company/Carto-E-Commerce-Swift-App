@@ -14,7 +14,7 @@ struct CartoApp: App {
     @StateObject private var appViewModel: AppViewModel
     init() {
         FirebaseApp.configure()
-
+        ServiceLocator.shared.register(container: AppContainer())
         let container = DIContainer.shared
         _appViewModel = StateObject(wrappedValue: container.appViewModel)
     }

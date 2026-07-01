@@ -37,7 +37,7 @@ struct MainView: View {
 }
 
 extension MainView {
-    @ViewBuilder
+    @MainActor @ViewBuilder
     func makeCategoryListScreen() -> some View {
         let repository = ServiceLocator.shared.resolveCategoryRepository()
         let useCase = GetCategoryUseCase(repository: repository)
