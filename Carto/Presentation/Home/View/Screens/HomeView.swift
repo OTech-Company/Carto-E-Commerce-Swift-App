@@ -67,9 +67,7 @@ struct HomeView: View {
             rate: 3.4
         ),
     ]
-
-    let brandsLogos = ["brand1", "brand2", "brand3", "brand4"]
-
+    
     @State private var currentIndex: Int = 0
     @StateObject private var viewModel = DIContainer.shared.makeHomeViewModel()
     
@@ -115,7 +113,8 @@ struct HomeView: View {
                     .font(.system(size: 28, weight: .bold))
                     .foregroundColor(Color("PrimaryColor"))
 
-                HomeBrandView(viewModel: viewModel.brandVM, brandsLogos: brandsLogos)
+                HomeBrandView(viewModel: viewModel.brandVM)
+                    
 
                 Spacer(minLength: 20)
 
