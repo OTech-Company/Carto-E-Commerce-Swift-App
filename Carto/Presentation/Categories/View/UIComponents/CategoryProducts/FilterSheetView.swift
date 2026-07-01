@@ -4,56 +4,122 @@
 //
 //  Created by Osama Hosam on 01/07/2026.
 //
-
-
 import SwiftUI
 
 struct FilterSheetView: View {
 
+    @ObservedObject var viewModel: CategoryProductsViewModel
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
 
-        VStack(alignment: .leading, spacing: 20) {
+        NavigationStack {
+            ScrollView {
 
-            Text("Filters")
-                .font(.title2.bold())
+                VStack(alignment: .leading, spacing: 20) {
 
-            Text("Price Range")
+                    Text("Brands")
+                        .font(.headline)
 
-            Slider(value: .constant(100),
-                   in: 0...500)
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 110))]) {
 
-            Text("Brands")
+                        ForEach(viewModel.brands, id: \.self) { brand in
 
-            ScrollView(.horizontal) {
+                            Button {
 
-                HStack {
+                                if viewModel.selectedBrands.contains(brand) {
+                                    viewModel.selectedBrands.remove(brand)
+                                } else {
+                                    viewModel.selectedBrands.insert(brand)
+                                }
 
-                    Text("Nike")
-                    Text("Adidas")
-                    Text("Puma")
+                            } label: {
+
+                                HStack {
+
+                                    Image(systemName:
+                                            viewModel.selectedBrands.contains(brand)
+                                          ? "checkmark.square.fill"
+                                          : "square")
+
+                                    Text(brand)
+                                }
+                            }
+                            .foregroundStyle(.primary)
+                        }
+                    }
+
+                    Divider()
+
+                    Text("Price Range")
+                        .font(.headline)
+
+                    Text("Minimum: $\(Int(viewModel.minPrice))")
+
+                    Slider(value: $viewModel.minPrice,
+                           in: 0...viewModel.maxPrice)
+
+                    Text("Maximum: $\(Int(viewModel.maxPrice))")
+
+                    Slider(value: $viewModel.maxPrice,
+                           in: viewModel.minPrice...1000)
+
+                    Divider()
+
+                    Text("Sizes")
+                        .font(.headline)
+
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))]) {
+
+                        ForEach(viewModel.sizes, id: \.self) { size in
+
+                            Button(size) {
+
+                                if viewModel.selectedSizes.contains(size) {
+                                    viewModel.selectedSizes.remove(size)
+                                } else {
+                                    viewModel.selectedSizes.insert(size)
+                                }
+
+                            }
+                            .padding(.horizontal,12)
+                            .padding(.vertical,8)
+                            .background(
+                                viewModel.selectedSizes.contains(size)
+                                ? Color.black
+                                : Color.gray.opacity(0.15)
+                            )
+                            .foregroundStyle(
+                                viewModel.selectedSizes.contains(size)
+                                ? .white
+                                : .black
+                            )
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                        }
+                    }
+
+                    Divider()
+
+                    Button {
+
+                        viewModel.applyFilters()
+                        dismiss()
+
+                    } label: {
+
+                        Text("Apply Filters")
+                            .bold()
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(.black)
+                            .foregroundStyle(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
                 }
+                .padding()
             }
-
-            Text("Sizes")
-
-            HStack {
-
-                Text("S")
-                Text("M")
-                Text("L")
-                Text("XL")
-            }
-
-            Button("Apply Filter") {
-
-                dismiss()
-            }
-            .buttonStyle(.borderedProminent)
-
-            Spacer()
+            .navigationTitle("Filters")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .padding()
     }
 }

@@ -80,7 +80,7 @@ struct CategoryProductsView: View {
             .navigationTitle("Products")
             .sheet(isPresented: $viewModel.showFilters) {
 
-                FilterSheetView()
+                FilterSheetView(viewModel: viewModel)
             }
             .task {
 
