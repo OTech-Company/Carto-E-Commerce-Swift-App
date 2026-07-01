@@ -6,24 +6,20 @@
 //
 
 protocol BrandRemoteDataSourceProtocol {
-    func fetchBrands() async throws -> [BrandDTO]
+    func fetchBrands() async throws -> BrandResponseDTO
 }
 
 class BrandRemoteDataSource: BrandRemoteDataSourceProtocol {
-    func fetchBrands() async throws -> [BrandDTO] {
+    func fetchBrands() async throws -> BrandResponseDTO {
         do {
-            struct AdminBrandsResponse: Decodable {
-                let brands: [BrandDTO]?
-            }
+            let response: BrandResponseDTO = try await ShopifyAPIClient.shared.requestREST(
+                endpoint: .brands
+            )
 
-            let response: AdminBrandsResponse = try await ShopifyAPIClient.shared.requestREST(
-                    endpoint: .brands,
-                )
-
-            print("Fetched brands:", response.brands?.count ?? 0)
-            return response.brands ?? []
+            print("Fetched brands count:", response.smartCollections.count)
+            return response
         } catch {
-            print("REST error:", error.localizedDescription)
+            print("REST error:", error)
             throw error
         }
     }

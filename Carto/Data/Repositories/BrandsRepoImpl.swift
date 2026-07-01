@@ -14,6 +14,6 @@ class BrandsRepoImpl: BrandsRepoProtocol{
     
     func fetchBrands() async throws -> [BrandEntity] {
         let brandsDTO = try await remoteDataSource.fetchBrands()
-        return brandsDTO.map { $0.toDomainModel() }
+        return brandsDTO.toDomainModel()
     }
 }

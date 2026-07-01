@@ -15,7 +15,7 @@ struct HomeBrandView: View {
         case .loading, .idle:
             ProgressView()
                 .progressViewStyle(
-                    CircularProgressViewStyle(tint: Color("primaryColor"))
+                    CircularProgressViewStyle(tint: Color("PrimaryColor"))
                 )
         case .failure(let error):
             Text("Error: \(error.localizedDescription)")

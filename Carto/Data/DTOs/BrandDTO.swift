@@ -9,10 +9,6 @@ import Foundation
 
 struct BrandResponseDTO: Decodable {
     let smartCollections: [BrandDTO]
-
-    enum CodingKeys: String, CodingKey {
-        case smartCollections = "smart_collections"
-    }
 }
 
 struct BrandDTO: Decodable {
@@ -23,16 +19,6 @@ struct BrandDTO: Decodable {
     let publishedAt: String
     let sortOrder: String
     let image: BrandImageDTO?
-
-    enum CodingKeys: String, CodingKey {
-        case id
-        case handle
-        case title
-        case updatedAt = "updated_at"
-        case publishedAt = "published_at"
-        case sortOrder = "sort_order"
-        case image
-    }
 }
 
 struct BrandImageDTO: Decodable {
@@ -41,13 +27,11 @@ struct BrandImageDTO: Decodable {
     let width: Int
     let height: Int
     let src: String
+}
 
-    enum CodingKeys: String, CodingKey {
-        case createdAt = "created_at"
-        case alt
-        case width
-        case height
-        case src
+extension BrandResponseDTO {
+    func toDomainModel() -> [BrandEntity] {
+        smartCollections.map { $0.toDomainModel() }
     }
 }
 
