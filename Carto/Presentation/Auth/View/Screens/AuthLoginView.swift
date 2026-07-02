@@ -65,7 +65,7 @@ struct LoginView: View {
                                 
                                 Spacer()
                                 
-                                Button(action: { /* Forgot Password action */ }) {
+                                Button(action: { viewModel.forgotPasswordTapped() }) {
                                     Text("Forgot Password?")
                                         .font(.system(size: 14, weight: .medium))
                                         .foregroundColor(Color(hex: "FF5A00"))

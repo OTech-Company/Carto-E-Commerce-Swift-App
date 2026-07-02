@@ -39,7 +39,11 @@ extension AuthRouter {
         push(.verification(email: email))
     }
 
-    func showVerificationSuccess() {
-        push(.verificationSuccess)
+    func showForgotPassword() {
+        push(.forgotPassword)
+    }
+
+    func showForgotPasswordSuccess() {
+        push(.forgotPasswordSuccess)
     }
 }

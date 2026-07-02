@@ -15,4 +15,5 @@ protocol AuthenticationRepositoryProtocol {
     func signOut()
     func sendEmailVerification() async throws
     func checkEmailVerified() async -> Bool
+    func sendPasswordReset(email: String) async throws
 }

@@ -82,6 +82,14 @@ final class FirebaseAuthService: FirebaseAuthServiceProtocol {
         }
     }
 
+    func sendPasswordReset(email: String) async throws {
+        do {
+            try await Auth.auth().sendPasswordReset(withEmail: email)
+        } catch let error as NSError {
+            throw mapFirebaseError(error)
+        }
+    }
+
     // MARK: - Error mapping
 
     private func mapFirebaseError(_ error: NSError) -> AuthError {

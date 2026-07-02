@@ -28,7 +28,7 @@ enum AuthError: LocalizedError {
         case .weakPassword:         return "Password must be at least 6 characters."
         case .networkError:         return "Check your internet connection and try again."
         case .wrongPassword:        return "Incorrect email or password."
-        case .userNotFound:         return "No account found with this email."
+        case .userNotFound:         return "No account was found with this email address."
         case .userDisabled:         return "This account has been disabled."
         case .tooManyRequests:      return "Too many attempts. Please wait a moment and try again."
         case .requiresRecentLogin:  return "Please log in again to continue."

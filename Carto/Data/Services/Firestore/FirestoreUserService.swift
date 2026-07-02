@@ -44,4 +44,14 @@ final class FirestoreUserService: FirestoreUserServiceProtocol {
             throw AuthError.firestoreWriteFailed
         }
     }
+    
+    func isEmailRegistered(_ email: String) async throws -> Bool {
+        let snapshot = try await Firestore.firestore()
+            .collection("users")
+            .whereField("email", isEqualTo: email)
+            .limit(to: 1)
+            .getDocuments()
+
+        return !snapshot.documents.isEmpty
+    }
 }

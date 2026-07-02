@@ -136,6 +136,17 @@ final class AuthenticationRepositoryImpl: AuthenticationRepositoryProtocol {
 
         try await firebaseAuthService.sendEmailVerification()
     }
+
+    func sendPasswordReset(email: String) async throws {
+
+        let isRegistered = try await firestoreUserService.isEmailRegistered(email)
+
+        guard isRegistered else {
+            throw AuthError.userNotFound
+        }
+
+        try await firebaseAuthService.sendPasswordReset(email: email)
+    }
 }
 
 private extension AuthenticationRepositoryImpl {
