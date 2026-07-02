@@ -5,10 +5,10 @@
 //  Created by Nadin Ahmed on 01/07/2026.
 //
 
-import Foundation
 import Combine
+import Foundation
 
-enum LoadState<T>{
+enum LoadState<T> {
     case idle
     case loading
     case success(T)
@@ -17,6 +17,8 @@ enum LoadState<T>{
 
 final class HomeBrandsViewModel: ObservableObject {
     @Published private(set) var state: LoadState<[BrandEntity]> = .idle
+    @Published private(set) var brands: [BrandEntity] = []
+    
     private let useCase: BrandsUseCaseProtocol
     
     init(useCase: BrandsUseCaseProtocol) {
@@ -27,11 +29,10 @@ final class HomeBrandsViewModel: ObservableObject {
     func loadBrands() async {
         state = .loading
         do {
-            let brands = try await useCase.fetchBrands()
+            brands = try await useCase.fetchBrands()
             state = .success(brands)
         } catch {
             state = .failure(error)
         }
     }
 }
-
