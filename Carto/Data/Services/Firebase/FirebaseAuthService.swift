@@ -90,10 +90,8 @@ final class FirebaseAuthService: FirebaseAuthServiceProtocol {
         }
     }
 
-    // MARK: - Error mapping
-
     private func mapFirebaseError(_ error: NSError) -> AuthError {
-        guard let errorCode = AuthErrorCode(rawValue: error.code) else {
+        guard let errorCode = AuthErrorCode.Code(rawValue: error.code) else {
             return .unknown(error.localizedDescription)
         }
         switch errorCode {

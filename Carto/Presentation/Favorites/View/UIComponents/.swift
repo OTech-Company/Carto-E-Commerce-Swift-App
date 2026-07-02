@@ -52,7 +52,6 @@ struct ProductCard: View {
                     }
                 }
                 
-                
                 if let discount = product.discountPercentage {
                     Text("\(discount)% OFF")
                         .font(.system(size: 11, weight: .bold))

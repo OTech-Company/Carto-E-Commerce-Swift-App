@@ -22,6 +22,8 @@ extension ProductDTO {
                 .first(where: { $0.name.lowercased() == "color" })?
                 .values ?? []
         )
+    }
+}
         
 extension Product {
     init(from dto: ProductDTO) {
