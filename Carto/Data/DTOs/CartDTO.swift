@@ -1,23 +1,36 @@
-struct CartDTO: Codable {
-    let id: String
-    let checkoutUrl: String
-    let lines: [CartLineDTO]
-    let cost: CartCostDTO
+//
+//  OrderAndCartDTOs.swift
+//  Carto
+//
+//  Created by Osama Abdellatif on 30/06/2026.
+//
+
+import Foundation
+
+// MARK: - Core Cart Structures (REST Admin API Compliant)
+
+struct CartDTO: Decodable {
+    let id: String // Note: Shopify persistent client-side cart tokens can be alpha-numeric hashes
+    let token: String?
+    let note: String?
+    let attributes: [String: String]?
+    let originalTotalPrice: Int?          // Shopify REST returns cart totals in cents or flat numbers
+    let totalPrice: Int?
+    let items: [CartLineDTO]?              // Replaces 'lines' to match REST keys natively
+
 }
 
-struct CartLineDTO: Codable {
-    let id: String
+
+
+struct CartLineDTO: Decodable {
+    let id: Int // Specific line item tracker number
+    let productId: Int?
+    let variantId: Int?
+    let title: String?
     let quantity: Int
-    let merchandise: VariantDTO
-}
+    let price: Int?                        // Price in cents or flat number representation
+    let sku: String?
+    let vendor: String?
+    let handle: String?
 
-struct CartCostDTO: Codable {
-    let totalAmount: MoneyDTO
-    let subtotalAmount: MoneyDTO
-    let totalTaxAmount: MoneyDTO?
-}
-
-struct MoneyDTO: Codable {
-    let amount: String
-    let currencyCode: String
 }

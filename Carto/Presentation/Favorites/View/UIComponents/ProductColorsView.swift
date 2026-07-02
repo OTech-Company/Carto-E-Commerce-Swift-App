@@ -7,15 +7,6 @@
 
 import SwiftUI
 
-struct FavoriteItem: Identifiable {
-    let id = UUID()
-    let image: String
-    let title: String
-    let price: String
-    let colors: [Color]
-    
-}
-
 struct ProductColorsView: View {
     let colors: [Color]
     var body: some View {

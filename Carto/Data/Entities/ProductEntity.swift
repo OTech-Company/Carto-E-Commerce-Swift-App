@@ -6,7 +6,7 @@ struct ProductEntity {
     let category: String
     let price: Double
     let compareAtPrice: Double?
-    let images: [String]          // image URLs
+    let images: [String]         
     let variants: [VariantEntity]
     let tags: [String]
     let rating: Double?

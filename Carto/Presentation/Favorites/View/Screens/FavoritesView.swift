@@ -8,42 +8,30 @@
 import SwiftUI
 
 struct FavoritesView: View {
-    let items = [
-        FavoriteItem(image: "shoes", title: "Nike", price: "$37,87", colors: [.cyan, .red]),
-        FavoriteItem(image: "shoes", title: "Nike", price: "$37,87", colors: [.cyan, .red]),
-        FavoriteItem(image: "shoes", title: "Nike", price: "$37,87", colors: [.cyan, .red]),
-        FavoriteItem(image: "shoes", title: "Nike", price: "$37,87", colors: [.cyan, .red]),
-        FavoriteItem(image: "shoes", title: "Nike", price: "$37,87", colors: [.cyan, .red]),
-        FavoriteItem(image: "shoes", title: "Nike", price: "$37,87", colors: [.cyan, .red]),
-        FavoriteItem(image: "shoes", title: "Nike", price: "$37,87", colors: [.cyan, .red]),
-        
-        
+
+    private let columns = [
+        GridItem(.flexible(), spacing: 12),
+        GridItem(.flexible(), spacing: 12)
     ]
-    
-    let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
-    
+
+    let products = ProductInfo.mockProducts
+
     var body: some View {
-        
-        VStack {
+        VStack(spacing: 0) {
             Text("Favorites")
                 .font(.title3)
-                .bold()
+                .fontWeight(.bold)
                 .padding(.top)
-            
-            ScrollView{
-                LazyVGrid(columns: columns, spacing: 18) {
-                    ForEach(items) { item in
-                        FavoriteCard(item: item)
+
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 16) {
+                    ForEach(products) { product in
+                        ProductCard(product: product)
                     }
                 }
                 .padding()
             }
         }
         .background(Color(.systemGray6))
-        
     }
 }
-
