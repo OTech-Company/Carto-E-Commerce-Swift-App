@@ -29,7 +29,3 @@ struct HomeBrandView: View {
         }
     }
 }
-
-#Preview {
-    HomeBrandView(barndLogo: "Green 1")
-}

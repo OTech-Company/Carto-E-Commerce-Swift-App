@@ -14,19 +14,24 @@ struct MainView: View {
                     Image(systemName: "house.fill")
                     Text("Home")
                 }
-
-            CategoriesView()
+            
+            makeCategoryListScreen()
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     Text("Categories")
                 }
-
+            makeOrderHistoryScreen()
+                .tabItem {
+                    Image(systemName: "history")
+                    Text("history")
+                }
+            
             FavoritesView()
                 .tabItem {
                     Image(systemName: "heart.fill")
                     Text("Favourits")
                 }
-
+            
             ProfileView()
                 .tabItem {
                     Image(systemName: "person.fill")
@@ -34,4 +39,32 @@ struct MainView: View {
                 }
         }.tint(Color("PrimaryColor"))
     }
+}
+
+extension MainView {
+    @MainActor @ViewBuilder
+    func makeCategoryListScreen() -> some View {
+        let repository = ServiceLocator.shared.resolveCategoryRepository()
+        let useCase = GetCategoryUseCase(repository: repository)
+        let viewModel = CategoryListViewModel(getCategoryUseCase: useCase, fetchSubcategoriesUseCase: useCase)
+        
+        if #available(iOS 17.0, *) {
+            CategoryListView(viewModel: viewModel)
+        } else {
+            Text("Please upgrade to iOS 17.")
+        }
+    }
+    
+    @ViewBuilder
+    func makeOrderHistoryScreen() -> some View {
+            let repository = ServiceLocator.shared.resolveOrderRepository()
+            let useCase = GetOrderHistoryUseCase(repository: repository)
+            let viewModel = OrderHistoryViewModel(getOrderHistoryUseCase: useCase)
+            
+            if #available(iOS 17.0, *) {
+                OrderHistoryView(viewModel: viewModel)
+            } else {
+                Text("Please upgrade to iOS 17.")
+            }
+        }
 }

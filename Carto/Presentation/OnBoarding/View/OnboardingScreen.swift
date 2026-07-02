@@ -67,9 +67,3 @@ struct OnboardingScreen: View {
         }
     }
 }
-
-#Preview {
-
-    OnboardingScreen( )
-
-}

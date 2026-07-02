@@ -21,5 +21,5 @@ struct CategoryDTO: Codable {
 }
 
 struct ImageDTO: Codable {
-    let src: String?
+    let src: String?            
 }

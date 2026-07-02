@@ -1,8 +1,8 @@
 //
-//  ProductsInfoRepositoryImpl.swift
+//  ProductsRepositoryImpl.swift
 //  Carto
 //
-//  Created by Manona on 29/06/2026.
+//  Created by Osama Abdellatif on 30/06/2026.
 //
 
 import Foundation
@@ -15,10 +15,11 @@ class ProductsRepositoryImpl: ProductsRepository {
         self.remoteDataSource = remoteDataSource
     }
 
-    func getProductInfo(productId: String) async throws -> ProductInfo {
-
+    func getProductInfo(productId: Int) async throws -> ProductInfo {
+        // 1. Fetch the flat REST DTO
         let dto = try await remoteDataSource.getProductInfo(productId: productId)
 
-        return dto.toDomain()
+        // 2. Map directly to your clean ProductInfo domain entity
+        return ProductInfo(from: dto)
     }
 }

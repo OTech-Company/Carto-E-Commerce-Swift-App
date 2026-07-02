@@ -6,17 +6,35 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct CartoApp: App {
+
+    @StateObject private var appViewModel: AppViewModel
     init() {
-        let container = AppContainer()
-        ServiceLocator.shared.register(container: container)
+        FirebaseApp.configure()
+        ServiceLocator.shared.register(container: AppContainer())
+        let container = DIContainer.shared
+        _appViewModel = StateObject(wrappedValue: container.appViewModel)
     }
-    
+
     var body: some Scene {
         WindowGroup {
-            FavoritesView()
+            switch appViewModel.sessionState {
+            case .loading:
+                SplashView()
+            case .unauthenticated:
+                AuthCoordinator(container: DIContainer.shared)
+            case .guest:
+                MainView()
+            case .authenticated(let user):
+                if user.isEmailVerified {
+                    MainView()
+                } else {
+                    AuthCoordinator(container: DIContainer.shared)
+                }
+            }
         }
     }
 }

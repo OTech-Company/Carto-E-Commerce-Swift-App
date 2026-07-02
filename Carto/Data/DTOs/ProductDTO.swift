@@ -6,6 +6,7 @@
 
 import Foundation
 
+// MARK: - API Response Wrapper
 struct ProductListResponse: Decodable {
     let products: [ProductDTO]?
 }

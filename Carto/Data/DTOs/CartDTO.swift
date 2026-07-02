@@ -7,8 +7,9 @@
 
 import Foundation
 
-// MARK: - Core Cart Structures (REST Admin API Compliant)
 
+
+// MARK: - Core Cart Structures (REST Admin API Compliant)
 struct CartDTO: Decodable {
     let id: String // Note: Shopify persistent client-side cart tokens can be alpha-numeric hashes
     let token: String?
@@ -17,10 +18,7 @@ struct CartDTO: Decodable {
     let originalTotalPrice: Int?          // Shopify REST returns cart totals in cents or flat numbers
     let totalPrice: Int?
     let items: [CartLineDTO]?              // Replaces 'lines' to match REST keys natively
-
 }
-
-
 
 struct CartLineDTO: Decodable {
     let id: Int // Specific line item tracker number
@@ -32,5 +30,4 @@ struct CartLineDTO: Decodable {
     let sku: String?
     let vendor: String?
     let handle: String?
-
 }

@@ -26,7 +26,7 @@ struct SearchEdgeDTO: Decodable {
 }
 
 // MARK: - PageInfoDTO
-struct PageInfoDTO: Decodable {
+struct PageInfoDTO: Decodable {           
     let hasNextPage: Bool
     let hasPreviousPage: Bool?
     let endCursor: String?
