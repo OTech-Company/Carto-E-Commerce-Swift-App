@@ -14,7 +14,7 @@ struct HomeBrandItem: View {
         ZStack {
             Circle()
                 .fill(Color.white)
-                .frame(width: 120, height: 120)
+                .frame(width: 100, height: 100)
                 .shadow(radius: 5)
 
             AsyncImage(url: URL(string: barndLogo)) { image in
@@ -26,7 +26,7 @@ struct HomeBrandItem: View {
                     .resizable()
                     .scaledToFill()
             }
-            .frame(width: 100, height: 100)
+            .frame(width: 80, height: 80)
             .clipShape(Circle())
             .overlay(
                 Circle()

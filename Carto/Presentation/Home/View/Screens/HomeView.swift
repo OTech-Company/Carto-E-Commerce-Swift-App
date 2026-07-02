@@ -113,7 +113,7 @@ struct HomeView: View {
                     .font(.system(size: 28, weight: .bold))
                     .foregroundColor(Color("PrimaryColor"))
 
-                HomeBrandView(viewModel: viewModel.brandVM)
+                HomeBrandView(viewModel: viewModel.brandVM,onViewMoreClicked: {})
                     
 
                 Spacer(minLength: 20)
