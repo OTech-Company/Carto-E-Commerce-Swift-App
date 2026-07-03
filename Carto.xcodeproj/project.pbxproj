@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6D513D3E2FF86AC8004CFA0E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D513D3D2FF86AC8004CFA0E /* CoreDataStack.swift */; };
 		6D513D402FF86B9A004CFA0E /* FavoriteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D513D3F2FF86B9A004CFA0E /* FavoriteItem.swift */; };
+		6D513D422FF86BEC004CFA0E /* FavoritesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D513D412FF86BEC004CFA0E /* FavoritesRepository.swift */; };
+		6D513D442FF86C2C004CFA0E /* FavoritesUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D513D432FF86C2C004CFA0E /* FavoritesUseCases.swift */; };
 		6D76EA9F2FF68ECB00C6938C /* AddToCartCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76EA9C2FF68ECB00C6938C /* AddToCartCounter.swift */; };
 		6D76EAA02FF68ECB00C6938C /* ProductCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76EA9D2FF68ECB00C6938C /* ProductCard.swift */; };
 		6D76EAA12FF68ECB00C6938C /* ProductColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76EA9E2FF68ECB00C6938C /* ProductColorsView.swift */; };
@@ -279,6 +281,8 @@
 /* Begin PBXFileReference section */
 		6D513D3D2FF86AC8004CFA0E /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		6D513D3F2FF86B9A004CFA0E /* FavoriteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteItem.swift; sourceTree = "<group>"; };
+		6D513D412FF86BEC004CFA0E /* FavoritesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRepository.swift; sourceTree = "<group>"; };
+		6D513D432FF86C2C004CFA0E /* FavoritesUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesUseCases.swift; sourceTree = "<group>"; };
 		6D76EA9C2FF68ECB00C6938C /* AddToCartCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCartCounter.swift; sourceTree = "<group>"; };
 		6D76EA9D2FF68ECB00C6938C /* ProductCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCard.swift; sourceTree = "<group>"; };
 		6D76EA9E2FF68ECB00C6938C /* ProductColorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductColorsView.swift; sourceTree = "<group>"; };
@@ -1714,6 +1718,7 @@
 				D9E5F76A2FF5DCB00014DD91 /* OrderRepositoryProtocol.swift */,
 				D9E5F76B2FF5DCB00014DD91 /* SubCategoryRepositoryProtocol.swift */,
 				D9E5F76C2FF5DCB00014DD91 /* AuthenticationRepositoryProtocol.swift */,
+				6D513D412FF86BEC004CFA0E /* FavoritesRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1747,6 +1752,7 @@
 				D9E5F7762FF5DCB00014DD91 /* ProductUseCase.swift */,
 				D9E5F7772FF5DCB00014DD91 /* CategoryUseCase.swift */,
 				D9E5F7782FF5DCB00014DD91 /* GetOrderHistoryUseCase.swift */,
+				6D513D432FF86C2C004CFA0E /* FavoritesUseCases.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -2059,6 +2065,7 @@
 				D9E5F82B2FF5DCB00014DD91 /* SwipeToAddView.swift in Sources */,
 				D9E5F7E32FF5DCB00014DD91 /* ForgotPasswordView.swift in Sources */,
 				D9E5F8512FF5DCB00014DD91 /* OrderRepositoryProtocol.swift in Sources */,
+				6D513D442FF86C2C004CFA0E /* FavoritesUseCases.swift in Sources */,
 				D9E5F8002FF5DCB00014DD91 /* SearchResultsViewModel.swift in Sources */,
 				D9E5F8462FF5DCB00014DD91 /* Validator.swift in Sources */,
 				D9E5F8332FF5DCB00014DD91 /* FilterSheetView.swift in Sources */,
@@ -2095,6 +2102,7 @@
 				D9E5F7942FF5DCB00014DD91 /* FirestoreUserService.swift in Sources */,
 				D9E5F7D42FF5DCB00014DD91 /* HomeBannerView.swift in Sources */,
 				D9E5F7912FF5DCB00014DD91 /* CartDTO.swift in Sources */,
+				6D513D422FF86BEC004CFA0E /* FavoritesRepository.swift in Sources */,
 				D9E5F7F52FF5DCB00014DD91 /* CheckoutView.swift in Sources */,
 				D9E5F7F72FF5DCB00014DD91 /* PaymentMethodCardView.swift in Sources */,
 				D9E5F8222FF5DCB00014DD91 /* OrderListView.swift in Sources */,
