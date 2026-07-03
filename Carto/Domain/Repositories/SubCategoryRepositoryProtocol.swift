@@ -1,0 +1,14 @@
+//
+//  SubCategoryRepositoryProtocol.swift
+//  Carto
+//
+//  Created by Osama Hosam on 30/06/2026.
+//
+
+import Foundation
+
+protocol SubCategoryRepositoryProtocol {
+
+    func fetchSubcategoriesWithImages(forCollectionId collectionId: String) async throws -> [Subcategory]
+    func fetchAllAvailableSubcategories() async throws -> [String]
+}
