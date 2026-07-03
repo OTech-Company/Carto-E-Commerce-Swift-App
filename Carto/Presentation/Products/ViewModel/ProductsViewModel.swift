@@ -8,7 +8,7 @@
 import Foundation
 
 @MainActor
-final class CategoryProductsViewModel: ObservableObject {
+final class ProductsViewModel: ObservableObject {
 
     @Published var products: [Product] = []
     @Published var filteredProducts: [Product] = []

@@ -9,18 +9,29 @@ import SwiftUI
 
 struct BrandsScreen: View {
     @ObservedObject var viewModel: HomeBrandsViewModel
+    @State private var searchText: String = ""
     
     let columns = [
         GridItem(.flexible(), spacing: 20),
         GridItem(.flexible(), spacing: 20)
     ]
 
+    var filteredBrands: [BrandEntity] {
+        if searchText.isEmpty {
+            return viewModel.brands
+        } else {
+            return viewModel.brands.filter {
+                $0.title.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
+
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 20) {
-                ForEach(viewModel.brands) { brand in
+                ForEach(filteredBrands) { brand in
                     NavigationLink {
-                        CategoryProductsView(
+                        ProductsView(
                             brandID: brand.id,
                             viewModel: DIContainer.shared.makeCategoryProductViewModel()
                         )
@@ -31,6 +42,8 @@ struct BrandsScreen: View {
                 }
             }.padding(16)
         }
+        .navigationTitle("Brands")
+        .searchable(text: $searchText, prompt: "Search brands")
     }
 }
 

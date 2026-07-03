@@ -111,15 +111,24 @@ struct HomeView: View {
                         }
                     }
 
-                    Text("Brands")
-                        .font(.system(size: 28, weight: .bold))
-                        .foregroundColor(Color("PrimaryColor"))
+                    HStack {
+                        Text("Brands")
+                            .font(.system(size: 28, weight: .bold))
+                            .foregroundColor(Color("PrimaryColor"))
+
+                        Spacer()
+
+                        Button {
+                            navigateToBrands = true
+                        } label: {
+                            Text("see more")
+                                .font(.system(size: 18, weight: .medium))
+                                .foregroundColor(Color("PrimaryColor"))
+                        }
+                    }
 
                     HomeBrandView(
-                        viewModel: viewModel.brandVM,
-                        onViewMoreClicked: {
-                            navigateToBrands = true
-                        }
+                        viewModel: viewModel.brandVM
                     )
                     .navigationDestination(isPresented: $navigateToBrands) {
                         BrandsScreen(viewModel: viewModel.brandVM)

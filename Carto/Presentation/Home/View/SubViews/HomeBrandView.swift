@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HomeBrandView: View {
     @ObservedObject var viewModel: HomeBrandsViewModel
-    let onViewMoreClicked: () -> Void
 
     var body: some View {
         switch viewModel.state {
@@ -27,30 +26,12 @@ struct HomeBrandView: View {
                 HStack(spacing: 16) {
                     ForEach(brands.prefix(5)) { brand in
                         NavigationLink {
-                            CategoryProductsView(
+                            ProductsView(
                                 brandID: brand.id,
                                 viewModel: DIContainer.shared.makeCategoryProductViewModel()
                             )
                         } label: {
-                            HomeBrandItem(barndLogo: brand.image ?? "")
-                        }
-                    }
-
-                    if brands.count > 5 {
-                        Button {
-                            onViewMoreClicked()
-                        } label: {
-                            VStack {
-                                Image(systemName: "ellipsis.circle")
-                                    .font(.system(size: 28))
-
-                                Text("See More")
-                                    .font(.caption)
-                                    .padding(.top, 4)
-                            }
-                            .frame(width: 100, height: 100)
-                            .background(Color.gray.opacity(0.1))
-                            .clipShape(Circle())
+                            CircularNetworkImag(imagURL: brand.image ?? "")
                         }
                     }
                 }.padding(.vertical, 12)

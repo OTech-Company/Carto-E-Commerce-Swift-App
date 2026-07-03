@@ -61,7 +61,7 @@ struct CategoryListView: View {
                             LazyVGrid(columns: columns, spacing: 16) {
                                 ForEach(displayCategories) { category in
                                     NavigationLink {
-                                        CategoryProductsView(
+                                        ProductsView(
                                             categoryId: String(category.id),
                                             viewModel: DIContainer.shared.makeCategoryProductViewModel()
                                         )

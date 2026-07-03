@@ -8,14 +8,14 @@
 
 import SwiftUI
 
-struct CategoryProductsView: View {
+struct ProductsView: View {
 
-    @StateObject private var viewModel: CategoryProductsViewModel
+    @StateObject private var viewModel: ProductsViewModel
 
     let categoryId: String?
     let brandID: Int?
 
-    init(categoryId: String? = nil, brandID: Int? = nil, viewModel: CategoryProductsViewModel) {
+    init(categoryId: String? = nil, brandID: Int? = nil, viewModel: ProductsViewModel) {
         self.categoryId = categoryId
         self.brandID = brandID
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -68,7 +68,7 @@ struct CategoryProductsView: View {
 
                         ForEach(viewModel.filteredProducts) { product in
 
-                            ProductCardView(product: product)
+                            ProductCard(product: product)
                         }
                     }
                     .padding()

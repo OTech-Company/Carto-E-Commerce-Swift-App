@@ -84,8 +84,8 @@ final class DIContainer {
         ProductsUseCase(repository: makeProductRepo())
     }
 
-    func makeCategoryProductViewModel() -> CategoryProductsViewModel {
-        CategoryProductsViewModel(
+    func makeCategoryProductViewModel() -> ProductsViewModel {
+        ProductsViewModel(
             getCategoryUseCase: GetCategoryUseCase(
                 repository: CategoryRepositoryImpl()
             ),

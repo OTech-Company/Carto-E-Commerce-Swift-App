@@ -18,28 +18,31 @@ struct CircularNetworkImag: View {
             case .empty:
                 Image("app_logo")
                     .resizable()
-                    .frame(width: 64, height: 64)
-                    .scaledToFill()
+                    .scaledToFit()
                     
 
             case .success(let image):
                 image
                     .resizable()
-                    .scaledToFill()
+                    .scaledToFit()
 
             case .failure:
                 Image("app_logo")
                     .resizable()
-                    .scaledToFill()
+                    .scaledToFit()
 
             @unknown default:
                 Image("app_logo")
                     .resizable()
-                    .scaledToFill()
+                    .scaledToFit()
             }
         }
         .frame(width: width, height: height)
         .clipShape(Circle())
+        .overlay(
+            Circle()
+                .stroke(Color("PrimaryColor"), lineWidth: 2)
+        )
     }
 }
 

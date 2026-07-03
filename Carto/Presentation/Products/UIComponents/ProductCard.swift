@@ -25,16 +25,18 @@ struct ProductCard: View {
             AsyncImage(url: URL(string: product.imageURL)) { image in
                 image
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
             } placeholder: {
                 ProgressView()
             }
             .frame(height: 115)
             .frame(maxWidth: .infinity)
+            .clipped()
+            .clipShape(RoundedRectangle(cornerRadius: 16))
             
             Text(product.title)
                 .font(.system(size: 14, weight: .bold))
-                .lineLimit(1)
+                .lineLimit(3)
             
             VStack(alignment: .leading, spacing: 2) {
                 
