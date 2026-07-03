@@ -1,0 +1,27 @@
+//
+//  Development.xcconfig
+//  Carto
+//
+//  Created by Osama Hosam on 03/07/2026.
+//
+
+// =============================================================================
+// Carto App Configuration Settings (Development)
+// =============================================================================
+
+// Groq AI Engine Setup
+GROQ_API_KEY = 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
+
+// Shopify Endpoint Constants
+SLASH = /
+SHOPIFY_SHOP_DOMAIN = https:${SLASH}${SLASH}mad46-ios-team6.myshopify.com
+SHOPIFY_API_VERSION = 2024-01
+
+// Private Access Tokens & Credentials
+SHOPIFY_ACCESS_TOKEN = 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
+SHOPIFY_STOREFRONT_TOKEN = 58e1f3756173f0a96d03353755d91186
+SHOPIFY_STORE_PASSWORD = sohldu
+
+// Shopify Integrated App Keys
+SHOPIFY_API_KEY = e09603df792c6c18ca12a848660db059
+SHOPIFY_API_SECRET_KEY = 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

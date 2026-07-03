@@ -1,8 +1,14 @@
 import Foundation
 
 enum NetworkConstants {
-    static let shopDomain = "https://mad46-ios-team6.myshopify.com"
-    static let apiVersion = "2024-01"
+    // Dynamically populated from environment configuration
+    static let shopDomain = AppEnvironment.shopDomain
+    static let apiVersion = AppEnvironment.apiVersion
+    static let shopifyAccessToken = AppEnvironment.shopifyAccessToken
+    static let storefrontAccessToken = AppEnvironment.storefrontAccessToken
+    static let storePassword = AppEnvironment.storePassword
+    static let apiKey = AppEnvironment.apiKey
+    static let apiSecretKey = AppEnvironment.apiSecretKey
 
     /// Shopify Admin REST base URL.
     static let restBaseURL = "\(shopDomain)/admin/api/\(apiVersion)"
@@ -13,16 +19,7 @@ enum NetworkConstants {
     /// Backwards-compatible alias for the existing network layer.
     static let baseURL = restBaseURL
 
-    /// Admin API token used for REST requests.
-    static let shopifyAccessToken = "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"
-
-    /// Storefront token used for GraphQL requests.
-    static let storefrontAccessToken = "58e1f3756173f0a96d03353755d91186"
-    static let storePassword = "sohldu"
-
-    static let apiKey = "e09603df792c6c18ca12a848660db059"
-    static let apiSecretKey = "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"
-
+    // Standard configurations (These are completely safe to keep here as open text code constants)
     static let timeoutInterval: TimeInterval = 30
     static let contentType = "application/json"
     static let adminAccessTokenHeader = "X-Shopify-Access-Token"
