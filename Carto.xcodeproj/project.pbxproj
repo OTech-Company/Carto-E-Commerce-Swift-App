@@ -11,6 +11,17 @@
 		6D76EAA02FF68ECB00C6938C /* ProductCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76EA9D2FF68ECB00C6938C /* ProductCard.swift */; };
 		6D76EAA12FF68ECB00C6938C /* ProductColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76EA9E2FF68ECB00C6938C /* ProductColorsView.swift */; };
 		6D76EAA32FF69E2B00C6938C /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76EAA22FF69E2B00C6938C /* String+HTML.swift */; };
+		6F6DD8102FF7A0090099872E /* AiRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD80F2FF79FFB0099872E /* AiRepositoryImpl.swift */; };
+		6F6DD8122FF7ACBE0099872E /* AI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD8112FF7ACB70099872E /* AI+Extensions.swift */; };
+		6F6DD8142FF7AD060099872E /* AiDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD8132FF7ACFA0099872E /* AiDTO.swift */; };
+		6F6DD8162FF7AD8C0099872E /* AiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD8152FF7AD880099872E /* AiRepository.swift */; };
+		6F6DD8182FF7AEB70099872E /* GroqClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD8172FF7AEB70099872E /* GroqClient.swift */; };
+		6F6DD81B2FF7AFC80099872E /* GeneratePersonalizedInsightsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD81A2FF7AFC80099872E /* GeneratePersonalizedInsightsUseCase.swift */; };
+		6F6DD81D2FF7AFDA0099872E /* GenerateOutfitSuggestionsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD81C2FF7AFDA0099872E /* GenerateOutfitSuggestionsUseCase.swift */; };
+		6F6DD81F2FF7AFF60099872E /* ExtractKeywordsFromImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD81E2FF7AFF60099872E /* ExtractKeywordsFromImageUseCase.swift */; };
+		6F6DD8212FF7B0050099872E /* CompareProductsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD8202FF7B0050099872E /* CompareProductsUseCase.swift */; };
+		6F6DD8232FF7B00D0099872E /* RunShoppingAssistantUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD8222FF7B00D0099872E /* RunShoppingAssistantUseCase.swift */; };
+		6F6DD8252FF7B1950099872E /* ExampleUsage.md in Resources */ = {isa = PBXBuildFile; fileRef = 6F6DD8242FF7B18A0099872E /* ExampleUsage.md */; };
 		6FB176392FEFE3140008DDDC /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175142FEFE3140008DDDC /* ServiceLocator.swift */; };
 		6FB176E22FEFE3140008DDDC /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175132FEFE3140008DDDC /* AppContainer.swift */; };
 		6FB176EC2FEFE3140008DDDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB1761A2FEFE3140008DDDC /* Assets.xcassets */; };
@@ -269,6 +280,17 @@
 		6D76EA9D2FF68ECB00C6938C /* ProductCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCard.swift; sourceTree = "<group>"; };
 		6D76EA9E2FF68ECB00C6938C /* ProductColorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductColorsView.swift; sourceTree = "<group>"; };
 		6D76EAA22FF69E2B00C6938C /* String+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTML.swift"; sourceTree = "<group>"; };
+		6F6DD80F2FF79FFB0099872E /* AiRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiRepositoryImpl.swift; sourceTree = "<group>"; };
+		6F6DD8112FF7ACB70099872E /* AI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AI+Extensions.swift"; sourceTree = "<group>"; };
+		6F6DD8132FF7ACFA0099872E /* AiDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiDTO.swift; sourceTree = "<group>"; };
+		6F6DD8152FF7AD880099872E /* AiRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiRepository.swift; sourceTree = "<group>"; };
+		6F6DD8172FF7AEB70099872E /* GroqClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroqClient.swift; sourceTree = "<group>"; };
+		6F6DD81A2FF7AFC80099872E /* GeneratePersonalizedInsightsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePersonalizedInsightsUseCase.swift; sourceTree = "<group>"; };
+		6F6DD81C2FF7AFDA0099872E /* GenerateOutfitSuggestionsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateOutfitSuggestionsUseCase.swift; sourceTree = "<group>"; };
+		6F6DD81E2FF7AFF60099872E /* ExtractKeywordsFromImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtractKeywordsFromImageUseCase.swift; sourceTree = "<group>"; };
+		6F6DD8202FF7B0050099872E /* CompareProductsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareProductsUseCase.swift; sourceTree = "<group>"; };
+		6F6DD8222FF7B00D0099872E /* RunShoppingAssistantUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunShoppingAssistantUseCase.swift; sourceTree = "<group>"; };
+		6F6DD8242FF7B18A0099872E /* ExampleUsage.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ExampleUsage.md; sourceTree = "<group>"; };
 		6FB175132FEFE3140008DDDC /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 		6FB175142FEFE3140008DDDC /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		6FB1761A2FEFE3140008DDDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -533,6 +555,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F6DD8192FF7AFB80099872E /* AI */ = {
+			isa = PBXGroup;
+			children = (
+				6F6DD8242FF7B18A0099872E /* ExampleUsage.md */,
+				6F6DD8222FF7B00D0099872E /* RunShoppingAssistantUseCase.swift */,
+				6F6DD8202FF7B0050099872E /* CompareProductsUseCase.swift */,
+				6F6DD81E2FF7AFF60099872E /* ExtractKeywordsFromImageUseCase.swift */,
+				6F6DD81C2FF7AFDA0099872E /* GenerateOutfitSuggestionsUseCase.swift */,
+				6F6DD81A2FF7AFC80099872E /* GeneratePersonalizedInsightsUseCase.swift */,
+			);
+			path = AI;
+			sourceTree = "<group>";
+		};
 		6FB175152FEFE3140008DDDC /* DI */ = {
 			isa = PBXGroup;
 			children = (
@@ -599,6 +634,7 @@
 		D9E5F62C2FF5DCAF0014DD91 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				6F6DD80F2FF79FFB0099872E /* AiRepositoryImpl.swift */,
 				D9E5F62D2FF5DCAF0014DD91 /* OrderRepositoryImpl.swift */,
 				D9E5F62E2FF5DCAF0014DD91 /* ProductsRepositoryImpl.swift */,
 				D9E5F62F2FF5DCAF0014DD91 /* CategoryRepositoryImpl.swift */,
@@ -610,6 +646,7 @@
 		D9E5F6312FF5DCAF0014DD91 /* DTOs */ = {
 			isa = PBXGroup;
 			children = (
+				6F6DD8132FF7ACFA0099872E /* AiDTO.swift */,
 				D9E5F6322FF5DCAF0014DD91 /* CategoryDTO.swift */,
 				D9E5F6332FF5DCAF0014DD91 /* ReviewDTO.swift */,
 				D9E5F6342FF5DCAF0014DD91 /* FirebaseUser.swift */,
@@ -664,6 +701,7 @@
 		D9E5F6492FF5DCAF0014DD91 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				6F6DD8172FF7AEB70099872E /* GroqClient.swift */,
 				D9E5F64A2FF5DCAF0014DD91 /* ShopifyRequest.swift */,
 				D9E5F64B2FF5DCAF0014DD91 /* ShopifyEndpoint.swift */,
 				D9E5F64C2FF5DCAF0014DD91 /* ShopifyResponse.swift */,
@@ -1594,6 +1632,7 @@
 		D9E5F75D2FF5DCAF0014DD91 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6F6DD8112FF7ACB70099872E /* AI+Extensions.swift */,
 				6D76EAA22FF69E2B00C6938C /* String+HTML.swift */,
 				D9E5F75E2FF5DCAF0014DD91 /* String+Extensions.swift */,
 				D9E5F75F2FF5DCAF0014DD91 /* View+Extensions.swift */,
@@ -1627,6 +1666,7 @@
 		D9E5F7672FF5DCB00014DD91 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				6F6DD8152FF7AD880099872E /* AiRepository.swift */,
 				D9E5F7682FF5DCB00014DD91 /* ProductsRepositoryProtocol.swift */,
 				D9E5F7692FF5DCB00014DD91 /* CategoryRepositoryProtocol.swift */,
 				D9E5F76A2FF5DCB00014DD91 /* OrderRepositoryProtocol.swift */,
@@ -1659,6 +1699,7 @@
 		D9E5F7752FF5DCB00014DD91 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				6F6DD8192FF7AFB80099872E /* AI */,
 				D9E5F7762FF5DCB00014DD91 /* ProductInfoUseCase.swift */,
 				D9E5F7772FF5DCB00014DD91 /* CategoryUseCase.swift */,
 				D9E5F7782FF5DCB00014DD91 /* GetOrderHistoryUseCase.swift */,
@@ -1824,6 +1865,7 @@
 			mainGroup = D9EB9A6E2FEFD04D005CE9A4;
 			packageReferences = (
 				D9E5F85F2FF5DE6E0014DD91 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				6F6DD80E2FF79D160099872E /* XCRemoteSwiftPackageReference "groq_swift" */,
 			);
 			productRefGroup = D9EB9A782FEFD04D005CE9A4 /* Products */;
 			projectDirPath = "";
@@ -1844,6 +1886,7 @@
 				D9E5F83D2FF5DCB00014DD91 /* GoogleService-Info.plist in Resources */,
 				6FB176EC2FEFE3140008DDDC /* Assets.xcassets in Resources */,
 				6FB176ED2FEFE3140008DDDC /* Localizable.strings in Resources */,
+				6F6DD8252FF7B1950099872E /* ExampleUsage.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1922,16 +1965,19 @@
 				D9E5F7A72FF5DCB00014DD91 /* AppUserEntity.swift in Sources */,
 				D9E5F7F42FF5DCB00014DD91 /* PaymentMethodsView.swift in Sources */,
 				D9E5F8012FF5DCB00014DD91 /* SearchResultCell.swift in Sources */,
+				6F6DD8212FF7B0050099872E /* CompareProductsUseCase.swift in Sources */,
 				D9E5F7E82FF5DCB00014DD91 /* BrandsCoordinator.swift in Sources */,
 				D9E5F8442FF5DCB00014DD91 /* NetworkConstants.swift in Sources */,
 				D9E5F8282FF5DCB00014DD91 /* ColorView.swift in Sources */,
 				D9E5F7F32FF5DCB00014DD91 /* PaymentConfirmationView.swift in Sources */,
 				D9E5F7A92FF5DCB00014DD91 /* NotificationSettingEntity.swift in Sources */,
+				6F6DD8162FF7AD8C0099872E /* AiRepository.swift in Sources */,
 				D9E5F7C02FF5DCB00014DD91 /* LanguageSettingsViewModel.swift in Sources */,
 				D9E5F7AE2FF5DCB00014DD91 /* ThemeEntity.swift in Sources */,
 				D9E5F83A2FF5DCB00014DD91 /* OnboardingLayoutBottom.swift in Sources */,
 				D9E5F7EF2FF5DCB00014DD91 /* PaymentCoordinator.swift in Sources */,
 				D9E5F7862FF5DCB00014DD91 /* UserFirestoreDTO.swift in Sources */,
+				6F6DD81F2FF7AFF60099872E /* ExtractKeywordsFromImageUseCase.swift in Sources */,
 				D9E5F7B42FF5DCB00014DD91 /* ADEntity.swift in Sources */,
 				D9E5F8502FF5DCB00014DD91 /* CategoryRepositoryProtocol.swift in Sources */,
 				D9E5F7C72FF5DCB00014DD91 /* SettingsView.swift in Sources */,
@@ -1940,6 +1986,7 @@
 				D9E5F79D2FF5DCB00014DD91 /* GuestSessionStoreProtocol.swift in Sources */,
 				D9E5F8402FF5DCB00014DD91 /* AppCoordinator.swift in Sources */,
 				D9E5F8422FF5DCB00014DD91 /* UIConstants.swift in Sources */,
+				6F6DD81B2FF7AFC80099872E /* GeneratePersonalizedInsightsUseCase.swift in Sources */,
 				D9E5F7DD2FF5DCB00014DD91 /* AuthCoordinator.swift in Sources */,
 				D9E5F8482FF5DCB00014DD91 /* String+Extensions.swift in Sources */,
 				D9E5F84D2FF5DCB00014DD91 /* AuthSession.swift in Sources */,
@@ -1963,6 +2010,7 @@
 				D9E5F7992FF5DCB00014DD91 /* ShopifyAPIClient.swift in Sources */,
 				D9E5F7C32FF5DCB00014DD91 /* SettingsCoordinator.swift in Sources */,
 				D9E5F7EA2FF5DCB00014DD91 /* BrandsCell.swift in Sources */,
+				6F6DD8102FF7A0090099872E /* AiRepositoryImpl.swift in Sources */,
 				D9E5F81F2FF5DCB00014DD91 /* OrdersCoordinator.swift in Sources */,
 				D9E5F7C22FF5DCB00014DD91 /* NotificationsSettingsViewModel.swift in Sources */,
 				D9E5F8312FF5DCB00014DD91 /* CategoryCardView.swift in Sources */,
@@ -1979,6 +2027,7 @@
 				D9E5F7D12FF5DCB00014DD91 /* HomeBannerViewModel.swift in Sources */,
 				D9E5F7D52FF5DCB00014DD91 /* HomeBrandView.swift in Sources */,
 				D9E5F7AA2FF5DCB00014DD91 /* CategoryEntity.swift in Sources */,
+				6F6DD8232FF7B00D0099872E /* RunShoppingAssistantUseCase.swift in Sources */,
 				D9E5F8522FF5DCB00014DD91 /* SubCategoryRepositoryProtocol.swift in Sources */,
 				D9E5F7CF2FF5DCB00014DD91 /* HomeCoordinator.swift in Sources */,
 				D9E5F8032FF5DCB00014DD91 /* SearchFiltersView.swift in Sources */,
@@ -2022,6 +2071,7 @@
 				D9E5F7E02FF5DCB00014DD91 /* VerificationView.swift in Sources */,
 				D9E5F7972FF5DCB00014DD91 /* ShopifyEndpoint.swift in Sources */,
 				D9E5F8362FF5DCB00014DD91 /* OnboardingHeadlineBlock.swift in Sources */,
+				6F6DD8122FF7ACBE0099872E /* AI+Extensions.swift in Sources */,
 				D9E5F8212FF5DCB00014DD91 /* OrderCell.swift in Sources */,
 				D9E5F8142FF5DCB00014DD91 /* ShoppingCartCoordinator.swift in Sources */,
 				D9E5F7AB2FF5DCB00014DD91 /* AddressEntity.swift in Sources */,
@@ -2034,6 +2084,7 @@
 				D9E5F8412FF5DCB00014DD91 /* Route.swift in Sources */,
 				D9E5F78E2FF5DCB00014DD91 /* OrderDTO.swift in Sources */,
 				D9E5F82A2FF5DCB00014DD91 /* HeaderView.swift in Sources */,
+				6F6DD8182FF7AEB70099872E /* GroqClient.swift in Sources */,
 				D9E5F79A2FF5DCB00014DD91 /* NetworkUsageSample.swift in Sources */,
 				D9E5F7CD2FF5DCB00014DD91 /* ToggleSettingView.swift in Sources */,
 				D9E5F7C12FF5DCB00014DD91 /* SettingsViewModel.swift in Sources */,
@@ -2062,12 +2113,14 @@
 				D9E5F8232FF5DCB00014DD91 /* OrderDetailView.swift in Sources */,
 				D9E5F79B2FF5DCB00014DD91 /* NetworkError.swift in Sources */,
 				D9E5F82D2FF5DCB00014DD91 /* CategoryProductsViewModel.swift in Sources */,
+				6F6DD81D2FF7AFDA0099872E /* GenerateOutfitSuggestionsUseCase.swift in Sources */,
 				D9E5F7CA2FF5DCB00014DD91 /* LanguageSettingsView.swift in Sources */,
 				D9E5F7B32FF5DCB00014DD91 /* BannerEntity.swift in Sources */,
 				D9E5F84E2FF5DCB00014DD91 /* MainView.swift in Sources */,
 				D9E5F7BC2FF5DCB00014DD91 /* AdsPlacementView.swift in Sources */,
 				D9E5F7842FF5DCB00014DD91 /* FirebaseUser.swift in Sources */,
 				D9E5F8292FF5DCB00014DD91 /* SizeView.swift in Sources */,
+				6F6DD8142FF7AD060099872E /* AiDTO.swift in Sources */,
 				D9E5F7BD2FF5DCB00014DD91 /* AdsPromotionalBannerView.swift in Sources */,
 				D9E5F80A2FF5DCB00014DD91 /* CouponCell.swift in Sources */,
 				D9E5F7AD2FF5DCB00014DD91 /* CartItemEntity.swift in Sources */,
@@ -2416,6 +2469,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6F6DD80E2FF79D160099872E /* XCRemoteSwiftPackageReference "groq_swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/engali94/groq_swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
 		D9E5F85F2FF5DE6E0014DD91 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
