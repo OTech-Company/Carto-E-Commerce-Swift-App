@@ -20,11 +20,6 @@ final class ProductsInfoViewModel: ObservableObject {
     init(product: Product) {
         self.product = product
         self.selectedSize = product.sizes.first ?? ""
-
-        print("Price:", product.variants.first?.price ?? "nil")
-        print("Compare At Price:", product.variants.first?.compareAtPrice ?? "nil")
-        print("Sizes:", product.sizes)
-        print("Colors:", product.colors)
     }
 
     func incrementQuantity() {
