@@ -15,11 +15,24 @@ final class ProductsInfoViewModel: ObservableObject {
     @Published var quantity = 0
     @Published var selectedSize: String
     @Published var selectedColorIndex = 0
-    @Published private(set) var isFavorite = false
+    @Published private(set) var isFavorite: Bool
 
-    init(product: Product) {
+    private let isFavoriteUseCase: IsFavoriteUseCase
+    private let addFavoriteUseCase: AddFavoriteUseCase
+    private let removeFavoriteUseCase: RemoveFavoriteUseCase
+
+    init(
+        product: Product,
+        isFavoriteUseCase: IsFavoriteUseCase,
+        addFavoriteUseCase: AddFavoriteUseCase,
+        removeFavoriteUseCase: RemoveFavoriteUseCase
+    ) {
         self.product = product
         self.selectedSize = product.sizes.first ?? ""
+        self.isFavoriteUseCase = isFavoriteUseCase
+        self.addFavoriteUseCase = addFavoriteUseCase
+        self.removeFavoriteUseCase = removeFavoriteUseCase
+        self.isFavorite = isFavoriteUseCase.execute(productId: product.id)
     }
 
     func incrementQuantity() {
@@ -32,10 +45,14 @@ final class ProductsInfoViewModel: ObservableObject {
     }
 
     func toggleFavorite() {
+        if isFavorite {
+            removeFavoriteUseCase.execute(productId: product.id)
+        } else {
+            addFavoriteUseCase.execute(product: product)
+        }
         isFavorite.toggle()
     }
 
     func addToCart() {
-        
     }
 }
