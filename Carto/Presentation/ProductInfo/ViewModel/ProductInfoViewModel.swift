@@ -2,35 +2,45 @@
 //  ProductsInfoViewModel.swift
 //  Carto
 //
-//  Created by Osama Abdellatif on 30/06/2026.
+//  Created by Manona on 29/06/2026.
 //
 
 import Foundation
-import Combine
 
 @MainActor
 final class ProductsInfoViewModel: ObservableObject {
 
-    @Published private(set) var product: Product?
-    @Published private(set) var isLoading = false
-    @Published var errorMessage: String?
+    let product: Product
 
-    private let useCase: ProductsUseCase
+    @Published var quantity = 0
+    @Published var selectedSize: String
+    @Published var selectedColorIndex = 0
+    @Published private(set) var isFavorite = false
 
-    init(useCase: ProductsUseCase) {
-        self.useCase = useCase
+    init(product: Product) {
+        self.product = product
+        self.selectedSize = product.sizes.first ?? ""
+
+        print("Price:", product.variants.first?.price ?? "nil")
+        print("Compare At Price:", product.variants.first?.compareAtPrice ?? "nil")
+        print("Sizes:", product.sizes)
+        print("Colors:", product.colors)
     }
 
-    func fetchProduct(productId: Int) async {
-        isLoading = true
-        errorMessage = nil 
+    func incrementQuantity() {
+        quantity += 1
+    }
 
-        do {
-            product = try await useCase.execute(productId: productId)
-            isLoading = false
-        } catch {
-            isLoading = false
-            errorMessage = error.localizedDescription
-        }
+    func decrementQuantity() {
+        guard quantity > 0 else { return }
+        quantity -= 1
+    }
+
+    func toggleFavorite() {
+        isFavorite.toggle()
+    }
+
+    func addToCart() {
+        
     }
 }

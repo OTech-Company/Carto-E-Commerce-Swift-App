@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct HeaderView: View {
+
+    @Environment(\.dismiss) private var dismiss
+
+    let title: String
+
     var body: some View {
-        HStack {
-            Button {} label: {
+        HStack(spacing: 12) {
+
+            Button {
+                dismiss()
+            } label: {
                 Image(systemName: "arrow.left")
                     .foregroundColor(.black)
                     .frame(width: 44, height: 44)
@@ -21,11 +29,17 @@ struct HeaderView: View {
                     }
             }
 
-            Spacer()
-            Text("Air Max 200 SE").bold()
-            Spacer()
+            Text(title)
+                .font(.system(size: 20, weight: .bold))
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
+                .minimumScaleFactor(0.45)
+                .allowsTightening(true)
+                .frame(maxWidth: .infinity)
 
-            Button {} label: {
+            Button {
+
+            } label: {
                 Image(systemName: "cart")
                     .foregroundColor(.black)
                     .frame(width: 44, height: 44)

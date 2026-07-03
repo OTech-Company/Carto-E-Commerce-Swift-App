@@ -8,55 +8,123 @@
 import SwiftUI
 
 struct ProductsInfoView: View {
-    @State private var quantity = 0
-    @State private var selectedSize = "UK 7"
-    @State private var selectedColorIndex = 0
+
+    @StateObject private var viewModel: ProductsInfoViewModel
+
+    init(product: Product) {
+        _viewModel = StateObject(wrappedValue: ProductsInfoViewModel(product: product))
+    }
 
     var body: some View {
-        VStack(spacing: 0) {
-
-            HeaderView()
+        VStack {
+            HeaderView(title: viewModel.product.title.capitalizedFirstLetterOnly())
                 .padding(.horizontal)
+                .padding(.top, 60)
 
-            HStack(alignment: .top) {
-                SizeView(selectedSize: $selectedSize)
+            VStack {
+                HStack(alignment: .top) {
 
-                ZStack {
-                    Image("NIKE")
-                        .resizable()
-                        .scaledToFit()
+                    if viewModel.product.sizes.isEmpty {
+                        VStack(alignment: .leading, spacing: 12) {
 
-                    Image("shoes")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 220)
-                }
+                            Text("Availability")
+                                .bold()
 
-                VStack(spacing: 24) {
-                    Spacer().frame(height: 20)
+                            Text("✓ In Stock")
+                                .font(.caption)
+                                .foregroundColor(.red)
+                                .frame(width: 80, height: 40)
+                                .background(Color.white)
+                                .overlay {
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(Color.black.opacity(0.25), lineWidth: 1)
+                                }
 
-                    Button {} label: {
-                        Image(systemName: "heart")
-                            .foregroundColor(.black)
-                            .frame(width: 44, height: 44)
-                            .background(Color.white)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                            }
+                            Spacer()
+                        }
+                    } else {
+                        SizeView(
+                            sizes: viewModel.product.sizes,
+                            selectedSize: $viewModel.selectedSize
+                        )
                     }
 
-                    ColorView(selectedColorIndex: $selectedColorIndex)
+                    Spacer()
+
+                    ZStack {
+                        Image("NIKE")
+                            .resizable()
+                            .scaledToFit()
+
+                        AsyncImage(url: URL(string: viewModel.product.imageURL)) { image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 190)
+                        } placeholder: {
+                            ProgressView()
+                                .frame(width: 190, height: 190)
+                        }
+                    }
+                    .frame(width: 190, height: 190)
+
+                    Spacer()
+
+                    VStack {
+                        Button {
+                            viewModel.toggleFavorite()
+                        } label: {
+                            Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart")
+                                .foregroundColor(viewModel.isFavorite ? .red : .black)
+                                .frame(width: 44, height: 44)
+                                .background(Color.white)
+                                .overlay {
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(Color.black.opacity(0.5), lineWidth: 0.5)
+                                }
+                        }
+
+                        Spacer().frame(height: 24)
+
+                        if !viewModel.product.colors.isEmpty {
+                            ColorView(
+                                colorNames: viewModel.product.colors,
+                                selectedColorIndex: $viewModel.selectedColorIndex
+                            )
+                        }
+
+                        Spacer()
+                    }
+                    .frame(width: 60, height: 240, alignment: .top)
+                }
+                .padding(.horizontal)
+
+                if !viewModel.product.description.isEmpty {
+                    ExpandableText(text: viewModel.product.description)
+                        .padding(.horizontal)
+                        .padding(.top, 20)
                 }
             }
-            .padding(.horizontal)
-            .padding(.top, 8)
 
-            Spacer(minLength: 0)
+            Spacer(minLength: 5)
 
-            SwipeToAddView(quantity: $quantity)
+            SwipeToAddView(
+                price: viewModel.product.price,
+                compareAtPrice: viewModel.product.compareAtPrice,
+                discountPercentage: viewModel.product.discountPercentage,
+                quantity: $viewModel.quantity
+            )
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(edges: .bottom)
+        .toolbar(.hidden, for: .tabBar)
+        .navigationBarBackButtonHidden(true)
+        .onChange(of: viewModel.quantity) { newValue in
+            if newValue > 0 {
+                viewModel.addToCart()
+            }
+        }
+        .ignoresSafeArea(edges: .top)
     }
+
 }

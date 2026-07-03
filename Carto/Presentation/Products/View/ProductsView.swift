@@ -67,8 +67,12 @@ struct ProductsView: View {
                               spacing: 16) {
 
                         ForEach(viewModel.filteredProducts) { product in
-
-                            ProductCard(product: product)
+                            NavigationLink {
+                                ProductsInfoView(product: product)
+                            } label: {
+                                ProductCard(product: product)
+                            }
+                            .buttonStyle(.plain)
                         }
                     }
                     .padding()

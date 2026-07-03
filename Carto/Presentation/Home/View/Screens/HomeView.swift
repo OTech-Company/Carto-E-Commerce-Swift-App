@@ -102,7 +102,12 @@ struct HomeView: View {
 
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(viewModel.productVM.products, id: \.id) { product in
-                            ProductCard(product: product)
+                            NavigationLink {
+                                ProductsInfoView(product: product)
+                            } label: {
+                                ProductCard(product: product)
+                            }
+                            .buttonStyle(.plain)
                         }
                     }
                 }.padding(.horizontal, 16)
