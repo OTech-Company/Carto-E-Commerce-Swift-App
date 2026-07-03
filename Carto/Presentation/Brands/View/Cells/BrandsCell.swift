@@ -9,6 +9,7 @@ import SwiftUI
 
 struct BrandsCell: View {
     let brand: BrandEntity
+    let onTap: () -> Void
 
     var body: some View {
         VStack(spacing: 12) {
@@ -23,6 +24,9 @@ struct BrandsCell: View {
         .background(Color("CardBGColor"))
         .cornerRadius(20)
         .shadow(radius: 5)
+        .onTapGesture {
+            onTap()
+        }
     }
 }
 //

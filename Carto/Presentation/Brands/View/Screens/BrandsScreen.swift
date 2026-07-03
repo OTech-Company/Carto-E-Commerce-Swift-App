@@ -9,6 +9,9 @@ import SwiftUI
 
 struct BrandsScreen: View {
     @ObservedObject var viewModel: HomeBrandsViewModel
+    @State private var navigateToProducts = false
+    
+    @StateObject private var productsViewModel = DIContainer.shared.makeCategoryProductViewModel()
     
     let columns = [
         GridItem(.flexible(), spacing: 20),
@@ -16,12 +19,22 @@ struct BrandsScreen: View {
     ]
 
     var body: some View {
-        ScrollView{
-            LazyVGrid(columns: columns, spacing: 20) {
-                ForEach(viewModel.brands) { brand in
-                    BrandsCell(brand: brand)
-                }
-            }.padding(16)
+        NavigationStack{
+            ScrollView{
+                LazyVGrid(columns: columns, spacing: 20) {
+                    ForEach(viewModel.brands) { brand in
+                        BrandsCell(brand: brand){
+                            navigateToProducts = true
+                        }.navigationDestination(isPresented: $navigateToProducts) {
+                            CategoryProductsView(
+                                categoryId: "",
+                                brandID: brand.id,
+                                viewModel: productsViewModel
+                                )
+                        }
+                    }
+                }.padding(16)
+            }
         }
     }
 }

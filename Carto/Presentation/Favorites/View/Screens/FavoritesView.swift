@@ -14,7 +14,7 @@ struct FavoritesView: View {
         GridItem(.flexible(), spacing: 12)
     ]
 
-    let products = ProductInfo.mockProducts
+    let products = Product.mockProducts
 
     var body: some View {
         VStack(spacing: 0) {

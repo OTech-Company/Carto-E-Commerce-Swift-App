@@ -7,6 +7,7 @@
 
 protocol ProductsRepository{
     
-    func getProductInfo(productId: Int) async throws -> ProductInfo
-
+    func getProductInfo(productId: Int) async throws -> Product
+    
+    func getProductsByBrand(brandId: Int) async throws -> [Product]
 }

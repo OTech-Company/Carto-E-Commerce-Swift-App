@@ -16,13 +16,15 @@ final class DIContainer {
     let validator: AuthValidatorProtocol
     let appViewModel: AppViewModel
     let brandRemoteDataSource: BrandRemoteDataSourceProtocol
+    let productRemoteDataSource: ProductsRemoteDataSource
 
     private init() {
         authRepository = AuthenticationRepositoryImpl()
         authSession = AuthSession()
         validator = AuthValidatorImpl()
-        appViewModel = AppViewModel(authSession: authSession)
         brandRemoteDataSource = BrandRemoteDataSource()
+        productRemoteDataSource = ProductsRemoteDataSourceImpl()
+        appViewModel = AppViewModel(authSession: authSession)
     }
 
     func makeLoginViewModel(router: AuthRouter) -> AuthLoginViewModel {
@@ -69,6 +71,25 @@ final class DIContainer {
         }
     
     func makeHomeViewModel() -> HomeViewModel {
-            HomeViewModel(brandVM: HomeBrandsViewModel(useCase: makeBrandsUseCase()))
-        }
+        HomeViewModel(
+            brandVM: HomeBrandsViewModel(useCase: makeBrandsUseCase())
+        )
+    }
+
+    func makeProductRepo() -> ProductsRepository {
+        ProductsRepositoryImpl(remoteDataSource: productRemoteDataSource)
+    }
+
+    func makeProductsUseCase() -> ProductUseCaseProtocol {
+        ProductsUseCase(repository: makeProductRepo())
+    }
+
+    func makeCategoryProductViewModel() -> CategoryProductsViewModel {
+        CategoryProductsViewModel(
+            getCategoryUseCase: GetCategoryUseCase(
+                repository: CategoryRepositoryImpl()
+            ),
+            getProductByBrand: makeProductsUseCase()
+        )
+    }
 }

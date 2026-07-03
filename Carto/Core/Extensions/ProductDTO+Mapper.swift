@@ -7,43 +7,95 @@
 import Foundation
 
 extension ProductDTO {
-    func toDomain() -> ProductInfo {
-        ProductInfo(
+    func toDomain() -> Product {
+        Product(
             id: id ?? 0,
             title: title ?? "",
-            price: Double(variants?.first?.price ?? "0") ?? 0,
-            compareAtPrice: variants?.first?.compareAtPrice.flatMap { Double($0) },
             description: (bodyHtml ?? "").strippingHTMLTags(),
-            imageURL: images?.first?.src ?? "",
-            sizes: options?
-                .first(where: { $0.name.lowercased() == "size" })?
-                .values ?? [],
-            colors: options?
-                .first(where: { $0.name.lowercased() == "color" })?
-                .values ?? []
+            vendor: vendor ?? "",
+            productType: productType ?? "",
+            handle: handle ?? "",
+            status: status ?? "",
+            tags: (tags ?? "")
+                .split(separator: ",")
+                .map { $0.trimmingCharacters(in: .whitespaces) }
+                .filter { !$0.isEmpty },
+            variants: variants?.map {
+                ProductVariant(
+                    id: $0.id ?? 0,
+                    productId: $0.productId ?? 0,
+                    title: $0.title ?? "",
+                    price: $0.price ?? "0",
+                    sku: $0.sku ?? "",
+                    compareAtPrice: $0.compareAtPrice,
+                    inventoryQuantity: $0.inventoryQuantity ?? 0
+                )
+            } ?? [],
+            images: images?.map {
+                ProductImage(
+                    id: $0.id ?? 0,
+                    productId: $0.productId ?? 0,
+                    alt: $0.alt ?? "",
+                    src: $0.src ?? ""
+                )
+            } ?? [],
+            options: options?.map {
+                ProductOption(
+                    id: $0.id ?? 0,
+                    productId: $0.productId ?? 0,
+                    name: $0.name ?? "",
+                    values: $0.values ?? []
+                )
+            } ?? []
         )
     }
 }
-        
+
 extension Product {
     init(from dto: ProductDTO) {
         self.id = dto.id ?? 0
         self.title = dto.title ?? "Untitled Product"
         self.description = dto.bodyHtml ?? ""
-        self.vendor = dto.vendor ?? "unknown brand"
+        self.vendor = dto.vendor ?? ""
         self.productType = dto.productType ?? ""
         self.handle = dto.handle ?? ""
-        self.status = dto.status ?? "unknown"
-        
-        // Parse comma-separated tags layout safely into an array
-        self.tags = dto.tags?
-            .components(separatedBy: ",")
-            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-            .filter { !$0.isEmpty } ?? []
-            
-        self.variants = dto.variants?.map { ProductVariant(from: $0) } ?? []
-        self.images = dto.images?.map { ProductImage(from: $0) } ?? []
-        self.options = dto.options?.map { ProductOption(from: $0) } ?? []
+        self.status = dto.status ?? ""
+        self.tags = (dto.tags ?? "")
+            .split(separator: ",")
+            .map { $0.trimmingCharacters(in: .whitespaces) }
+            .filter { !$0.isEmpty }
+        self.variants =
+            dto.variants?.map {
+                ProductVariant(
+                    id: $0.id,
+                    productId: $0.productId,
+                    title: $0.title,
+                    price: $0.price ?? "0",
+                    sku: $0.sku ?? "",
+                    compareAtPrice: $0.compareAtPrice,
+                    inventoryQuantity: $0.inventoryQuantity ?? 0
+                )
+            } ?? []
+
+        self.images =
+            dto.images?.map {
+                ProductImage(
+                    id: $0.id,
+                    productId: $0.productId,
+                    alt: $0.alt ?? "",
+                    src: $0.src ?? ""
+                )
+            } ?? []
+
+        self.options =
+            dto.options?.map {
+                ProductOption(
+                    id: $0.id,
+                    productId: $0.productId,
+                    name: $0.name,
+                    values: $0.values ?? []
+                )
+            } ?? []
     }
 }
 

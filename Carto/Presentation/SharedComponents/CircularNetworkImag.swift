@@ -18,7 +18,9 @@ struct CircularNetworkImag: View {
             case .empty:
                 Image("app_logo")
                     .resizable()
+                    .frame(width: 64, height: 64)
                     .scaledToFill()
+                    
 
             case .success(let image):
                 image

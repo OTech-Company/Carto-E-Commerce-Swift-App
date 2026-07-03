@@ -12,12 +12,12 @@ struct CategoryProductsView: View {
 
     @StateObject private var viewModel: CategoryProductsViewModel
 
-    let categoryId: String
+    let categoryId: String?
+    let brandID: Int?
 
-    init(categoryId: String,
-         viewModel: CategoryProductsViewModel) {
-
+    init(categoryId: String, brandID: Int, viewModel: CategoryProductsViewModel) {
         self.categoryId = categoryId
+        self.brandID = brandID
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
@@ -83,8 +83,11 @@ struct CategoryProductsView: View {
                 FilterSheetView(viewModel: viewModel)
             }
             .task {
-
-                await viewModel.loadProducts(categoryId: categoryId)
+                if brandID != nil {
+                    await viewModel.loadProducts(brandId: brandID!)
+                } else if categoryId != nil {
+                    await viewModel.loadProducts(categoryId: categoryId!)
+                }
             }
         }
     }

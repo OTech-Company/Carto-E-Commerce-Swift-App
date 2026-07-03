@@ -21,6 +21,8 @@ struct CategoryListView: View {
     @State private var searchText = ""
     @FocusState private var isSearchFieldFocused: Bool
     
+    @StateObject private var productsViewModel = DIContainer.shared.makeCategoryProductViewModel()
+    
     private let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
@@ -63,12 +65,9 @@ struct CategoryListView: View {
                                     NavigationLink {
                                         CategoryProductsView(
                                             categoryId: String(category.id),
-                                            viewModel: CategoryProductsViewModel(
-                                                getCategoryUseCase: GetCategoryUseCase(
-                                                    repository: CategoryRepositoryImpl()
-                                                )
+                                            brandID: 0,
+                                            viewModel: productsViewModel,
                                             )
-                                        )
                                     } label: {
                                         CategoryCardView(category: category)
                                     }
