@@ -65,7 +65,7 @@ struct ProductCard: View {
             AddToCartCounter()
         }
         .padding(12)
-        .background(Color.white)
+        .background(Color(.systemGray6))
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(color: .black.opacity(0.05), radius: 6, x: 0, y: 3)
     }

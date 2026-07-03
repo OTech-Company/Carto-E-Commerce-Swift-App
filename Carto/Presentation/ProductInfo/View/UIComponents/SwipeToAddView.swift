@@ -28,6 +28,7 @@ struct SwipeToAddView: View {
                         Text(String(format: "$%.2f", price))
                             .font(.title2)
                             .bold()
+                            .foregroundColor(.blue)
 
                         if let compareAtPrice = compareAtPrice, compareAtPrice > price {
                             Text(String(format: "$%.2f", compareAtPrice))

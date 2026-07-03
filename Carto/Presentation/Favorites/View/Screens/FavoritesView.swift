@@ -32,6 +32,5 @@ struct FavoritesView: View {
                 .padding()
             }
         }
-        .background(Color(.systemGray6))
     }
 }

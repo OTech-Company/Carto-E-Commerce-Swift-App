@@ -10,15 +10,21 @@ import Foundation
 @MainActor
 final class ProductsInfoViewModel: ObservableObject {
 
-    let product: ProductInfo
-    @Published var quantity: Int = 0
-    @Published var selectedSize: String = ""
-    @Published var selectedColorIndex: Int = 0
-    @Published private(set) var isFavorite: Bool = false
+    let product: Product
 
-    init(product: ProductInfo) {
+    @Published var quantity = 0
+    @Published var selectedSize: String
+    @Published var selectedColorIndex = 0
+    @Published private(set) var isFavorite = false
+
+    init(product: Product) {
         self.product = product
         self.selectedSize = product.sizes.first ?? ""
+
+        print("Price:", product.variants.first?.price ?? "nil")
+        print("Compare At Price:", product.variants.first?.compareAtPrice ?? "nil")
+        print("Sizes:", product.sizes)
+        print("Colors:", product.colors)
     }
 
     func incrementQuantity() {
@@ -26,9 +32,8 @@ final class ProductsInfoViewModel: ObservableObject {
     }
 
     func decrementQuantity() {
-        if quantity > 0 {
-            quantity -= 1
-        }
+        guard quantity > 0 else { return }
+        quantity -= 1
     }
 
     func toggleFavorite() {
@@ -36,5 +41,6 @@ final class ProductsInfoViewModel: ObservableObject {
     }
 
     func addToCart() {
+        
     }
 }
