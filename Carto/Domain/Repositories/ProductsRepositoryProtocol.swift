@@ -10,4 +10,7 @@ protocol ProductsRepository{
     func getProductInfo(productId: Int) async throws -> Product
     
     func getProductsByBrand(brandId: Int) async throws -> [Product]
+    
+    func getAllProducts() async throws -> [Product]
+    
 }

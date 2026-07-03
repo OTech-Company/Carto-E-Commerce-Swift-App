@@ -27,4 +27,9 @@ class ProductsRepositoryImpl: ProductsRepository {
         let productsDto = try await remoteDataSource.getProductsByBrand(brandId: brandId)
         return productsDto.map { Product(from: $0)}
     }
+    
+    func getAllProducts() async throws -> [Product] {
+        let productsDto = try await remoteDataSource.getAllProducts()
+        return productsDto.map { Product(from: $0) }
+    }
 }

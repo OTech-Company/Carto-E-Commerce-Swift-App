@@ -10,9 +10,26 @@ import Foundation
 protocol ProductsRemoteDataSource {
     func getProductInfo(productId: Int) async throws -> ProductDTO
     func getProductsByBrand(brandId: Int) async throws -> [ProductDTO]
+    func getAllProducts() async throws -> [ProductDTO]
 }
 
 class ProductsRemoteDataSourceImpl: ProductsRemoteDataSource {
+    
+    func getAllProducts() async throws -> [ProductDTO] {
+        do {
+            let response: ProductListResponse = try await ShopifyAPIClient.shared.requestREST(
+                endpoint: .products
+            )
+
+            let products = response.products ?? []
+            print("Fetched products:", products.count)
+            return products
+        } catch {
+            print("REST error:", error)
+            throw error
+        }            
+    }
+    
     func getProductInfo(productId: Int) async throws -> ProductDTO {
         return ProductDTO(
             id: productId, // Expects Int to resolve type mismatches

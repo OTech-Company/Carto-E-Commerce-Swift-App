@@ -10,13 +10,26 @@ import Foundation
 
 final class HomeViewModel: ObservableObject {
     let brandVM: HomeBrandsViewModel
-
-    init(brandVM: HomeBrandsViewModel) {
+    let productVM: HomeProductsViewModel
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    init(brandVM: HomeBrandsViewModel, productVM: HomeProductsViewModel) {
         self.brandVM = brandVM
+        self.productVM = productVM
+        
+        brandVM.objectWillChange
+            .sink { [weak self] _ in self?.objectWillChange.send() }
+            .store(in: &cancellables)
+        
+        productVM.objectWillChange
+            .sink { [weak self] _ in self?.objectWillChange.send() }
+            .store(in: &cancellables)
     }
-
+    
     func loadAllData() async {
         async let brands: () = brandVM.loadBrands()
-        _ = await brands
+        async let products: () = productVM.loadProducts()
+        _ = await [brands, products]
     }
 }

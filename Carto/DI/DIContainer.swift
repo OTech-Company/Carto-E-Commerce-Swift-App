@@ -70,9 +70,14 @@ final class DIContainer {
             BrandsUseCase(repository: makeBrandsRepo())
         }
     
+    func makeHomeProductsViewModel() -> HomeProductsViewModel {
+        HomeProductsViewModel(useCase: makeProductsUseCase())
+    }
+    
     func makeHomeViewModel() -> HomeViewModel {
         HomeViewModel(
-            brandVM: HomeBrandsViewModel(useCase: makeBrandsUseCase())
+            brandVM: HomeBrandsViewModel(useCase: makeBrandsUseCase()),
+            productVM: makeHomeProductsViewModel()
         )
     }
 

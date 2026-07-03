@@ -7,15 +7,6 @@
 
 import SwiftUI
 
-struct ProductEntity2: Identifiable {
-    let id = UUID()
-    let name: String
-    let description: String
-    let price: Double
-    let imageName: String
-    let rate: Double
-}
-
 struct HomeView: View {
 
     //=============================Dummy data ===================================
@@ -34,37 +25,6 @@ struct HomeView: View {
             title: "20% Discount",
             description: "on your first purchase",
             imageName: "Green 1"
-        ),
-    ]
-
-    let products: [ProductEntity2] = [
-        ProductEntity2(
-            name: "Product 1",
-            description: "Description 1",
-            price: 10.0,
-            imageName: "Green 1",
-            rate: 3.4
-        ),
-        ProductEntity2(
-            name: "Product 2",
-            description: "Description 2",
-            price: 10.0,
-            imageName: "Green 1",
-            rate: 3.4
-        ),
-        ProductEntity2(
-            name: "Product 3",
-            description: "Description 3",
-            price: 10.0,
-            imageName: "Green 1",
-            rate: 3.4
-        ),
-        ProductEntity2(
-            name: "Product 4",
-            description: "Description 4",
-            price: 10.0,
-            imageName: "Green 1",
-            rate: 3.4
         ),
     ]
 
@@ -136,17 +96,13 @@ struct HomeView: View {
 
                     Spacer(minLength: 20)
 
-                    Text("Top Rated")
+                    Text("Products")
                         .font(.system(size: 28, weight: .bold))
                         .foregroundColor(Color("PrimaryColor"))
 
                     LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(products, id: \.id) { product in
-                            HomeProductCardCell(
-                                product: product,
-                                onTab: {},
-                                onAddToFav: {}
-                            )
+                        ForEach(viewModel.productVM.products, id: \.id) { product in
+                            ProductCard(product: product)
                         }
                     }
                 }.padding(.horizontal, 16)
