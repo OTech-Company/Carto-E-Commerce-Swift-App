@@ -1,5 +1,9 @@
 import Foundation
 
+struct CategoriesResponse: Decodable {
+    let customCollections: [CategoryDTO]?
+}
+
 struct CategoryDTO: Codable {
     let id: Int
     let title: String

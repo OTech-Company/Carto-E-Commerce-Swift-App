@@ -26,6 +26,8 @@ struct CategoryListView: View {
         GridItem(.flexible(), spacing: 16)
     ]
     
+
+    
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
@@ -58,7 +60,15 @@ struct CategoryListView: View {
                         ScrollView {
                             LazyVGrid(columns: columns, spacing: 16) {
                                 ForEach(displayCategories) { category in
-                                    CategoryCardView(category: category)
+                                    NavigationLink {
+                                        ProductsView(
+                                            categoryId: String(category.id),
+                                            viewModel: DIContainer.shared.makeCategoryProductViewModel()
+                                        )
+                                    } label: {
+                                        CategoryCardView(category: category)
+                                    }
+                                    .buttonStyle(.plain)
                                 }
                             }
                             .padding(.horizontal, 16)
@@ -70,6 +80,12 @@ struct CategoryListView: View {
             .background(Color(.systemGroupedBackground).opacity(0.3))
             .task {
                 await viewModel.loadCategories()
+                print("======")
+                await viewModel.loadSubCategories()
+                print("======")
+                await viewModel.loadSubcategories(for: "347833073708")
+                await viewModel.loadSubcategories(for: "347833565228")
+
             }
             .onAppear {
                 Task { await viewModel.loadCategories() }

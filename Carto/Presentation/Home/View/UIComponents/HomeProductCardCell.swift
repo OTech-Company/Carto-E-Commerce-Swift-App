@@ -8,29 +8,29 @@
 import SwiftUI
 
 struct HomeProductCardCell: View {
-    let product: ProductEntity2
+    let product: Product
     let onTab: () -> Void
     let onAddToFav: () -> Void
     
 
     var body: some View {
         VStack(alignment: .center, spacing: 16) {
-            HStack(alignment: .bottom){
-                Spacer()
-                Image(systemName: "star.fill")
-                    .foregroundColor(.yellow)
-                Text("\(product.rate, specifier: "%.1f")")
-                    .font(.system(size: 16))
-                    .foregroundColor(Color("PrimaryColor"))
-            }
+//            HStack(alignment: .bottom){
+//                Spacer()
+//                Image(systemName: "star.fill")
+//                    .foregroundColor(.yellow)
+//                Text("\(product.rate, specifier: "%.1f")")
+//                    .font(.system(size: 16))
+//                    .foregroundColor(Color("PrimaryColor"))
+//            }
             
-            Image(product.imageName)
+            Image(product.imageURL)
                 .resizable()
                 .scaledToFit()
                 .frame(maxWidth: .infinity, minHeight: 150)
             HStack {
                 VStack(alignment: .leading) {
-                    Text(product.name)
+                    Text(product.handle)
                     Text("$\(product.price, specifier: "%.2f")")
                 }
 

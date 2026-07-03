@@ -1,4 +1,3 @@
-//
 //  ProductDTO.swift
 //  Carto
 //
@@ -7,6 +6,7 @@
 
 import Foundation
 
+// MARK: - API Response Wrapper
 struct ProductListResponse: Decodable {
     let products: [ProductDTO]?
 }
@@ -15,7 +15,13 @@ struct ProductDetailResponse: Decodable {
     let product: ProductDTO?
 }
 
+struct CategoryPoductsResponse: Decodable {
+    let products: [ProductDTO]?
+}
+
+// MARK: - Product DTO
 struct ProductDTO: Decodable {
+    /// Changed to Int to resolve the 64-bit number decoding mismatch
     let id: Int?
     let title: String?
     let bodyHtml: String?
@@ -29,6 +35,7 @@ struct ProductDTO: Decodable {
     let options: [ProductOptionDTO]?
 }
 
+// MARK: - Product Variant DTO
 struct ProductVariantDTO: Decodable {
     let id: Int
     let productId: Int
@@ -55,6 +62,7 @@ struct ProductVariantDTO: Decodable {
     let adminGraphqlApiId: String?
 }
 
+// MARK: - Product Image DTO
 struct ProductImageDTO: Decodable {
     let id: Int
     let productId: Int
@@ -69,6 +77,7 @@ struct ProductImageDTO: Decodable {
     let adminGraphqlApiId: String?
 }
 
+// MARK: - Product Option DTO
 struct ProductOptionDTO: Decodable {
     let id: Int
     let productId: Int
