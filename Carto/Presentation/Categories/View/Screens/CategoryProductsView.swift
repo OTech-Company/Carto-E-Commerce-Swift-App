@@ -15,7 +15,7 @@ struct CategoryProductsView: View {
     let categoryId: String?
     let brandID: Int?
 
-    init(categoryId: String, brandID: Int, viewModel: CategoryProductsViewModel) {
+    init(categoryId: String? = nil, brandID: Int? = nil, viewModel: CategoryProductsViewModel) {
         self.categoryId = categoryId
         self.brandID = brandID
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -28,66 +28,63 @@ struct CategoryProductsView: View {
 
     var body: some View {
 
-        NavigationStack {
+        VStack {
 
-            VStack {
+            HStack {
 
-                HStack {
-
-                    TextField("Search products...",
-                              text: $viewModel.searchText)
-                    .textFieldStyle(.roundedBorder)
-                    .onChange(of: viewModel.searchText) { _ in
-                        viewModel.search()
-                    }
-
-                    Button {
-
-                        viewModel.showFilters.toggle()
-
-                    } label: {
-
-                        Image(systemName: "slider.horizontal.3")
-                    }
-
+                TextField("Search products...",
+                          text: $viewModel.searchText)
+                .textFieldStyle(.roundedBorder)
+                .onChange(of: viewModel.searchText) { _ in
+                    viewModel.search()
                 }
-                .padding()
 
-                if viewModel.isLoading {
+                Button {
 
-                    Spacer()
+                    viewModel.showFilters.toggle()
 
-                    ProgressView()
+                } label: {
 
-                    Spacer()
+                    Image(systemName: "slider.horizontal.3")
+                }
 
-                } else {
+            }
+            .padding()
 
-                    ScrollView {
+            if viewModel.isLoading {
 
-                        LazyVGrid(columns: columns,
-                                  spacing: 16) {
+                Spacer()
 
-                            ForEach(viewModel.filteredProducts) { product in
+                ProgressView()
 
-                                ProductCardView(product: product)
-                            }
+                Spacer()
+
+            } else {
+
+                ScrollView {
+
+                    LazyVGrid(columns: columns,
+                              spacing: 16) {
+
+                        ForEach(viewModel.filteredProducts) { product in
+
+                            ProductCardView(product: product)
                         }
-                        .padding()
                     }
+                    .padding()
                 }
             }
-            .navigationTitle("Products")
-            .sheet(isPresented: $viewModel.showFilters) {
+        }
+        .navigationTitle("Products")
+        .sheet(isPresented: $viewModel.showFilters) {
 
-                FilterSheetView(viewModel: viewModel)
-            }
-            .task {
-                if brandID != nil {
-                    await viewModel.loadProducts(brandId: brandID!)
-                } else if categoryId != nil {
-                    await viewModel.loadProducts(categoryId: categoryId!)
-                }
+            FilterSheetView(viewModel: viewModel)
+        }
+        .task {
+            if let brandID = brandID {
+                await viewModel.loadProducts(brandId: brandID)
+            } else if let categoryId = categoryId {
+                await viewModel.loadProducts(categoryId: categoryId)
             }
         }
     }

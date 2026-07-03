@@ -26,7 +26,14 @@ struct HomeBrandView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
                     ForEach(brands.prefix(5)) { brand in
-                        HomeBrandItem(barndLogo: brand.image ?? "")
+                        NavigationLink {
+                            CategoryProductsView(
+                                brandID: brand.id,
+                                viewModel: DIContainer.shared.makeCategoryProductViewModel()
+                            )
+                        } label: {
+                            HomeBrandItem(barndLogo: brand.image ?? "")
+                        }
                     }
 
                     if brands.count > 5 {

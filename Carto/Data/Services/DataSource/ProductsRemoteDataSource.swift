@@ -86,12 +86,13 @@ class ProductsRemoteDataSourceImpl: ProductsRemoteDataSource {
     
     func getProductsByBrand(brandId: Int) async throws -> [ProductDTO] {
         do {
-            let response: [ProductDTO] = try await ShopifyAPIClient.shared.requestREST(
+            let response: CategoryProductsResponse = try await ShopifyAPIClient.shared.requestREST(
                 endpoint: .productsByBrand(id: String(brandId))
             )
 
-            print("Fetched products by brands count:", response.count)
-            return response
+            let products = response.products ?? []
+            print("Fetched products by brands count:", products.count)
+            return products
         } catch {
             print("REST error:", error)
             throw error
