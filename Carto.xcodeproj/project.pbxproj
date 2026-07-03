@@ -22,8 +22,8 @@
 		6F6DD8212FF7B0050099872E /* CompareProductsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD8202FF7B0050099872E /* CompareProductsUseCase.swift */; };
 		6F6DD8232FF7B00D0099872E /* RunShoppingAssistantUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD8222FF7B00D0099872E /* RunShoppingAssistantUseCase.swift */; };
 		6F6DD8252FF7B1950099872E /* ExampleUsage.md in Resources */ = {isa = PBXBuildFile; fileRef = 6F6DD8242FF7B18A0099872E /* ExampleUsage.md */; };
-		6F6DD8272FF7B2A30099872E /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6F6DD8262FF7B2A30099872E /* Development.xcconfig */; };
 		6F6DD82A2FF7B4CA0099872E /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD8292FF7B4CA0099872E /* AppEnvironment.swift */; };
+		6F6DD82D2FF7D2300099872E /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6F6DD82C2FF7D22D0099872E /* Development.xcconfig */; };
 		6FB176392FEFE3140008DDDC /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175142FEFE3140008DDDC /* ServiceLocator.swift */; };
 		6FB176E22FEFE3140008DDDC /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175132FEFE3140008DDDC /* AppContainer.swift */; };
 		6FB176EC2FEFE3140008DDDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB1761A2FEFE3140008DDDC /* Assets.xcassets */; };
@@ -293,9 +293,9 @@
 		6F6DD8202FF7B0050099872E /* CompareProductsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareProductsUseCase.swift; sourceTree = "<group>"; };
 		6F6DD8222FF7B00D0099872E /* RunShoppingAssistantUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunShoppingAssistantUseCase.swift; sourceTree = "<group>"; };
 		6F6DD8242FF7B18A0099872E /* ExampleUsage.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ExampleUsage.md; sourceTree = "<group>"; };
-		6F6DD8262FF7B2A30099872E /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		6F6DD8282FF7B3800099872E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6F6DD8292FF7B4CA0099872E /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		6F6DD82C2FF7D22D0099872E /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		6FB175132FEFE3140008DDDC /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 		6FB175142FEFE3140008DDDC /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		6FB1761A2FEFE3140008DDDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1617,11 +1617,11 @@
 		D9E5F7552FF5DCAF0014DD91 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				6F6DD82C2FF7D22D0099872E /* Development.xcconfig */,
 				6F6DD8292FF7B4CA0099872E /* AppEnvironment.swift */,
 				D9E5F7562FF5DCAF0014DD91 /* UIConstants.swift */,
 				D9E5F7572FF5DCAF0014DD91 /* AppConstants.swift */,
 				D9E5F7582FF5DCAF0014DD91 /* NetworkConstants.swift */,
-				6F6DD8262FF7B2A30099872E /* Development.xcconfig */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -1890,11 +1890,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F6DD8272FF7B2A30099872E /* Development.xcconfig in Resources */,
 				D9E5F83D2FF5DCB00014DD91 /* GoogleService-Info.plist in Resources */,
 				6FB176EC2FEFE3140008DDDC /* Assets.xcassets in Resources */,
 				6FB176ED2FEFE3140008DDDC /* Localizable.strings in Resources */,
 				6F6DD8252FF7B1950099872E /* ExampleUsage.md in Resources */,
+				6F6DD82D2FF7D2300099872E /* Development.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2198,7 +2198,7 @@
 /* Begin XCBuildConfiguration section */
 		D9EB9A9E2FEFD058005CE9A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F6DD8262FF7B2A30099872E /* Development.xcconfig */;
+			baseConfigurationReference = 6F6DD82C2FF7D22D0099872E /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -2259,7 +2259,7 @@
 		};
 		D9EB9A9F2FEFD058005CE9A4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F6DD8262FF7B2A30099872E /* Development.xcconfig */;
+			baseConfigurationReference = 6F6DD82C2FF7D22D0099872E /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
