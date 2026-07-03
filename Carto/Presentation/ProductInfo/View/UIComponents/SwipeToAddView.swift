@@ -46,46 +46,19 @@ struct SwipeToAddView: View {
                 }
 
                 Spacer()
-
-                HStack(spacing: 16) {
-                    Button {
-                        if quantity > 0 {
-                            quantity -= 1
-                        }
-                    } label: {
-                        Text("−")
-                            .font(.title3)
-                            .foregroundColor(.black)
-                            .frame(width: 32, height: 32)
-                            .background(Color(.systemGray6))
-                            .clipShape(Circle())
-                    }
-
-                    Text("\(quantity)")
-                        .font(.headline)
-                        .frame(minWidth: 20)
-
-                    Button {
-                        quantity += 1
-                    } label: {
-                        Text("+")
-                            .font(.title3)
-                            .foregroundColor(.black)
-                            .frame(width: 32, height: 32)
-                            .background(Color(.systemGray6))
-                            .clipShape(Circle())
-                    }
-                }
             }
             .padding(.horizontal)
+            .padding(.bottom, 8)
 
-            Text("Swipe down to add")
+            Text("Swipe up to remove")
                 .font(.subheadline)
                 .bold()
-                .foregroundColor(.secondary)
-                .padding(.bottom, 2)
+                .foregroundColor(dragOffset < 0 ? .black : .secondary)
+                .scaleEffect(dragOffset < 0 ? 1.05 : 1)
+                .animation(.easeOut(duration: 0.2), value: dragOffset < 0)
+                .padding(.bottom, -4)
 
-            VStack(spacing: 1) {
+            VStack(spacing: -6) {
                 Image(systemName: "chevron.up")
                     .font(.title3)
                     .fontWeight(.bold)
@@ -101,17 +74,28 @@ struct SwipeToAddView: View {
                     .fontWeight(.bold)
                     .foregroundColor(.black.opacity(0.6))
             }
-
-            Spacer(minLength: 6)
+            .padding(.top, 4)
+            .padding(.bottom, -25)
 
             Circle()
                 .fill(Color.black)
                 .frame(width: 50, height: 50)
                 .overlay {
-                    Image(systemName: "bag")
-                        .foregroundColor(.white)
-                        .font(.title3)
+                    if quantity > 0 {
+                        Text("\(quantity)")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .transition(.scale.combined(with: .opacity))
+                    } else {
+                        Image(systemName: "bag")
+                            .foregroundColor(.white)
+                            .font(.title3)
+                            .transition(.scale.combined(with: .opacity))
+                    }
                 }
+                .animation(.spring(), value: quantity)
+                .padding(.top, 35)
                 .offset(y: dragOffset)
                 .gesture(
                     DragGesture()
@@ -139,9 +123,9 @@ struct SwipeToAddView: View {
                 )
                 .animation(.interactiveSpring(), value: dragOffset)
 
-            Spacer(minLength: 6)
+            Spacer(minLength: 0)
 
-            VStack(spacing: 1) {
+            VStack(spacing: -6) {
                 Image(systemName: "chevron.down")
                     .font(.title3)
                     .fontWeight(.bold)
@@ -159,12 +143,21 @@ struct SwipeToAddView: View {
             }
             .padding(.bottom, 0)
 
+            Text("Swipe down to add")
+                .font(.subheadline)
+                .bold()
+                .foregroundColor(dragOffset > 0 ? .black : .secondary)
+                .scaleEffect(dragOffset > 0 ? 1.05 : 1)
+                .animation(.easeOut(duration: 0.2), value: dragOffset > 0)
+                .padding(.top, 4)
+
             ZStack(alignment: .top) {
-                Image("bag")
+                Image(quantity > 0 ? "bagFull" : "bag")
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: .infinity, maxHeight: 200)
-                    .padding(.top, -30)
+                    .padding(.top, -15)
+                    .frame(height: 165, alignment: .top)
                     .clipped()
 
                 if showAddedEffect {

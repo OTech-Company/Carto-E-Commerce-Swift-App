@@ -21,6 +21,7 @@
 		6D7A459B2FF28C0D00E2805D /* ProductsRemoteDataSourceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7A459A2FF28C0D00E2805D /* ProductsRemoteDataSourceImpl.swift */; };
 		6D7A459D2FF28DF900E2805D /* ProductInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7A459C2FF28DF900E2805D /* ProductInfoViewModel.swift */; };
 		6D7A459F2FF2939700E2805D /* ProductsRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7A459E2FF2939700E2805D /* ProductsRemoteDataSource.swift */; };
+		6DECA2E82FF6D98C0024BCBF /* ExpandableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DECA2E72FF6D98C0024BCBF /* ExpandableText.swift */; };
 		6F5DA4022FF139AC002F500B /* OnboardingControlsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA4012FF139AC002F500B /* OnboardingControlsRow.swift */; };
 		6F5DA4042FF139BA002F500B /* OnboardingHeadlineBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA4032FF139BA002F500B /* OnboardingHeadlineBlock.swift */; };
 		6F5DA4062FF139C4002F500B /* OnboardingLayoutBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5DA4052FF139C4002F500B /* OnboardingLayoutBottom.swift */; };
@@ -244,6 +245,7 @@
 		6D7A459A2FF28C0D00E2805D /* ProductsRemoteDataSourceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsRemoteDataSourceImpl.swift; sourceTree = "<group>"; };
 		6D7A459C2FF28DF900E2805D /* ProductInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInfoViewModel.swift; sourceTree = "<group>"; };
 		6D7A459E2FF2939700E2805D /* ProductsRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsRemoteDataSource.swift; sourceTree = "<group>"; };
+		6DECA2E72FF6D98C0024BCBF /* ExpandableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableText.swift; sourceTree = "<group>"; };
 		6F5DA4012FF139AC002F500B /* OnboardingControlsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingControlsRow.swift; sourceTree = "<group>"; };
 		6F5DA4032FF139BA002F500B /* OnboardingHeadlineBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingHeadlineBlock.swift; sourceTree = "<group>"; };
 		6F5DA4052FF139C4002F500B /* OnboardingLayoutBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLayoutBottom.swift; sourceTree = "<group>"; };
@@ -1118,6 +1120,7 @@
 				6D7A45812FF2800100E2805D /* SizeView.swift */,
 				6D7A45832FF2804700E2805D /* ColorView.swift */,
 				6D7A45852FF280CA00E2805D /* SwipeToAddView.swift */,
+				6DECA2E72FF6D98C0024BCBF /* ExpandableText.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -1774,6 +1777,7 @@
 				6FB176942FEFE3140008DDDC /* UIConstants.swift in Sources */,
 				6FB176F22FF0089C0008DDDC /* OnboardingScreen.swift in Sources */,
 				6FB176952FEFE3140008DDDC /* CouponsCoordinator.swift in Sources */,
+				6DECA2E82FF6D98C0024BCBF /* ExpandableText.swift in Sources */,
 				6FB176972FEFE3140008DDDC /* AuthForgotPasswordView.swift in Sources */,
 				6F5DA4252FF1BE83002F500B /* ADEntity.swift in Sources */,
 				6FB1769A2FEFE3140008DDDC /* SearchFiltersView.swift in Sources */,

@@ -1,3 +1,10 @@
+//
+//  SizeView.swift
+//  Carto
+//
+//  Created by Manona on 27/06/2026.
+//
+
 import SwiftUI
 
 struct SizeView: View {

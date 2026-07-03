@@ -30,7 +30,7 @@ extension ProductInfo {
         title: "Nike Air Max",
         price: 89.99,
         compareAtPrice: 129.99,
-        description: "Lightweight running shoe with breathable mesh upper and responsive cushioning, built for everyday comfort and long-distance runs.",
+        description: "Lightweight running shoe with breathable mesh upper and responsive cushioning, built for everyday comfort and long-distance runs.Lightweight running shoe with breathable mesh upper and responsive cushioning, built for everyday comfort and long-distance runs.",
         imageURL: "https://cdn.shopify.com/example.png",
         sizes: ["S", "M", "L", "XL"],
         colors: ["black", "white", "red"]
