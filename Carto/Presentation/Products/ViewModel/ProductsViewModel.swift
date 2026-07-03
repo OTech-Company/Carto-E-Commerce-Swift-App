@@ -8,7 +8,7 @@
 import Foundation
 
 @MainActor
-final class CategoryProductsViewModel: ObservableObject {
+final class ProductsViewModel: ObservableObject {
 
     @Published var products: [Product] = []
     @Published var filteredProducts: [Product] = []
@@ -40,9 +40,11 @@ final class CategoryProductsViewModel: ObservableObject {
     @Published var showFilters = false
 
     private let getCategoryUseCase: GetCategoryUseCase
-
-    init(getCategoryUseCase: GetCategoryUseCase) {
+    private let getProductByBrand: ProductUseCaseProtocol
+    
+    init(getCategoryUseCase: GetCategoryUseCase, getProductByBrand: ProductUseCaseProtocol) {
         self.getCategoryUseCase = getCategoryUseCase
+        self.getProductByBrand = getProductByBrand
     }
 
     func loadProducts(categoryId: String) async {
@@ -210,4 +212,51 @@ final class CategoryProductsViewModel: ObservableObject {
         .sorted()
     }
     
+    func loadProducts(brandId: Int)async{
+        isLoading = true
+        
+        defer {
+            isLoading = false
+        }
+        
+        do{
+            let loadedProducts = try await getProductByBrand.execute(brandId: brandId)
+            products = loadedProducts
+            filteredProducts = loadedProducts
+            
+            // Available brands
+            brands = Array(
+                Set(loadedProducts.map(\.vendor))
+            ).sorted()
+
+            // Available sizes
+            sizes = Array(
+                Set(
+                    loadedProducts.flatMap {
+                        $0.options.first {
+                            $0.name.lowercased() == "size"
+                        }?.values ?? []
+                    }
+                )
+            ).sorted()
+
+            // Available colors
+            colors = Array(
+                Set(
+                    loadedProducts.flatMap {
+                        $0.options.first {
+                            $0.name.lowercased() == "color"
+                        }?.values ?? []
+                    }
+                )
+            ).sorted()
+
+            productTypes = Array(
+                Set(products.map(\.productType))
+            ).sorted()
+            
+        }catch{
+            errorMessage = error.localizedDescription
+        }
+    }
 }

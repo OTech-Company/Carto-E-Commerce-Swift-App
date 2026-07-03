@@ -11,13 +11,13 @@ import Combine
 @MainActor
 final class ProductsInfoViewModel: ObservableObject {
 
-    @Published private(set) var product: ProductInfo?
+    @Published private(set) var product: Product?
     @Published private(set) var isLoading = false
     @Published var errorMessage: String?
 
-    private let useCase: ProductsInfoUseCase
+    private let useCase: ProductsUseCase
 
-    init(useCase: ProductsInfoUseCase) {
+    init(useCase: ProductsUseCase) {
         self.useCase = useCase
     }
 

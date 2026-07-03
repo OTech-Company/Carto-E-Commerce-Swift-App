@@ -36,6 +36,9 @@ final class ShopifyAPIClient {
 
         let (data, response) = try await session.data(for: urlRequest)
 
+        print("RAW JSON:")
+        print(String(data: data, encoding: .utf8) ?? "Invalid JSON")
+        
         guard let http = response as? HTTPURLResponse else {
             throw NetworkError.unknown(URLError(.badServerResponse))
         }

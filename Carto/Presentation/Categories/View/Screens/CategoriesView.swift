@@ -61,13 +61,9 @@ struct CategoryListView: View {
                             LazyVGrid(columns: columns, spacing: 16) {
                                 ForEach(displayCategories) { category in
                                     NavigationLink {
-                                        CategoryProductsView(
+                                        ProductsView(
                                             categoryId: String(category.id),
-                                            viewModel: CategoryProductsViewModel(
-                                                getCategoryUseCase: GetCategoryUseCase(
-                                                    repository: CategoryRepositoryImpl()
-                                                )
-                                            )
+                                            viewModel: DIContainer.shared.makeCategoryProductViewModel()
                                         )
                                     } label: {
                                         CategoryCardView(category: category)

@@ -8,7 +8,7 @@ import SwiftUI
 
 struct FilterSheetView: View {
 
-    @ObservedObject var viewModel: CategoryProductsViewModel
+    @ObservedObject var viewModel: ProductsViewModel
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
