@@ -1,4 +1,4 @@
-let client = GroqClient(apiKey: "ur_API_KEY")
+let client = GroqClient(apiKey: "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")
 
 // 1. Inject client dependency into the repository layer
 let aiRepository: AIRepository = AIRepositoryImpl(client: client)

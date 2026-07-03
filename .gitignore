@@ -13,6 +13,11 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 
+# Local Secrets & API Key Configurations
+Core/Constants/Development.xcconfig
+Carto/Core/Constants/Development.xcconfig
+*.xcconfig
+
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace
