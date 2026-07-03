@@ -17,6 +17,7 @@ final class DIContainer {
     let appViewModel: AppViewModel
     let brandRemoteDataSource: BrandRemoteDataSourceProtocol
     let productRemoteDataSource: ProductsRemoteDataSource
+    let favoritesLocalDataSource: FavoritesLocalDataSourceProtocol
 
     private init() {
         authRepository = AuthenticationRepositoryImpl()
@@ -25,6 +26,8 @@ final class DIContainer {
         brandRemoteDataSource = BrandRemoteDataSource()
         productRemoteDataSource = ProductsRemoteDataSourceImpl()
         appViewModel = AppViewModel(authSession: authSession)
+        favoritesLocalDataSource = FavoritesLocalDataSource()
+
     }
 
     func makeLoginViewModel(router: AuthRouter) -> AuthLoginViewModel {
@@ -97,4 +100,40 @@ final class DIContainer {
             getProductByBrand: makeProductsUseCase()
         )
     }
+
+    func makeFavoritesRepo() -> FavoritesRepository {
+        FavoritesRepositoryImpl(local: favoritesLocalDataSource)
+    }
+
+    func makeGetFavoritesUseCase() -> GetFavoritesUseCase {
+        GetFavoritesUseCase(repository: makeFavoritesRepo())
+    }
+
+    func makeIsFavoriteUseCase() -> IsFavoriteUseCase {
+        IsFavoriteUseCase(repository: makeFavoritesRepo())
+    }
+
+    func makeAddFavoriteUseCase() -> AddFavoriteUseCase {
+        AddFavoriteUseCase(repository: makeFavoritesRepo())
+    }
+
+    func makeRemoveFavoriteUseCase() -> RemoveFavoriteUseCase {
+        RemoveFavoriteUseCase(repository: makeFavoritesRepo())
+    }
+    
+    func makeFavoritesViewModel() -> FavoritesViewModel {
+        FavoritesViewModel(
+            getFavoritesUseCase: makeGetFavoritesUseCase(),
+            removeFavoriteUseCase: makeRemoveFavoriteUseCase()
+        )
+    }
+
+    func makeProductsInfoViewModel(product: Product) -> ProductsInfoViewModel { ProductsInfoViewModel(
+            product: product,
+            isFavoriteUseCase: makeIsFavoriteUseCase(),
+            addFavoriteUseCase: makeAddFavoriteUseCase(),
+            removeFavoriteUseCase: makeRemoveFavoriteUseCase()
+        )
+    }
+
 }
