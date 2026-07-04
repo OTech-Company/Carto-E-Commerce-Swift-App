@@ -16,6 +16,7 @@ protocol FavoritesLocalDataSourceProtocol {
 
 final class FavoritesLocalDataSource: FavoritesLocalDataSourceProtocol {
     private let context: NSManagedObjectContext
+
     init(context: NSManagedObjectContext = CoreDataStack.shared.context) {
         self.context = context
     }
@@ -24,35 +25,40 @@ final class FavoritesLocalDataSource: FavoritesLocalDataSourceProtocol {
         let request: NSFetchRequest<CDFavoriteItem> = CDFavoriteItem.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "savedAt", ascending: false)]
         let results = (try? context.fetch(request)) ?? []
-        return results.map {
-            FavoriteItem(id: Int($0.id), title: $0.title ?? "", imageURL: $0.imageURL ?? "",
-                         price: $0.price, compareAtPrice: $0.compareAtPrice,
-                         savedAt: $0.savedAt ?? Date())
+        return results.compactMap { entity in
+            guard let data = entity.productData,
+                  let product = try? JSONDecoder().decode(Product.self, from: data) else {
+                return nil
+            }
+            return FavoriteItem(
+                id: Int(entity.id),
+                product: product,
+                savedAt: entity.savedAt ?? Date()
+            )
         }
     }
 
     func isFavorite(productId: Int) -> Bool {
         let request: NSFetchRequest<CDFavoriteItem> = CDFavoriteItem.fetchRequest()
-        request.predicate = NSPredicate(format: "id == %d", productId)
+        request.predicate = NSPredicate(format: "id == %@", NSNumber(value: productId))
         return (try? context.count(for: request)) ?? 0 > 0
     }
 
     func save(_ item: FavoriteItem) {
+        delete(productId: item.id)
+        guard let data = try? JSONEncoder().encode(item.product) else { return }
         let entity = CDFavoriteItem(context: context)
         entity.id = Int64(item.id)
-        entity.title = item.title
-        entity.imageURL = item.imageURL
-        entity.price = item.price
-        entity.compareAtPrice = item.compareAtPrice ?? 0
+        entity.productData = data
         entity.savedAt = item.savedAt
         CoreDataStack.shared.saveContext()
     }
 
     func delete(productId: Int) {
         let request: NSFetchRequest<CDFavoriteItem> = CDFavoriteItem.fetchRequest()
-        request.predicate = NSPredicate(format: "id == %d", productId)
-        if let object = try? context.fetch(request).first {
-            context.delete(object)
+        request.predicate = NSPredicate(format: "id == %@", NSNumber(value: productId))
+        if let objects = try? context.fetch(request) {
+            objects.forEach { context.delete($0) }
             CoreDataStack.shared.saveContext()
         }
     }
