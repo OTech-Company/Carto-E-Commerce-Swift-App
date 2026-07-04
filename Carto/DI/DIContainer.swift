@@ -17,6 +17,7 @@ final class DIContainer {
     let appViewModel: AppViewModel
     let brandRemoteDataSource: BrandRemoteDataSourceProtocol
     let productRemoteDataSource: ProductsRemoteDataSource
+    let addressRemoteDataSource: AddressRemoteDataSourceProtocol
 
     private init() {
         authRepository = AuthenticationRepositoryImpl()
@@ -25,6 +26,7 @@ final class DIContainer {
         brandRemoteDataSource = BrandRemoteDataSource()
         productRemoteDataSource = ProductsRemoteDataSourceImpl()
         appViewModel = AppViewModel(authSession: authSession)
+        addressRemoteDataSource = AddressRemoteDataSourceImpl()
     }
 
     func makeLoginViewModel(router: AuthRouter) -> AuthLoginViewModel {
@@ -96,5 +98,13 @@ final class DIContainer {
             ),
             getProductByBrand: makeProductsUseCase()
         )
+    }
+
+    func makeAddressRepo() -> AddressRepoProtocol {
+        AddressRepoImpl(remoteDataSource: addressRemoteDataSource)
+    }
+
+    func makeAddressViewModel() -> AddressViewModel {
+        AddressViewModel(repo: makeAddressRepo())
     }
 }

@@ -39,6 +39,18 @@ enum ShopifyEndpoint {
     // Ads / Banners
     case banners
 
+    // Address
+    case addresses(customerId: String)
+    case addressByID(id: String, customerId: String)
+    case addAddress(customerId: String, addressData: [String: Any])
+    case updateAddress(
+        id: String,
+        customerId: String,
+        addressData: [String: Any]
+    )
+    case setDefaultAddress(customerId: String, addressId: String)
+    case deleteAddress(id: String, customerId: String)
+
     // Computed path for each case
     var path: String {
         switch self {
@@ -61,15 +73,34 @@ enum ShopifyEndpoint {
         case .checkout:                       return "/checkouts.json"
         case .paymentMethods:                 return "/payment_methods.json"
         case .banners:                        return "/metafields.json"
+        case .addresses(let customerId):
+            return "/customers/\(customerId)/addresses.json"
+        case .addressByID(let id, let customerId):
+            return "/customers/\(customerId)/addresses/\(id).json"
+        case .addAddress(let customerId, _):
+            return "/customers/\(customerId)/addresses.json"
+        case .updateAddress(let id, let customerId, _):
+            return "/customers/\(customerId)/addresses/\(id).json"
+        case .setDefaultAddress(let customerId, let addressId):
+            return
+                "/customers/\(customerId)/addresses/\(addressId)/default.json"
+        case .deleteAddress(let id, let customerId):
+            return "/customers/\(customerId)/addresses/\(id).json"
+
         }
     }
 
     var httpMethod: String {
         switch self {
         case .login, .register, .createCart,
-             .addToCart, .checkout:           return "POST"
-        case .removeFromCart:                return "DELETE"
-        default:                             return "GET"
+            .addToCart, .checkout, .addAddress(customerId: _, addressData: _):
+            return "POST"
+        case .removeFromCart, .deleteAddress(id: _, customerId: _):
+            return "DELETE"
+        case .updateAddress(id: _, customerId: _, addressData: _),
+            .setDefaultAddress(customerId: _, addressId: _):
+            return "PUT"
+        default: return "GET"
         }
     }
 }
