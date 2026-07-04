@@ -20,15 +20,21 @@ final class FavoritesViewModel: ObservableObject {
     private let removeFavoriteUseCase: RemoveFavoriteUseCase
     private var cancellable: AnyCancellable?
     private var isPerformingLocalChange = false
+    private let syncFavoritesUseCase: SyncFavoritesUseCase
 
     init(
         getFavoritesUseCase: GetFavoritesUseCase,
         removeFavoriteUseCase: RemoveFavoriteUseCase,
+        syncFavoritesUseCase: SyncFavoritesUseCase,
         store: FavoritesStateStore = .shared
     ) {
         self.getFavoritesUseCase = getFavoritesUseCase
         self.removeFavoriteUseCase = removeFavoriteUseCase
+        self.syncFavoritesUseCase = syncFavoritesUseCase
         loadFavorites()
+        Task {
+            await syncFavoritesUseCase.execute()
+        }
 
         cancellable = store.$favoriteIds
             .dropFirst()

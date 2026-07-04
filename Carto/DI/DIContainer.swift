@@ -130,7 +130,8 @@ final class DIContainer {
     func makeFavoritesViewModel() -> FavoritesViewModel {
         FavoritesViewModel(
             getFavoritesUseCase: makeGetFavoritesUseCase(),
-            removeFavoriteUseCase: makeRemoveFavoriteUseCase()
+            removeFavoriteUseCase: makeRemoveFavoriteUseCase(),
+            syncFavoritesUseCase: makeSyncFavoritesUseCase()
         )
     }
     
