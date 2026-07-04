@@ -14,6 +14,13 @@ struct CartoApp: App {
     @StateObject private var appViewModel: AppViewModel
     init() {
         FirebaseApp.configure()
+
+        URLCache.shared = URLCache(
+            memoryCapacity: 50 * 1024 * 1024,
+            diskCapacity: 200 * 1024 * 1024,   
+            diskPath: "image_cache"
+        )
+
         ServiceLocator.shared.register(container: AppContainer())
         let container = DIContainer.shared
         _appViewModel = StateObject(wrappedValue: container.appViewModel)
