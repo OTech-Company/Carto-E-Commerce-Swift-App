@@ -7,8 +7,23 @@
 
 import SwiftUI
 
-struct ProfileView: View {
+struct SettingsView: View {
     var body: some View {
-        Text("Profile")
+        NavigationStack {
+            List {
+                Section("Account") {
+                    Label("Profile", systemImage: "person.crop.circle")
+                    Label("Addresses", systemImage: "house")
+                }
+
+                Section("App") {
+                    Label("Notifications", systemImage: "bell")
+                    Label("Language", systemImage: "globe")
+                }
+            }
+            .navigationTitle("Settings")
+        }
     }
 }
+
+typealias ProfileView = SettingsView

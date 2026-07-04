@@ -39,7 +39,6 @@ struct SplashView: View {
 //                await NetworkUsageSample.fetchProductWithGraphQL(id: "1")
 //                print("=====================")
 //               await NetworkUsageSample.fetchProducts()
-                
             }
             .onAppear {
                 // Animate logo entrance
