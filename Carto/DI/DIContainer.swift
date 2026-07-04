@@ -18,6 +18,7 @@ final class DIContainer {
     let brandRemoteDataSource: BrandRemoteDataSourceProtocol
     let productRemoteDataSource: ProductsRemoteDataSource
     let favoritesLocalDataSource: FavoritesLocalDataSourceProtocol
+    let favoritesRemoteDataSource: FavoritesRemoteDataSourceProtocol
 
     private init() {
         authRepository = AuthenticationRepositoryImpl()
@@ -27,6 +28,7 @@ final class DIContainer {
         productRemoteDataSource = ProductsRemoteDataSourceImpl()
         appViewModel = AppViewModel(authSession: authSession)
         favoritesLocalDataSource = FavoritesLocalDataSource()
+        favoritesRemoteDataSource = FavoritesRemoteDataSource()
 
     }
 
@@ -102,7 +104,11 @@ final class DIContainer {
     }
 
     func makeFavoritesRepo() -> FavoritesRepository {
-        FavoritesRepositoryImpl(local: favoritesLocalDataSource)
+        FavoritesRepositoryImpl(
+            local: favoritesLocalDataSource,
+            remote: favoritesRemoteDataSource,
+            currentUserId: { [weak self] in self?.authSession.currentUser?.uid }
+        )
     }
 
     func makeGetFavoritesUseCase() -> GetFavoritesUseCase {
@@ -142,5 +148,9 @@ final class DIContainer {
             addFavoriteUseCase: makeAddFavoriteUseCase(),
             removeFavoriteUseCase: makeRemoveFavoriteUseCase()
         )
+    }
+    
+    func makeSyncFavoritesUseCase() -> SyncFavoritesUseCase {
+        SyncFavoritesUseCase(repository: makeFavoritesRepo())
     }
 }

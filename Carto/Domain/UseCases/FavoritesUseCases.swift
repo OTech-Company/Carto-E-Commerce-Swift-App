@@ -26,3 +26,8 @@ struct RemoveFavoriteUseCase {
     let repository: FavoritesRepository
     func execute(productId: Int) { repository.removeFavorite(productId: productId) }
 }
+
+struct SyncFavoritesUseCase {
+    let repository: FavoritesRepository
+    func execute() async { await repository.syncFromRemote() }
+}
