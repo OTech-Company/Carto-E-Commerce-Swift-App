@@ -127,13 +127,20 @@ final class DIContainer {
             removeFavoriteUseCase: makeRemoveFavoriteUseCase()
         )
     }
-
-    func makeProductsInfoViewModel(product: Product) -> ProductsInfoViewModel { ProductsInfoViewModel(
+    
+    func makeProductCardViewModel(product: Product) -> ProductCardViewModel {
+        ProductCardViewModel(
             product: product,
-            isFavoriteUseCase: makeIsFavoriteUseCase(),
             addFavoriteUseCase: makeAddFavoriteUseCase(),
             removeFavoriteUseCase: makeRemoveFavoriteUseCase()
         )
     }
 
+    func makeProductsInfoViewModel(product: Product) -> ProductsInfoViewModel {
+        ProductsInfoViewModel(
+            product: product,
+            addFavoriteUseCase: makeAddFavoriteUseCase(),
+            removeFavoriteUseCase: makeRemoveFavoriteUseCase()
+        )
+    }
 }
