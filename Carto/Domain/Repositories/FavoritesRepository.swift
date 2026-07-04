@@ -12,4 +12,5 @@ protocol FavoritesRepository {
     func isFavorite(productId: Int) -> Bool
     func addFavorite(_ item: FavoriteItem)
     func removeFavorite(productId: Int)
+    func syncFromRemote() async
 }
