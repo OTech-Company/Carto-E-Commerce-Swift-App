@@ -68,7 +68,7 @@ struct ProductsView: View {
 
                         ForEach(viewModel.filteredProducts) { product in
                             NavigationLink {
-                                ProductsInfoView(product: product)
+                                ProductsInfoView(viewModel: DIContainer.shared.makeProductsInfoViewModel(product: product))
                             } label: {
                                 ProductCard(product: product)
                             }

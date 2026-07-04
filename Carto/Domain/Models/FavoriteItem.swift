@@ -9,20 +9,14 @@ import Foundation
 
 struct FavoriteItem: Identifiable, Equatable {
     let id: Int
-    let title: String
-    let imageURL: String
-    let price: Double
-    let compareAtPrice: Double?
+    let product: Product
     let savedAt: Date
 }
 
 extension FavoriteItem {
     init(product: Product, savedAt: Date = Date()) {
         self.id = product.id
-        self.title = product.title
-        self.imageURL = product.imageURL
-        self.price = product.price
-        self.compareAtPrice = product.compareAtPrice
+        self.product = product
         self.savedAt = savedAt
     }
 }

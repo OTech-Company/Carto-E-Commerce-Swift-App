@@ -26,7 +26,7 @@ struct MainView: View {
                     Text("history")
                 }
             
-            FavoritesView()
+            FavoritesView(viewModel: DIContainer.shared.makeFavoritesViewModel())
                 .tabItem {
                     Image(systemName: "heart.fill")
                     Text("Favourits")

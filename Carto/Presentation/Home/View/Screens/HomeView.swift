@@ -103,7 +103,7 @@ struct HomeView: View {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(viewModel.productVM.products, id: \.id) { product in
                             NavigationLink {
-                                ProductsInfoView(product: product)
+                                ProductsInfoView(viewModel: DIContainer.shared.makeProductsInfoViewModel(product: product))
                             } label: {
                                 ProductCard(product: product)
                             }
