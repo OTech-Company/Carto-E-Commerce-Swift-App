@@ -20,6 +20,7 @@
 		6D76EAA12FF68ECB00C6938C /* ProductColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76EA9E2FF68ECB00C6938C /* ProductColorsView.swift */; };
 		6D76EAA32FF69E2B00C6938C /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76EAA22FF69E2B00C6938C /* String+HTML.swift */; };
 		6D78D9052FF8F9B2007C617D /* FavoritesStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D78D9042FF8F9B2007C617D /* FavoritesStateStore.swift */; };
+		6D7BC1082FF957500067D8AF /* FavoritesRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7BC1072FF957500067D8AF /* FavoritesRemoteDataSource.swift */; };
 		6D9CBDC02FF8B9E0000B45FC /* ProductCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9CBDBF2FF8B9E0000B45FC /* ProductCardViewModel.swift */; };
 		6DD082332FF8310E00C29F79 /* ExpandableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD082322FF8310E00C29F79 /* ExpandableText.swift */; };
 		6F6DD8332FF7F17F0099872E /* GroqClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD8322FF7F17F0099872E /* GroqClient.swift */; };
@@ -298,6 +299,7 @@
 		6D76EA9E2FF68ECB00C6938C /* ProductColorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductColorsView.swift; sourceTree = "<group>"; };
 		6D76EAA22FF69E2B00C6938C /* String+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTML.swift"; sourceTree = "<group>"; };
 		6D78D9042FF8F9B2007C617D /* FavoritesStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesStateStore.swift; sourceTree = "<group>"; };
+		6D7BC1072FF957500067D8AF /* FavoritesRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesRemoteDataSource.swift; sourceTree = "<group>"; };
 		6D9CBDBF2FF8B9E0000B45FC /* ProductCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCardViewModel.swift; sourceTree = "<group>"; };
 		6DD082322FF8310E00C29F79 /* ExpandableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableText.swift; sourceTree = "<group>"; };
 		6F6DD8322FF7F17F0099872E /* GroqClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroqClient.swift; sourceTree = "<group>"; };
@@ -590,6 +592,24 @@
 			path = State;
 			sourceTree = "<group>";
 		};
+		6D7BC1052FF956F80067D8AF /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				6D513D452FF86CCE004CFA0E /* FavoritesLocalDataSource.swift */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		6D7BC1062FF9570D0067D8AF /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				D57F10642FF6AD7800F421D4 /* BrandRemoteDataSource.swift */,
+				D9E5F6452FF5DCAF0014DD91 /* ProductsRemoteDataSource.swift */,
+				6D7BC1072FF957500067D8AF /* FavoritesRemoteDataSource.swift */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
 		6F6DD83E2FF7F1C80099872E /* AI */ = {
 			isa = PBXGroup;
 			children = (
@@ -766,9 +786,8 @@
 		D9E5F6432FF5DCAF0014DD91 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				D57F10642FF6AD7800F421D4 /* BrandRemoteDataSource.swift */,
-				D9E5F6452FF5DCAF0014DD91 /* ProductsRemoteDataSource.swift */,
-				6D513D452FF86CCE004CFA0E /* FavoritesLocalDataSource.swift */,
+				6D7BC1062FF9570D0067D8AF /* Remote */,
+				6D7BC1052FF956F80067D8AF /* Local */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -2104,6 +2123,7 @@
 				6D513D442FF86C2C004CFA0E /* FavoritesUseCases.swift in Sources */,
 				D9E5F8002FF5DCB00014DD91 /* SearchResultsViewModel.swift in Sources */,
 				D9E5F8462FF5DCB00014DD91 /* Validator.swift in Sources */,
+				6D7BC1082FF957500067D8AF /* FavoritesRemoteDataSource.swift in Sources */,
 				D9E5F8332FF5DCB00014DD91 /* FilterSheetView.swift in Sources */,
 				6D78D9052FF8F9B2007C617D /* FavoritesStateStore.swift in Sources */,
 				D9E5F7AF2FF5DCB00014DD91 /* PaymentMethodEntity.swift in Sources */,
