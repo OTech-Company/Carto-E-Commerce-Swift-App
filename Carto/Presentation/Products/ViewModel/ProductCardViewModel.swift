@@ -1,19 +1,16 @@
 //
-//  ProductsInfoViewModel.swift
+//  ProductCardViewModel.swift
 //  Carto
 //
-//  Created by Manona on 29/06/2026.
+//  Created by Manona on 03/07/2026.
 //
 
 import Foundation
 import Combine
 
 @MainActor
-final class ProductsInfoViewModel: ObservableObject {
+final class ProductCardViewModel: ObservableObject {
     let product: Product
-    @Published var quantity = 0
-    @Published var selectedSize: String
-    @Published var selectedColorIndex = 0
     @Published private(set) var isFavorite: Bool
 
     private let addFavoriteUseCase: AddFavoriteUseCase
@@ -27,7 +24,6 @@ final class ProductsInfoViewModel: ObservableObject {
         store: FavoritesStateStore = .shared
     ) {
         self.product = product
-        self.selectedSize = product.sizes.first ?? ""
         self.addFavoriteUseCase = addFavoriteUseCase
         self.removeFavoriteUseCase = removeFavoriteUseCase
         self.isFavorite = store.isFavorite(product.id)
@@ -40,16 +36,12 @@ final class ProductsInfoViewModel: ObservableObject {
             }
     }
 
-    func incrementQuantity() { quantity += 1 }
-    func decrementQuantity() { if quantity > 0 { quantity -= 1 } }
-
     func toggleFavorite() {
         if isFavorite {
             removeFavoriteUseCase.execute(productId: product.id)
         } else {
             addFavoriteUseCase.execute(product: product)
         }
+        
     }
-
-    func addToCart() {}
 }
