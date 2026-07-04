@@ -14,8 +14,8 @@ GROQ_API_KEY = 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
 
 // Shopify Endpoint Constants
 SLASH = /
-SHOPIFY_SHOP_DOMAIN = https:${SLASH}${SLASH}mad46-ios-team6.myshopify.com
-SHOPIFY_API_VERSION = 2024-01
+SHOPIFY_SHOP_DOMAIN = mad46-ios-team6.myshopify.com
+SHOPIFY_API_VERSION = 2026-07
 
 // Private Access Tokens & Credentials
 SHOPIFY_ACCESS_TOKEN = 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
