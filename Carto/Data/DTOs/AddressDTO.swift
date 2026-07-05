@@ -34,10 +34,6 @@ struct AddressResponseDTO: Decodable {
 
 struct AddressByIdDTO: Decodable {
     let customerAddress: AddressDTO
-    
-    enum CodingKeys: String, CodingKey {
-        case customerAddress = "customer_address"
-    }
 }
 
 struct AddressDTO: Decodable {
@@ -53,13 +49,13 @@ struct AddressDTO: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case id
-        case customerId = "customer_id"
+        case customerId
         case company
         case province
         case country
-        case provinceCode = "province_code"
-        case countryCode = "country_code"
-        case countryName = "country_name"
+        case provinceCode
+        case countryCode
+        case countryName
         case isDefault = "default"
     }
 }
