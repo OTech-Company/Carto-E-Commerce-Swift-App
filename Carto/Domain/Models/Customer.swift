@@ -18,27 +18,6 @@ struct Customer {
     let orders: [CustomerOrder]
 }
 
-struct CustomerAddress {
-    let id: String
-    let address1: String
-    let address2: String?
-    let city: String
-    let province: String?
-    let country: String
-    let zip: String
-}
-
-struct CustomerOrder {
-    let id: String
-    let orderNumber: Int
-    let processedAt: String
-    let financialStatus: String
-    let fulfillmentStatus: String
-    let totalPrice: String
-    let currencyCode: String
-    let lineItems: [CustomerOrderLineItem]
-}
-
 struct CustomerOrderLineItem {
     let title: String
     let quantity: Int
