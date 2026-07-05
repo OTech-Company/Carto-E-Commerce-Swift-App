@@ -1,6 +1,6 @@
 import Foundation
 
-enum ShopifyEndpoint {
+enum ShopifyEndpoint: Sendable {
 
     // Auth
     case login
@@ -42,12 +42,8 @@ enum ShopifyEndpoint {
     // Address
     case addresses(customerId: String)
     case addressByID(id: String, customerId: String)
-    case addAddress(customerId: String, addressData: [String: Any])
-    case updateAddress(
-        id: String,
-        customerId: String,
-        addressData: [String: Any]
-    )
+    case addAddress(customerId: String)
+    case updateAddress(id: String, customerId: String)
     case setDefaultAddress(customerId: String, addressId: String)
     case deleteAddress(id: String, customerId: String)
 
@@ -77,9 +73,9 @@ enum ShopifyEndpoint {
             return "/customers/\(customerId)/addresses.json"
         case .addressByID(let id, let customerId):
             return "/customers/\(customerId)/addresses/\(id).json"
-        case .addAddress(let customerId, _):
+        case .addAddress(let customerId):
             return "/customers/\(customerId)/addresses.json"
-        case .updateAddress(let id, let customerId, _):
+        case .updateAddress(let id, let customerId):
             return "/customers/\(customerId)/addresses/\(id).json"
         case .setDefaultAddress(let customerId, let addressId):
             return
@@ -93,12 +89,11 @@ enum ShopifyEndpoint {
     var httpMethod: String {
         switch self {
         case .login, .register, .createCart,
-            .addToCart, .checkout, .addAddress(customerId: _, addressData: _):
+            .addToCart, .checkout, .addAddress:
             return "POST"
-        case .removeFromCart, .deleteAddress(id: _, customerId: _):
+        case .removeFromCart, .deleteAddress:
             return "DELETE"
-        case .updateAddress(id: _, customerId: _, addressData: _),
-            .setDefaultAddress(customerId: _, addressId: _):
+        case .updateAddress, .setDefaultAddress:
             return "PUT"
         default: return "GET"
         }

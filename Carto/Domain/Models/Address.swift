@@ -17,3 +17,20 @@ struct Address: Identifiable {
     let countryName: String
     let isDefault: Bool
 }
+
+extension Address {
+    func toNewAddress() -> NewAddress {
+        NewAddress(
+            id: id,
+            address1: "",
+            city: countryName,
+            province: province,
+            country: country,
+            zip: "",
+            phone: "",
+            firstName: "",
+            lastName: "",
+            company: company ?? ""
+        )
+    }
+}

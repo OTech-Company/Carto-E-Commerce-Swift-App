@@ -28,6 +28,7 @@ class AddressViewModel: ObservableObject {
 
     func loadAllAdresses(for customerId: String) async {
         isLoading = true
+        errorMessage = nil
 
         defer {
             isLoading = false
@@ -66,6 +67,7 @@ class AddressViewModel: ObservableObject {
 
         do {
             addedAddress = try await repo.addAddress(address, for: customerId)
+            await loadAllAdresses(for: customerId)
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -87,6 +89,7 @@ class AddressViewModel: ObservableObject {
                 addressID: addressId,
                 address: address
             )
+            await loadAllAdresses(for: customerId)
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -102,8 +105,28 @@ class AddressViewModel: ObservableObject {
 
         do {
             try await repo.deleteAddress(addressId, for: customerId)
+            await loadAllAdresses(for: customerId)
         } catch {
             errorMessage = error.localizedDescription
         }
     }
+
+    func setDefaultAddress(_ addressId: String, for customerId: String) async {
+        isLoading = true
+
+        defer {
+            isLoading = false
+        }
+
+        do {
+            defaultAddress = try await repo.setDefaultAddress(
+                addressID: addressId,
+                for: customerId
+            )
+            await loadAllAdresses(for: customerId)
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+    
 }

@@ -15,6 +15,7 @@ struct AddressRequestDTO: Encodable {
     let phone: String
     let firstName: String
     let lastName: String
+    let company: String
 
     enum CodingKeys: String, CodingKey {
         case address1
@@ -25,6 +26,7 @@ struct AddressRequestDTO: Encodable {
         case phone
         case firstName = "first_name"
         case lastName = "last_name"
+        case company
     }
 }
 

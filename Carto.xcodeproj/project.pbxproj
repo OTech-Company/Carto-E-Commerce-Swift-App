@@ -56,6 +56,8 @@
 		D5D1AC142FF9BE150026A4BF /* AddressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1AC132FF9BE150026A4BF /* AddressCard.swift */; };
 		D5D1AC162FF9D0460026A4BF /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1AC152FF9D0460026A4BF /* EmptyStateView.swift */; };
 		D5D1AC182FF9D4CE0026A4BF /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1AC172FF9D4CE0026A4BF /* PrimaryButton.swift */; };
+		D5D1AC1A2FFA037F0026A4BF /* AddressField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1AC192FFA037F0026A4BF /* AddressField.swift */; };
+		D5D1AC1C2FFA03EA0026A4BF /* AddressFormBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1AC1B2FFA03EA0026A4BF /* AddressFormBottomSheet.swift */; };
 		D9E5F77C2FF5DCB00014DD91 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E5F6282FF5DCAF0014DD91 /* AppViewModel.swift */; };
 		D9E5F77D2FF5DCB00014DD91 /* FirebaseUserMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E5F62B2FF5DCAF0014DD91 /* FirebaseUserMapper.swift */; };
 		D9E5F77E2FF5DCB00014DD91 /* OrderRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E5F62D2FF5DCAF0014DD91 /* OrderRepositoryImpl.swift */; };
@@ -343,6 +345,8 @@
 		D5D1AC132FF9BE150026A4BF /* AddressCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCard.swift; sourceTree = "<group>"; };
 		D5D1AC152FF9D0460026A4BF /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		D5D1AC172FF9D4CE0026A4BF /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		D5D1AC192FFA037F0026A4BF /* AddressField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressField.swift; sourceTree = "<group>"; };
+		D5D1AC1B2FFA03EA0026A4BF /* AddressFormBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressFormBottomSheet.swift; sourceTree = "<group>"; };
 		D9E5F6282FF5DCAF0014DD91 /* AppViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		D9E5F62B2FF5DCAF0014DD91 /* FirebaseUserMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseUserMapper.swift; sourceTree = "<group>"; };
 		D9E5F62D2FF5DCAF0014DD91 /* OrderRepositoryImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -723,6 +727,8 @@
 			isa = PBXGroup;
 			children = (
 				D5D1AC132FF9BE150026A4BF /* AddressCard.swift */,
+				D5D1AC192FFA037F0026A4BF /* AddressField.swift */,
+				D5D1AC1B2FFA03EA0026A4BF /* AddressFormBottomSheet.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -2148,6 +2154,7 @@
 				D5D1AC042FF9A7F70026A4BF /* AddressRepoProtocol.swift in Sources */,
 				D9E5F8512FF5DCB00014DD91 /* OrderRepositoryProtocol.swift in Sources */,
 				D9E5F8002FF5DCB00014DD91 /* SearchResultsViewModel.swift in Sources */,
+				D5D1AC1A2FFA037F0026A4BF /* AddressField.swift in Sources */,
 				D9E5F8462FF5DCB00014DD91 /* Validator.swift in Sources */,
 				D9E5F8332FF5DCB00014DD91 /* FilterSheetView.swift in Sources */,
 				D9E5F7AF2FF5DCB00014DD91 /* PaymentMethodEntity.swift in Sources */,
@@ -2268,6 +2275,7 @@
 				D9E5F7FF2FF5DCB00014DD91 /* SearchViewModel.swift in Sources */,
 				D9E5F7A82FF5DCB00014DD91 /* OrderEntity.swift in Sources */,
 				D9E5F7812FF5DCB00014DD91 /* AuthenticationRepositoryImpl.swift in Sources */,
+				D5D1AC1C2FFA03EA0026A4BF /* AddressFormBottomSheet.swift in Sources */,
 				D9E5F81E2FF5DCB00014DD91 /* OrderDetailViewModel.swift in Sources */,
 				D9E5F8382FF5DCB00014DD91 /* Color+Hex.swift in Sources */,
 				D9E5F8472FF5DCB00014DD91 /* Debouncer.swift in Sources */,

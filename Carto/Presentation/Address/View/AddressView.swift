@@ -7,17 +7,43 @@
 
 import SwiftUI
 
+private struct AddressSheetItem: Identifiable {
+    let id = UUID()
+    let address: NewAddress?
+}
+
 struct AddressView: View {
     @StateObject var viewModel: AddressViewModel = DIContainer.shared
         .makeAddressViewModel()
+
+    @State private var addressToDelete: Address? = nil
+    @State private var showAlert: Bool = false
+
+    @State private var addressSheet: AddressSheetItem? = nil
+
     let customerId: String = "10440744534060"
 
     var body: some View {
-        content
-            .navigationTitle("Addresses")
-            .task {
+        NavigationStack {
+            content
+                .navigationTitle("Addresses")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button {
+                            addressSheet = AddressSheetItem(address: nil)
+                        } label: {
+                            Image(systemName: "plus")
+                                .font(.system(size: 18, weight: .semibold))
+                                .foregroundStyle(Color("PrimaryColor"))
+                        }
+                    }
+                }
+        }
+        .onAppear {
+            Task {
                 await viewModel.loadAllAdresses(for: customerId)
             }
+        }
     }
 
     @ViewBuilder
@@ -40,14 +66,32 @@ struct AddressView: View {
                         if address.isDefault {
                             AddressCard(
                                 address: address,
-                                onEdit: {}
+                                onEdit: {
+                                    addressSheet = AddressSheetItem(
+                                        address: address.toNewAddress()
+                                    )
+                                }
                             )
                         } else {
                             AddressCard(
                                 address: address,
-                                onEdit: {},
-                                onDelete: {},
-                                onSetDefault: {}
+                                onEdit: {
+                                    addressSheet = AddressSheetItem(
+                                        address: address.toNewAddress()
+                                    )
+                                },
+                                onDelete: {
+                                    addressToDelete = address
+                                    showAlert = true
+                                },
+                                onSetDefault: {
+                                    Task {
+                                        await viewModel.setDefaultAddress(
+                                            String(address.id),
+                                            for: customerId
+                                        )
+                                    }
+                                }
                             )
                         }
                     }
@@ -55,11 +99,46 @@ struct AddressView: View {
                 .padding()
             }
             .background(Color("BackgroundColor"))
-            .safeAreaInset(edge: .bottom) {
-                PrimaryButton(title: "Add New Address") {
-
+            .alert(
+                "Delete Address",
+                isPresented: $showAlert,
+                presenting: addressToDelete
+            ) { address in
+                Button("Delete", role: .destructive) {
+                    Task {
+                        await viewModel.deleteAddress(
+                            String(address.id),
+                            for: customerId
+                        )
+                    }
                 }
-                .padding()
+                Button("Cancel", role: .cancel) {}
+            } message: { address in
+                Text(
+                    "Are you sure you want to delete this address? This action can't be undone."
+                )
+            }
+            .sheet(item: $addressSheet) { sheet in
+                AddressFormBottomSheet(
+                    address: sheet.address,
+                    onAdd: { newAddress in
+                        Task {
+                            await viewModel.addAddress(
+                                newAddress,
+                                for: customerId
+                            )
+                        }
+                    },
+                    onEdit: { updatedAddress in
+                        Task {
+                            await viewModel.editAddress(
+                                for: customerId,
+                                addressId: String(updatedAddress.id),
+                                address: updatedAddress
+                            )
+                        }
+                    }
+                )
             }
         }
     }

@@ -45,9 +45,9 @@ class AddressRemoteDataSource: AddressRemoteDataSourceProtocol {
         let response: AddressByIdDTO = try await ShopifyAPIClient.shared
             .requestREST(
                 endpoint: ShopifyEndpoint.addAddress(
-                    customerId: customerID,
-                    addressData: ["address": address]
-                )
+                    customerId: customerID
+                ),
+                body: ["address": address]
             )
         return response
     }
@@ -61,9 +61,9 @@ class AddressRemoteDataSource: AddressRemoteDataSourceProtocol {
             .requestREST(
                 endpoint: ShopifyEndpoint.updateAddress(
                     id: addressID,
-                    customerId: customerID,
-                    addressData: ["address": address]
-                )
+                    customerId: customerID
+                ),
+                body: ["address": address]
             )
         return response
     }

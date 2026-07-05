@@ -21,7 +21,7 @@ struct LoadingView: View {
 
             Text("Loading...")
                 .font(.headline)
-                .foregroundColor(.gray)
+                .foregroundColor(Color("PrimaryColor"))
         }
         .frame(maxWidth: width, maxHeight: height)
     }
