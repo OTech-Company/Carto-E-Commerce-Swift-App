@@ -4,13 +4,6 @@
 //
 //  Created by Osama Hosam on 05/07/2026.
 //
-
-
-//
-//  ChatBubbleView.swift
-//  Carto
-//
-
 import SwiftUI
 
 struct ChatBubbleView: View {

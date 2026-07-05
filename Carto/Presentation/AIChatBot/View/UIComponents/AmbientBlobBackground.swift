@@ -5,12 +5,6 @@
 //  Created by Osama Hosam on 05/07/2026.
 //
 
-
-//
-//  AmbientBlobBackground.swift
-//  Carto
-//
-
 import SwiftUI
 
 struct AmbientBlobBackground: View {
@@ -18,7 +12,6 @@ struct AmbientBlobBackground: View {
         ZStack {
             Color(.systemBackground)
             
-            // Premium ambient glows matching Carto design layout
             RadialGradient(colors: [Color.blue.opacity(0.18), .clear], center: .bottomTrailing, startRadius: 10, endRadius: 300)
             RadialGradient(colors: [Color.cyan.opacity(0.15), .clear], center: .topLeading, startRadius: 10, endRadius: 250)
             RadialGradient(colors: [Color.blue.opacity(0.12), .clear], center: .center, startRadius: 10, endRadius: 200)
@@ -27,7 +20,6 @@ struct AmbientBlobBackground: View {
     }
 }
 
-// Glassmorphic helper modifier required for custom subviews
 struct GlassCardModifier: ViewModifier {
     var cornerRadius: CGFloat
     var isEnabled: Bool

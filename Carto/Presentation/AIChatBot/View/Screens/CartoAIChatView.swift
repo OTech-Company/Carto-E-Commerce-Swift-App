@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 // MARK: - Carto AI Dynamic Chat Screen
 struct CartoAIChatView: View {
     @StateObject private var viewModel: CartoAIChatViewModel
@@ -46,11 +45,6 @@ struct CartoAIChatView: View {
                             }
                             .padding()
                         }
-                        
-                        SuggestionChipsView(suggestions: viewModel.suggestionChips) { selectedChip in
-                            viewModel.appendSuggestion(selectedChip)
-                        }
-                        .padding(.top, 10)
                     }
                 }
                 .onChange(of: viewModel.messages.count) { _ in
@@ -58,6 +52,15 @@ struct CartoAIChatView: View {
                         withAnimation { proxy.scrollTo(lastElement.id, anchor: .bottom) }
                     }
                 }
+            }
+            
+        
+            if !viewModel.suggestionChips.isEmpty {
+                SuggestionChipsView(suggestions: viewModel.suggestionChips) { selectedChip in
+                    viewModel.appendSuggestion(selectedChip)
+                }
+                .transition(.opacity.combined(with: .move(edge: .bottom)))
+                .animation(.easeInOut, value: viewModel.suggestionChips)
             }
             
             ChatInputBar(text: $viewModel.inputText) {
