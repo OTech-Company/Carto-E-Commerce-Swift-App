@@ -32,7 +32,7 @@ struct MainView: View {
                     Text("Favourits")
                 }
             
-            ProfileView()
+            AddressView()
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text("Profile")

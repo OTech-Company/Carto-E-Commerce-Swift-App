@@ -26,7 +26,7 @@ final class DIContainer {
         brandRemoteDataSource = BrandRemoteDataSource()
         productRemoteDataSource = ProductsRemoteDataSourceImpl()
         appViewModel = AppViewModel(authSession: authSession)
-        addressRemoteDataSource = AddressRemoteDataSourceImpl()
+        addressRemoteDataSource = AddressRemoteDataSource()
     }
 
     func makeLoginViewModel(router: AuthRouter) -> AuthLoginViewModel {
