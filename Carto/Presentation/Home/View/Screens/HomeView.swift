@@ -29,6 +29,7 @@ struct HomeView: View {
     ]
 
     @State private var currentIndex: Int = 0
+    @State private var isShowingAISheet: Bool = false // State tracking the AI feature modal sheet
     @StateObject private var viewModel = DIContainer.shared.makeHomeViewModel()
     @EnvironmentObject private var router: Router<AppRoute>
     
@@ -44,73 +45,103 @@ struct HomeView: View {
     ]
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                HStack {
-                    Spacer()
-                    Button(action: {}) {
-                        Image(systemName: "cart.fill")
-                            .font(.system(size: 24))
-                            .foregroundStyle(Color("PrimaryColor"))
+        ZStack(alignment: .bottomTrailing) {
+            ScrollView {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Spacer()
+                        Button(action: {}) {
+                            Image(systemName: "cart.fill")
+                                .font(.system(size: 24))
+                                .foregroundStyle(Color("PrimaryColor"))
+                        }
                     }
-                }
-                TabView(selection: $currentIndex) {
-                    ForEach(0..<ads.count) { index in
-                        HomeBannerView(ad: ads[index])
-                            .tag(index)
+                    TabView(selection: $currentIndex) {
+                        ForEach(0..<ads.count) { index in
+                            HomeBannerView(ad: ads[index])
+                                .tag(index)
+                        }
                     }
-                }
-                .frame(height: 200)
-                .tabViewStyle(
-                    PageTabViewStyle(indexDisplayMode: .automatic)
-                )
-                .onReceive(timer) { _ in
-                    withAnimation {
-                        currentIndex = (currentIndex + 1) % ads.count
+                    .frame(height: 200)
+                    .tabViewStyle(
+                        PageTabViewStyle(indexDisplayMode: .automatic)
+                    )
+                    .onReceive(timer) { _ in
+                        withAnimation {
+                            currentIndex = (currentIndex + 1) % ads.count
+                        }
                     }
-                }
 
-                HStack {
-                    Text("Brands")
+                    HStack {
+                        Text("Brands")
+                            .font(.system(size: 28, weight: .bold))
+                            .foregroundColor(Color("PrimaryColor"))
+
+                        Spacer()
+
+                        Button {
+                            router.push(to: .brands)
+                        } label: {
+                            Text("see more")
+                                .font(.system(size: 18, weight: .medium))
+                                .foregroundColor(Color("PrimaryColor"))
+                        }
+                    }
+
+                    HomeBrandView(
+                        viewModel: viewModel.brandVM
+                    )
+
+                    Spacer(minLength: 20)
+
+                    Text("Products")
                         .font(.system(size: 28, weight: .bold))
                         .foregroundColor(Color("PrimaryColor"))
 
-                    Spacer()
-
-                    Button {
-                        router.push(to: .brands)
-                    } label: {
-                        Text("see more")
-                            .font(.system(size: 18, weight: .medium))
-                            .foregroundColor(Color("PrimaryColor"))
-                    }
-                }
-
-                HomeBrandView(
-                    viewModel: viewModel.brandVM
-                )
-
-                Spacer(minLength: 20)
-
-                Text("Products")
-                    .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(Color("PrimaryColor"))
-
-                LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(viewModel.productVM.products, id: \.id) { product in
-                        Button {
-                            router.push(to: .productDetails(product: product))
-                        } label: {
-                            ProductCard(product: product)
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(viewModel.productVM.products, id: \.id) { product in
+                            Button {
+                                router.push(to: .productDetails(product: product))
+                            } label: {
+                                ProductCard(product: product)
+                            }
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
                     }
                 }
+                .padding(.horizontal, 16)
             }
-            .padding(.horizontal, 16)
+            
+            // MARK: - Floating AI Assistant Action Trigger
+            Button(action: {
+                isShowingAISheet = true
+            }) {
+                Image(systemName: "sparkles.rectangle.stack.fill" /* Customize to match your specific asset or SF symbol */)
+                    .font(.title2)
+                    .foregroundColor(.white)
+                    .padding(16)
+                    .background(
+                        LinearGradient(
+                            colors: [Color.blue, Color.cyan],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .clipShape(Circle())
+                    .shadow(color: Color.blue.opacity(0.3), radius: 8, x: 0, y: 4)
+            }
+            .padding(.trailing, 20)
+            .padding(.bottom, 20)
         }
         .task {
             await viewModel.loadAllData()
+        }.sheet(isPresented: $isShowingAISheet) {
+            AIFeatureSheet {
+                isShowingAISheet = false
+                router.push(to: .aiChat)
+            }
+            .presentationDetents([PresentationDetent.medium, PresentationDetent.large])
+            .presentationDragIndicator(Visibility.visible)
         }
     }
 }

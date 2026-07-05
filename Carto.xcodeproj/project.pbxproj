@@ -13,6 +13,15 @@
 		6D76EAA32FF69E2B00C6938C /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76EAA22FF69E2B00C6938C /* String+HTML.swift */; };
 		6DD082312FF830CF00C29F79 /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD082302FF830CF00C29F79 /* ColorView.swift */; };
 		6DD082332FF8310E00C29F79 /* ExpandableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD082322FF8310E00C29F79 /* ExpandableText.swift */; };
+		6F149FAB2FFA94A200F7EAF3 /* CartoAIChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FAA2FFA94A200F7EAF3 /* CartoAIChatViewModel.swift */; };
+		6F149FAD2FFA94CF00F7EAF3 /* CartoAIChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FAC2FFA94CF00F7EAF3 /* CartoAIChatView.swift */; };
+		6F149FAF2FFA94EA00F7EAF3 /* AIFeatureSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FAE2FFA94EA00F7EAF3 /* AIFeatureSheetViewModel.swift */; };
+		6F149FB12FFA957100F7EAF3 /* AmbientBlobBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FB02FFA957100F7EAF3 /* AmbientBlobBackground.swift */; };
+		6F149FB32FFA957E00F7EAF3 /* ChatHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FB22FFA957E00F7EAF3 /* ChatHeaderView.swift */; };
+		6F149FB52FFA958600F7EAF3 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FB42FFA958600F7EAF3 /* ChatBubbleView.swift */; };
+		6F149FB72FFA958E00F7EAF3 /* SuggestionChipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FB62FFA958E00F7EAF3 /* SuggestionChipsView.swift */; };
+		6F149FB92FFA959600F7EAF3 /* ChatInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FB82FFA959600F7EAF3 /* ChatInputBar.swift */; };
+		6F149FBB2FFA969600F7EAF3 /* AIFeatureSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FBA2FFA969600F7EAF3 /* AIFeatureSheet.swift */; };
 		6F6DD8332FF7F17F0099872E /* GroqClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD8322FF7F17F0099872E /* GroqClient.swift */; };
 		6F6DD8352FF7F1A60099872E /* AiDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD8342FF7F1A60099872E /* AiDTO.swift */; };
 		6F6DD8372FF7F1B40099872E /* AiRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD8362FF7F1B40099872E /* AiRepositoryImpl.swift */; };
@@ -319,6 +328,15 @@
 		6D76EAA22FF69E2B00C6938C /* String+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTML.swift"; sourceTree = "<group>"; };
 		6DD082302FF830CF00C29F79 /* ColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
 		6DD082322FF8310E00C29F79 /* ExpandableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableText.swift; sourceTree = "<group>"; };
+		6F149FAA2FFA94A200F7EAF3 /* CartoAIChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIChatViewModel.swift; sourceTree = "<group>"; };
+		6F149FAC2FFA94CF00F7EAF3 /* CartoAIChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIChatView.swift; sourceTree = "<group>"; };
+		6F149FAE2FFA94EA00F7EAF3 /* AIFeatureSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIFeatureSheetViewModel.swift; sourceTree = "<group>"; };
+		6F149FB02FFA957100F7EAF3 /* AmbientBlobBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientBlobBackground.swift; sourceTree = "<group>"; };
+		6F149FB22FFA957E00F7EAF3 /* ChatHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHeaderView.swift; sourceTree = "<group>"; };
+		6F149FB42FFA958600F7EAF3 /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
+		6F149FB62FFA958E00F7EAF3 /* SuggestionChipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionChipsView.swift; sourceTree = "<group>"; };
+		6F149FB82FFA959600F7EAF3 /* ChatInputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputBar.swift; sourceTree = "<group>"; };
+		6F149FBA2FFA969600F7EAF3 /* AIFeatureSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIFeatureSheet.swift; sourceTree = "<group>"; };
 		6F6DD8322FF7F17F0099872E /* GroqClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroqClient.swift; sourceTree = "<group>"; };
 		6F6DD8342FF7F1A60099872E /* AiDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiDTO.swift; sourceTree = "<group>"; };
 		6F6DD8362FF7F1B40099872E /* AiRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -630,6 +648,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F149FA52FFA93F100F7EAF3 /* AIChatBot */ = {
+			isa = PBXGroup;
+			children = (
+				6F149FA72FFA946B00F7EAF3 /* View */,
+				6F149FA62FFA940600F7EAF3 /* ViewModel */,
+			);
+			path = AIChatBot;
+			sourceTree = "<group>";
+		};
+		6F149FA62FFA940600F7EAF3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6F149FAE2FFA94EA00F7EAF3 /* AIFeatureSheetViewModel.swift */,
+				6F149FAA2FFA94A200F7EAF3 /* CartoAIChatViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6F149FA72FFA946B00F7EAF3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6F149FA92FFA948400F7EAF3 /* Screens */,
+				6F149FA82FFA947500F7EAF3 /* UIComponents */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6F149FA82FFA947500F7EAF3 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				6F149FBA2FFA969600F7EAF3 /* AIFeatureSheet.swift */,
+				6F149FB82FFA959600F7EAF3 /* ChatInputBar.swift */,
+				6F149FB62FFA958E00F7EAF3 /* SuggestionChipsView.swift */,
+				6F149FB42FFA958600F7EAF3 /* ChatBubbleView.swift */,
+				6F149FB22FFA957E00F7EAF3 /* ChatHeaderView.swift */,
+				6F149FB02FFA957100F7EAF3 /* AmbientBlobBackground.swift */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		6F149FA92FFA948400F7EAF3 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				6F149FAC2FFA94CF00F7EAF3 /* CartoAIChatView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
 		6F6DD83E2FF7F1C80099872E /* AI */ = {
 			isa = PBXGroup;
 			children = (
@@ -993,6 +1059,7 @@
 		D9E5F6712FF5DCAF0014DD91 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				6F149FA52FFA93F100F7EAF3 /* AIChatBot */,
 				D5B150F22FF7467D00641EE4 /* Products */,
 				D59EBD502FF6D23C00883859 /* SharedComponents */,
 				D9E5F6722FF5DCAF0014DD91 /* Ads */,
@@ -2165,6 +2232,7 @@
 				D9E5F7E22FF5DCB00014DD91 /* AuthRegisterView.swift in Sources */,
 				D9E5F81A2FF5DCB00014DD91 /* CartFooterView.swift in Sources */,
 				D9E5F7BA2FF5DCB00014DD91 /* AdsPlacementViewModel.swift in Sources */,
+				6F149FB32FFA957E00F7EAF3 /* ChatHeaderView.swift in Sources */,
 				D9E5F7A22FF5DCB00014DD91 /* UserSessionMO.swift in Sources */,
 				D9E5F8072FF5DCB00014DD91 /* CouponsCoordinator.swift in Sources */,
 				D946FDCC2FFA1B6400FBC3E1 /* AddressDTOs.swift in Sources */,
@@ -2179,6 +2247,7 @@
 				D9E5F7C82FF5DCB00014DD91 /* ProfileView.swift in Sources */,
 				D9E5F79C2FF5DCB00014DD91 /* GuestSessionStore.swift in Sources */,
 				D9E5F82F2FF5DCB00014DD91 /* ProductsView.swift in Sources */,
+				6F149FB92FFA959600F7EAF3 /* ChatInputBar.swift in Sources */,
 				D9E5F83C2FF5DCB00014DD91 /* BagsTransitionView.swift in Sources */,
 				D9E5F7EE2FF5DCB00014DD91 /* PaymentConfirmationViewModel.swift in Sources */,
 				D9E5F7A72FF5DCB00014DD91 /* AppUserEntity.swift in Sources */,
@@ -2200,6 +2269,7 @@
 				D9E5F8502FF5DCB00014DD91 /* CategoryRepositoryProtocol.swift in Sources */,
 				D946FD842FF9859100FBC3E1 /* GraphQLStorefrontNetworkError.swift in Sources */,
 				D57F10612FF6ACA900F421D4 /* HomeBrandsViewModel.swift in Sources */,
+				6F149FAD2FFA94CF00F7EAF3 /* CartoAIChatView.swift in Sources */,
 				D9E5F7C72FF5DCB00014DD91 /* SettingsView.swift in Sources */,
 				D946FD642FF9151E00FBC3E1 /* GraphQLClient.swift in Sources */,
 				D946FD752FF95AC700FBC3E1 /* StorefrontProductsRemoteDataSource.swift in Sources */,
@@ -2265,6 +2335,7 @@
 				D9E5F78A2FF5DCB00014DD91 /* SettingsDTO.swift in Sources */,
 				D9E5F78F2FF5DCB00014DD91 /* ProductDTO.swift in Sources */,
 				D9E5F7FD2FF5DCB00014DD91 /* SearchFiltersViewModel.swift in Sources */,
+				6F149FB52FFA958600F7EAF3 /* ChatBubbleView.swift in Sources */,
 				D9E5F7E42FF5DCB00014DD91 /* ForgotPasswordSuccessView.swift in Sources */,
 				D9E5F81D2FF5DCB00014DD91 /* OrderTrackingViewModel.swift in Sources */,
 				D9E5F8132FF5DCB00014DD91 /* CartSummaryViewModel.swift in Sources */,
@@ -2329,6 +2400,7 @@
 				6F6DD8432FF7F1C80099872E /* CompareProductsUseCase.swift in Sources */,
 				6F6DD8442FF7F1C80099872E /* ExtractKeywordsFromImageUseCase.swift in Sources */,
 				D9E5F7C12FF5DCB00014DD91 /* SettingsViewModel.swift in Sources */,
+				6F149FAF2FFA94EA00F7EAF3 /* AIFeatureSheetViewModel.swift in Sources */,
 				D9E5F7832FF5DCB00014DD91 /* ReviewDTO.swift in Sources */,
 				D9E5F7A12FF5DCB00014DD91 /* Carto.xcdatamodeld in Sources */,
 				D9E5F8182FF5DCB00014DD91 /* CartView.swift in Sources */,
@@ -2354,7 +2426,9 @@
 				D9E5F8542FF5DCB00014DD91 /* Product.swift in Sources */,
 				D9E5F77F2FF5DCB00014DD91 /* ProductsRepositoryImpl.swift in Sources */,
 				D9E5F7B12FF5DCB00014DD91 /* ReviewEntity.swift in Sources */,
+				6F149FBB2FFA969600F7EAF3 /* AIFeatureSheet.swift in Sources */,
 				D59EBD482FF6D1B500883859 /* BrandsUseCase.swift in Sources */,
+				6F149FB12FFA957100F7EAF3 /* AmbientBlobBackground.swift in Sources */,
 				D9E5F7ED2FF5DCB00014DD91 /* BrandsHeaderView.swift in Sources */,
 				D946FDAC2FFA0AF100FBC3E1 /* CartQueries.swift in Sources */,
 				D9E5F7F12FF5DCB00014DD91 /* PaymentMethodsViewModel.swift in Sources */,
@@ -2379,12 +2453,14 @@
 				D9E5F7852FF5DCB00014DD91 /* APIResponseDTO.swift in Sources */,
 				D9E5F7FF2FF5DCB00014DD91 /* SearchViewModel.swift in Sources */,
 				D9E5F7A82FF5DCB00014DD91 /* OrderEntity.swift in Sources */,
+				6F149FB72FFA958E00F7EAF3 /* SuggestionChipsView.swift in Sources */,
 				D9E5F7812FF5DCB00014DD91 /* AuthenticationRepositoryImpl.swift in Sources */,
 				D9E5F81E2FF5DCB00014DD91 /* OrderDetailViewModel.swift in Sources */,
 				D9E5F8382FF5DCB00014DD91 /* Color+Hex.swift in Sources */,
 				D946FDB92FFA0B3400FBC3E1 /* STProduct.swift in Sources */,
 				D9E5F8472FF5DCB00014DD91 /* Debouncer.swift in Sources */,
 				D9E5F8062FF5DCB00014DD91 /* SearchBarView.swift in Sources */,
+				6F149FAB2FFA94A200F7EAF3 /* CartoAIChatViewModel.swift in Sources */,
 				D9E5F7DE2FF5DCB00014DD91 /* AuthRouter.swift in Sources */,
 				D9E5F7B62FF5DCB00014DD91 /* ProductEntity.swift in Sources */,
 				D9E5F85B2FF5DCB00014DD91 /* CategoryUseCase.swift in Sources */,
@@ -2573,6 +2649,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2603,6 +2680,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
