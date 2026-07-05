@@ -7,52 +7,54 @@
 
 import Foundation
 
-private func extractNumericId(from gid: String) -> Int {
-    let components = gid.split(separator: "/")
-    guard let last = components.last, let id = Int(last) else { return 0 }
-    return id
-}
-
 extension StorefrontProduct {
-    func toDomain() -> Product {
-        let productId = extractNumericId(from: id)
-        return Product(
-            id: productId,
+    func toDomain() -> STProduct {
+        STProduct(
+            id: id,
             title: title,
-            description: description ?? "",
-            vendor: vendor ?? "",
-            productType: productType ?? "",
+            description: description,
+            vendor: vendor,
+            productType: productType,
             handle: handle,
-            status: status ?? "",
             tags: tags,
-            variants: variants.nodes.map { $0.toDomain(productId: productId) },
-            images: images.nodes.map { $0.toDomain(productId: productId) },
-            options: options?.map { opt in
-                let optionId = opt.id.flatMap { extractNumericId(from: $0) } ?? 0
-                return ProductOption(id: optionId, productId: productId, name: opt.name, values: opt.values)
-            } ?? []
+            variants: variants.nodes.map { $0.toDomain() },
+            images: images.nodes.map { $0.toDomain() },
+            options: options?.map { $0.toDomain() } ?? []
         )
     }
 }
 
 extension StorefrontProductVariant {
-    func toDomain(productId: Int) -> ProductVariant {
-        let variantId = extractNumericId(from: id)
-        return ProductVariant(
-            id: variantId,
-            productId: productId,
+    func toDomain() -> STVariant {
+        STVariant(
+            id: id,
+            merchandiseId: id,
             title: title,
             price: price.amount,
-            sku: sku ?? "",
             compareAtPrice: compareAtPrice?.amount,
-            inventoryQuantity: 0
+            sku: sku,
+            availableForSale: availableForSale,
+            currencyCode: price.currencyCode
         )
     }
 }
 
 extension StorefrontImage {
-    func toDomain(productId: Int) -> ProductImage {
-        let imageId = id.flatMap { extractNumericId(from: $0) } ?? 0
-        return ProductImage(id: imageId, productId: productId, alt: altText ?? "", src: url)
+    func toDomain() -> STImage {
+        STImage(
+            id: id,
+            url: url,
+            altText: altText
+        )
+    }
+}
+
+extension StorefrontOption {
+    func toDomain() -> STOption {
+        STOption(
+            id: id,
+            name: name,
+            values: values
+        )
     }
 }
