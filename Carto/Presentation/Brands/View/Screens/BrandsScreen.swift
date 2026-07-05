@@ -10,6 +10,7 @@ import SwiftUI
 struct BrandsScreen: View {
     @ObservedObject var viewModel: HomeBrandsViewModel
     @State private var searchText: String = ""
+    @EnvironmentObject private var router: Router<AppRoute>
     
     let columns = [
         GridItem(.flexible(), spacing: 20),
@@ -30,11 +31,8 @@ struct BrandsScreen: View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 20) {
                 ForEach(filteredBrands) { brand in
-                    NavigationLink {
-                        ProductsView(
-                            brandID: brand.id,
-                            viewModel: DIContainer.shared.makeCategoryProductViewModel()
-                        )
+                    Button {
+                        router.push(to: .brandProducts(brandId: brand.id, brandName: brand.title))
                     } label: {
                         BrandsCell(brand: brand)
                     }
@@ -44,6 +42,11 @@ struct BrandsScreen: View {
         }
         .navigationTitle("Brands")
         .searchable(text: $searchText, prompt: "Search brands")
+        .task {
+            if viewModel.brands.isEmpty {
+                await viewModel.loadBrands()
+            }
+        }
     }
 }
 

@@ -2,23 +2,24 @@
 //  CartoApp.swift
 //  Carto
 //
-//  Created by Mohamed Ayman on 27/06/2026.
-//
 
 import SwiftUI
-import Firebase
+import FirebaseCore
 
 @main
 struct CartoApp: App {
-
     @StateObject private var appViewModel: AppViewModel
-    init() {
-        FirebaseApp.configure()
-        ServiceLocator.shared.register(container: AppContainer())
-        let container = DIContainer.shared
-        _appViewModel = StateObject(wrappedValue: container.appViewModel)
-    }
 
+    init() {
+        if FirebaseApp.app() == nil {
+            FirebaseApp.configure()
+        }
+
+        ServiceLocator.shared.register(container: AppContainer())
+
+        _appViewModel = StateObject(wrappedValue: DIContainer.shared.appViewModel)
+    }
+    
     var body: some Scene {
         WindowGroup {
             switch appViewModel.sessionState {
@@ -27,12 +28,12 @@ struct CartoApp: App {
             case .unauthenticated:
                 AuthCoordinator(container: DIContainer.shared)
             case .guest:
-                MainView()
+                ContentView()
             case .authenticated(let user):
                 if user.isEmailVerified {
-                    MainView()
+                    ContentView()
                 } else {
-                    AuthCoordinator(container: DIContainer.shared)
+                    Text("Carto requires iOS 17 or later.")
                 }
             }
         }

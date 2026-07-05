@@ -13,9 +13,9 @@
 
 import SwiftUI
 
-@available(iOS 17.0, *)
 struct CategoryListView: View {
     @StateObject var viewModel: CategoryListViewModel
+    @EnvironmentObject private var router: Router<AppRoute>
     
     @State private var isSearchActive = false
     @State private var searchText = ""
@@ -29,67 +29,67 @@ struct CategoryListView: View {
 
     
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 0) {
-                CustomCategoryNavigationBar(
-                    isSearchActive: $isSearchActive,
-                    searchText: $searchText,
-                    isSearchFieldFocused: $isSearchFieldFocused
-                )
-                
-                Group {
-                    switch viewModel.state {
-                    case .loading:
-                        Spacer()
-                        ProgressView()
-                        Spacer()
-                        
-                    case .error(let message):
-                        Spacer()
-                        Text(message).foregroundColor(.red)
-                        Spacer()
-                        
-                    case .success(let allCategories):
-                        let displayCategories = allCategories.filter {
-                            let title = $0.title.lowercased()
-                            return title != "home page" &&
-                                   title != "hydrogen" &&
-                                   (searchText.isEmpty || title.contains(searchText.lowercased()))
-                        }
-                        
-                        ScrollView {
-                            LazyVGrid(columns: columns, spacing: 16) {
-                                ForEach(displayCategories) { category in
-                                    NavigationLink {
-                                        ProductsView(
+        VStack(spacing: 0) {
+            CustomCategoryNavigationBar(
+                isSearchActive: $isSearchActive,
+                searchText: $searchText,
+                isSearchFieldFocused: $isSearchFieldFocused
+            )
+            
+            Group {
+                switch viewModel.state {
+                case .loading:
+                    Spacer()
+                    ProgressView()
+                    Spacer()
+                    
+                case .error(let message):
+                    Spacer()
+                    Text(message).foregroundColor(.red)
+                    Spacer()
+                    
+                case .success(let allCategories):
+                    let displayCategories = allCategories.filter {
+                        let title = $0.title.lowercased()
+                        return title != "home page" &&
+                               title != "hydrogen" &&
+                               (searchText.isEmpty || title.contains(searchText.lowercased()))
+                    }
+                    
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 16) {
+                            ForEach(displayCategories) { category in
+                                Button {
+                                    router.push(
+                                        to: .categoryProducts(
                                             categoryId: String(category.id),
-                                            viewModel: DIContainer.shared.makeCategoryProductViewModel()
+                                            categoryName: category.title
                                         )
-                                    } label: {
-                                        CategoryCardView(category: category)
-                                    }
-                                    .buttonStyle(.plain)
+                                    )
+                                } label: {
+                                    CategoryCardView(category: category)
                                 }
+                                .buttonStyle(.plain)
                             }
-                            .padding(.horizontal, 16)
-                            .padding(.top, 12)
                         }
+                        .padding(.horizontal, 16)
+                        .padding(.top, 12)
                     }
                 }
             }
-            .background(Color(.systemGroupedBackground).opacity(0.3))
-            .task {
-                await viewModel.loadCategories()
-                print("======")
-                await viewModel.loadSubCategories()
-                print("======")
-                await viewModel.loadSubcategories(for: "347833073708")
-                await viewModel.loadSubcategories(for: "347833565228")
+        }
+        .background(Color(.systemGroupedBackground).opacity(0.3))
+        .task {
+            await viewModel.loadCategories()
+            print("======")
+            await viewModel.loadSubCategories()
+            print("======")
+            await viewModel.loadSubcategories(for: "347833073708")
+            await viewModel.loadSubcategories(for: "347833565228")
 
-            }
-            .onAppear {
-                Task { await viewModel.loadCategories() }
-            }
+        }
+        .onAppear {
+            Task { await viewModel.loadCategories() }
         }
     }
 }
