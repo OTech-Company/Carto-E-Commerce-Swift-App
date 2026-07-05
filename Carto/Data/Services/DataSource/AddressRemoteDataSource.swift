@@ -2,92 +2,63 @@
 //  AddressRemoteDataSource.swift
 //  Carto
 //
-//  Created by Nadin Ahmed on 04/07/2026.
+//  Created by Mohamed Ayman on 04/07/2026.
 //
+
 import Foundation
 
-protocol AddressRemoteDataSourceProtocol {
-    func getAllAddresses(for customerID: String) async throws -> AddressResponseDTO
-    func getAddressByID(for addressID: String, customerID: String) async throws -> AddressByIdDTO
-    func addAddress(for customerID: String, address: AddressRequestDTO) async throws -> AddressByIdDTO
-    func updateAddress(for addressID: String, customerID: String, address: AddressRequestDTO) async throws -> AddressByIdDTO
-    func setDefaultAddress(for customerID: String, addressID: String) async throws -> AddressByIdDTO
-    func deleteAddress(for addressID: String, customerID: String) async throws -> Void
+protocol AddressRemoteDataSource {
+    func createAddress(accessToken: String, address: StorefrontMailingAddressInput) async throws -> CustomerAddress
+    func updateAddress(accessToken: String, id: String, address: StorefrontMailingAddressInput) async throws -> CustomerAddress
+    func deleteAddress(accessToken: String, id: String) async throws -> String
+    func setDefaultAddress(accessToken: String, addressId: String) async throws -> CustomerAddress?
 }
 
-class AddressRemoteDataSource: AddressRemoteDataSourceProtocol {
-    func getAllAddresses(for customerID: String) async throws
-        -> AddressResponseDTO
-    {
-        let response: AddressResponseDTO = try await ShopifyAPIClient.shared
-            .requestREST(
-                endpoint: ShopifyEndpoint.addresses(customerId: customerID)
-            )
-        return response
+final class AddressGraphQLRemoteDataSource: AddressRemoteDataSource {
+
+    private let client: GraphQLClient
+
+    init(client: GraphQLClient = GraphQLStorefrontClient.shared) {
+        self.client = client
     }
 
-    func getAddressByID(for addressID: String, customerID: String) async throws
-        -> AddressByIdDTO
-    {
-        let response: AddressByIdDTO = try await ShopifyAPIClient.shared
-            .requestREST(
-                endpoint: ShopifyEndpoint.addressByID(
-                    id: addressID,
-                    customerId: customerID
-                )
-            )
-        return response
+    func createAddress(accessToken: String, address: StorefrontMailingAddressInput) async throws -> CustomerAddress {
+        let request = GraphQLRequest(
+            query: StorefrontAddressQueries.createAddress,
+            variables: StorefrontCreateAddressVariables(customerAccessToken: accessToken, address: address),
+            operationName: "CustomerAddressCreate"
+        )
+        let response: StorefrontCreateAddressResponse = try await client.request(request)
+        return try response.customerAddressCreate.toDomain()
     }
 
-    func addAddress(for customerID: String, address: AddressRequestDTO)
-        async throws -> AddressByIdDTO
-    {
-        let response: AddressByIdDTO = try await ShopifyAPIClient.shared
-            .requestREST(
-                endpoint: ShopifyEndpoint.addAddress(
-                    customerId: customerID
-                ),
-                body: ["address": address]
-            )
-        return response
+    func updateAddress(accessToken: String, id: String, address: StorefrontMailingAddressInput) async throws -> CustomerAddress {
+        let request = GraphQLRequest(
+            query: StorefrontAddressQueries.updateAddress,
+            variables: StorefrontUpdateAddressVariables(customerAccessToken: accessToken, id: id, address: address),
+            operationName: "CustomerAddressUpdate"
+        )
+        let response: StorefrontUpdateAddressResponse = try await client.request(request)
+        return try response.customerAddressUpdate.toDomain()
     }
 
-    func updateAddress(
-        for addressID: String,
-        customerID: String,
-        address: AddressRequestDTO
-    ) async throws -> AddressByIdDTO {
-        let response: AddressByIdDTO = try await ShopifyAPIClient.shared
-            .requestREST(
-                endpoint: ShopifyEndpoint.updateAddress(
-                    id: addressID,
-                    customerId: customerID
-                ),
-                body: ["address": address]
-            )
-        return response
+    func deleteAddress(accessToken: String, id: String) async throws -> String {
+        let request = GraphQLRequest(
+            query: StorefrontAddressQueries.deleteAddress,
+            variables: StorefrontDeleteAddressVariables(customerAccessToken: accessToken, id: id),
+            operationName: "CustomerAddressDelete"
+        )
+        let response: StorefrontDeleteAddressResponse = try await client.request(request)
+        return try response.customerAddressDelete.toDomain()
     }
 
-    func setDefaultAddress(for customerID: String, addressID: String)
-        async throws -> AddressByIdDTO
-    {
-        let response: AddressByIdDTO = try await ShopifyAPIClient.shared
-            .requestREST(
-                endpoint: ShopifyEndpoint.setDefaultAddress(
-                    customerId: customerID,
-                    addressId: addressID
-                )
-            )
-        return response
-    }
-
-    func deleteAddress(for addressID: String, customerID: String) async throws {
-        let response: EmptyResponse = try await ShopifyAPIClient.shared
-            .requestREST(
-                endpoint: ShopifyEndpoint.deleteAddress(
-                    id: addressID,
-                    customerId: customerID
-                )
-            )
+    func setDefaultAddress(accessToken: String, addressId: String) async throws -> CustomerAddress? {
+        let request = GraphQLRequest(
+            query: StorefrontAddressQueries.setDefaultAddress,
+            variables: StorefrontSetDefaultAddressVariables(customerAccessToken: accessToken, addressId: addressId),
+            operationName: "CustomerDefaultAddressUpdate"
+        )
+        let response: StorefrontSetDefaultAddressResponse = try await client.request(request)
+        return try response.customerDefaultAddressUpdate.toDomain()
     }
 }

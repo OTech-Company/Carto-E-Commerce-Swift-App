@@ -151,6 +151,7 @@ final class AuthRegisterViewModel: ObservableObject {
             do {
                 try await Task.sleep(for: .seconds(1))
                 repository.continueAsGuest()
+                await authSession.refreshSession()
                 isLoading = false
             } catch {
                 isLoading = false

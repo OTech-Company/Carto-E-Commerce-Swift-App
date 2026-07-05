@@ -11,10 +11,10 @@ enum NetworkConstants {
     static let apiSecretKey = AppEnvironment.apiSecretKey
 
     /// Shopify Admin REST base URL.
-    static let restBaseURL = "\(shopDomain)/admin/api/\(apiVersion)"
+    static let restBaseURL = "https://\(shopDomain)/admin/api/\(apiVersion)"
 
     /// Shopify Storefront GraphQL endpoint.
-    static let graphqlBaseURL = "\(shopDomain)/api/\(apiVersion)/graphql.json"
+    static let graphqlBaseURL = "https://\(shopDomain)/api/\(apiVersion)/graphql.json"
 
     /// Backwards-compatible alias for the existing network layer.
     static let baseURL = restBaseURL
@@ -25,4 +25,5 @@ enum NetworkConstants {
     static let adminAccessTokenHeader = "X-Shopify-Access-Token"
     static let storefrontAccessTokenHeader = "X-Shopify-Storefront-Access-Token"
     static let acceptHeader = "Accept"
+    static let contentTypeHeader = "Content-Type"
 }
