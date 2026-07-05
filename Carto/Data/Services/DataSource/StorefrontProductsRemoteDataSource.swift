@@ -8,9 +8,9 @@
 import Foundation
 
 protocol StorefrontProductsRemoteDataSourceProtocol {
-    func fetchProducts(first: Int, after: String?) async throws -> StorefrontPage<Product>
-    func fetchProduct(handle: String) async throws -> Product?
-    func searchProducts(query: String, first: Int) async throws -> StorefrontPage<Product>
+    func fetchProducts(first: Int, after: String?) async throws -> StorefrontPage<STProduct>
+    func fetchProduct(handle: String) async throws -> STProduct?
+    func searchProducts(query: String, first: Int) async throws -> StorefrontPage<STProduct>
 }
 
 final class StorefrontProductsRemoteDataSource: StorefrontProductsRemoteDataSourceProtocol {
@@ -21,7 +21,7 @@ final class StorefrontProductsRemoteDataSource: StorefrontProductsRemoteDataSour
         self.client = client
     }
 
-    func fetchProducts(first: Int, after: String? = nil) async throws -> StorefrontPage<Product> {
+    func fetchProducts(first: Int, after: String? = nil) async throws -> StorefrontPage<STProduct> {
         let request = GraphQLRequest(query: StorefrontProductQueries.fetchProducts,
                                      variables: StorefrontProductsVariables(first: first, after: after),
                                      operationName: "FetchProducts")
@@ -29,7 +29,7 @@ final class StorefrontProductsRemoteDataSource: StorefrontProductsRemoteDataSour
         return response.products.toStorefrontPage { $0.toDomain() }
     }
 
-    func fetchProduct(handle: String) async throws -> Product? {
+    func fetchProduct(handle: String) async throws -> STProduct? {
         let request = GraphQLRequest(query: StorefrontProductQueries.fetchProductByHandle,
                                      variables: StorefrontProductByHandleVariables(handle: handle),
                                      operationName: "FetchProductByHandle")
@@ -37,7 +37,7 @@ final class StorefrontProductsRemoteDataSource: StorefrontProductsRemoteDataSour
         return response.productByHandle?.toDomain()
     }
 
-    func searchProducts(query: String, first: Int) async throws -> StorefrontPage<Product> {
+    func searchProducts(query: String, first: Int) async throws -> StorefrontPage<STProduct> {
         let request = GraphQLRequest(query: StorefrontProductQueries.searchProducts,
                                      variables: StorefrontSearchProductsVariables(query: query, first: first),
                                      operationName: "SearchProducts")
