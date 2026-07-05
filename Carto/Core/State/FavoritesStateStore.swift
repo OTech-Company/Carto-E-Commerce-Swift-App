@@ -15,7 +15,7 @@ final class FavoritesStateStore: ObservableObject {
 
     private init() {}
 
-    func setInitial(_ ids: Set<Int>) {
+    func initializeFavorites(_ ids: Set<Int>) {
         favoriteIds = ids
     }
 

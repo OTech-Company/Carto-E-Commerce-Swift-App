@@ -29,7 +29,6 @@ final class DIContainer {
         appViewModel = AppViewModel(authSession: authSession)
         favoritesLocalDataSource = FavoritesLocalDataSource()
         favoritesRemoteDataSource = FavoritesRemoteDataSource()
-
     }
 
     func makeLoginViewModel(router: AuthRouter) -> AuthLoginViewModel {
@@ -40,7 +39,7 @@ final class DIContainer {
             router: router
         )
     }
-    
+
     func makeRegisterViewModel(router: AuthRouter) -> AuthRegisterViewModel {
         AuthRegisterViewModel(
             validator: validator,
@@ -66,19 +65,19 @@ final class DIContainer {
             router: router
         )
     }
-    
+
     func makeBrandsRepo() -> BrandsRepoProtocol {
-            BrandsRepoImpl(remoteDataSource: brandRemoteDataSource)
-        }
-    
+        BrandsRepoImpl(remoteDataSource: brandRemoteDataSource)
+    }
+
     func makeBrandsUseCase() -> BrandsUseCaseProtocol {
-            BrandsUseCase(repository: makeBrandsRepo())
-        }
-    
+        BrandsUseCase(repository: makeBrandsRepo())
+    }
+
     func makeHomeProductsViewModel() -> HomeProductsViewModel {
         HomeProductsViewModel(useCase: makeProductsUseCase())
     }
-    
+
     func makeHomeViewModel() -> HomeViewModel {
         HomeViewModel(
             brandVM: HomeBrandsViewModel(useCase: makeBrandsUseCase()),
@@ -103,30 +102,36 @@ final class DIContainer {
         )
     }
 
-    func makeFavoritesRepo() -> FavoritesRepository {
-        FavoritesRepositoryImpl(
+    private(set) lazy var favoritesRepository: FavoritesRepository = {
+        let repo = FavoritesRepositoryImpl(
             local: favoritesLocalDataSource,
             remote: favoritesRemoteDataSource,
             currentUserId: { [weak self] in self?.authSession.currentUser?.uid }
         )
-    }
+        repo.bootstrapStore()
+        return repo
+    }()
 
     func makeGetFavoritesUseCase() -> GetFavoritesUseCase {
-        GetFavoritesUseCase(repository: makeFavoritesRepo())
+        GetFavoritesUseCase(repository: favoritesRepository)
     }
 
     func makeIsFavoriteUseCase() -> IsFavoriteUseCase {
-        IsFavoriteUseCase(repository: makeFavoritesRepo())
+        IsFavoriteUseCase(repository: favoritesRepository)
     }
 
     func makeAddFavoriteUseCase() -> AddFavoriteUseCase {
-        AddFavoriteUseCase(repository: makeFavoritesRepo())
+        AddFavoriteUseCase(repository: favoritesRepository)
     }
 
     func makeRemoveFavoriteUseCase() -> RemoveFavoriteUseCase {
-        RemoveFavoriteUseCase(repository: makeFavoritesRepo())
+        RemoveFavoriteUseCase(repository: favoritesRepository)
     }
-    
+
+    func makeSyncFavoritesUseCase() -> SyncFavoritesUseCase {
+        SyncFavoritesUseCase(repository: favoritesRepository)
+    }
+
     func makeFavoritesViewModel() -> FavoritesViewModel {
         FavoritesViewModel(
             getFavoritesUseCase: makeGetFavoritesUseCase(),
@@ -134,7 +139,7 @@ final class DIContainer {
             syncFavoritesUseCase: makeSyncFavoritesUseCase()
         )
     }
-    
+
     func makeProductCardViewModel(product: Product) -> ProductCardViewModel {
         ProductCardViewModel(
             product: product,
@@ -149,9 +154,5 @@ final class DIContainer {
             addFavoriteUseCase: makeAddFavoriteUseCase(),
             removeFavoriteUseCase: makeRemoveFavoriteUseCase()
         )
-    }
-    
-    func makeSyncFavoritesUseCase() -> SyncFavoritesUseCase {
-        SyncFavoritesUseCase(repository: makeFavoritesRepo())
     }
 }

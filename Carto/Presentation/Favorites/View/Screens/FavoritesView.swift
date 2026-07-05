@@ -61,7 +61,7 @@ struct FavoritesView: View {
             .onAppear {
                 viewModel.loadFavorites()
             }
-            .alert("Remove from favorites", isPresented: $viewModel.showDeleteConfirmation) {
+            .alert("Remove from favorites?", isPresented: $viewModel.showDeleteConfirmation) {
                 Button("Cancel", role: .cancel) {
                     viewModel.cancelDelete()
                 }

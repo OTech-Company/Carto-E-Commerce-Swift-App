@@ -29,69 +29,29 @@ final class FavoritesRemoteDataSource: FavoritesRemoteDataSourceProtocol {
         let snapshot = try await collection(uid: uid).getDocuments()
         return snapshot.documents.compactMap { doc -> FavoriteItem? in
             let data = doc.data()
-
             guard
-                let id = data["id"] as? Int,
-                let title = data["title"] as? String,
+                let base64 = data["productData"] as? String,
+                let decodedData = Data(base64Encoded: base64),
+                let product = try? JSONDecoder().decode(Product.self, from: decodedData),
                 let timestamp = data["savedAt"] as? Timestamp
             else { return nil }
 
-            let description = data["description"] as? String ?? ""
-            let imageURL = data["imageURL"] as? String ?? ""
-            let price = data["price"] as? Double ?? 0
-            let compareAtPrice = data["compareAtPrice"] as? Double
-            let colors = data["colors"] as? [String] ?? []
-            let sizes = data["sizes"] as? [String] ?? []
-
-            var options: [ProductOption] = []
-            if !sizes.isEmpty {
-                options.append(ProductOption(id: id, productId: id, name: "Size", values: sizes))
-            }
-            if !colors.isEmpty {
-                options.append(ProductOption(id: id, productId: id, name: "Color", values: colors))
-            }
-
-            let product = Product(
-                id: id,
-                title: title,
-                description: description,
-                vendor: "",
-                productType: "",
-                handle: "",
-                status: "active",
-                tags: [],
-                variants: [
-                    ProductVariant(
-                        id: id,
-                        productId: id,
-                        title: "Default",
-                        price: String(price),
-                        sku: "",
-                        compareAtPrice: compareAtPrice.map { String($0) },
-                        inventoryQuantity: 0
-                    )
-                ],
-                images: [
-                    ProductImage(id: id, productId: id, alt: title, src: imageURL)
-                ],
-                options: options
-            )
-
-            return FavoriteItem(id: id, product: product, savedAt: timestamp.dateValue())
+            return FavoriteItem(id: product.id, product: product, savedAt: timestamp.dateValue())
         }
     }
 
     func save(_ item: FavoriteItem, uid: String) async throws {
+        guard let encoded = try? JSONEncoder().encode(item.product) else {
+            throw NSError(domain: "FavoritesRemoteDataSource", code: -1, userInfo: [
+                NSLocalizedDescriptionKey: "Failed to encode product for saving."
+            ])
+        }
         let product = item.product
+
         try await collection(uid: uid).document("\(item.id)").setData([
-            "id": product.id,
+            "productData": encoded.base64EncodedString(),
             "title": product.title,
-            "description": product.description,
-            "imageURL": product.imageURL,
             "price": product.price,
-            "compareAtPrice": product.compareAtPrice as Any,
-            "colors": product.colors,
-            "sizes": product.sizes,
             "savedAt": Timestamp(date: item.savedAt)
         ])
     }
