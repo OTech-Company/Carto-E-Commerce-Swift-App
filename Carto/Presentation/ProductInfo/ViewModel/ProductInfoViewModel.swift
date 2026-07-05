@@ -16,20 +16,17 @@ final class ProductsInfoViewModel: ObservableObject {
     @Published var selectedColorIndex = 0
     @Published private(set) var isFavorite: Bool
 
-    private let addFavoriteUseCase: AddFavoriteUseCase
-    private let removeFavoriteUseCase: RemoveFavoriteUseCase
+    private let repository: FavoritesRepository
     private var cancellable: AnyCancellable?
 
     init(
         product: Product,
-        addFavoriteUseCase: AddFavoriteUseCase,
-        removeFavoriteUseCase: RemoveFavoriteUseCase,
+        repository: FavoritesRepository,
         store: FavoritesStateStore = .shared
     ) {
         self.product = product
         self.selectedSize = product.sizes.first ?? ""
-        self.addFavoriteUseCase = addFavoriteUseCase
-        self.removeFavoriteUseCase = removeFavoriteUseCase
+        self.repository = repository
         self.isFavorite = store.isFavorite(product.id)
 
         cancellable = store.$favoriteIds
@@ -45,9 +42,9 @@ final class ProductsInfoViewModel: ObservableObject {
 
     func toggleFavorite() {
         if isFavorite {
-            removeFavoriteUseCase.execute(productId: product.id)
+            repository.removeFavorite(productId: product.id)
         } else {
-            addFavoriteUseCase.execute(product: product)
+            repository.addFavorite(FavoriteItem(product: product))
         }
     }
 

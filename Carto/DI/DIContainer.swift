@@ -112,47 +112,21 @@ final class DIContainer {
         return repo
     }()
 
-    func makeGetFavoritesUseCase() -> GetFavoritesUseCase {
-        GetFavoritesUseCase(repository: favoritesRepository)
-    }
-
-    func makeIsFavoriteUseCase() -> IsFavoriteUseCase {
-        IsFavoriteUseCase(repository: favoritesRepository)
-    }
-
-    func makeAddFavoriteUseCase() -> AddFavoriteUseCase {
-        AddFavoriteUseCase(repository: favoritesRepository)
-    }
-
-    func makeRemoveFavoriteUseCase() -> RemoveFavoriteUseCase {
-        RemoveFavoriteUseCase(repository: favoritesRepository)
-    }
-
-    func makeSyncFavoritesUseCase() -> SyncFavoritesUseCase {
-        SyncFavoritesUseCase(repository: favoritesRepository)
-    }
-
     func makeFavoritesViewModel() -> FavoritesViewModel {
-        FavoritesViewModel(
-            getFavoritesUseCase: makeGetFavoritesUseCase(),
-            removeFavoriteUseCase: makeRemoveFavoriteUseCase(),
-            syncFavoritesUseCase: makeSyncFavoritesUseCase()
-        )
+        FavoritesViewModel(repository: favoritesRepository)
     }
 
     func makeProductCardViewModel(product: Product) -> ProductCardViewModel {
         ProductCardViewModel(
             product: product,
-            addFavoriteUseCase: makeAddFavoriteUseCase(),
-            removeFavoriteUseCase: makeRemoveFavoriteUseCase()
+            repository: favoritesRepository
         )
     }
 
     func makeProductsInfoViewModel(product: Product) -> ProductsInfoViewModel {
         ProductsInfoViewModel(
             product: product,
-            addFavoriteUseCase: makeAddFavoriteUseCase(),
-            removeFavoriteUseCase: makeRemoveFavoriteUseCase()
+            repository: favoritesRepository
         )
     }
 }

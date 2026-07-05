@@ -16,24 +16,20 @@ final class FavoritesViewModel: ObservableObject {
     @Published var showDeleteConfirmation = false
     @Published var navigateToProduct: Product?
 
-    private let getFavoritesUseCase: GetFavoritesUseCase
-    private let removeFavoriteUseCase: RemoveFavoriteUseCase
+    private let repository: FavoritesRepository
     private var cancellable: AnyCancellable?
     private var isPerformingLocalChange = false
-    private let syncFavoritesUseCase: SyncFavoritesUseCase
 
     init(
-        getFavoritesUseCase: GetFavoritesUseCase,
-        removeFavoriteUseCase: RemoveFavoriteUseCase,
-        syncFavoritesUseCase: SyncFavoritesUseCase,
+        repository: FavoritesRepository,
         store: FavoritesStateStore = .shared
     ) {
-        self.getFavoritesUseCase = getFavoritesUseCase
-        self.removeFavoriteUseCase = removeFavoriteUseCase
-        self.syncFavoritesUseCase = syncFavoritesUseCase
+        self.repository = repository
         loadFavorites()
-        Task {
-            await syncFavoritesUseCase.execute()
+
+        Task { [weak self] in
+            await self?.repository.syncFromRemote()
+            self?.loadFavorites()
         }
 
         cancellable = store.$favoriteIds
@@ -46,7 +42,7 @@ final class FavoritesViewModel: ObservableObject {
     }
 
     func loadFavorites() {
-        favorites = getFavoritesUseCase.execute()
+        favorites = repository.getFavorites()
     }
 
     func requestDelete(_ item: FavoriteItem) {
@@ -57,7 +53,7 @@ final class FavoritesViewModel: ObservableObject {
     func confirmDelete() {
         guard let item = itemPendingDeletion else { return }
         isPerformingLocalChange = true
-        removeFavoriteUseCase.execute(productId: item.id)
+        repository.removeFavorite(productId: item.id)
         itemPendingDeletion = nil
         loadFavorites()
         isPerformingLocalChange = false

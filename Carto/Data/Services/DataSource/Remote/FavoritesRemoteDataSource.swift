@@ -2,7 +2,7 @@
 //  FavoritesRemoteDataSource.swift
 //  Carto
 //
-//  Created by Manona on 04/07/2026.
+//  Created by Manona on 05/07/2026.
 //
 
 import Foundation
@@ -30,9 +30,8 @@ final class FavoritesRemoteDataSource: FavoritesRemoteDataSourceProtocol {
         return snapshot.documents.compactMap { doc -> FavoriteItem? in
             let data = doc.data()
             guard
-                let base64 = data["productData"] as? String,
-                let decodedData = Data(base64Encoded: base64),
-                let product = try? JSONDecoder().decode(Product.self, from: decodedData),
+                let productMap = data["product"] as? [String: Any],
+                let product = Product(firestoreMap: productMap),
                 let timestamp = data["savedAt"] as? Timestamp
             else { return nil }
 
@@ -41,15 +40,10 @@ final class FavoritesRemoteDataSource: FavoritesRemoteDataSourceProtocol {
     }
 
     func save(_ item: FavoriteItem, uid: String) async throws {
-        guard let encoded = try? JSONEncoder().encode(item.product) else {
-            throw NSError(domain: "FavoritesRemoteDataSource", code: -1, userInfo: [
-                NSLocalizedDescriptionKey: "Failed to encode product for saving."
-            ])
-        }
         let product = item.product
 
         try await collection(uid: uid).document("\(item.id)").setData([
-            "productData": encoded.base64EncodedString(),
+            "product": product.asFirestoreMap,
             "title": product.title,
             "price": product.price,
             "savedAt": Timestamp(date: item.savedAt)

@@ -13,19 +13,16 @@ final class ProductCardViewModel: ObservableObject {
     let product: Product
     @Published private(set) var isFavorite: Bool
 
-    private let addFavoriteUseCase: AddFavoriteUseCase
-    private let removeFavoriteUseCase: RemoveFavoriteUseCase
+    private let repository: FavoritesRepository
     private var cancellable: AnyCancellable?
 
     init(
         product: Product,
-        addFavoriteUseCase: AddFavoriteUseCase,
-        removeFavoriteUseCase: RemoveFavoriteUseCase,
+        repository: FavoritesRepository,
         store: FavoritesStateStore = .shared
     ) {
         self.product = product
-        self.addFavoriteUseCase = addFavoriteUseCase
-        self.removeFavoriteUseCase = removeFavoriteUseCase
+        self.repository = repository
         self.isFavorite = store.isFavorite(product.id)
 
         cancellable = store.$favoriteIds
@@ -38,10 +35,9 @@ final class ProductCardViewModel: ObservableObject {
 
     func toggleFavorite() {
         if isFavorite {
-            removeFavoriteUseCase.execute(productId: product.id)
+            repository.removeFavorite(productId: product.id)
         } else {
-            addFavoriteUseCase.execute(product: product)
+            repository.addFavorite(FavoriteItem(product: product))
         }
-        
     }
 }
