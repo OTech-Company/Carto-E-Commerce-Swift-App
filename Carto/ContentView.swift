@@ -79,20 +79,13 @@ extension ContentView {
         case .productDetails(let product):
             return AnyView(ProductsInfoView(product: product))
         case .aiChat:
-                    
                     let client = GroqClient(apiKey: AppEnvironment.groqApiKey)
-                    
-                   
                     let aiRepository = AIRepositoryImpl(client: client)
-                    
-                    
                     let runShoppingAssistantUseCase = RunShoppingAssistantUseCase(repository: aiRepository)
-                    
                     
                     return AnyView(
                         CartoAIChatView(runShoppingAssistantUseCase: runShoppingAssistantUseCase)
-                            .navigationTitle("AI Assistant")
-                            .navigationBarTitleDisplayMode(.inline)
+                            .toolbar(.hidden, for: .navigationBar)
                     )
         }
     }

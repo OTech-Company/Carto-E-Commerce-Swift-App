@@ -5,24 +5,31 @@
 //  Created by Osama Hosam on 05/07/2026.
 //
 
-
-//
-//  ChatHeaderView.swift
-//  Carto
-//
-
 import SwiftUI
 
 struct ChatHeaderView: View {
     var onBackTap: (() -> Void)? = nil
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        HStack {
-            Button(action: { onBackTap?() }) {
+        HStack(spacing: 12) {
+            // MARK: - Native Back Navigation Trigger
+            Button(action: {
+                if let onBackTap = onBackTap {
+                    onBackTap()
+                } else {
+                    dismiss() 
+                }
+            }) {
                 Image(systemName: "chevron.left")
                     .foregroundColor(.primary)
                     .font(.title3)
+                    .fontWeight(.medium)
             }
+            .padding(.trailing, 4)
+            
+            Text("Carto AI Assistant")
+                .font(.headline)
             
             HStack(spacing: 6) {
                 Circle()
@@ -37,9 +44,6 @@ struct ChatHeaderView: View {
             .padding(.vertical, 4)
             .background(Color.secondary.opacity(0.1))
             .cornerRadius(12)
-            
-            Text("Carto AI Assistant")
-                .font(.headline)
             
             Spacer()
             

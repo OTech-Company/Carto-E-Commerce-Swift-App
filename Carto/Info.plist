@@ -4,19 +4,23 @@
 <dict>
 	<key>ShopifyAccessToken</key>
 	<string>$(SHOPIFY_ACCESS_TOKEN)</string>
-    <key>GroqAPIKey</key>
-    <string>$(GROQ_API_KEY)</string>
-    <key>ShopifyShopDomain</key>
-    <string>$(SHOPIFY_SHOP_DOMAIN)</string>
-    <key>ShopifyApiVersion</key>
-    <string>$(SHOPIFY_API_VERSION)</string>
-    <key>ShopifyStorefrontToken</key>
-    <string>$(SHOPIFY_STOREFRONT_TOKEN)</string>
-    <key>ShopifyStorePassword</key>
-    <string>$(SHOPIFY_STORE_PASSWORD)</string>
-    <key>ShopifyApiKey</key>
-    <string>$(SHOPIFY_API_KEY)</string>
-    <key>ShopifyApiSecretKey</key>
-    <string>$(SHOPIFY_API_SECRET_KEY)</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Carto needs speech recognition permission to dictate your AI queries.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Carto needs microphone access to record your voice for text dictation.</string>
+	<key>GroqAPIKey</key>
+	<string>$(GROQ_API_KEY)</string>
+	<key>ShopifyShopDomain</key>
+	<string>$(SHOPIFY_SHOP_DOMAIN)</string>
+	<key>ShopifyApiVersion</key>
+	<string>$(SHOPIFY_API_VERSION)</string>
+	<key>ShopifyStorefrontToken</key>
+	<string>$(SHOPIFY_STOREFRONT_TOKEN)</string>
+	<key>ShopifyStorePassword</key>
+	<string>$(SHOPIFY_STORE_PASSWORD)</string>
+	<key>ShopifyApiKey</key>
+	<string>$(SHOPIFY_API_KEY)</string>
+	<key>ShopifyApiSecretKey</key>
+	<string>$(SHOPIFY_API_SECRET_KEY)</string>
 </dict>
 </plist>
