@@ -10,30 +10,30 @@ import Combine
 
 @MainActor
 final class ProductCardViewModel: ObservableObject {
-    let product: Product
     @Published private(set) var isFavorite: Bool
 
     private let repository: FavoritesRepository
     private var cancellable: AnyCancellable?
+    private let productId: Int
 
     init(
-        product: Product,
+        productId: Int,
         repository: FavoritesRepository,
         store: FavoritesStateStore = .shared
     ) {
-        self.product = product
+        self.productId = productId
         self.repository = repository
-        self.isFavorite = store.isFavorite(product.id)
+        self.isFavorite = store.isFavorite(productId)
 
         cancellable = store.$favoriteIds
             .receive(on: DispatchQueue.main)
             .sink { [weak self] ids in
                 guard let self else { return }
-                self.isFavorite = ids.contains(self.product.id)
+                self.isFavorite = ids.contains(self.productId)
             }
     }
 
-    func toggleFavorite() {
+    func toggleFavorite(for product: Product) {
         if isFavorite {
             repository.removeFavorite(productId: product.id)
         } else {

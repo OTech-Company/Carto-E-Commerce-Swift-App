@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct ProductCard: View {
+    let product: Product
     @StateObject private var viewModel: ProductCardViewModel
     var onFavoriteTap: (() -> Void)? = nil
 
     init(product: Product, onFavoriteTap: (() -> Void)? = nil) {
-        _viewModel = StateObject(wrappedValue: DIContainer.shared.makeProductCardViewModel(product: product))
+        self.product = product
+        _viewModel = StateObject(wrappedValue: DIContainer.shared.makeProductCardViewModel(productId: product.id))
         self.onFavoriteTap = onFavoriteTap
     }
 
@@ -20,7 +22,7 @@ struct ProductCard: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Button {
-                    onFavoriteTap?() ?? viewModel.toggleFavorite()
+                    onFavoriteTap?() ?? viewModel.toggleFavorite(for: product)
                 } label: {
                     Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart")
                         .font(.system(size: 18))
@@ -31,27 +33,23 @@ struct ProductCard: View {
                 Spacer()
             }
 
-            AsyncImage(url: URL(string: viewModel.product.imageURL)) { image in
-                image.resizable().scaledToFill()
-            } placeholder: {
-                ProgressView()
-            }
-            .frame(height: 115)
-            .frame(maxWidth: .infinity)
-            .clipped()
-            .clipShape(RoundedRectangle(cornerRadius: 16))
+            imageView
+                .frame(height: 115)
+                .frame(maxWidth: .infinity)
+                .clipped()
+                .clipShape(RoundedRectangle(cornerRadius: 16))
 
-            Text(viewModel.product.title)
+            Text(product.title)
                 .font(.system(size: 14, weight: .bold))
                 .lineLimit(3)
 
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 6) {
-                    Text("$\(viewModel.product.price, specifier: "%.2f")")
+                    Text("$\(product.price, specifier: "%.2f")")
                         .font(.system(size: 12, weight: .bold))
                         .foregroundColor(.blue)
 
-                    if let compareAtPrice = viewModel.product.compareAtPrice {
+                    if let compareAtPrice = product.compareAtPrice {
                         Text("$\(compareAtPrice, specifier: "%.2f")")
                             .font(.system(size: 12))
                             .foregroundColor(.secondary)
@@ -59,7 +57,7 @@ struct ProductCard: View {
                     }
                 }
 
-                if let discount = viewModel.product.discountPercentage {
+                if let discount = product.discountPercentage {
                     Text("\(discount)% OFF")
                         .font(.system(size: 11, weight: .bold))
                         .foregroundColor(.red)
@@ -73,5 +71,32 @@ struct ProductCard: View {
         .background(Color(.systemGray6))
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(color: .black.opacity(0.05), radius: 6, x: 0, y: 3)
+    }
+
+    @ViewBuilder
+    private var imageView: some View {
+        if let url = URL(string: product.imageURL), !product.imageURL.isEmpty {
+            AsyncImage(url: url) { phase in
+                switch phase {
+                case .success(let image):
+                    image.resizable().scaledToFill()
+                case .failure:
+                    placeholderImage
+                case .empty:
+                    ProgressView()
+                @unknown default:
+                    placeholderImage
+                }
+            }
+        } else {
+            placeholderImage
+        }
+    }
+
+    private var placeholderImage: some View {
+        Image(systemName: "photo")
+            .font(.system(size: 28))
+            .foregroundColor(.gray.opacity(0.4))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

@@ -12,16 +12,25 @@ final class FavoritesRepositoryImpl: FavoritesRepository {
     private let remote: FavoritesRemoteDataSourceProtocol
     private let store: FavoritesStateStore
     private let currentUserId: () -> String?
+    private let defaults: UserDefaults
+    private let lastSyncedUserIdKey = "favorites_last_synced_uid"
+
+    private var lastSyncedUserId: String? {
+        get { defaults.string(forKey: lastSyncedUserIdKey) }
+        set { defaults.set(newValue, forKey: lastSyncedUserIdKey) }
+    }
 
     init(
         local: FavoritesLocalDataSourceProtocol,
         remote: FavoritesRemoteDataSourceProtocol,
         store: FavoritesStateStore = .shared,
+        defaults: UserDefaults = .standard,
         currentUserId: @escaping () -> String?
     ) {
         self.local = local
         self.remote = remote
         self.store = store
+        self.defaults = defaults
         self.currentUserId = currentUserId
     }
 
@@ -71,20 +80,40 @@ final class FavoritesRepositoryImpl: FavoritesRepository {
     }
 
     func syncFromRemote() async {
+        let uid = currentUserId()
+
+        guard uid != lastSyncedUserId else { return }
+
+        await local.deleteAll()
+        store.initializeFavorites([])
+
+        guard let uid else {
+            lastSyncedUserId = nil
+            return
+        }
+
+        guard let remoteItems = try? await remote.fetchAll(uid: uid) else {
+            lastSyncedUserId = uid
+            return
+        }
+
+        await local.saveAll(remoteItems)
+        store.initializeFavorites(Set(remoteItems.map { $0.id }))
+        lastSyncedUserId = uid
+    }
+
+    func forceRefreshFromRemote() async {
         guard let uid = currentUserId() else { return }
         guard let remoteItems = try? await remote.fetchAll(uid: uid) else { return }
 
         let remoteIds = Set(remoteItems.map { $0.id })
         let localIds = Set(local.fetchAll().map { $0.id })
+        let staleIds = Array(localIds.subtracting(remoteIds))
 
-        for item in remoteItems where !localIds.contains(item.id) {
-            local.save(item)
-        }
-
-        for id in localIds.subtracting(remoteIds) {
-            local.delete(productId: id)
-        }
+        await local.saveAll(remoteItems)
+        await local.delete(productIds: staleIds)
 
         store.initializeFavorites(Set(local.fetchAll().map { $0.id }))
+        lastSyncedUserId = uid
     }
 }

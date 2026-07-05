@@ -116,9 +116,9 @@ final class DIContainer {
         FavoritesViewModel(repository: favoritesRepository)
     }
 
-    func makeProductCardViewModel(product: Product) -> ProductCardViewModel {
+    func makeProductCardViewModel(productId: Int) -> ProductCardViewModel {
         ProductCardViewModel(
-            product: product,
+            productId: productId,
             repository: favoritesRepository
         )
     }

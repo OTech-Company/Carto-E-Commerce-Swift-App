@@ -12,7 +12,7 @@ final class CoreDataStack {
     private init() {}
 
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Carto") 
+        let container = NSPersistentContainer(name: "Carto")
         container.loadPersistentStores { _, error in
             if let error { fatalError("CoreData load error: \(error)") }
         }
@@ -25,5 +25,9 @@ final class CoreDataStack {
     func saveContext() {
         guard context.hasChanges else { return }
         do { try context.save() } catch { print("CoreData save error: \(error)") }
+    }
+
+    func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
+        persistentContainer.performBackgroundTask(block)
     }
 }
