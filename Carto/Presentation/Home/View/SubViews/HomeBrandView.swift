@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct HomeBrandView: View {
     @ObservedObject var viewModel: HomeBrandsViewModel
+    @Environment(Router<AppRoute>.self) private var router
 
     var body: some View {
         switch viewModel.state {
@@ -25,14 +27,12 @@ struct HomeBrandView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
                     ForEach(brands.prefix(5)) { brand in
-                        NavigationLink {
-                            ProductsView(
-                                brandID: brand.id,
-                                viewModel: DIContainer.shared.makeCategoryProductViewModel()
-                            )
+                        Button {
+                            router.push(to: .brandProducts(brandId: brand.id, brandName: brand.title))
                         } label: {
                             CircularNetworkImag(imagURL: brand.image ?? "")
                         }
+                        .buttonStyle(.plain)
                     }
                 }.padding(.vertical, 12)
                     .padding(.horizontal, 4)

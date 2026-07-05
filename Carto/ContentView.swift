@@ -29,6 +29,9 @@ struct ContentView: View {
     @ViewBuilder
     private func makeHomeScreen() -> some View {
         HomeView()
+            .withRouter { route in
+                routeDestination(for: route)
+            }
     }
 
     @ViewBuilder
@@ -46,18 +49,45 @@ extension ContentView {
         let viewModel = CategoryListViewModel(getCategoryUseCase: useCase, fetchSubcategoriesUseCase: useCase)
 
         CategoryListView(viewModel: viewModel)
+            .withRouter { route in
+                routeDestination(for: route)
+            }
     }
 
     @ViewBuilder
     func makeSettingsScreen() -> some View {
         SettingsView()
     }
+
+    @MainActor
+    private func routeDestination(for route: AppRoute) -> AnyView {
+        switch route {
+        case .brands:
+            return AnyView(BrandsScreen(
+                viewModel: HomeBrandsViewModel(useCase: DIContainer.shared.makeBrandsUseCase())
+            ))
+        case .brandProducts(let brandId, let brandName):
+            return AnyView(ProductsView(
+                brandID: brandId,
+                viewModel: DIContainer.shared.makeCategoryProductViewModel()
+            )
+            .navigationTitle(brandName))
+        case .categoryProducts(let categoryId, let categoryName):
+            return AnyView(ProductsView(
+                categoryId: categoryId,
+                viewModel: DIContainer.shared.makeCategoryProductViewModel()
+            )
+            .navigationTitle(categoryName))
+        case .productDetails(let product):
+            return AnyView(ProductsInfoView(product: product))
+        }
+    }
     
 //    func makeOrderHistoryScreen() -> some View {
 //            let repository = ServiceLocator.shared.resolveOrderRepository()
 //            let useCase = GetOrderHistoryUseCase(repository: repository)
 //            let viewModel = OrderHistoryViewModel(getOrderHistoryUseCase: useCase)
-//            
+//
 //            if #available(iOS 17.0, *) {
 //                OrderHistoryView(viewModel: viewModel)
 //            } else {

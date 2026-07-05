@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct HomeView: View {
 
     //=============================Dummy data ===================================
@@ -29,8 +30,8 @@ struct HomeView: View {
     ]
 
     @State private var currentIndex: Int = 0
-    @State private var navigateToBrands = false
     @StateObject private var viewModel = DIContainer.shared.makeHomeViewModel()
+    @Environment(Router<AppRoute>.self) private var router
 
     let timer = Timer.publish(
         every: 3,
@@ -44,76 +45,73 @@ struct HomeView: View {
     ]
 
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading) {
-                    HStack {
-                        Spacer()
-                        Button(action: {}) {
-                            Image(systemName: "cart.fill")
-                                .font(.system(size: 24))
-                                .foregroundStyle(Color("PrimaryColor"))
-                        }
+        ScrollView {
+            VStack(alignment: .leading) {
+                HStack {
+                    Spacer()
+                    Button(action: {}) {
+                        Image(systemName: "cart.fill")
+                            .font(.system(size: 24))
+                            .foregroundStyle(Color("PrimaryColor"))
                     }
-                    TabView(selection: $currentIndex) {
-                        ForEach(0..<ads.count) { index in
-                            HomeBannerView(ad: ads[index])
-                                .tag(index)
-                        }
+                }
+                TabView(selection: $currentIndex) {
+                    ForEach(0..<ads.count) { index in
+                        HomeBannerView(ad: ads[index])
+                            .tag(index)
                     }
-                    .frame(height: 200)
-                    .tabViewStyle(
-                        PageTabViewStyle(indexDisplayMode: .automatic)
-                    )
-                    .onReceive(timer) { _ in
-                        withAnimation {
-                            currentIndex = (currentIndex + 1) % ads.count
-                        }
+                }
+                .frame(height: 200)
+                .tabViewStyle(
+                    PageTabViewStyle(indexDisplayMode: .automatic)
+                )
+                .onReceive(timer) { _ in
+                    withAnimation {
+                        currentIndex = (currentIndex + 1) % ads.count
                     }
+                }
 
-                    HStack {
-                        Text("Brands")
-                            .font(.system(size: 28, weight: .bold))
-                            .foregroundColor(Color("PrimaryColor"))
-
-                        Spacer()
-
-                        Button {
-                            navigateToBrands = true
-                        } label: {
-                            Text("see more")
-                                .font(.system(size: 18, weight: .medium))
-                                .foregroundColor(Color("PrimaryColor"))
-                        }
-                    }
-
-                    HomeBrandView(
-                        viewModel: viewModel.brandVM
-                    )
-                    .navigationDestination(isPresented: $navigateToBrands) {
-                        BrandsScreen(viewModel: viewModel.brandVM)
-                    }
-
-                    Spacer(minLength: 20)
-
-                    Text("Products")
+                HStack {
+                    Text("Brands")
                         .font(.system(size: 28, weight: .bold))
                         .foregroundColor(Color("PrimaryColor"))
 
-                    LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(viewModel.productVM.products, id: \.id) { product in
-                            NavigationLink {
-                                ProductsInfoView(product: product)
-                            } label: {
-                                ProductCard(product: product)
-                            }
-                            .buttonStyle(.plain)
-                        }
+                    Spacer()
+
+                    Button {
+                        router.push(to: .brands)
+                    } label: {
+                        Text("see more")
+                            .font(.system(size: 18, weight: .medium))
+                            .foregroundColor(Color("PrimaryColor"))
                     }
-                }.padding(.horizontal, 16)
-            }.task {
-                await viewModel.loadAllData()
+                }
+
+                HomeBrandView(
+                    viewModel: viewModel.brandVM
+                )
+
+                Spacer(minLength: 20)
+
+                Text("Products")
+                    .font(.system(size: 28, weight: .bold))
+                    .foregroundColor(Color("PrimaryColor"))
+
+                LazyVGrid(columns: columns, spacing: 20) {
+                    ForEach(viewModel.productVM.products, id: \.id) { product in
+                        Button {
+                            router.push(to: .productDetails(product: product))
+                        } label: {
+                            ProductCard(product: product)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
             }
+            .padding(.horizontal, 16)
+        }
+        .task {
+            await viewModel.loadAllData()
         }
     }
 }

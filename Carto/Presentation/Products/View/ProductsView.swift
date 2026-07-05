@@ -8,9 +8,11 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct ProductsView: View {
 
     @StateObject private var viewModel: ProductsViewModel
+    @Environment(Router<AppRoute>.self) private var router
 
     let categoryId: String?
     let brandID: Int?
@@ -67,8 +69,8 @@ struct ProductsView: View {
                               spacing: 16) {
 
                         ForEach(viewModel.filteredProducts) { product in
-                            NavigationLink {
-                                ProductsInfoView(product: product)
+                            Button {
+                                router.push(to: .productDetails(product: product))
                             } label: {
                                 ProductCard(product: product)
                             }

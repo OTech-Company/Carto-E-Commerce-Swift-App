@@ -21,12 +21,15 @@ public struct RouterViewModifier<Route: Hashable & Identifiable, Destination: Vi
                 .environment(router)
                 .navigationDestination(for: Route.self) { route in
                     destinationFactory(route)
+                        .environment(router)
                 }
                 .sheet(item: Bindable(router).sheetDestination) { route in
                     NavigationStack {
                         destinationFactory(route)
+                            .environment(router)
                     }
                 }
         }
+        .environment(router)
     }
 }

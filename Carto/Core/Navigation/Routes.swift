@@ -1,15 +1,21 @@
 import Foundation
 
-enum AppRoute: Hashable {
-    // Product exploration paths
-    case productDetails(id: String, name: String)
-    case categoryListing(categoryName: String)
-    
-    case cartPreview
-    case secureCheckout
-    case orderDetails(orderId: String)
-    
-    // Account & profile settings
-    case addressBook
-    case editProfile
+enum AppRoute: Hashable, Identifiable {
+    case brands
+    case brandProducts(brandId: Int, brandName: String)
+    case categoryProducts(categoryId: String, categoryName: String)
+    case productDetails(product: Product)
+
+    var id: String {
+        switch self {
+        case .brands:
+            return "brands"
+        case .brandProducts(let brandId, _):
+            return "brandProducts-\(brandId)"
+        case .categoryProducts(let categoryId, _):
+            return "categoryProducts-\(categoryId)"
+        case .productDetails(let product):
+            return "productDetails-\(product.id)"
+        }
+    }
 }
