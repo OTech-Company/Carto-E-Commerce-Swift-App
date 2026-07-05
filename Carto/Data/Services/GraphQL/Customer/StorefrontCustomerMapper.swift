@@ -48,15 +48,20 @@ extension StorefrontCustomerProfile {
 }
 
 extension StorefrontAddress {
-    func toDomain() -> CustomerAddress {
+    func toDomain(isDefault: Bool = false) -> CustomerAddress {
         CustomerAddress(
             id: id,
             address1: address1 ?? "",
             address2: address2,
             city: city ?? "",
-            province: province,
+            province: province ?? "",
             country: country ?? "",
-            zip: zip ?? ""
+            zip: zip ?? "",
+            phone: phone ?? "",
+            firstName: firstName ?? "",
+            lastName: lastName ?? "",
+            company: company,
+            isDefault: isDefault
         )
     }
 }

@@ -109,6 +109,10 @@ struct StorefrontAddress: Decodable {
     let province: String?
     let country: String?
     let zip: String?
+    let phone: String?
+    let firstName: String?
+    let lastName: String?
+    let company: String?
 }
 
 struct StorefrontOrder: Decodable {

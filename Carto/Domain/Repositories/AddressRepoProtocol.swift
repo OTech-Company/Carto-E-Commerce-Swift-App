@@ -8,22 +8,22 @@
 import Foundation
 
 protocol AddressRepoProtocol {
-    func getAllAddresses(for customerID: String) async throws -> [Address]
+    func getAllAddresses(for customerID: String) async throws -> [CustomerAddress]
     
     func getAddressByID(_ addressId: String, for customerID: String) async throws
-        -> Address
+        -> CustomerAddress
     
-    func addAddress(_ address: NewAddress, for customerID: String)
-        async throws -> Address
+    func addAddress(_ address: CustomerAddress, for customerID: String)
+        async throws -> CustomerAddress
     
     func updateAddress(
         for customerID: String,
         addressID: String,
-        address: NewAddress
-    ) async throws -> Address
+        address: CustomerAddress
+    ) async throws -> CustomerAddress
     
     func setDefaultAddress(addressID: String, for customerID: String)
-        async throws -> Address
+        async throws -> CustomerAddress
     
     func deleteAddress(_ addressID: String, for customerID: String) async throws
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddressCard: View {
-    let address: Address
+    let address: CustomerAddress
 
     var onEdit: (() -> Void)? = nil
     var onDelete: (() -> Void)? = nil
@@ -46,7 +46,7 @@ struct AddressCard: View {
     private var header: some View {
         HStack(alignment: .top) {
             Text(
-                address.company?.isEmpty == false ? address.company! : "Address"
+                address.address1
             )
             .font(.headline)
             .foregroundColor(.primary)
@@ -84,11 +84,11 @@ struct AddressCard: View {
                 .clipShape(Circle())
 
             VStack(alignment: .leading, spacing: 4) {
-                Text("\(address.province), \(address.country)")
+                Text("\(address.address2), \(address.city)")
                     .font(.subheadline.weight(.medium))
                     .foregroundColor(.primary)
 
-                Text("\(address.countryName) • \(address.provinceCode)")
+                Text("\(address.province), \(address.country)")
                     .font(.caption)
                     .foregroundColor(.secondary)
             }

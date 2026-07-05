@@ -9,67 +9,84 @@ import Foundation
 
 class AddressRepoImpl: AddressRepoProtocol {
 
-    private let remoteDataSource: AddressRemoteDataSourceProtocol
+    private let remoteDataSource: AddressRemoteDataSource
 
-    init(remoteDataSource: AddressRemoteDataSourceProtocol) {
+    init(remoteDataSource: AddressRemoteDataSource) {
         self.remoteDataSource = remoteDataSource
     }
 
-    func getAllAddresses(for customerID: String) async throws -> [Address] {
-        let response = try await remoteDataSource.getAllAddresses(
-            for: customerID
+    func getAllAddresses(for customerID: String) async throws
+        -> [CustomerAddress]
+    {
+        return try await remoteDataSource.fetchAddresses(
+            accessToken: customerID
         )
-        return response.addresses.map { $0.toDomain() }
     }
 
     func getAddressByID(_ addressId: String, for customerID: String)
-        async throws -> Address
+        async throws -> CustomerAddress
     {
-        let response = try await remoteDataSource.getAddressByID(
-            for: addressId,
-            customerID: customerID
+        let addresses = try await remoteDataSource.fetchAddresses(
+            accessToken: customerID
         )
-        return response.customerAddress.toDomain()
+        guard let address = addresses.first(where: { $0.id == addressId })
+        else {
+            throw NSError(
+                domain: "AddressRepo",
+                code: 404,
+                userInfo: [NSLocalizedDescriptionKey: "Address not found"]
+            )
+        }
+        return address
     }
 
-    func addAddress(_ address: NewAddress, for customerID: String) async throws
-        -> Address
+    func addAddress(_ address: CustomerAddress, for customerID: String)
+        async throws
+        -> CustomerAddress
     {
-        let response = try await remoteDataSource.addAddress(
-            for: customerID,
-            address: address.toRequestDTO()
+        return try await remoteDataSource.createAddress(
+            accessToken: customerID,
+            address: address.toMailingAddressInput()
         )
-        return response.customerAddress.toDomain()
     }
 
     func updateAddress(
         for customerID: String,
         addressID: String,
-        address: NewAddress
-    ) async throws -> Address {
-        let response = try await remoteDataSource.updateAddress(
-            for: addressID,
-            customerID: customerID,
-            address: address.toRequestDTO()
+        address: CustomerAddress
+    ) async throws -> CustomerAddress {
+        return try await remoteDataSource.updateAddress(
+            accessToken: customerID,
+            id: addressID,
+            address: address.toMailingAddressInput()
         )
-        return response.customerAddress.toDomain()
     }
 
     func setDefaultAddress(addressID: String, for customerID: String)
-        async throws -> Address
+        async throws -> CustomerAddress
     {
-        let response = try await remoteDataSource.setDefaultAddress(
-            for: customerID,
-            addressID: addressID
-        )
-        return response.customerAddress.toDomain()
+        guard
+            let address = try await remoteDataSource.setDefaultAddress(
+                accessToken: customerID,
+                addressId: addressID
+            )
+        else {
+            throw NSError(
+                domain: "AddressRepo",
+                code: 404,
+                userInfo: [
+                    NSLocalizedDescriptionKey: "Default address not found"
+                ]
+            )
+        }
+        return address
     }
 
     func deleteAddress(_ addressID: String, for customerID: String) async throws
     {
-        try await remoteDataSource.deleteAddress(
-            for: addressID,
-            customerID: customerID
+        _ = try await remoteDataSource.deleteAddress(
+            accessToken: customerID,
+            id: addressID
         )
     }
 }

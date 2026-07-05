@@ -25,6 +25,10 @@ enum StorefrontCustomerQueries {
               province
               country
               zip
+              phone
+              firstName
+              lastName
+              company
             }
             addresses(first: 10) {
               edges {
@@ -36,6 +40,10 @@ enum StorefrontCustomerQueries {
                   province
                   country
                   zip
+                  phone
+                  firstName
+                  lastName
+                  company
                 }
               }
               pageInfo {

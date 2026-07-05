@@ -9,6 +9,39 @@ import Foundation
 
 enum StorefrontAddressQueries {
 
+    static let fetchAddresses = """
+        query FetchAddresses($customerAccessToken: String!) {
+            customer(customerAccessToken: $customerAccessToken) {
+                defaultAddress {
+                    id
+                }
+                addresses(first: 10) {
+                    edges {
+                        node {
+                            id
+                            address1
+                            address2
+                            city
+                            province
+                            country
+                            zip
+                            phone
+                            firstName
+                            lastName
+                            company
+                        }
+                    }
+                    pageInfo {
+                        hasNextPage
+                        hasPreviousPage
+                        startCursor
+                        endCursor
+                    }
+                }
+            }
+        }
+        """
+    
     static let createAddress = """
         mutation CustomerAddressCreate($customerAccessToken: String!, $address: MailingAddressInput!) {
           customerAddressCreate(customerAccessToken: $customerAccessToken, address: $address) {
@@ -20,6 +53,10 @@ enum StorefrontAddressQueries {
               province
               country
               zip
+              phone
+              firstName
+              lastName
+              company
             }
             customerUserErrors {
               field
@@ -40,6 +77,10 @@ enum StorefrontAddressQueries {
               province
               country
               zip
+              phone
+              firstName
+              lastName
+              company
             }
             customerUserErrors {
               field
@@ -74,6 +115,10 @@ enum StorefrontAddressQueries {
                 province
                 country
                 zip
+                phone
+                firstName
+                lastName
+                company
               }
             }
             customerUserErrors {

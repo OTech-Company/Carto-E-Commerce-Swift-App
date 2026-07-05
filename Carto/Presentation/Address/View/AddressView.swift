@@ -9,14 +9,14 @@ import SwiftUI
 
 private struct AddressSheetItem: Identifiable {
     let id = UUID()
-    let address: NewAddress?
+    let address: CustomerAddress?
 }
 
 struct AddressView: View {
     @StateObject var viewModel: AddressViewModel = DIContainer.shared
         .makeAddressViewModel()
 
-    @State private var addressToDelete: Address? = nil
+    @State private var addressToDelete: CustomerAddress? = nil
     @State private var showAlert: Bool = false
 
     @State private var addressSheet: AddressSheetItem? = nil
@@ -24,81 +24,24 @@ struct AddressView: View {
     let customerId: String = "10440744534060"
 
     var body: some View {
-        NavigationStack {
-            content
-                .navigationTitle("Addresses")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            addressSheet = AddressSheetItem(address: nil)
-                        } label: {
-                            Image(systemName: "plus")
-                                .font(.system(size: 18, weight: .semibold))
-                                .foregroundStyle(Color("PrimaryColor"))
-                        }
+        content
+            .navigationTitle("Addresses")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        addressSheet = AddressSheetItem(address: nil)
+                    } label: {
+                        Image(systemName: "plus")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundStyle(Color("PrimaryColor"))
                     }
                 }
-        }
-        .onAppear {
-            Task {
-                await viewModel.loadAllAdresses(for: customerId)
             }
-        }
-    }
-
-    @ViewBuilder
-    private var content: some View {
-        if viewModel.isLoading {
-            LoadingView(width: .infinity, height: .infinity)
-                .padding()
-        } else if let error = viewModel.errorMessage {
-            ErrorView(width: .infinity, height: .infinity, message: error)
-                .padding()
-        } else if viewModel.addresses.isEmpty {
-            EmptyStateView(
-                image: "mappin.slash",
-                title: "No avilable addresses found",
-            )
-        } else {
-            ScrollView {
-                VStack(spacing: 14) {
-                    ForEach(viewModel.addresses) { address in
-                        if address.isDefault {
-                            AddressCard(
-                                address: address,
-                                onEdit: {
-                                    addressSheet = AddressSheetItem(
-                                        address: address.toNewAddress()
-                                    )
-                                }
-                            )
-                        } else {
-                            AddressCard(
-                                address: address,
-                                onEdit: {
-                                    addressSheet = AddressSheetItem(
-                                        address: address.toNewAddress()
-                                    )
-                                },
-                                onDelete: {
-                                    addressToDelete = address
-                                    showAlert = true
-                                },
-                                onSetDefault: {
-                                    Task {
-                                        await viewModel.setDefaultAddress(
-                                            String(address.id),
-                                            for: customerId
-                                        )
-                                    }
-                                }
-                            )
-                        }
-                    }
+            .onAppear {
+                Task {
+                    await viewModel.loadAllAdresses(for: customerId)
                 }
-                .padding()
             }
-            .background(Color("BackgroundColor"))
             .alert(
                 "Delete Address",
                 isPresented: $showAlert,
@@ -140,6 +83,61 @@ struct AddressView: View {
                     }
                 )
             }
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        if viewModel.isLoading {
+            LoadingView(width: .infinity, height: .infinity)
+                .padding()
+        } else if let error = viewModel.errorMessage {
+            ErrorView(width: .infinity, height: .infinity, message: error)
+                .padding()
+        } else if viewModel.addresses.isEmpty {
+            EmptyStateView(
+                image: "mappin.slash",
+                title: "No avilable addresses found",
+            )
+        } else {
+            ScrollView {
+                VStack(spacing: 14) {
+                    ForEach(viewModel.addresses) { address in
+                        if address.isDefault {
+                            AddressCard(
+                                address: address,
+                                onEdit: {
+                                    addressSheet = AddressSheetItem(
+                                        address: address
+                                    )
+                                }
+                            )
+                        } else {
+                            AddressCard(
+                                address: address,
+                                onEdit: {
+                                    addressSheet = AddressSheetItem(
+                                        address: address
+                                    )
+                                },
+                                onDelete: {
+                                    addressToDelete = address
+                                    showAlert = true
+                                },
+                                onSetDefault: {
+                                    Task {
+                                        await viewModel.setDefaultAddress(
+                                            String(address.id),
+                                            for: customerId
+                                        )
+                                    }
+                                }
+                            )
+                        }
+                    }
+                }
+                .padding()
+            }
+            .background(Color("BackgroundColor"))
         }
     }
 }

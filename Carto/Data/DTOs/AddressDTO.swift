@@ -63,17 +63,15 @@ struct AddressDTO: Decodable {
 }
 
 extension AddressDTO {
-    func toDomain() -> Address {
-        return Address(
-            id: id,
-            customerId: customerId,
-            company: company,
+    func toDomain() -> CustomerAddress {
+        return CustomerAddress(
+            id: String(id),
+            address1: "",
+            address2: "",
+            city: "",
             province: province,
             country: country,
-            provinceCode: provinceCode,
-            countryCode: countryCode,
-            countryName: countryName,
-            isDefault: isDefault
+            zip: ""
         )
     }
 }

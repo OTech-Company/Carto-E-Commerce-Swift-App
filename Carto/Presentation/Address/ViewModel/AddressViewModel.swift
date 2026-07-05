@@ -11,11 +11,11 @@ import Foundation
 @MainActor
 class AddressViewModel: ObservableObject {
 
-    @Published var addresses: [Address] = []
-    @Published var addressById: Address?
-    @Published var addedAddress: Address?
-    @Published var updatedAddress: Address?
-    @Published var defaultAddress: Address?
+    @Published var addresses: [CustomerAddress] = []
+    @Published var addressById: CustomerAddress?
+    @Published var addedAddress: CustomerAddress?
+    @Published var updatedAddress: CustomerAddress?
+    @Published var defaultAddress: CustomerAddress?
 
     @Published private(set) var isLoading = false
     @Published var errorMessage: String?
@@ -58,7 +58,7 @@ class AddressViewModel: ObservableObject {
         }
     }
 
-    func addAddress(_ address: NewAddress, for customerId: String) async {
+    func addAddress(_ address: CustomerAddress, for customerId: String) async {
         isLoading = true
 
         defer {
@@ -76,7 +76,7 @@ class AddressViewModel: ObservableObject {
     func editAddress(
         for customerId: String,
         addressId: String,
-        address: NewAddress
+        address: CustomerAddress
     ) async {
         isLoading = true
         defer {

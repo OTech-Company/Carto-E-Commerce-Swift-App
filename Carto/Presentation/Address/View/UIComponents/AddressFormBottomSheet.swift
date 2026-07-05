@@ -9,31 +9,18 @@ import SwiftUI
 
 struct AddressFormBottomSheet: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var formData: NewAddress
+    @State private var formData: CustomerAddress
 
     private let isEditing: Bool
-    private let onAdd: (NewAddress) -> Void
-    private let onEdit: (NewAddress) -> Void
+    private let onAdd: (CustomerAddress) -> Void
+    private let onEdit: (CustomerAddress) -> Void
 
     init(
-        address: NewAddress? = nil,
-        onAdd: @escaping (NewAddress) -> Void,
-        onEdit: @escaping (NewAddress) -> Void
+        address: CustomerAddress? = nil,
+        onAdd: @escaping (CustomerAddress) -> Void,
+        onEdit: @escaping (CustomerAddress) -> Void
     ) {
-        _formData = State(
-            initialValue: address
-                ?? NewAddress(
-                    address1: "",
-                    city: "",
-                    province: "",
-                    country: "",
-                    zip: "",
-                    phone: "",
-                    firstName: "",
-                    lastName: "",
-                    company: ""
-                )
-        )
+        _formData = State(initialValue: address ?? CustomerAddress())
         self.isEditing = address != nil
         self.onAdd = onAdd
         self.onEdit = onEdit
@@ -42,7 +29,8 @@ struct AddressFormBottomSheet: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                Group {
+                VStack(spacing: 8) {
+                    // MARK: - Personal Info
                     HStack(spacing: 12) {
                         AddressField(
                             title: "First name",
@@ -58,49 +46,63 @@ struct AddressFormBottomSheet: View {
                         )
                     }
 
+                    AddressField(
+                        title: "Company",
+                        text: optionalBinding($formData.company),
+                        textContentType: .organizationName
+                    )
+
                     Divider().overlay(Color("TintColor"))
+                        .padding(.vertical, 12)
 
-                    Group {
+                    // MARK: - Address Info
+                    AddressField(
+                        title: "Address",
+                        isRequired: true,
+                        text: $formData.address1,
+                        textContentType: .streetAddressLine1
+                    )
+
+                    AddressField(
+                        title: "Apt, suite, etc.",
+                        text: optionalBinding($formData.address2),
+                        textContentType: .streetAddressLine2
+                    )
+
+                    HStack(spacing: 12) {
                         AddressField(
-                            title: "Address",
+                            title: "City",
                             isRequired: true,
-                            text: $formData.address1,
-                            textContentType: .streetAddressLine1
+                            text: $formData.city,
+                            textContentType: .addressCity
                         )
+                        AddressField(
+                            title: "Zip",
+                            isRequired: true,
+                            text: $formData.zip,
+                            keyboardType: .numberPad,
+                            textContentType: .postalCode
+                        )
+                    }
 
-                        HStack(spacing: 12) {
-                            AddressField(
-                                title: "City",
-                                isRequired: true,
-                                text: $formData.city,
-                                textContentType: .addressCity
-                            )
-                            AddressField(
-                                title: "Zip",
-                                isRequired: true,
-                                text: $formData.zip,
-                                keyboardType: .numberPad,
-                                textContentType: .postalCode
-                            )
-                        }
-
-                        HStack(spacing: 12) {
-                            AddressField(
-                                title: "Province",
-                                text: $formData.province,
-                                textContentType: .addressState
-                            )
-                            AddressField(
-                                title: "Country",
-                                isRequired: true,
-                                text: $formData.country,
-                                textContentType: .countryName
-                            )
-                        }
+                    HStack(spacing: 12) {
+                        AddressField(
+                            title: "Province",
+                            text: $formData.province,
+                            textContentType: .addressState
+                        )
+                        AddressField(
+                            title: "Country",
+                            isRequired: true,
+                            text: $formData.country,
+                            textContentType: .countryName
+                        )
                     }
 
                     Divider().overlay(Color("TintColor"))
+                        .padding(.vertical, 12)
 
+                    // MARK: - Contact Info
                     AddressField(
                         title: "Phone",
                         text: $formData.phone,
@@ -153,5 +155,13 @@ struct AddressFormBottomSheet: View {
         }
         .presentationDetents([.large])
         .presentationDragIndicator(.visible)
+    }
+
+    // MARK: - Helpers
+    private func optionalBinding(_ binding: Binding<String?>) -> Binding<String> {
+        Binding<String>(
+            get: { binding.wrappedValue ?? "" },
+            set: { binding.wrappedValue = $0.isEmpty ? nil : $0 }
+        )
     }
 }
