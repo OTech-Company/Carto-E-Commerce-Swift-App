@@ -13,10 +13,9 @@
 
 import SwiftUI
 
-@available(iOS 17.0, *)
 struct CategoryListView: View {
     @StateObject var viewModel: CategoryListViewModel
-    @Environment(Router<AppRoute>.self) private var router
+    @EnvironmentObject private var router: Router<AppRoute>
     
     @State private var isSearchActive = false
     @State private var searchText = ""

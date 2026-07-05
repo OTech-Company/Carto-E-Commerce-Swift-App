@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-@available(iOS 17.0, *)
 struct HomeBrandView: View {
     @ObservedObject var viewModel: HomeBrandsViewModel
-    @Environment(Router<AppRoute>.self) private var router
-
+    @EnvironmentObject private var router: Router<AppRoute>
+    
     var body: some View {
         switch viewModel.state {
         case .loading, .idle:

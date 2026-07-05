@@ -6,14 +6,10 @@
 //
 import Foundation
 import SwiftUI
-import Observation
 
-@available(iOS 17.0, *)
-@Observable
-public class Router<Route: Hashable & Identifiable> { 
-    public var path = NavigationPath()
-    
-    public var sheetDestination: Route?
+public class Router<Route: Hashable & Identifiable>: ObservableObject {
+    @Published public var path = NavigationPath()
+    @Published public var sheetDestination: Route?
     
     public init() {}
     
@@ -30,6 +26,8 @@ public class Router<Route: Hashable & Identifiable> {
     }
     
     public func popToRoot() {
+        // Safe check to avoid popping an empty path
+        guard !path.isEmpty else { return }
         path.removeLast(path.count)
     }
 }

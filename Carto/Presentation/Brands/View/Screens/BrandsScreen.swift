@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-@available(iOS 17.0, *)
 struct BrandsScreen: View {
     @ObservedObject var viewModel: HomeBrandsViewModel
     @State private var searchText: String = ""
-    @Environment(Router<AppRoute>.self) private var router
+    @EnvironmentObject private var router: Router<AppRoute>
     
     let columns = [
         GridItem(.flexible(), spacing: 20),

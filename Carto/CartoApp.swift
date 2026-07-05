@@ -6,7 +6,6 @@
 import SwiftUI
 import FirebaseCore
 
-@available(iOS 17.0, *)
 @main
 struct CartoApp: App {
     @StateObject private var appViewModel: AppViewModel

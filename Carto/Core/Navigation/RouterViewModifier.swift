@@ -6,9 +6,9 @@
 //
 import SwiftUI
 
-@available(iOS 17.0, *)
 public struct RouterViewModifier<Route: Hashable & Identifiable, Destination: View>: ViewModifier {
-    @State private var router = Router<Route>()
+
+    @StateObject private var router = Router<Route>()
     private let destinationFactory: (Route) -> Destination
     
     public init(@ViewBuilder destinationFactory: @escaping (Route) -> Destination) {
@@ -18,18 +18,18 @@ public struct RouterViewModifier<Route: Hashable & Identifiable, Destination: Vi
     public func body(content: Content) -> some View {
         NavigationStack(path: $router.path) {
             content
-                .environment(router)
+                .environmentObject(router) // Use environmentObject
                 .navigationDestination(for: Route.self) { route in
                     destinationFactory(route)
-                        .environment(router)
+                        .environmentObject(router)
                 }
-                .sheet(item: Bindable(router).sheetDestination) { route in
+                .sheet(item: $router.sheetDestination) { route in // Standard binding syntax replaces Bindable
                     NavigationStack {
                         destinationFactory(route)
-                            .environment(router)
+                            .environmentObject(router)
                     }
                 }
         }
-        .environment(router)
+        .environmentObject(router)
     }
 }

@@ -6,7 +6,6 @@
 //
 import SwiftUI
 
-@available(iOS 17.0, *)
 struct ContentView: View {
     var body: some View {
         TabView {
@@ -40,7 +39,6 @@ struct ContentView: View {
     }
 }
 
-@available(iOS 17.0, *)
 extension ContentView {
     @MainActor @ViewBuilder
     func makeCategoryListScreen() -> some View {

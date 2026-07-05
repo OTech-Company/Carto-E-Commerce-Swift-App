@@ -8,12 +8,11 @@
 
 import SwiftUI
 
-@available(iOS 17.0, *)
 struct ProductsView: View {
 
     @StateObject private var viewModel: ProductsViewModel
-    @Environment(Router<AppRoute>.self) private var router
-
+    @EnvironmentObject private var router: Router<AppRoute>
+    
     let categoryId: String?
     let brandID: Int?
 

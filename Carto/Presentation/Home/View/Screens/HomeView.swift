@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-@available(iOS 17.0, *)
 struct HomeView: View {
 
     //=============================Dummy data ===================================
@@ -31,8 +30,8 @@ struct HomeView: View {
 
     @State private var currentIndex: Int = 0
     @StateObject private var viewModel = DIContainer.shared.makeHomeViewModel()
-    @Environment(Router<AppRoute>.self) private var router
-
+    @EnvironmentObject private var router: Router<AppRoute>
+    
     let timer = Timer.publish(
         every: 3,
         on: .main,
