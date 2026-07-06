@@ -39,6 +39,4 @@ struct HomeBannerView: View {
     }
 }
 
-//#Preview {
-//    HomeBannerView()
-//}
+

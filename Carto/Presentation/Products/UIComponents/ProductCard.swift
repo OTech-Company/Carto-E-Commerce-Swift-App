@@ -1,5 +1,5 @@
 //
-//  FavoriteCard.swift
+//  ProductCard.swift
 //  Carto
 //
 //  Created by Manona on 29/06/2026.
@@ -95,7 +95,7 @@ struct ProductCard: View {
 
     init(product: Product, onFavoriteTap: (() -> Void)? = nil) {
         self.product = product
-        _viewModel = StateObject(wrappedValue: DIContainer.shared.makeProductCardViewModel(productId: product.id))
+        _viewModel = StateObject(wrappedValue: DIContainer.shared.makeProductCardViewModel(product: product))
         self.onFavoriteTap = onFavoriteTap
     }
 
@@ -145,7 +145,13 @@ struct ProductCard: View {
                 }
             }
 
-            AddToCartCounter()
+            AddToCartCounter(
+                quantity: viewModel.cartQuantity,
+                isOutOfStock: viewModel.isOutOfStock,
+                onAdd: { viewModel.addToCart() },
+                onIncrement: { viewModel.incrementQuantity() },
+                onDecrement: { viewModel.decrementQuantity() }
+            )
         }
         .onAppear {
             print("Title: \(product.title)")
