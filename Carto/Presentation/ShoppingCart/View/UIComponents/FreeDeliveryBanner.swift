@@ -9,114 +9,123 @@ import SwiftUI
 
 struct FreeDeliveryBanner: View {
 
-    @State private var currentAmount: Double = 954.95
-    private let freeDeliveryAmount: Double = 1000
+    let subtotal: Double
+    let hasItems: Bool
+
+    private let freeDeliveryAmount: Double = 500
 
     private var reachedFreeDelivery: Bool {
-        currentAmount >= freeDeliveryAmount
+        hasItems && subtotal >= freeDeliveryAmount
     }
 
     private var progress: Double {
-        min(currentAmount / freeDeliveryAmount, 1)
+        guard hasItems else { return 0 }
+        return min(subtotal / freeDeliveryAmount, 1)
     }
 
     private var remaining: Double {
-        max(freeDeliveryAmount - currentAmount, 0)
+        max(freeDeliveryAmount - subtotal, 0)
     }
-
-    @State private var isPaused = false
-    let demoTimer = Timer.publish(every: 1.5, on: .main, in: .common).autoconnect()
 
     var body: some View {
 
         HStack(alignment: .top, spacing: 14) {
 
             ZStack {
+
                 Circle()
-                    .fill(Color.blue.opacity(0.12))
-                    .frame(width: 44, height: 44)
+                    .fill(Color.orange.opacity(0.12))
+                    .frame(width: 46, height: 46)
 
                 Image(systemName: reachedFreeDelivery ? "checkmark" : "box.truck.fill")
-                    .font(.system(size: 18, weight: .medium))
-                    .foregroundStyle(.blue)
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundStyle(.orange)
             }
 
-            VStack(alignment: .leading, spacing: 6) {
+            VStack(alignment: .leading, spacing: 8) {
 
                 Group {
-                    if reachedFreeDelivery {
+
+                    if !hasItems {
+
+                        Text("Add items to your cart to unlock free delivery")
+
+                    } else if reachedFreeDelivery {
+
                         Text("You've unlocked FREE delivery!")
-                            .foregroundStyle(.primary)
+
                     } else {
+
                         (
                             Text("You're ")
                             + Text("$\(remaining, specifier: "%.2f")")
                                 .fontWeight(.bold)
-                                .foregroundColor(.blue)
+                                .foregroundColor(.orange)
                             + Text(" away from ")
                             + Text("FREE")
                                 .fontWeight(.bold)
-                                .foregroundColor(.blue)
+                                .foregroundColor(.orange)
                             + Text(" delivery!")
                         )
-                        .foregroundStyle(.primary)
                     }
                 }
-                .font(.subheadline)
+                .font(.system(size: 13, weight: .medium))
+                .foregroundStyle(.primary)
                 .lineLimit(1)
+                .minimumScaleFactor(0.8)
 
                 GeometryReader { geo in
+
                     ZStack(alignment: .leading) {
+
                         Capsule()
-                            .fill(Color.gray.opacity(0.15))
+                            .fill(Color.orange.opacity(0.15))
                             .frame(height: 8)
 
                         Capsule()
-                            .fill(.blue)
+                            .fill(
+                                LinearGradient(
+                                    colors: [
+                                        Color.orange.opacity(0.75),
+                                        Color.orange
+                                    ],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
                             .frame(width: geo.size.width * progress, height: 8)
+                            .animation(.easeInOut(duration: 0.35), value: progress)
                     }
                 }
                 .frame(height: 8)
 
                 HStack {
-                    Text(reachedFreeDelivery
-                         ? "Your order qualifies for free shipping"
-                         : "Add more items to unlock free delivery")
-                        .foregroundStyle(.secondary)
+
+                    Text(
+                        reachedFreeDelivery
+                        ? "Your order qualifies for free shipping"
+                        : "Add more items to unlock free delivery"
+                    )
+                    .foregroundStyle(.gray)
 
                     Spacer()
 
-                    if !reachedFreeDelivery {
+                    if hasItems && !reachedFreeDelivery {
+
                         Text("$\(remaining, specifier: "%.2f") left")
                             .fontWeight(.semibold)
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(.orange)
                     }
                 }
-                .font(.caption)
+                .font(.system(size: 11))
                 .lineLimit(1)
+                .minimumScaleFactor(0.8)
             }
         }
         .padding()
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 18))
         .shadow(color: .black.opacity(0.05), radius: 6, y: 3)
-        .onReceive(demoTimer) { _ in
-            guard !isPaused else { return }
-
-            if currentAmount < freeDeliveryAmount {
-                withAnimation(.easeInOut) {
-                    currentAmount += 40
-                }
-            } else {
-                isPaused = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    withAnimation(.easeInOut) {
-                        currentAmount = 954.95
-                    }
-                    isPaused = false
-                }
-            }
-        }
+        .animation(.easeInOut(duration: 0.35), value: subtotal)
     }
 }
-

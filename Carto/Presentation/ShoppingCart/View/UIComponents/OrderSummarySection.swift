@@ -37,7 +37,7 @@ struct OrderSummarySection: View {
 
             HStack {
                 Text("Delivery")
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.green)
 
                 Spacer()
 
@@ -60,7 +60,7 @@ struct OrderSummarySection: View {
             summaryRow(
                 title: "Discount",
                 value: String(format: "-$%.2f", discount),
-                valueColor: .green
+                valueColor: .red
             )
 
             DashDivider()
@@ -87,7 +87,18 @@ struct OrderSummarySection: View {
         .padding()
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: .black.opacity(0.05), radius: 6, y: 3)
+        .shadow(
+            color: .black.opacity(0.04),
+            radius: 6,
+            x: 0,
+            y: 3
+        )
+        .shadow(
+            color: Color.orange.opacity(0.18),
+            radius: 20,
+            x: 0,
+            y: 8
+        )
     }
 
     @ViewBuilder
@@ -130,13 +141,4 @@ private struct DashDivider: View {
     }
 }
 
-#Preview {
-    OrderSummarySection(
-        subtotal: 1169.90,
-        discount: 120,
-        freeDeliveryThreshold: 1000,
-        deliveryCost: 50
-    )
-    .padding()
-    .background(Color(.systemGroupedBackground))
-}
+

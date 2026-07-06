@@ -24,7 +24,7 @@ struct CouponSection: View {
                 HStack(spacing: 10) {
 
                     Image(systemName: "ticket.fill")
-                        .foregroundStyle(.blue)
+                        .foregroundStyle(.orange)
 
                     TextField("Enter coupon code", text: $coupon)
                         .textInputAutocapitalization(.characters)
@@ -49,10 +49,11 @@ struct CouponSection: View {
                     Text(isCouponApplied ? "Undo" : "Apply")
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.white)
-                        .frame(width: 80, height: 52)
-                        .background(isCouponApplied ? .red : .blue)
+                        .frame(width: 84, height: 52)
+                        .background(.orange)
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                 }
+                .buttonStyle(PressableButtonStyle())
             }
 
             if isCouponApplied {
@@ -76,7 +77,18 @@ struct CouponSection: View {
         .padding()
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: .black.opacity(0.05), radius: 6, y: 3)
+        .shadow(
+            color: .black.opacity(0.02),
+            radius: 4,
+            x: 0,
+            y: 2
+        )
+        .shadow(
+            color: Color.orange.opacity(0.08),
+            radius: 12,
+            x: 0,
+            y: 5
+        )
+        .contentShape(RoundedRectangle(cornerRadius: 20))
     }
 }
-
