@@ -35,7 +35,9 @@ struct ContentView: View {
 
     @ViewBuilder
     private func makeFavoritesScreen() -> some View {
-        FavoritesView()
+        FavoritesView(
+            viewModel: DIContainer.shared.makeFavoritesViewModel()
+        )
     }
 }
 
@@ -82,7 +84,11 @@ extension ContentView {
             )
             .navigationTitle(categoryName))
         case .productDetails(let product):
-            return AnyView(ProductsInfoView(product: product))
+            return AnyView(
+                ProductsInfoView(
+                    viewModel: DIContainer.shared.makeProductsInfoViewModel(product: product)
+                )
+            )
         }
     }
     

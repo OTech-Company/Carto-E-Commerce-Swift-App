@@ -11,8 +11,8 @@ struct ProductsInfoView: View {
 
     @StateObject private var viewModel: ProductsInfoViewModel
 
-    init(product: Product) {
-        _viewModel = StateObject(wrappedValue: ProductsInfoViewModel(product: product))
+    init(viewModel: ProductsInfoViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {

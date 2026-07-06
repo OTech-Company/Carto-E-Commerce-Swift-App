@@ -5,7 +5,7 @@
 
 import Foundation
 
-struct Product: Identifiable, Equatable, Hashable {
+struct Product: Identifiable, Equatable, Hashable, Codable{
     let id: Int
     let title: String
     let description: String
@@ -55,7 +55,7 @@ struct Product: Identifiable, Equatable, Hashable {
     }
 }
 
-struct ProductVariant: Identifiable, Equatable, Hashable {
+struct ProductVariant: Identifiable, Equatable, Hashable, Codable {
     let id: Int
     let productId: Int
     let title: String
@@ -65,14 +65,14 @@ struct ProductVariant: Identifiable, Equatable, Hashable {
     let inventoryQuantity: Int
 }
 
-struct ProductImage: Identifiable, Equatable, Hashable {
+struct ProductImage: Identifiable, Equatable, Hashable, Codable {
     let id: Int
     let productId: Int
     let alt: String
     let src: String
 }
 
-struct ProductOption: Identifiable, Equatable, Hashable {
+struct ProductOption: Identifiable, Equatable, Hashable, Codable {
     let id: Int
     let productId: Int
     let name: String
