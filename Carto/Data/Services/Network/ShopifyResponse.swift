@@ -6,16 +6,6 @@ struct ShopifyResponse<T: Decodable>: Decodable {
     let errors: [ShopifyAPIError]?
 }
 
-struct GraphQLResponse<T: Decodable>: Decodable {
-    let data: T?
-    let errors: [GraphQLError]?
-
-    struct GraphQLError: Decodable {
-        let message: String
-        let path: [String]?
-    }
-}
-
 // error object returned in the response body
 struct ShopifyAPIError: Decodable {
     let message: String

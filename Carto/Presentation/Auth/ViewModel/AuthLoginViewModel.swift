@@ -101,6 +101,7 @@ final class AuthLoginViewModel: ObservableObject {
             do {
                 try await Task.sleep(for: .seconds(1))
                 repository.continueAsGuest()
+                await authSession.refreshSession()
             } catch {
                 generalErrorMessage = error.localizedDescription
             }
