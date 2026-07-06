@@ -11,12 +11,18 @@ import Foundation
 final class DIContainer {
     static let shared = DIContainer()
 
+    // MARK: - Core & Auth Properties
     let authRepository: AuthenticationRepositoryProtocol
     let authSession: AuthSession
     let validator: AuthValidatorProtocol
     let appViewModel: AppViewModel
+    
+    // MARK: - Feature Data Sources
     let brandRemoteDataSource: BrandRemoteDataSourceProtocol
     let productRemoteDataSource: ProductsRemoteDataSource
+    let addressRemoteDataSource: AddressRemoteDataSource
+    let favoritesLocalDataSource: FavoritesLocalDataSourceProtocol
+    let favoritesRemoteDataSource: FavoritesRemoteDataSourceProtocol
 
     private init() {
         authRepository = AuthenticationRepositoryImpl()
@@ -25,8 +31,12 @@ final class DIContainer {
         brandRemoteDataSource = BrandRemoteDataSource()
         productRemoteDataSource = ProductsRemoteDataSourceImpl()
         appViewModel = AppViewModel(authSession: authSession)
+        addressRemoteDataSource = AddressGraphQLRemoteDataSource()
+        favoritesLocalDataSource = FavoritesLocalDataSource()
+        favoritesRemoteDataSource = FavoritesRemoteDataSource()
     }
 
+    // MARK: - Auth ViewModels
     func makeLoginViewModel(router: AuthRouter) -> AuthLoginViewModel {
         AuthLoginViewModel(
             validator: validator,
@@ -35,7 +45,7 @@ final class DIContainer {
             router: router
         )
     }
-    
+
     func makeRegisterViewModel(router: AuthRouter) -> AuthRegisterViewModel {
         AuthRegisterViewModel(
             validator: validator,
@@ -62,14 +72,16 @@ final class DIContainer {
         )
     }
     
+    // MARK: - Brands Feature
     func makeBrandsRepo() -> BrandsRepoProtocol {
-            BrandsRepoImpl(remoteDataSource: brandRemoteDataSource)
-        }
+        BrandsRepoImpl(remoteDataSource: brandRemoteDataSource)
+    }
     
     func makeBrandsUseCase() -> BrandsUseCaseProtocol {
-            BrandsUseCase(repository: makeBrandsRepo())
-        }
+        BrandsUseCase(repository: makeBrandsRepo())
+    }
     
+    // MARK: - Home Feature
     func makeHomeProductsViewModel() -> HomeProductsViewModel {
         HomeProductsViewModel(useCase: makeProductsUseCase())
     }
@@ -81,6 +93,7 @@ final class DIContainer {
         )
     }
 
+    // MARK: - Products Feature
     func makeProductRepo() -> ProductsRepository {
         ProductsRepositoryImpl(remoteDataSource: productRemoteDataSource)
     }
@@ -97,15 +110,53 @@ final class DIContainer {
             getProductByBrand: makeProductsUseCase()
         )
     }
+
+    // MARK: - Address Feature
+    func makeAddressRepo() -> AddressRepoProtocol {
+        AddressRepoImpl(remoteDataSource: addressRemoteDataSource)
+    }
+
+    func makeAddressViewModel() -> AddressViewModel {
+        AddressViewModel(repo: makeAddressRepo())
+    }
+    
+    // MARK: - Favorites Feature
+    private(set) lazy var favoritesRepository: FavoritesRepository = {
+        let repo = FavoritesRepositoryImpl(
+            local: favoritesLocalDataSource,
+            remote: favoritesRemoteDataSource,
+            currentUserId: { [weak self] in self?.authSession.currentUser?.uid }
+        )
+        repo.bootstrapStore()
+        return repo
+    }
+
+    func makeFavoritesViewModel() -> FavoritesViewModel {
+        FavoritesViewModel(repository: favoritesRepository)
+    }
+
+    func makeProductCardViewModel(productId: Int) -> ProductCardViewModel {
+        ProductCardViewModel(
+            productId: productId,
+            repository: favoritesRepository
+        )
+    }
+
+    func makeProductsInfoViewModel(product: Product) -> ProductsInfoViewModel {
+        ProductsInfoViewModel(
+            product: product,
+            repository: favoritesRepository
+        )
+    }
+    
     // MARK: - AI Feature Injection Dependencies
-        
-        func makeAIRepo() -> AIRepository {
-            let client = GroqClient(apiKey: AppEnvironment.groqApiKey)
-            let aiRepository = AIRepositoryImpl(client: client)
-            return aiRepository
-        }
-        
-        func makeCompareProductsUseCase() -> CompareProductsUseCase {
-            CompareProductsUseCase(repository: makeAIRepo())
-        }
+    func makeAIRepo() -> AIRepository {
+        let client = GroqClient(apiKey: AppEnvironment.groqApiKey)
+        let aiRepository = AIRepositoryImpl(client: client)
+        return aiRepository
+    }
+    
+    func makeCompareProductsUseCase() -> CompareProductsUseCase {
+        CompareProductsUseCase(repository: makeAIRepo())
+    }
 }
