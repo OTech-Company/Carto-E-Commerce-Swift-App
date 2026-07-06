@@ -21,7 +21,7 @@ struct AddressView: View {
 
     @State private var addressSheet: AddressSheetItem? = nil
 
-    let customerId: String = "10440744534060"
+    let customerId: String = "050024a0002062a460127a22eeb2fedf"
 
     var body: some View {
         content

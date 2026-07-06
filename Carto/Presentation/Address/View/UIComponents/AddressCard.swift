@@ -84,13 +84,21 @@ struct AddressCard: View {
                 .clipShape(Circle())
 
             VStack(alignment: .leading, spacing: 4) {
-                Text("\(address.address2), \(address.city)")
-                    .font(.subheadline.weight(.medium))
-                    .foregroundColor(.primary)
+                Text(
+                    address.address2 != nil
+                        ? "\(address.address2!), \(address.city)"
+                        : address.city
+                )
+                .font(.subheadline.weight(.medium))
+                .foregroundColor(.primary)
 
-                Text("\(address.province), \(address.country)")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                Text(
+                    address.province != ""
+                        ? "\(address.province), \(address.country)"
+                        : address.country
+                )
+                .font(.caption)
+                .foregroundColor(.secondary)
             }
         }
     }

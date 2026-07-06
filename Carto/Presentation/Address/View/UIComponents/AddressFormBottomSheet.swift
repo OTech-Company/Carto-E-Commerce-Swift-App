@@ -25,6 +25,12 @@ struct AddressFormBottomSheet: View {
         self.onAdd = onAdd
         self.onEdit = onEdit
     }
+    
+    let countries = Locale.Region.isoRegions
+        .compactMap { region in
+            Locale.current.localizedString(forRegionCode: region.identifier)
+        }
+        .sorted()
 
     var body: some View {
         NavigationStack {
@@ -91,11 +97,11 @@ struct AddressFormBottomSheet: View {
                             text: $formData.province,
                             textContentType: .addressState
                         )
-                        AddressField(
+                        
+                        CountryField(
                             title: "Country",
-                            isRequired: true,
-                            text: $formData.country,
-                            textContentType: .countryName
+                            countries: countries,
+                            selectedCountry: $formData.country
                         )
                     }
 

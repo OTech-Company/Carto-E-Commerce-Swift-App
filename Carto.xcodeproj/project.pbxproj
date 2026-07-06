@@ -51,6 +51,7 @@
 		D57F105F2FF6AC6A00F421D4 /* BrandsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F105E2FF6AC6A00F421D4 /* BrandsScreen.swift */; };
 		D57F10612FF6ACA900F421D4 /* HomeBrandsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F10602FF6ACA900F421D4 /* HomeBrandsViewModel.swift */; };
 		D57F10652FF6AD7800F421D4 /* BrandRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F10642FF6AD7800F421D4 /* BrandRemoteDataSource.swift */; };
+		D5950D2D2FFB68D100C8E18E /* CountryFeild.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5950D2C2FFB68BD00C8E18E /* CountryFeild.swift */; };
 		D59EBD482FF6D1B500883859 /* BrandsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59EBD472FF6D1B500883859 /* BrandsUseCase.swift */; };
 		D59EBD4A2FF6D1C700883859 /* BrandsRepoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59EBD492FF6D1C700883859 /* BrandsRepoProtocol.swift */; };
 		D59EBD4C2FF6D1EA00883859 /* BrandsRepoImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59EBD4B2FF6D1EA00883859 /* BrandsRepoImpl.swift */; };
@@ -367,6 +368,7 @@
 		D57F105E2FF6AC6A00F421D4 /* BrandsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsScreen.swift; sourceTree = "<group>"; };
 		D57F10602FF6ACA900F421D4 /* HomeBrandsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBrandsViewModel.swift; sourceTree = "<group>"; };
 		D57F10642FF6AD7800F421D4 /* BrandRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandRemoteDataSource.swift; sourceTree = "<group>"; };
+		D5950D2C2FFB68BD00C8E18E /* CountryFeild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryFeild.swift; sourceTree = "<group>"; };
 		D59EBD472FF6D1B500883859 /* BrandsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsUseCase.swift; sourceTree = "<group>"; };
 		D59EBD492FF6D1C700883859 /* BrandsRepoProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsRepoProtocol.swift; sourceTree = "<group>"; };
 		D59EBD4B2FF6D1EA00883859 /* BrandsRepoImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsRepoImpl.swift; sourceTree = "<group>"; };
@@ -710,6 +712,7 @@
 		D5029C702FFAB61C004FC5E4 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				D5950D2C2FFB68BD00C8E18E /* CountryFeild.swift */,
 				D5029C6D2FFAB61C004FC5E4 /* AddressCard.swift */,
 				D5029C6E2FFAB61C004FC5E4 /* AddressField.swift */,
 				D5029C6F2FFAB61C004FC5E4 /* AddressFormBottomSheet.swift */,
@@ -2278,6 +2281,7 @@
 				D59EBD532FF6D23C00883859 /* ErrorView.swift in Sources */,
 				D9E5F77C2FF5DCB00014DD91 /* AppViewModel.swift in Sources */,
 				D9E5F7C42FF5DCB00014DD91 /* ThemeSettingsViewModel.swift in Sources */,
+				D5950D2D2FFB68D100C8E18E /* CountryFeild.swift in Sources */,
 				D9E5F84C2FF5DCB00014DD91 /* Date+Extensions.swift in Sources */,
 				D9E5F7902FF5DCB00014DD91 /* AuthDTO.swift in Sources */,
 				D9E5F8392FF5DCB00014DD91 /* OnboardingLayoutTop.swift in Sources */,
