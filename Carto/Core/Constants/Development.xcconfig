@@ -10,7 +10,7 @@
 // =============================================================================
 
 // Groq AI Engine Setup
-GROQ_API_KEY = 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
+GROQ_API_KEY = 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
 
 // Shopify Endpoint Constants
 SLASH = /

@@ -97,15 +97,4 @@ final class DIContainer {
             getProductByBrand: makeProductsUseCase()
         )
     }
-    // MARK: - AI Feature Injection Dependencies
-        
-        func makeAIRepo() -> AIRepository {
-            let client = GroqClient(apiKey: AppEnvironment.groqApiKey)
-            let aiRepository = AIRepositoryImpl(client: client)
-            return aiRepository
-        }
-        
-        func makeCompareProductsUseCase() -> CompareProductsUseCase {
-            CompareProductsUseCase(repository: makeAIRepo())
-        }
 }

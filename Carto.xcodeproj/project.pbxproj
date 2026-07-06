@@ -672,10 +672,10 @@
 		6F149FA62FFA940600F7EAF3 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				6F149FAA2FFA94A200F7EAF3 /* CartoAIAssistantViewModel.swift */,
 				6F149FCC2FFBC59500F7EAF3 /* CartoAIComparisonViewModel.swift */,
 				6F149FCA2FFBC58700F7EAF3 /* CartoAIOutfitViewModel.swift */,
 				6F149FC82FFBC57200F7EAF3 /* CartoAIInsightsViewModel.swift */,
+				6F149FAA2FFA94A200F7EAF3 /* CartoAIAssistantViewModel.swift */,
 				6F149FAE2FFA94EA00F7EAF3 /* AIFeatureSheetViewModel.swift */,
 			);
 			path = ViewModel;

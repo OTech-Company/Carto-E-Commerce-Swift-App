@@ -6,7 +6,6 @@ enum AppRoute: Hashable, Identifiable {
     case categoryProducts(categoryId: String, categoryName: String)
     case productDetails(product: Product)
     case aiChat
-    case aiComparison
     var id: String {
         switch self {
         case .brands:
@@ -19,8 +18,6 @@ enum AppRoute: Hashable, Identifiable {
             return "productDetails-\(product.id)"
         case .aiChat:
             return "aiChat"
-        case .aiComparison:
-            return "aiComparison"
         }
     }
 }
