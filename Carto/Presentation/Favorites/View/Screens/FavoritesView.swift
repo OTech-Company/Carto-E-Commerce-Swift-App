@@ -46,9 +46,10 @@ struct FavoritesView: View {
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(viewModel.favorites) { item in
-                                ProductCard(product: item.product) {
+                                ProductCard(product: item.product, onFavoriteTap: {
                                     viewModel.requestDelete(item)
-                                }
+                                })
+                                .contentShape(Rectangle())
                                 .onTapGesture {
                                     viewModel.didTapCard(item)
                                 }

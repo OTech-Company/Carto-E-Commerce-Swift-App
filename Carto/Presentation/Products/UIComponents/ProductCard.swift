@@ -66,6 +66,10 @@ struct ProductCard: View {
 
             AddToCartCounter()
         }
+        .onAppear {
+            print("Title: \(product.title)")
+            print("Image URL: \(product.imageURL)")
+        }
         .padding(12)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color(.systemGray6))
@@ -76,14 +80,19 @@ struct ProductCard: View {
     @ViewBuilder
     private var imageView: some View {
         if let url = URL(string: product.imageURL), !product.imageURL.isEmpty {
-            AsyncImage(url: url) { phase in
+            AsyncImage(url: url, transaction: Transaction(animation: .easeInOut)) { phase in
                 switch phase {
                 case .success(let image):
-                    image.resizable().scaledToFill()
+                    image
+                        .resizable()
+                        .scaledToFill()
+
                 case .failure:
                     placeholderImage
+
                 case .empty:
                     ProgressView()
+
                 @unknown default:
                     placeholderImage
                 }
