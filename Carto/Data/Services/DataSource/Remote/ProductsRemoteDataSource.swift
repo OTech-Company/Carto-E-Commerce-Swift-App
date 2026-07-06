@@ -10,6 +10,8 @@ import Foundation
 protocol ProductsRemoteDataSource {
     func getProductsByBrand(brandId: Int) async throws -> [ProductDTO]
     func getAllProducts() async throws -> [ProductDTO]
+    func getProductInfo(productId: Int) async throws -> ProductDTO
+
 }
 
 class ProductsRemoteDataSourceImpl: ProductsRemoteDataSource {
@@ -29,6 +31,28 @@ class ProductsRemoteDataSourceImpl: ProductsRemoteDataSource {
         }            
     }
 
+    func getProductInfo(productId: Int) async throws -> ProductDTO {
+            do {
+                let response: ProductDetailResponse = try await ShopifyAPIClient.shared.requestREST(
+                    endpoint: .productDetail(id: String(productId))
+                )
+                
+                guard let product = response.product else {
+                    throw NSError(
+                        domain: "ProductsRemoteDataSource",
+                        code: 404,
+                        userInfo: [NSLocalizedDescriptionKey: "Product detail payload is empty."]
+                    )
+                }
+                
+                print("Fetched product details for ID: \(productId), Title: \(product.title ?? "")")
+                return product
+            } catch {
+                print("REST error fetching product info for ID \(productId):", error)
+                throw error
+            }
+        }
+    
     func getProductsByBrand(brandId: Int) async throws -> [ProductDTO] {
         do {
             let response: CategoryProductsResponse = try await ShopifyAPIClient.shared.requestREST(

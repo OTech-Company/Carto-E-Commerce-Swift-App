@@ -25,6 +25,26 @@
 		6D76EAA32FF69E2B00C6938C /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76EAA22FF69E2B00C6938C /* String+HTML.swift */; };
 		6DD082312FF830CF00C29F79 /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD082302FF830CF00C29F79 /* ColorView.swift */; };
 		6DD082332FF8310E00C29F79 /* ExpandableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD082322FF8310E00C29F79 /* ExpandableText.swift */; };
+		6F14A00B2FFC71D400F7EAF3 /* ComparisonInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FF92FFC71D400F7EAF3 /* ComparisonInputField.swift */; };
+		6F14A00C2FFC71D400F7EAF3 /* SuggestionChipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FF02FFC71D400F7EAF3 /* SuggestionChipsView.swift */; };
+		6F14A00D2FFC71D400F7EAF3 /* CartoAIOutfitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F14A0022FFC71D400F7EAF3 /* CartoAIOutfitViewModel.swift */; };
+		6F14A00E2FFC71D400F7EAF3 /* CartoAIInsightsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F14A0072FFC71D400F7EAF3 /* CartoAIInsightsViewModel.swift */; };
+		6F14A00F2FFC71D400F7EAF3 /* AIFeatureSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FEB2FFC71D400F7EAF3 /* AIFeatureSheet.swift */; };
+		6F14A0102FFC71D400F7EAF3 /* ProductMiniCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FFC2FFC71D400F7EAF3 /* ProductMiniCard.swift */; };
+		6F14A0112FFC71D400F7EAF3 /* AIFeatureSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FF32FFC71D400F7EAF3 /* AIFeatureSheetViewModel.swift */; };
+		6F14A0122FFC71D400F7EAF3 /* CartoAIComparisonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FFF2FFC71D400F7EAF3 /* CartoAIComparisonViewModel.swift */; };
+		6F14A0132FFC71D400F7EAF3 /* CartoAIOutfitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F14A0012FFC71D400F7EAF3 /* CartoAIOutfitView.swift */; };
+		6F14A0142FFC71D400F7EAF3 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FED2FFC71D400F7EAF3 /* ChatBubbleView.swift */; };
+		6F14A0162FFC71D400F7EAF3 /* CartoAIAssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FF62FFC71D400F7EAF3 /* CartoAIAssistantView.swift */; };
+		6F14A0172FFC71D400F7EAF3 /* ChatInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FEF2FFC71D400F7EAF3 /* ChatInputBar.swift */; };
+		6F14A0182FFC71D400F7EAF3 /* CartoAIInsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F14A0062FFC71D400F7EAF3 /* CartoAIInsightsView.swift */; };
+		6F14A0192FFC71D400F7EAF3 /* ComparisonVisualHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FFB2FFC71D400F7EAF3 /* ComparisonVisualHeader.swift */; };
+		6F14A01A2FFC71D400F7EAF3 /* CartoAIAssistantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FF72FFC71D400F7EAF3 /* CartoAIAssistantViewModel.swift */; };
+		6F14A01B2FFC71D400F7EAF3 /* AmbientBlobBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FEC2FFC71D400F7EAF3 /* AmbientBlobBackground.swift */; };
+		6F14A01C2FFC71D400F7EAF3 /* ComparisonResultDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FFA2FFC71D400F7EAF3 /* ComparisonResultDashboard.swift */; };
+		6F14A01D2FFC71D400F7EAF3 /* ChatHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FEE2FFC71D400F7EAF3 /* ChatHeaderView.swift */; };
+		6F14A01E2FFC71D400F7EAF3 /* CartoAIComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F149FFE2FFC71D400F7EAF3 /* CartoAIComparisonView.swift */; };
+		6F14A01F2FFC71D400F7EAF3 /* OutfitGridItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F14A0032FFC71D400F7EAF3 /* OutfitGridItemCard.swift */; };
 		6F6DD8332FF7F17F0099872E /* GroqClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD8322FF7F17F0099872E /* GroqClient.swift */; };
 		6F6DD8352FF7F1A60099872E /* AiDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD8342FF7F1A60099872E /* AiDTO.swift */; };
 		6F6DD8372FF7F1B40099872E /* AiRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD8362FF7F1B40099872E /* AiRepositoryImpl.swift */; };
@@ -345,6 +365,26 @@
 		6D76EAA22FF69E2B00C6938C /* String+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTML.swift"; sourceTree = "<group>"; };
 		6DD082302FF830CF00C29F79 /* ColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
 		6DD082322FF8310E00C29F79 /* ExpandableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableText.swift; sourceTree = "<group>"; };
+		6F149FEB2FFC71D400F7EAF3 /* AIFeatureSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIFeatureSheet.swift; sourceTree = "<group>"; };
+		6F149FEC2FFC71D400F7EAF3 /* AmbientBlobBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientBlobBackground.swift; sourceTree = "<group>"; };
+		6F149FED2FFC71D400F7EAF3 /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
+		6F149FEE2FFC71D400F7EAF3 /* ChatHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHeaderView.swift; sourceTree = "<group>"; };
+		6F149FEF2FFC71D400F7EAF3 /* ChatInputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputBar.swift; sourceTree = "<group>"; };
+		6F149FF02FFC71D400F7EAF3 /* SuggestionChipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionChipsView.swift; sourceTree = "<group>"; };
+		6F149FF32FFC71D400F7EAF3 /* AIFeatureSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIFeatureSheetViewModel.swift; sourceTree = "<group>"; };
+		6F149FF62FFC71D400F7EAF3 /* CartoAIAssistantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIAssistantView.swift; sourceTree = "<group>"; };
+		6F149FF72FFC71D400F7EAF3 /* CartoAIAssistantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIAssistantViewModel.swift; sourceTree = "<group>"; };
+		6F149FF92FFC71D400F7EAF3 /* ComparisonInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonInputField.swift; sourceTree = "<group>"; };
+		6F149FFA2FFC71D400F7EAF3 /* ComparisonResultDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonResultDashboard.swift; sourceTree = "<group>"; };
+		6F149FFB2FFC71D400F7EAF3 /* ComparisonVisualHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonVisualHeader.swift; sourceTree = "<group>"; };
+		6F149FFC2FFC71D400F7EAF3 /* ProductMiniCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMiniCard.swift; sourceTree = "<group>"; };
+		6F149FFE2FFC71D400F7EAF3 /* CartoAIComparisonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIComparisonView.swift; sourceTree = "<group>"; };
+		6F149FFF2FFC71D400F7EAF3 /* CartoAIComparisonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIComparisonViewModel.swift; sourceTree = "<group>"; };
+		6F14A0012FFC71D400F7EAF3 /* CartoAIOutfitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIOutfitView.swift; sourceTree = "<group>"; };
+		6F14A0022FFC71D400F7EAF3 /* CartoAIOutfitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIOutfitViewModel.swift; sourceTree = "<group>"; };
+		6F14A0032FFC71D400F7EAF3 /* OutfitGridItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitGridItemCard.swift; sourceTree = "<group>"; };
+		6F14A0062FFC71D400F7EAF3 /* CartoAIInsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIInsightsView.swift; sourceTree = "<group>"; };
+		6F14A0072FFC71D400F7EAF3 /* CartoAIInsightsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIInsightsViewModel.swift; sourceTree = "<group>"; };
 		6F6DD8322FF7F17F0099872E /* GroqClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroqClient.swift; sourceTree = "<group>"; };
 		6F6DD8342FF7F1A60099872E /* AiDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiDTO.swift; sourceTree = "<group>"; };
 		6F6DD8362FF7F1B40099872E /* AiRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -695,6 +735,113 @@
 				6D4CA3FF2FFB7B2700A6651F /* FavoritesLocalDataSource.swift */,
 			);
 			path = Local;
+			sourceTree = "<group>";
+		};
+		6F149FF12FFC71D400F7EAF3 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				6F149FEB2FFC71D400F7EAF3 /* AIFeatureSheet.swift */,
+				6F149FEC2FFC71D400F7EAF3 /* AmbientBlobBackground.swift */,
+				6F149FED2FFC71D400F7EAF3 /* ChatBubbleView.swift */,
+				6F149FEE2FFC71D400F7EAF3 /* ChatHeaderView.swift */,
+				6F149FEF2FFC71D400F7EAF3 /* ChatInputBar.swift */,
+				6F149FF02FFC71D400F7EAF3 /* SuggestionChipsView.swift */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		6F149FF22FFC71D400F7EAF3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6F149FF12FFC71D400F7EAF3 /* UIComponents */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6F149FF42FFC71D400F7EAF3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6F149FF32FFC71D400F7EAF3 /* AIFeatureSheetViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6F149FF52FFC71D400F7EAF3 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				6F149FF22FFC71D400F7EAF3 /* View */,
+				6F149FF42FFC71D400F7EAF3 /* ViewModel */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		6F149FF82FFC71D400F7EAF3 /* AiAssistantChat */ = {
+			isa = PBXGroup;
+			children = (
+				6F149FF62FFC71D400F7EAF3 /* CartoAIAssistantView.swift */,
+				6F149FF72FFC71D400F7EAF3 /* CartoAIAssistantViewModel.swift */,
+			);
+			path = AiAssistantChat;
+			sourceTree = "<group>";
+		};
+		6F149FFD2FFC71D400F7EAF3 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				6F149FF92FFC71D400F7EAF3 /* ComparisonInputField.swift */,
+				6F149FFA2FFC71D400F7EAF3 /* ComparisonResultDashboard.swift */,
+				6F149FFB2FFC71D400F7EAF3 /* ComparisonVisualHeader.swift */,
+				6F149FFC2FFC71D400F7EAF3 /* ProductMiniCard.swift */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		6F14A0002FFC71D400F7EAF3 /* AiComaprison */ = {
+			isa = PBXGroup;
+			children = (
+				6F149FFD2FFC71D400F7EAF3 /* UIComponents */,
+				6F149FFE2FFC71D400F7EAF3 /* CartoAIComparisonView.swift */,
+				6F149FFF2FFC71D400F7EAF3 /* CartoAIComparisonViewModel.swift */,
+			);
+			path = AiComaprison;
+			sourceTree = "<group>";
+		};
+		6F14A0052FFC71D400F7EAF3 /* AiOutfitGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				6F14A0032FFC71D400F7EAF3 /* OutfitGridItemCard.swift */,
+				6F14A0012FFC71D400F7EAF3 /* CartoAIOutfitView.swift */,
+				6F14A0022FFC71D400F7EAF3 /* CartoAIOutfitViewModel.swift */,
+			);
+			path = AiOutfitGenerator;
+			sourceTree = "<group>";
+		};
+		6F14A0082FFC71D400F7EAF3 /* AiShoppingInsights */ = {
+			isa = PBXGroup;
+			children = (
+				6F14A0062FFC71D400F7EAF3 /* CartoAIInsightsView.swift */,
+				6F14A0072FFC71D400F7EAF3 /* CartoAIInsightsViewModel.swift */,
+			);
+			path = AiShoppingInsights;
+			sourceTree = "<group>";
+		};
+		6F14A0092FFC71D400F7EAF3 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				6F149FF82FFC71D400F7EAF3 /* AiAssistantChat */,
+				6F14A0002FFC71D400F7EAF3 /* AiComaprison */,
+				6F14A0052FFC71D400F7EAF3 /* AiOutfitGenerator */,
+				6F14A0082FFC71D400F7EAF3 /* AiShoppingInsights */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		6F14A00A2FFC71D400F7EAF3 /* AIChatBot */ = {
+			isa = PBXGroup;
+			children = (
+				6F149FF52FFC71D400F7EAF3 /* Common */,
+				6F14A0092FFC71D400F7EAF3 /* Features */,
+			);
+			path = AIChatBot;
 			sourceTree = "<group>";
 		};
 		6F6DD83E2FF7F1C80099872E /* AI */ = {
@@ -1093,6 +1240,7 @@
 		D9E5F6712FF5DCAF0014DD91 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				6F14A00A2FFC71D400F7EAF3 /* AIChatBot */,
 				D5C086DC2FFC121500A55BFE /* Address */,
 				D5B150F22FF7467D00641EE4 /* Products */,
 				D59EBD502FF6D23C00883859 /* SharedComponents */,
@@ -2330,6 +2478,26 @@
 				D9E5F84C2FF5DCB00014DD91 /* Date+Extensions.swift in Sources */,
 				D9E5F7902FF5DCB00014DD91 /* AuthDTO.swift in Sources */,
 				D9E5F8392FF5DCB00014DD91 /* OnboardingLayoutTop.swift in Sources */,
+				6F14A00B2FFC71D400F7EAF3 /* ComparisonInputField.swift in Sources */,
+				6F14A00C2FFC71D400F7EAF3 /* SuggestionChipsView.swift in Sources */,
+				6F14A00D2FFC71D400F7EAF3 /* CartoAIOutfitViewModel.swift in Sources */,
+				6F14A00E2FFC71D400F7EAF3 /* CartoAIInsightsViewModel.swift in Sources */,
+				6F14A00F2FFC71D400F7EAF3 /* AIFeatureSheet.swift in Sources */,
+				6F14A0102FFC71D400F7EAF3 /* ProductMiniCard.swift in Sources */,
+				6F14A0112FFC71D400F7EAF3 /* AIFeatureSheetViewModel.swift in Sources */,
+				6F14A0122FFC71D400F7EAF3 /* CartoAIComparisonViewModel.swift in Sources */,
+				6F14A0132FFC71D400F7EAF3 /* CartoAIOutfitView.swift in Sources */,
+				6F14A0142FFC71D400F7EAF3 /* ChatBubbleView.swift in Sources */,
+				6F14A0162FFC71D400F7EAF3 /* CartoAIAssistantView.swift in Sources */,
+				6F14A0172FFC71D400F7EAF3 /* ChatInputBar.swift in Sources */,
+				6F14A0182FFC71D400F7EAF3 /* CartoAIInsightsView.swift in Sources */,
+				6F14A0192FFC71D400F7EAF3 /* ComparisonVisualHeader.swift in Sources */,
+				6F14A01A2FFC71D400F7EAF3 /* CartoAIAssistantViewModel.swift in Sources */,
+				6F14A01B2FFC71D400F7EAF3 /* AmbientBlobBackground.swift in Sources */,
+				6F14A01C2FFC71D400F7EAF3 /* ComparisonResultDashboard.swift in Sources */,
+				6F14A01D2FFC71D400F7EAF3 /* ChatHeaderView.swift in Sources */,
+				6F14A01E2FFC71D400F7EAF3 /* CartoAIComparisonView.swift in Sources */,
+				6F14A01F2FFC71D400F7EAF3 /* OutfitGridItemCard.swift in Sources */,
 				D9E5F7C52FF5DCB00014DD91 /* ProfileViewModel.swift in Sources */,
 				D9E5F7D22FF5DCB00014DD91 /* HomeView.swift in Sources */,
 				6F6DD8462FF7F1D70099872E /* AiRepository.swift in Sources */,
@@ -2693,6 +2861,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2723,6 +2892,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

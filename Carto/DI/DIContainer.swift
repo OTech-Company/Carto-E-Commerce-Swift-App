@@ -129,7 +129,7 @@ final class DIContainer {
         )
         repo.bootstrapStore()
         return repo
-    }
+    }()
 
     func makeFavoritesViewModel() -> FavoritesViewModel {
         FavoritesViewModel(repository: favoritesRepository)
