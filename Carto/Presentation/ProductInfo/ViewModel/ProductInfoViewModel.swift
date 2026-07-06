@@ -6,41 +6,47 @@
 //
 
 import Foundation
+import Combine
 
 @MainActor
 final class ProductsInfoViewModel: ObservableObject {
-
     let product: Product
-
     @Published var quantity = 0
     @Published var selectedSize: String
     @Published var selectedColorIndex = 0
-    @Published private(set) var isFavorite = false
+    @Published private(set) var isFavorite: Bool
 
-    init(product: Product) {
+    private let repository: FavoritesRepository
+    private var cancellable: AnyCancellable?
+
+    init(
+        product: Product,
+        repository: FavoritesRepository,
+        store: FavoritesStateStore = .shared
+    ) {
         self.product = product
         self.selectedSize = product.sizes.first ?? ""
+        self.repository = repository
+        self.isFavorite = store.isFavorite(product.id)
 
-        print("Price:", product.variants.first?.price ?? "nil")
-        print("Compare At Price:", product.variants.first?.compareAtPrice ?? "nil")
-        print("Sizes:", product.sizes)
-        print("Colors:", product.colors)
+        cancellable = store.$favoriteIds
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] ids in
+                guard let self else { return }
+                self.isFavorite = ids.contains(self.product.id)
+            }
     }
 
-    func incrementQuantity() {
-        quantity += 1
-    }
-
-    func decrementQuantity() {
-        guard quantity > 0 else { return }
-        quantity -= 1
-    }
+    func incrementQuantity() { quantity += 1 }
+    func decrementQuantity() { if quantity > 0 { quantity -= 1 } }
 
     func toggleFavorite() {
-        isFavorite.toggle()
+        if isFavorite {
+            repository.removeFavorite(productId: product.id)
+        } else {
+            repository.addFavorite(FavoriteItem(product: product))
+        }
     }
 
-    func addToCart() {
-        
-    }
+    func addToCart() {}
 }

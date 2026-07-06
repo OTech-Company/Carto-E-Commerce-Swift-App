@@ -23,6 +23,10 @@ struct StorefrontMailingAddressInput: Encodable {
 
 // MARK: - Variables
 
+struct StorefrontFetchAddressesVariables: Encodable {
+    let customerAccessToken: String
+}
+
 struct StorefrontCreateAddressVariables: Encodable {
     let customerAccessToken: String
     let address: StorefrontMailingAddressInput
@@ -45,6 +49,19 @@ struct StorefrontSetDefaultAddressVariables: Encodable {
 }
 
 // MARK: - Responses
+
+struct StorefrontFetchAddressesResponse: Decodable {
+    let customer: StorefrontFetchAddressesCustomer?
+}
+
+struct StorefrontFetchAddressesCustomer: Decodable {
+    let defaultAddress: StorefrontDefaultAddressId?
+    let addresses: StorefrontConnection<StorefrontAddress>
+}
+
+struct StorefrontDefaultAddressId: Decodable {
+    let id: String
+}
 
 struct StorefrontCreateAddressResponse: Decodable {
     let customerAddressCreate: StorefrontAddressMutationPayload

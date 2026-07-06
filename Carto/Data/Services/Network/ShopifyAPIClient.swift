@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 
-final class ShopifyAPIClient {
+final class ShopifyAPIClient: @unchecked Sendable {
 
     static let shared = ShopifyAPIClient()
     private let session: URLSession

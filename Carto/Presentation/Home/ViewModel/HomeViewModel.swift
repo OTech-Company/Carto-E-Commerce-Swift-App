@@ -8,6 +8,7 @@
 import Combine
 import Foundation
 
+@MainActor
 final class HomeViewModel: ObservableObject {
     let brandVM: HomeBrandsViewModel
     let productVM: HomeProductsViewModel
@@ -28,8 +29,8 @@ final class HomeViewModel: ObservableObject {
     }
     
     func loadAllData() async {
-        async let brands: () = brandVM.loadBrands()
-        async let products: () = productVM.loadProducts()
-        _ = await [brands, products]
+        async let brands: Void = brandVM.loadBrands()
+        async let products: Void = productVM.loadProducts()
+        _ = await (brands, products)
     }
 }
