@@ -7,6 +7,87 @@
 
 import SwiftUI
 
+private final class ProductImageCache {
+    static let shared = ProductImageCache()
+    private let cache = NSCache<NSString, UIImage>()
+
+    private init() {
+        cache.countLimit = 200
+        cache.totalCostLimit = 100 * 1024 * 1024 
+    }
+
+    func image(for url: URL) -> UIImage? {
+        cache.object(forKey: url.absoluteString as NSString)
+    }
+
+    func store(_ image: UIImage, for url: URL) {
+        let cost = Int(image.size.width * image.size.height * image.scale * image.scale)
+        cache.setObject(image, forKey: url.absoluteString as NSString, cost: cost)
+    }
+}
+
+private final class CachedImageLoader: ObservableObject {
+    @Published var image: UIImage? = nil
+    @Published var failed = false
+
+    private var task: URLSessionDataTask?
+
+    func load(url: URL) {
+        if let cached = ProductImageCache.shared.image(for: url) {
+            self.image = cached
+            return
+        }
+
+        task?.cancel()
+        task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+            guard let self else { return }
+            if let urlError = error as? URLError, urlError.code == .cancelled { return }
+            guard let data, let loaded = UIImage(data: data) else {
+                DispatchQueue.main.async { self.failed = true }
+                return
+            }
+            ProductImageCache.shared.store(loaded, for: url)
+            DispatchQueue.main.async { self.image = loaded }
+        }
+        task?.resume()
+    }
+
+    func cancel() {
+        task?.cancel()
+        task = nil
+    }
+}
+
+private struct CachedProductImage: View {
+    let url: URL
+    @StateObject private var loader = CachedImageLoader()
+
+    var body: some View {
+        Group {
+            if let uiImage = loader.image {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFill()
+                    .transition(.opacity.animation(.easeInOut(duration: 0.2)))
+            } else if loader.failed {
+                placeholderImage
+            } else {
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+        }
+        .onAppear { loader.load(url: url) }
+        .onDisappear { loader.cancel() }
+    }
+
+    private var placeholderImage: some View {
+        Image(systemName: "photo")
+            .font(.system(size: 28))
+            .foregroundColor(.gray.opacity(0.4))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
 struct ProductCard: View {
     let product: Product
     @StateObject private var viewModel: ProductCardViewModel
@@ -80,23 +161,7 @@ struct ProductCard: View {
     @ViewBuilder
     private var imageView: some View {
         if let url = URL(string: product.imageURL), !product.imageURL.isEmpty {
-            AsyncImage(url: url, transaction: Transaction(animation: .easeInOut)) { phase in
-                switch phase {
-                case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFill()
-
-                case .failure:
-                    placeholderImage
-
-                case .empty:
-                    ProgressView()
-
-                @unknown default:
-                    placeholderImage
-                }
-            }
+            CachedProductImage(url: url)
         } else {
             placeholderImage
         }

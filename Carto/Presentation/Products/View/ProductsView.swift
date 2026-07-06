@@ -68,11 +68,12 @@ struct ProductsView: View {
                               spacing: 16) {
 
                         ForEach(viewModel.filteredProducts) { product in
-                            ProductCard(product: product)
-                                .id(product.id)
-                                .onTapGesture {
-                                    router.push(to: .productDetails(product: product))
-                                }
+                            Button {
+                                router.push(to: .productDetails(product: product))
+                            } label: {
+                                ProductCard(product: product)
+                            }
+                            .buttonStyle(.plain)
                         }
                     }
                     .padding()
