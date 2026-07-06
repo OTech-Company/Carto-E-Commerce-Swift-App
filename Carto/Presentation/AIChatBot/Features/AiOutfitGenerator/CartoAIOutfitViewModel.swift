@@ -31,21 +31,22 @@ class CartAiOutfitViewModel: ObservableObject {
     }
     
     // Added an explicit flag parameter defaulted to false to completely block accidental trigger requests
-    func generateOutfitMatrix(isIntentionalSubmit: Bool = false) async {
-        // Guard statement: Absolutely reject any execution if it wasn't triggered by an explicit user action button click
-        guard isIntentionalSubmit else { return }
+    func generateOutfitMatrix(withExplicitPrompt prompt: String? = nil) async {
+        // Fallback to internal binding if no explicit string parameter passed (e.g. from chip action)
+        let queryToProcess = prompt ?? inputText
+        let cleanQuery = queryToProcess.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        let cleanQuery = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !cleanQuery.isEmpty else { return }
         
-        resetState()
+        errorMessage = nil
         isLoading = true
+        // Do not clear previous products immediately so UI stays stable during reloading transition frames
         
         do {
             let fetchedProducts = try await productsUseCase.execute()
             let response = try await runOutfitSuggestionsUseCase.execute(for: cleanQuery, catalogInventory: fetchedProducts)
-            self.outfitResult = response
             
+            self.outfitResult = response
             await hydrateRecommendedProducts(with: response.itemIdsInBundle)
         } catch {
             self.errorMessage = error.localizedDescription
@@ -76,6 +77,7 @@ class CartAiOutfitViewModel: ObservableObject {
         var localProducts: [Product] = []
         for id in ids {
             if let product = try? await productsUseCase.execute(productId: id) {
+                print("Product ID: \(product.id) | Images Count: \(product.images.count) | ImageURL: '\(product.imageURL)'")
                 localProducts.append(product)
             }
         }

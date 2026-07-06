@@ -23,7 +23,13 @@ final class CartoAIAssistantViewModel: ObservableObject {
     @Published var inputText: String = ""
     @Published var isLoading: Bool = false
     
-    let suggestionChips = ["Find running shoes", "Track my order", "Suggest gifts", "Sale Items", "New arrivals"]
+    let suggestionChips = [
+        "Help me pick an outfit",
+        "What are the latest arrivals?",
+        "Show me items on sale",
+        "Find gifts for someone",
+        "What trends are hot right now?"
+    ]
     
     // Dependencies injected strictly via Domain Use Case Protocols
     private let runShoppingAssistantUseCase: RunShoppingAssistantUseCase

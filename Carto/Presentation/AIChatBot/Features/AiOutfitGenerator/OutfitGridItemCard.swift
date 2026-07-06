@@ -21,15 +21,31 @@ struct OutfitGridItemCard: View {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color(.systemGray6).opacity(0.7))
                         .aspectRatio(1.0, contentMode: .fit)
-                    
-                    if let urlString = product.mainImageUrl, let url = URL(string: urlString) {
-                        AsyncImage(url: url) { image in
-                            image.resizable().scaledToFit()
-                        } placeholder: {
-                            ProgressView().tint(.secondary)
-                        }
-                        .padding(12)
-                    }
+                    if let url = URL(string: product.imageURL) , !product.imageURL.isEmpty {
+                                            AsyncImage(url: url) { phase in
+                                                switch phase {
+                                                case .empty:
+                                                    ProgressView()
+                                                        .tint(.secondary)
+                                                case .success(let image):
+                                                    image
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                case .failure:
+                                                    Image(systemName: "bag.fill")
+                                                        .font(.system(size: 24))
+                                                        .foregroundColor(.secondary.opacity(0.4))
+                                                @unknown default:
+                                                    EmptyView()
+                                                }
+                                            }
+                                            .padding(12)
+                                        } else {
+                                            Image(systemName: "bag.fill")
+                                                .font(.system(size: 24))
+                                                .foregroundColor(.secondary.opacity(0.4))
+                                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                        }
                     
                     // Controls overlay floating perfectly along bottom margins
                     HStack {
