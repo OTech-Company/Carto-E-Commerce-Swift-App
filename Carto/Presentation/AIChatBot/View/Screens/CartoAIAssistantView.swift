@@ -8,11 +8,11 @@
 import SwiftUI
 
 // MARK: - Carto AI Dynamic Chat Screen
-struct CartoAIChatView: View {
-    @StateObject private var viewModel: CartoAIChatViewModel
+struct CartoAIAssistantView: View {
+    @StateObject private var viewModel: CartoAIAssistantViewModel
     
     init(runShoppingAssistantUseCase: RunShoppingAssistantUseCase) {
-        _viewModel = StateObject(wrappedValue: CartoAIChatViewModel(runShoppingAssistantUseCase: runShoppingAssistantUseCase))
+        _viewModel = StateObject(wrappedValue: CartoAIAssistantViewModel(runShoppingAssistantUseCase: runShoppingAssistantUseCase))
     }
     
     var body: some View {

@@ -18,7 +18,7 @@ struct ChatMessageDisplay: Identifiable, Equatable {
 
 // MARK: - Chat Assistant ViewModel
 @MainActor
-final class CartoAIChatViewModel: ObservableObject {
+final class CartoAIAssistantViewModel: ObservableObject {
     @Published var messages: [ChatMessageDisplay] = []
     @Published var inputText: String = ""
     @Published var isLoading: Bool = false

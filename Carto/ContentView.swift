@@ -84,7 +84,7 @@ extension ContentView {
                     let runShoppingAssistantUseCase = RunShoppingAssistantUseCase(repository: aiRepository)
                     
                     return AnyView(
-                        CartoAIChatView(runShoppingAssistantUseCase: runShoppingAssistantUseCase)
+                        CartoAIAssistantView(runShoppingAssistantUseCase: runShoppingAssistantUseCase)
                             .toolbar(.hidden, for: .navigationBar)
                     )
         }
