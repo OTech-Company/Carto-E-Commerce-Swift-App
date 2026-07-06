@@ -17,7 +17,7 @@ struct CartoAIAssistantView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            ChatHeaderView()
+            ChatHeaderView(title : "Carto AI Assistant")
             
             ScrollViewReader { proxy in
                 ScrollView {

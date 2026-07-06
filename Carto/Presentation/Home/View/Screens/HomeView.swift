@@ -137,11 +137,22 @@ struct HomeView: View {
             await viewModel.loadAllData()
         }.sheet(isPresented: $isShowingAISheet) {
             AIFeatureSheet {
+                // 1. Dismiss assistant sheet first
                 isShowingAISheet = false
-                router.push(to: .aiChat)
+                
+                // 2. Small delay to let sheet slide down completely before pushing
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    router.push(to: .aiChat)
+                }
+            } onNavigateToComparison: {
+                isShowingAISheet = false
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    router.push(to: .aiComparison)
+                }
             }
-            .presentationDetents([PresentationDetent.medium, PresentationDetent.large])
-            .presentationDragIndicator(Visibility.visible)
+            .presentationDetents([.medium, .large])
+            .presentationDragIndicator(.visible)
         }
     }
 }

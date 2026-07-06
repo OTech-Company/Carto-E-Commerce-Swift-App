@@ -50,6 +50,7 @@ struct FeatureCard: View {
 
 struct AIFeatureSheet: View {
     var onNavigateToChat: () -> Void
+    var onNavigateToComparison: () -> Void
     
     let features: [AIFeatureItem] = [
         AIFeatureItem(icon: "bubble.left.and.bubble.right.fill", iconColor: .blue, title: "AI Shopping\nAssistant"),
@@ -71,7 +72,10 @@ struct AIFeatureSheet: View {
                 FeatureCard(item: features[0]) {
                     onNavigateToChat()
                 }
-                FeatureCard(item: features[1]) { print("Comparison tapped") }
+                FeatureCard(item: features[1]) {
+                    print("Comparison tapped")
+                    onNavigateToComparison()
+                }
                 FeatureCard(item: features[2]) { print("Outfit tapped") }
                 FeatureCard(item: features[3]) { print("Insights tapped") }
             }

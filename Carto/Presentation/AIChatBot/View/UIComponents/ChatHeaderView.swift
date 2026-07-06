@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ChatHeaderView: View {
+    var title : String
     var onBackTap: (() -> Void)? = nil
     @Environment(\.dismiss) private var dismiss
     
@@ -28,7 +29,7 @@ struct ChatHeaderView: View {
             }
             .padding(.trailing, 4)
             
-            Text("Carto AI Assistant")
+            Text(title)
                 .font(.headline)
             
             HStack(spacing: 6) {

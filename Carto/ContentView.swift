@@ -79,14 +79,29 @@ extension ContentView {
         case .productDetails(let product):
             return AnyView(ProductsInfoView(product: product))
         case .aiChat:
-                    let client = GroqClient(apiKey: AppEnvironment.groqApiKey)
-                    let aiRepository = AIRepositoryImpl(client: client)
+                    let aiRepository = DIContainer.shared.makeAIRepo()
                     let runShoppingAssistantUseCase = RunShoppingAssistantUseCase(repository: aiRepository)
                     
                     return AnyView(
                         CartoAIAssistantView(runShoppingAssistantUseCase: runShoppingAssistantUseCase)
                             .toolbar(.hidden, for: .navigationBar)
                     )
+        case .aiComparison:
+
+            let aiRepo = DIContainer.shared.makeAIRepo()
+            let productRepo = DIContainer.shared.makeProductRepo()
+            
+            let runComparisonUseCaseInstance = CompareProductsUseCase(repository: aiRepo)
+            let structuralProductsUseCase = ProductsUseCase(repository: productRepo)
+            
+            
+            return AnyView(
+                CartoAIComparisonView(
+                    compareUseCase: runComparisonUseCaseInstance,
+                    productsUseCase: structuralProductsUseCase
+                )
+                .toolbar(.hidden, for: .navigationBar)
+            )
         }
     }
     
