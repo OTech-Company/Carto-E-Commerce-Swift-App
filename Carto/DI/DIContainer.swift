@@ -17,6 +17,8 @@ final class DIContainer {
     let appViewModel: AppViewModel
     let brandRemoteDataSource: BrandRemoteDataSourceProtocol
     let productRemoteDataSource: ProductsRemoteDataSource
+    let favoritesLocalDataSource: FavoritesLocalDataSourceProtocol
+    let favoritesRemoteDataSource: FavoritesRemoteDataSourceProtocol
 
     private init() {
         authRepository = AuthenticationRepositoryImpl()
@@ -25,6 +27,8 @@ final class DIContainer {
         brandRemoteDataSource = BrandRemoteDataSource()
         productRemoteDataSource = ProductsRemoteDataSourceImpl()
         appViewModel = AppViewModel(authSession: authSession)
+        favoritesLocalDataSource = FavoritesLocalDataSource()
+        favoritesRemoteDataSource = FavoritesRemoteDataSource()
     }
 
     func makeLoginViewModel(router: AuthRouter) -> AuthLoginViewModel {
@@ -35,7 +39,7 @@ final class DIContainer {
             router: router
         )
     }
-    
+
     func makeRegisterViewModel(router: AuthRouter) -> AuthRegisterViewModel {
         AuthRegisterViewModel(
             validator: validator,
@@ -61,19 +65,19 @@ final class DIContainer {
             router: router
         )
     }
-    
+
     func makeBrandsRepo() -> BrandsRepoProtocol {
-            BrandsRepoImpl(remoteDataSource: brandRemoteDataSource)
-        }
-    
+        BrandsRepoImpl(remoteDataSource: brandRemoteDataSource)
+    }
+
     func makeBrandsUseCase() -> BrandsUseCaseProtocol {
-            BrandsUseCase(repository: makeBrandsRepo())
-        }
-    
+        BrandsUseCase(repository: makeBrandsRepo())
+    }
+
     func makeHomeProductsViewModel() -> HomeProductsViewModel {
         HomeProductsViewModel(useCase: makeProductsUseCase())
     }
-    
+
     func makeHomeViewModel() -> HomeViewModel {
         HomeViewModel(
             brandVM: HomeBrandsViewModel(useCase: makeBrandsUseCase()),
@@ -95,6 +99,34 @@ final class DIContainer {
                 repository: CategoryRepositoryImpl()
             ),
             getProductByBrand: makeProductsUseCase()
+        )
+    }
+
+    private(set) lazy var favoritesRepository: FavoritesRepository = {
+        let repo = FavoritesRepositoryImpl(
+            local: favoritesLocalDataSource,
+            remote: favoritesRemoteDataSource,
+            currentUserId: { [weak self] in self?.authSession.currentUser?.uid }
+        )
+        repo.bootstrapStore()
+        return repo
+    }()
+
+    func makeFavoritesViewModel() -> FavoritesViewModel {
+        FavoritesViewModel(repository: favoritesRepository)
+    }
+
+    func makeProductCardViewModel(productId: Int) -> ProductCardViewModel {
+        ProductCardViewModel(
+            productId: productId,
+            repository: favoritesRepository
+        )
+    }
+
+    func makeProductsInfoViewModel(product: Product) -> ProductsInfoViewModel {
+        ProductsInfoViewModel(
+            product: product,
+            repository: favoritesRepository
         )
     }
 }
