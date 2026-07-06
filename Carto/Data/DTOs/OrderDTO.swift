@@ -36,16 +36,3 @@ struct DiscountApplicationDTO: Decodable {
     let valueType: String?
     let code: String?
 }
-
-struct AddressDTO: Decodable {
-    let id: Int?
-    let firstName: String?
-    let lastName: String?        
-    let address1: String?
-    let address2: String?
-    let city: String?
-    let province: String?
-    let country: String?
-    let zip: String?
-    let phone: String?
-}

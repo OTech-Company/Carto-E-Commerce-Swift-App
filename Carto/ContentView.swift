@@ -57,11 +57,16 @@ extension ContentView {
     @ViewBuilder
     func makeSettingsScreen() -> some View {
         SettingsView()
+            .withRouter { route in
+                routeDestination(for: route)
+            }
     }
 
     @MainActor
     private func routeDestination(for route: AppRoute) -> AnyView {
         switch route {
+        case .addresses:
+            return AnyView(AddressView())
         case .brands:
             return AnyView(BrandsScreen(
                 viewModel: HomeBrandsViewModel(useCase: DIContainer.shared.makeBrandsUseCase())

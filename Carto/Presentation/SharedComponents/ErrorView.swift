@@ -27,13 +27,7 @@ struct ErrorView: View {
                 .multilineTextAlignment(.center)
                 .foregroundColor(.gray)
         }
-        .padding()
         .frame(maxWidth: width, maxHeight: height)
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.white)
-        )
-        .shadow(radius: 3)
     }
 }
 //

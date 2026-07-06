@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 
+@MainActor
 final class HomeProductsViewModel: ObservableObject {
     @Published private(set) var state: LoadState<[Product]> = .idle
     @Published private(set) var products: [Product] = []
@@ -18,7 +19,6 @@ final class HomeProductsViewModel: ObservableObject {
         self.useCase = useCase
     }
 
-    @MainActor
     func loadProducts() async {
         state = .loading
         do {
