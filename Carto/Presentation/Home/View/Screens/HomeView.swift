@@ -48,7 +48,9 @@ struct HomeView: View {
             VStack(alignment: .leading) {
                 HStack {
                     Spacer()
-                    Button(action: {}) {
+                    Button {
+                        router.push(to: .cart)
+                    } label: {
                         Image(systemName: "cart.fill")
                             .font(.system(size: 24))
                             .foregroundStyle(Color("PrimaryColor"))

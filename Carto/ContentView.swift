@@ -84,6 +84,9 @@ extension ContentView {
                     viewModel: DIContainer.shared.makeProductsInfoViewModel(product: product)
                 )
             )
+            return AnyView(ProductsInfoView(product: product))
+        case .cart:
+            return AnyView(CartView())
         }
     }
     
