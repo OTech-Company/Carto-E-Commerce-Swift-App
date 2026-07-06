@@ -35,7 +35,6 @@ final class CartoAIAssistantViewModel: ObservableObject {
     
     private func setupDefaultConversations() {
         messages = [
-            ChatMessageDisplay(text: "Find running shoes", isUser: true, recommendedProductIds: []),
             ChatMessageDisplay(text: "Hi! I'm your smart shopping assistant. How can I help you find the perfect product today?", isUser: false, recommendedProductIds: [])
         ]
     }

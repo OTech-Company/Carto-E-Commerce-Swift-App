@@ -150,6 +150,12 @@ struct HomeView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     router.push(to: .aiComparison)
                 }
+            }onNavigateToOutfit:{
+                isShowingAISheet = false
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    router.push(to: .aiOutfit)
+                }
             }
             .presentationDetents([.medium, .large])
             .presentationDragIndicator(.visible)

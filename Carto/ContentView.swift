@@ -102,6 +102,22 @@ extension ContentView {
                 )
                 .toolbar(.hidden, for: .navigationBar)
             )
+        case .aiOutfit:
+            
+            let aiRepo = DIContainer.shared.makeAIRepo()
+            let productRepo = DIContainer.shared.makeProductRepo()
+            
+            let runOutfitSuggestionsUseCase = GenerateOutfitSuggestionsUseCase(repository: aiRepo)
+            let structuralProductsUseCase = ProductsUseCase(repository: productRepo)
+            
+            
+            return AnyView(
+                CartoAIOutfitView(
+                    runOutfitSuggestionsUseCase: runOutfitSuggestionsUseCase,
+                    productsUseCase: structuralProductsUseCase
+                )
+                .toolbar(.hidden, for: .navigationBar)
+            )
         }
     }
     

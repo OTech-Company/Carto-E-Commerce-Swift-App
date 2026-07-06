@@ -2,7 +2,7 @@
 //  ChatInputBar.swift
 //  Carto
 //
-//  Created by Osama Hosam on 05/07/2026.
+//  Created by Ossama Abdellatif on 05/07/2026.
 //
 
 import SwiftUI
@@ -22,10 +22,14 @@ struct ChatInputBar: View {
     
     var body: some View {
         VStack(spacing: 4) {
-            HStack {
+            HStack(spacing: 12) {
                 HStack {
                     TextField("Ask anything...", text: $text)
                         .font(.system(size: 15))
+                        .submitLabel(.send)
+                        .onSubmit {
+                            handleIntentSubmission()
+                        }
                     
                     // Waveform / Mic Toggle Button
                     Button(action: toggleRecording) {
@@ -51,9 +55,9 @@ struct ChatInputBar: View {
                         )
                 )
                 
+                // Secure Intent-Controlled Send Action
                 Button(action: {
-                    if isRecording { stopRecording() }
-                    onSend()
+                    handleIntentSubmission()
                 }) {
                     Image(systemName: "arrow.right")
                         .foregroundColor(.blue)
@@ -61,6 +65,7 @@ struct ChatInputBar: View {
                         .background(Color.blue.opacity(0.1))
                         .clipShape(Circle())
                 }
+                .disabled(text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !isRecording)
             }
             .padding(.horizontal)
             
@@ -71,6 +76,25 @@ struct ChatInputBar: View {
         }
         .onDisappear {
             if isRecording { stopRecording() }
+        }
+    }
+    
+    // MARK: - Central Intent Dispatch Validation
+    private func handleIntentSubmission() {
+        // 1. If we are actively listening, stop the audio hardware track cleanly first
+        if isRecording {
+            stopRecording()
+        }
+        
+        // 2. Wrap check on the Main Queue thread loop to guarantee text mutations have synchronized
+        DispatchQueue.main.async {
+            let processedPrompt = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            // Prevent execution if field contains completely zero content strings
+            guard !processedPrompt.isEmpty else { return }
+            
+            // Run the networking composition payload use-case logic safely
+            onSend()
         }
     }
     
@@ -93,7 +117,6 @@ struct ChatInputBar: View {
     }
     
     private func startRecording() throws {
-        // Cancel any existing tasks
         recognitionTask?.cancel()
         recognitionTask = nil
         
@@ -108,6 +131,7 @@ struct ChatInputBar: View {
         let inputNode = audioEngine.inputNode
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         
+        inputNode.removeTap(onBus: 0) // Defensive reset clean state line
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
             recognitionRequest.append(buffer)
         }
@@ -117,13 +141,25 @@ struct ChatInputBar: View {
         isRecording = true
         
         recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest) { result, error in
+            var isFinal = false
+            
             if let result = result {
                 DispatchQueue.main.async {
                     self.text = result.bestTranscription.formattedString
                 }
+                isFinal = result.isFinal
             }
-            if error != nil || result?.isFinal == true {
-                self.stopRecording()
+            
+            // Error handling fallback cleanup logic
+            if error != nil || isFinal {
+                audioEngine.stop()
+                inputNode.removeTap(onBus: 0)
+                self.recognitionRequest = nil
+                self.recognitionTask = nil
+                
+                DispatchQueue.main.async {
+                    self.isRecording = false
+                }
             }
         }
     }
@@ -132,7 +168,7 @@ struct ChatInputBar: View {
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
         recognitionRequest?.endAudio()
-        recognitionTask?.cancel()
+        recognitionTask?.finish() // complete cleanly instead of calling cancellation errors mid-stream
         
         let audioSession = AVAudioSession.sharedInstance()
         try? audioSession.setCategory(.ambient, mode: .default)
