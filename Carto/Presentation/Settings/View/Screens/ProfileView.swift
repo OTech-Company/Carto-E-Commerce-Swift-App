@@ -5,33 +5,47 @@
 //  Created by Nadin Ahmed on 28/06/2026.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 struct ProfileView: View {
 
     @State private var currentUser: User?
+    @EnvironmentObject private var router: Router<AppRoute>
+    @StateObject private var viewModel = DIContainer.shared
+        .makeProfileViewModel()
 
     private var isAuthenticated: Bool {
         currentUser != nil
     }
 
     var body: some View {
-        NavigationStack {
+        VStack(spacing: 0) {
+            if !isAuthenticated {
+                GuestBanner {
+                    Task {
+                        await viewModel.login()
+                    }
+                }.padding(.top)
+            }
+
             List {
-                userInfoSection
+                if isAuthenticated {
+                    userInfoSection
+                }
                 activitySection
                 appSettingsSection
                 otherSection
             }
             .listStyle(.insetGrouped)
             .navigationTitle("Profile")
-            .onAppear {
-                currentUser = DIContainer.shared.authSession.currentUser
-            }
-            .onReceive(DIContainer.shared.authSession.sessionPublisher) { state in
-                currentUser = state.user
-            }
+        }
+        .onAppear {
+            currentUser = DIContainer.shared.authSession.currentUser
+        }
+        .onReceive(DIContainer.shared.authSession.sessionPublisher) {
+            state in
+            currentUser = state.user
         }
     }
 
@@ -70,7 +84,13 @@ struct ProfileView: View {
     private var activitySection: some View {
         Section("Activity") {
             Label("Order History", systemImage: "clock.arrow.circlepath")
+                .onTapGesture {
+                    router.push(to: .orderHistory)
+                }
             Label("Addresses", systemImage: "mappin.and.ellipse")
+                .onTapGesture {
+                    router.push(to: .addresses)
+                }
         }
     }
 
@@ -78,6 +98,9 @@ struct ProfileView: View {
     private var appSettingsSection: some View {
         Section("App") {
             Label("Settings", systemImage: "gearshape")
+                .onTapGesture {
+                    router.push(to: .settings)
+                }
         }
     }
 
@@ -88,9 +111,14 @@ struct ProfileView: View {
 
             if isAuthenticated {
                 Button(role: .destructive) {
-                    signOut()
+                    Task {
+                        await viewModel.signOut()
+                    }
                 } label: {
-                    Label("Log Out", systemImage: "rectangle.portrait.and.arrow.right")
+                    Label(
+                        "Log Out",
+                        systemImage: "rectangle.portrait.and.arrow.right"
+                    )
                 }
             }
         }
@@ -101,12 +129,7 @@ struct ProfileView: View {
     private var avatarInitials: String {
         guard let user = currentUser else { return "G" }
         let first = user.firstName.prefix(1)
-        let last  = user.lastName.prefix(1)
+        let last = user.lastName.prefix(1)
         return "\(first)\(last)".uppercased()
     }
-
-    private func signOut() {
-        DIContainer.shared.authRepository.signOut()
-    }
 }
-

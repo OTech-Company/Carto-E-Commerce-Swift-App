@@ -57,6 +57,9 @@ extension ContentView {
     @ViewBuilder
     func makeProfileScreen() -> some View {
         ProfileView()
+            .withRouter { route in
+                routeDestination(for: route)
+            }
     }
 
     @MainActor
@@ -84,18 +87,20 @@ extension ContentView {
                     viewModel: DIContainer.shared.makeProductsInfoViewModel(product: product)
                 )
             )
+        case .addresses:
+            return AnyView(AddressView())
+        case .settings:
+            return AnyView(SettingsView())
+        case .orderHistory:
+            return AnyView(makeOrderHistoryScreen())
         }
     }
     
-//    func makeOrderHistoryScreen() -> some View {
-//            let repository = ServiceLocator.shared.resolveOrderRepository()
-//            let useCase = GetOrderHistoryUseCase(repository: repository)
-//            let viewModel = OrderHistoryViewModel(getOrderHistoryUseCase: useCase)
-//
-//            if #available(iOS 17.0, *) {
-//                OrderHistoryView(viewModel: viewModel)
-//            } else {
-//                Text("Please upgrade to iOS 17.")
-//            }
-//        }
+    func makeOrderHistoryScreen() -> some View {
+            let repository = ServiceLocator.shared.resolveOrderRepository()
+            let useCase = GetOrderHistoryUseCase(repository: repository)
+            let viewModel = OrderHistoryViewModel(getOrderHistoryUseCase: useCase)
+
+            return OrderHistoryView(viewModel: viewModel)
+        }
 }

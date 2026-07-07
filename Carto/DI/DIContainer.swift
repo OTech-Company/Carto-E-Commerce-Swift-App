@@ -139,4 +139,8 @@ final class DIContainer {
             repository: favoritesRepository
         )
     }
+    
+    func makeProfileViewModel() -> ProfileViewModel {
+        ProfileViewModel(authRepo: authRepository)
+    }
 }
