@@ -24,29 +24,14 @@ struct ProductsInfoView: View {
             VStack {
                 HStack(alignment: .top) {
 
-                    if viewModel.product.sizes.isEmpty {
-                        VStack(alignment: .leading, spacing: 12) {
-
-                            Text("Availability")
-                                .bold()
-
-                            Text("✓ In Stock")
-                                .font(.caption)
-                                .foregroundColor(.red)
-                                .frame(width: 80, height: 40)
-                                .background(Color.white)
-                                .overlay {
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .stroke(Color.black.opacity(0.25), lineWidth: 1)
-                                }
-
-                            Spacer()
-                        }
-                    } else {
+                    if !viewModel.product.sizes.isEmpty {
                         SizeView(
                             sizes: viewModel.product.sizes,
                             selectedSize: $viewModel.selectedSize
                         )
+                    } else {
+                        Spacer()
+                            .frame(width: 80)
                     }
 
                     Spacer()
@@ -112,6 +97,8 @@ struct ProductsInfoView: View {
                 price: viewModel.product.price,
                 compareAtPrice: viewModel.product.compareAtPrice,
                 discountPercentage: viewModel.product.discountPercentage,
+                isOutOfStock: viewModel.isOutOfStock,
+                maxQuantity: viewModel.product.variants.first?.inventoryQuantity ?? 0,
                 quantity: $viewModel.quantity
             )
         }
@@ -120,9 +107,7 @@ struct ProductsInfoView: View {
         .toolbar(.hidden, for: .tabBar)
         .navigationBarBackButtonHidden(true)
         .onChange(of: viewModel.quantity) { newValue in
-            if newValue > 0 {
-                viewModel.addToCart()
-            }
+            viewModel.quantityChanged(to: newValue)
         }
         .ignoresSafeArea(edges: .top)
     }

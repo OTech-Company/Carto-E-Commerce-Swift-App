@@ -63,6 +63,10 @@ struct ProductVariant: Identifiable, Equatable, Hashable, Codable {
     let sku: String
     let compareAtPrice: String?
     let inventoryQuantity: Int
+    let option1: String?
+    let option2: String?
+    let option3: String?
+    let adminGraphqlApiId: String?
 }
 
 struct ProductImage: Identifiable, Equatable, Hashable, Codable {
@@ -80,6 +84,28 @@ struct ProductOption: Identifiable, Equatable, Hashable, Codable {
 }
 
 extension Product {
+    func variantFor(color: String, size: String) -> ProductVariant? {
+        variants.first { variant in
+            let matchesColor = [variant.option1, variant.option2, variant.option3]
+                .compactMap { $0?.lowercased() }
+                .contains(color.lowercased())
+            let matchesSize = [variant.option1, variant.option2, variant.option3]
+                .compactMap { $0?.lowercased() }
+                .contains(size.lowercased())
+            
+            let hasColorOption = !self.colors.isEmpty
+            let hasSizeOption = !self.sizes.isEmpty
+            
+            let colorOK = !hasColorOption || matchesColor
+            let sizeOK = !hasSizeOption || matchesSize
+            
+            let titleOK = variant.title.lowercased().contains(color.lowercased()) &&
+                          variant.title.lowercased().contains(size.lowercased())
+            
+            return (colorOK && sizeOK) || titleOK
+        } ?? variants.first
+    }
+
     static let mock = Product(
         id: 1,
         title: "Nike Air Max",
@@ -93,7 +119,8 @@ extension Product {
             ProductVariant(
                 id: 1, productId: 1, title: "Default",
                 price: "89.99", sku: "NAM-001",
-                compareAtPrice: "129.99", inventoryQuantity: 25
+                compareAtPrice: "129.99", inventoryQuantity: 25,
+                option1: nil, option2: nil, option3: nil, adminGraphqlApiId: nil
             )
         ],
         images: [
@@ -112,7 +139,11 @@ extension Product {
             vendor: "Adidas", productType: "Shoes", handle: "adidas-runner",
             status: "active", tags: ["running"],
             variants: [
-                ProductVariant(id: 2, productId: 2, title: "Default", price: "74.99", sku: "AR-002", compareAtPrice: "99.99", inventoryQuantity: 10)
+                ProductVariant(
+                    id: 2, productId: 2, title: "Default", price: "74.99", sku: "AR-002",
+                    compareAtPrice: "99.99", inventoryQuantity: 10,
+                    option1: nil, option2: nil, option3: nil, adminGraphqlApiId: nil
+                )
             ],
             images: [ProductImage(id: 2, productId: 2, alt: "Adidas Runner", src: "")],
             options: [
@@ -125,7 +156,11 @@ extension Product {
             vendor: "Puma", productType: "Shoes", handle: "puma-sport",
             status: "active", tags: ["sport"],
             variants: [
-                ProductVariant(id: 3, productId: 3, title: "Default", price: "65.99", sku: "PS-003", compareAtPrice: "89.99", inventoryQuantity: 15)
+                ProductVariant(
+                    id: 3, productId: 3, title: "Default", price: "65.99", sku: "PS-003",
+                    compareAtPrice: "89.99", inventoryQuantity: 15,
+                    option1: nil, option2: nil, option3: nil, adminGraphqlApiId: nil
+                )
             ],
             images: [ProductImage(id: 3, productId: 3, alt: "Puma Sport", src: "")],
             options: [

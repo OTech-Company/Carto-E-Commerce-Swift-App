@@ -20,6 +20,8 @@ final class DIContainer {
     let addressRemoteDataSource: AddressRemoteDataSource
     let favoritesLocalDataSource: FavoritesLocalDataSourceProtocol
     let favoritesRemoteDataSource: FavoritesRemoteDataSourceProtocol
+    let cartLocalDataSource: CartLocalDataSourceProtocol
+    let cartRemoteDataSource: CartFirestoreRemoteDataSourceProtocol
 
     private init() {
         authRepository = AuthenticationRepositoryImpl()
@@ -31,6 +33,8 @@ final class DIContainer {
         addressRemoteDataSource = AddressGraphQLRemoteDataSource()
         favoritesLocalDataSource = FavoritesLocalDataSource()
         favoritesRemoteDataSource = FavoritesRemoteDataSource()
+        cartLocalDataSource = CartLocalDataSource()
+        cartRemoteDataSource = CartFirestoreRemoteDataSource()
     }
 
     func makeLoginViewModel(router: AuthRouter) -> AuthLoginViewModel {
@@ -126,17 +130,37 @@ final class DIContainer {
         FavoritesViewModel(repository: favoritesRepository)
     }
 
-    func makeProductCardViewModel(productId: Int) -> ProductCardViewModel {
-        ProductCardViewModel(
-            productId: productId,
-            repository: favoritesRepository
-        )
-    }
-
     func makeProductsInfoViewModel(product: Product) -> ProductsInfoViewModel {
         ProductsInfoViewModel(
             product: product,
-            repository: favoritesRepository
+            favoritesRepository: favoritesRepository,
+            cartUseCase: makeCartUseCase()
+        )
+    }
+    
+    private(set) lazy var cartRepository: CartRepository = {
+        let repo = CartRepositoryImpl(
+            local: cartLocalDataSource,
+            remote: cartRemoteDataSource,
+            currentUserId: { [weak self] in self?.authSession.currentUser?.uid }
+        )
+        repo.bootstrapStore()
+        return repo
+    }()
+
+    func makeCartUseCase() -> CartUseCaseProtocol {
+        CartUseCase(repository: cartRepository)
+    }
+
+    func makeCartViewModel() -> CartViewModel {
+        CartViewModel(useCase: makeCartUseCase(), repository: cartRepository)
+    }
+
+    func makeProductCardViewModel(product: Product) -> ProductCardViewModel {
+        ProductCardViewModel(
+            product: product,
+            repository: favoritesRepository,
+            cartUseCase: makeCartUseCase()
         )
     }
 }
