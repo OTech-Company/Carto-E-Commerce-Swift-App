@@ -61,4 +61,5 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 Carto.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
-.DS_Store
+*.DS_Store
+*.xcconfig

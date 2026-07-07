@@ -21,7 +21,6 @@ struct CartoApp: App {
         }
 
         ServiceLocator.shared.register(container: AppContainer())
-
         _appViewModel = StateObject(wrappedValue: DIContainer.shared.appViewModel)
     }
         
@@ -32,12 +31,12 @@ struct CartoApp: App {
             case .loading:
                 SplashView()
             case .unauthenticated:
-                AuthCoordinator(container: DIContainer.shared)
+                PaymentDemoView()
             case .guest:
-                ContentView()
+                PaymentDemoView()
             case .authenticated(let user):
                 if user.isEmailVerified {
-                    ContentView()
+                    PaymentDemoView()
                 } else {
                     Text("Carto requires iOS 17 or later.")
                 }

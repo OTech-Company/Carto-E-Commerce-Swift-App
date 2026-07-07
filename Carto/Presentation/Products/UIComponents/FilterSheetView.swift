@@ -198,21 +198,21 @@ struct FilterSheetView: View {
                         Divider()
                     }
 
-                    Button {
-
-                        viewModel.applyFilters()
-                        dismiss()
-
-                    } label: {
-
-                        Text("Apply Filters")
-                            .bold()
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(.black)
-                            .foregroundStyle(.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    }
+//                    Button {
+//
+//                        viewModel.applyFilters()
+//                        dismiss()
+//
+//                    } label: {
+//
+//                        Text("Apply Filters")
+//                            .bold()
+//                            .frame(maxWidth: .infinity)
+//                            .padding()
+//                            .background(.black)
+//                            .foregroundStyle(.white)
+//                            .clipShape(RoundedRectangle(cornerRadius: 12))
+//                    }
                     
                 }
                 .padding()

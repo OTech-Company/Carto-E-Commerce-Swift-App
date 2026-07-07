@@ -59,3 +59,10 @@ extension StorefrontSetDefaultAddressPayload {
         return customer?.defaultAddress?.toDomain()
     }
 }
+
+struct CustomerAddressPage {
+    let items: [CustomerAddress]
+    let hasNextPage: Bool
+    let endCursor: String?
+    let defaultAddressId: String?
+}
