@@ -96,7 +96,7 @@ struct AddressView: View {
         } else if viewModel.addresses.isEmpty {
             EmptyStateView(
                 image: "mappin.slash",
-                title: "No avilable addresses found",
+                title: "No avilable addresses found"
             )
         } else {
             ScrollView {

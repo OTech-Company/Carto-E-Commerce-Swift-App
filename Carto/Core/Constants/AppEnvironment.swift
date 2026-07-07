@@ -20,6 +20,9 @@ enum AppEnvironment {
     static let storePassword = getString(for: "ShopifyStorePassword")
     static let apiKey = getString(for: "ShopifyApiKey")
     static let apiSecretKey = getString(for: "ShopifyApiSecretKey")
+    static let paymobApiPublicKey = getString(for: "PaymobApiPublicKey")
+    static let paymobApiSecretKey = getString(for: "PaymobApiSecretKey")
+    static let paymobApiIntegrationId = getString(for: "PaymobApiIntegrationId")
     
     private static func getString(for key: String) -> String {
         guard let value = Bundle.main.infoDictionary?[key] as? String else {

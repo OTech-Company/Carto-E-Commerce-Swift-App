@@ -30,6 +30,17 @@ struct StorefrontCartInput: Encodable {
     let lines: [StorefrontCartLineInput]?
 }
 
+struct StorefrontCartDeliveryAddressPreferenceInput: Encodable {
+    let deliveryAddress: StorefrontMailingAddressInput
+}
+
+struct StorefrontCartBuyerIdentityInput: Encodable {
+    let email: String?
+    let phone: String?
+    let countryCode: String?
+    let deliveryAddressPreferences: [StorefrontCartDeliveryAddressPreferenceInput]?
+}
+
 // MARK: - Variables
 
 struct StorefrontFetchCartVariables: Encodable {
@@ -60,7 +71,16 @@ struct StorefrontUpdateDiscountCodesVariables: Encodable {
     let discountCodes: [String]
 }
 
+struct StorefrontUpdateCartBuyerIdentityVariables: Encodable {
+    let cartId: String
+    let buyerIdentity: StorefrontCartBuyerIdentityInput
+}
+
 // MARK: - Responses
+
+struct StorefrontCartBuyerIdentityUpdateResponse: Decodable {
+    let cartBuyerIdentityUpdate: StorefrontCartMutationPayload
+}
 
 struct StorefrontFetchCartResponse: Decodable {
     let cart: StorefrontCart?

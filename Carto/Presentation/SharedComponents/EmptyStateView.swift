@@ -35,10 +35,3 @@ struct EmptyStateView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
-
-#Preview {
-    EmptyStateView(
-        image: "mappin.slash",
-        title: "No avilable addresses found",
-    )
-}

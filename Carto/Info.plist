@@ -2,21 +2,38 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>PaymobApiIntegrationId</key>
+	<string>$(PAYMOB_API_INTERGRATION_ID)</string>
+	<key>PaymobApiSecretKey</key>
+	<string>$(PAYMOB_API_SECRET_KEY)</string>
+	<key>PaymobApiPublicKey</key>
+	<string>$(PAYMOB_API_PUBLIC_KEY)</string>
 	<key>ShopifyAccessToken</key>
 	<string>$(SHOPIFY_ACCESS_TOKEN)</string>
-    <key>GroqAPIKey</key>
-    <string>$(GROQ_API_KEY)</string>
-    <key>ShopifyShopDomain</key>
-    <string>$(SHOPIFY_SHOP_DOMAIN)</string>
-    <key>ShopifyApiVersion</key>
-    <string>$(SHOPIFY_API_VERSION)</string>
-    <key>ShopifyStorefrontToken</key>
-    <string>$(SHOPIFY_STOREFRONT_TOKEN)</string>
-    <key>ShopifyStorePassword</key>
-    <string>$(SHOPIFY_STORE_PASSWORD)</string>
-    <key>ShopifyApiKey</key>
-    <string>$(SHOPIFY_API_KEY)</string>
-    <key>ShopifyApiSecretKey</key>
-    <string>$(SHOPIFY_API_SECRET_KEY)</string>
+	<key>GroqAPIKey</key>
+	<string>$(GROQ_API_KEY)</string>
+	<key>ShopifyShopDomain</key>
+	<string>$(SHOPIFY_SHOP_DOMAIN)</string>
+	<key>ShopifyApiVersion</key>
+	<string>$(SHOPIFY_API_VERSION)</string>
+	<key>ShopifyStorefrontToken</key>
+	<string>$(SHOPIFY_STOREFRONT_TOKEN)</string>
+	<key>ShopifyStorePassword</key>
+	<string>$(SHOPIFY_STORE_PASSWORD)</string>
+	<key>ShopifyApiKey</key>
+	<string>$(SHOPIFY_API_KEY)</string>
+	<key>ShopifyApiSecretKey</key>
+	<string>$(SHOPIFY_API_SECRET_KEY)</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.iti.carto.checkout</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>carto</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
