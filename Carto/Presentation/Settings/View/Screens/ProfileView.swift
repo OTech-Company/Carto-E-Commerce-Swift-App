@@ -108,6 +108,9 @@ struct ProfileView: View {
     private var otherSection: some View {
         Section("Other") {
             Label("About Us", systemImage: "info.circle")
+                .onTapGesture {
+                    router.push(to: .aboutUs)
+                }
 
             if isAuthenticated {
                 Button(role: .destructive) {

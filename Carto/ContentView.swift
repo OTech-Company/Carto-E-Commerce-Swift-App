@@ -93,6 +93,8 @@ extension ContentView {
             return AnyView(SettingsView())
         case .orderHistory:
             return AnyView(makeOrderHistoryScreen())
+        case .aboutUs:
+            return AnyView(AboutUsView())
         }
     }
     
