@@ -39,7 +39,7 @@ struct CartoApp: App {
                 if user.isEmailVerified {
                     ContentView()
                 } else {
-                    Text("Carto requires iOS 17 or later.")
+                    ContentView()
                 }
             }
         }

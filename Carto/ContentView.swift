@@ -18,8 +18,8 @@ struct ContentView: View {
             makeFavoritesScreen()
                 .tabItem { Label("Favorites", systemImage: "heart.fill") }
             
-            makeSettingsScreen()
-                .tabItem { Label("Settings", systemImage: "gearshape.fill") }
+            makeProfileScreen()
+                .tabItem { Label("Profile", systemImage: "person.fill") }
         }
         .tint(Color("PrimaryColor"))
     }
@@ -55,8 +55,8 @@ extension ContentView {
     }
 
     @ViewBuilder
-    func makeSettingsScreen() -> some View {
-        SettingsView()
+    func makeProfileScreen() -> some View {
+        ProfileView()
     }
 
     @MainActor
