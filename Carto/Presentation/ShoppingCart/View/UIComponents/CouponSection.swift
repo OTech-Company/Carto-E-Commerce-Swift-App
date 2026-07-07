@@ -10,14 +10,28 @@ import SwiftUI
 struct CouponSection: View {
 
     @State private var coupon = ""
-    @State private var isCouponApplied = false
+    @ObservedObject private var cartStore = CartStateStore.shared
 
     var body: some View {
 
         VStack(alignment: .leading, spacing: 16) {
 
-            Label("Promo Code", systemImage: "ticket.fill")
-                .font(.headline)
+            HStack {
+                Label("Promo Code", systemImage: "ticket.fill")
+                    .font(.headline)
+                
+                Spacer()
+                
+                if let code = cartStore.appliedCouponCode, !cartStore.isCouponApplied, !code.isEmpty {
+                    Text("\(code) ready!")
+                        .font(.caption.weight(.bold))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color.orange)
+                        .clipShape(Capsule())
+                }
+            }
 
             HStack(spacing: 12) {
 
@@ -29,7 +43,12 @@ struct CouponSection: View {
                     TextField("Enter coupon code", text: $coupon)
                         .textInputAutocapitalization(.characters)
                         .autocorrectionDisabled()
-                        .disabled(isCouponApplied)
+                        .disabled(cartStore.isCouponApplied)
+                        .onChange(of: coupon) { newValue in
+                            if !cartStore.isCouponApplied {
+                                cartStore.appliedCouponCode = newValue
+                            }
+                        }
                 }
                 .padding(.horizontal, 14)
                 .frame(height: 52)
@@ -37,26 +56,29 @@ struct CouponSection: View {
                 .clipShape(RoundedRectangle(cornerRadius: 16))
 
                 Button {
-
-                    isCouponApplied.toggle()
-
-                    if !isCouponApplied {
-                        coupon = ""
+                    withAnimation {
+                        if cartStore.isCouponApplied {
+                            cartStore.clearCoupon()
+                            coupon = ""
+                        } else {
+                            cartStore.appliedCouponCode = coupon
+                            cartStore.applyCoupon()
+                        }
                     }
-
                 } label: {
 
-                    Text(isCouponApplied ? "Undo" : "Apply")
+                    Text(cartStore.isCouponApplied ? "Undo" : "Apply")
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.white)
                         .frame(width: 84, height: 52)
-                        .background(.orange)
+                        .background(coupon.isEmpty ? Color.gray : Color.orange)
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                 }
                 .buttonStyle(PressableButtonStyle())
+                .disabled(coupon.isEmpty)
             }
 
-            if isCouponApplied {
+            if cartStore.isCouponApplied {
 
                 HStack {
 
@@ -72,6 +94,11 @@ struct CouponSection: View {
                     Spacer()
                 }
                 .padding(.top, 2)
+            }
+        }
+        .onAppear {
+            if let applied = cartStore.appliedCouponCode {
+                coupon = applied
             }
         }
         .padding()

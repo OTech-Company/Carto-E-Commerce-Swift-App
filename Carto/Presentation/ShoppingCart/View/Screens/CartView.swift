@@ -63,7 +63,7 @@ struct CartView: View {
                     
                     OrderSummarySection(
                         subtotal: viewModel.subtotal,
-                        discount: 0,
+                        discount: viewModel.discount,
                         freeDeliveryThreshold: 500,
                         deliveryCost: viewModel.deliveryFee
                     )

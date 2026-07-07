@@ -125,31 +125,36 @@ struct ProductCard: View {
                     }
                 } label: {
                     Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart")
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(viewModel.isFavorite ? .white : .gray.opacity(0.7))
+                        .font(.system(size: viewModel.isFavorite ? 22 : 16, weight: .semibold))
+                        .foregroundColor(viewModel.isFavorite ? .red : .gray.opacity(0.7))
                         .frame(width: 34, height: 34)
                         .background(
-                            Circle()
-                                .fill(viewModel.isFavorite
-                                      ? Color.red
-                                      : Color.white.opacity(0.92))
-                                .shadow(
-                                    color: viewModel.isFavorite
-                                        ? Color.red.opacity(0.4)
-                                        : Color.black.opacity(0.08),
-                                    radius: viewModel.isFavorite ? 8 : 4,
-                                    x: 0,
-                                    y: 2
-                                )
+                            Group {
+                                if !viewModel.isFavorite {
+                                    Circle()
+                                        .fill(Color.white.opacity(0.92))
+                                        .shadow(
+                                            color: Color.black.opacity(0.08),
+                                            radius: 4,
+                                            x: 0,
+                                            y: 2
+                                        )
+                                }
+                            }
                         )
                         .overlay(
-                            Circle()
-                                .stroke(
-                                    viewModel.isFavorite
-                                        ? Color.red.opacity(0.3)
-                                        : Color.gray.opacity(0.2),
-                                    lineWidth: 1.5
-                                )
+                            Group {
+                                if !viewModel.isFavorite {
+                                    Circle()
+                                        .stroke(Color.gray.opacity(0.2), lineWidth: 1.5)
+                                }
+                            }
+                        )
+                        .shadow(
+                            color: viewModel.isFavorite ? Color.red.opacity(0.45) : Color.clear,
+                            radius: viewModel.isFavorite ? 6 : 0,
+                            x: 0,
+                            y: 2
                         )
                         .scaleEffect(favBounce ? 1.3 : 1.0)
                         .rotationEffect(.degrees(favBounce ? -12 : 0))

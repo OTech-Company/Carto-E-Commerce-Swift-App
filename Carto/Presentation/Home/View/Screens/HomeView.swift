@@ -9,22 +9,27 @@ import SwiftUI
 
 struct HomeView: View {
 
-    //=============================Dummy data ===================================
     let ads: [ADEntity] = [
         ADEntity(
-            title: "20% Discount",
-            description: "on your first purchase",
-            imageName: "Green 1"
+            title: "10% Discount",
+            description: "Get 10% off your purchase",
+            imageName: "coupon_10",
+            couponCode: "Carto10",
+            discountPercentage: 10
         ),
         ADEntity(
             title: "20% Discount",
-            description: "on your first purchase",
-            imageName: "Green 1"
+            description: "Get 20% off your purchase",
+            imageName: "coupon_20",
+            couponCode: "Carto20",
+            discountPercentage: 20
         ),
         ADEntity(
-            title: "20% Discount",
-            description: "on your first purchase",
-            imageName: "Green 1"
+            title: "50% Discount",
+            description: "Get 50% off your purchase",
+            imageName: "coupon_50",
+            couponCode: "Carto50",
+            discountPercentage: 50
         ),
     ]
 
@@ -33,7 +38,7 @@ struct HomeView: View {
     @EnvironmentObject private var router: Router<AppRoute>
     
     let timer = Timer.publish(
-        every: 3,
+        every: 5,
         on: .main,
         in: .common
     ).autoconnect()
@@ -57,15 +62,26 @@ struct HomeView: View {
                     }
                 }
                 TabView(selection: $currentIndex) {
-                    ForEach(0..<ads.count) { index in
+                    ForEach(0..<ads.count, id: \.self) { index in
                         HomeBannerView(ad: ads[index])
                             .tag(index)
                     }
                 }
                 .frame(height: 200)
                 .tabViewStyle(
-                    PageTabViewStyle(indexDisplayMode: .automatic)
+                    PageTabViewStyle(indexDisplayMode: .never)
                 )
+                .overlay(alignment: .bottom) {
+                    HStack(spacing: 8) {
+                        ForEach(0..<ads.count, id: \.self) { index in
+                            Circle()
+                                .fill(index == currentIndex ? Color("PrimaryColor") : Color.gray.opacity(0.5))
+                                .frame(width: 8, height: 8)
+                                .shadow(color: index == currentIndex ? Color("PrimaryColor").opacity(0.6) : .clear, radius: 3)
+                        }
+                    }
+                    .padding(.bottom, 16)
+                }
                 .onReceive(timer) { _ in
                     withAnimation {
                         currentIndex = (currentIndex + 1) % ads.count

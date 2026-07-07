@@ -18,6 +18,8 @@ final class CartStateStore: ObservableObject {
 
     @Published private(set) var items: [String: CartItem] = [:]
     @Published private(set) var selectedVariants: [Int: SelectedVariant] = [:]
+    @Published var appliedCouponCode: String?
+    @Published private(set) var isCouponApplied: Bool = false
 
     private init() {}
 
@@ -61,7 +63,46 @@ final class CartStateStore: ObservableObject {
         allItems.reduce(0) { $0 + ($1.product.price * Double($1.quantity)) }
     }
 
+    var deliveryFee: Double {
+        guard !isEmpty else { return 0 }
+        return subtotal >= 500 ? 0 : 50
+    }
+
+    var discountAmount: Double {
+        guard isCouponApplied, let code = appliedCouponCode else { return 0 }
+        let percentage: Double
+        switch code.lowercased() {
+        case "carto10": percentage = 0.10
+        case "carto20": percentage = 0.20
+        case "carto50": percentage = 0.50
+        default: percentage = 0.0
+        }
+        return subtotal * percentage
+    }
+
+    var finalTotal: Double {
+        return subtotal + deliveryFee - discountAmount
+    }
+
     var isEmpty: Bool {
         items.isEmpty
+    }
+
+
+    func setCoupon(_ code: String) {
+        appliedCouponCode = code
+        isCouponApplied = false
+    }
+
+
+    func applyCoupon() {
+        guard appliedCouponCode != nil, !(appliedCouponCode?.isEmpty ?? true) else { return }
+        isCouponApplied = true
+    }
+
+
+    func clearCoupon() {
+        appliedCouponCode = nil
+        isCouponApplied = false
     }
 }

@@ -35,7 +35,10 @@ final class CartRepositoryImpl: CartRepository {
     }
 
     func bootstrapStore() {
-        store.initializeCart(local.fetchAll())
+        let items = local.fetchAll()
+        DispatchQueue.main.async { [weak store] in
+            store?.initializeCart(items)
+        }
     }
 
     func getCartItems() -> [CartItem] {
@@ -48,7 +51,9 @@ final class CartRepositoryImpl: CartRepository {
 
     func addOrUpdate(_ item: CartItem) {
         local.save(item)
-        store.upsert(item)
+        DispatchQueue.main.async { [weak store] in
+            store?.upsert(item)
+        }
 
         guard let uid = currentUserId() else { return }
 
@@ -64,7 +69,9 @@ final class CartRepositoryImpl: CartRepository {
     func remove(productId: Int, color: String, size: String) {
         let id = CartItem.makeId(productId: productId, color: color, size: size)
         local.delete(id: id)
-        store.remove(id: id)
+        DispatchQueue.main.async { [weak store] in
+            store?.remove(id: id)
+        }
 
         guard let uid = currentUserId() else { return }
 
@@ -83,7 +90,9 @@ final class CartRepositoryImpl: CartRepository {
         guard uid != lastSyncedUserId else { return }
 
         await local.deleteAll()
-        store.initializeCart([])
+        await MainActor.run { [weak store] in
+            store?.initializeCart([])
+        }
 
         guard let uid else {
             lastSyncedUserId = nil
@@ -96,7 +105,9 @@ final class CartRepositoryImpl: CartRepository {
         }
 
         await local.saveAll(remoteItems)
-        store.initializeCart(remoteItems)
+        await MainActor.run { [weak store] in
+            store?.initializeCart(remoteItems)
+        }
         lastSyncedUserId = uid
     }
 }
