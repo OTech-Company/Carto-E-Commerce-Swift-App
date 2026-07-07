@@ -3,11 +3,6 @@
 //  Carto
 //
 //  Created by Mohamed Ayman on 05/07/2026.
-//  Updated on 06/07/2026: orchestrates the Intention flow —
-//  create Intention → get clientSecret/publicKey → present the SDK.
-//
-//  (This file was exported as "File.swift" but its own header always named
-//  it PaymobCheckoutCoordinator.swift — renamed to match.)
 //
 
 import UIKit

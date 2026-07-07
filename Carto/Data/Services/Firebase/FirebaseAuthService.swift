@@ -1,16 +1,11 @@
-//
-//  FirebaseAuthService.swift
-//  Carto
-//
-//  Created by Mohamed Ayman on 30/06/2026.
-//
-
 import Foundation
 import FirebaseAuth
+import GoogleSignIn
+import UIKit
 
 final class FirebaseAuthService: FirebaseAuthServiceProtocol {
 
-    func createUser(email: String, password: String) async throws -> FirebaseAuthUser{
+    func createUser(email: String, password: String) async throws -> FirebaseAuthUser {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             return FirebaseAuthUser(
@@ -22,20 +17,18 @@ final class FirebaseAuthService: FirebaseAuthServiceProtocol {
             throw mapFirebaseError(error)
         }
     }
-    
-    func deleteCurrentUser() async throws {
 
+    func deleteCurrentUser() async throws {
         guard let currentUser = Auth.auth().currentUser else {
             throw AuthError.unknown("No authenticated user found.")
         }
-
         do {
             try await currentUser.delete()
         } catch let error as NSError {
             throw mapFirebaseError(error)
         }
     }
-    
+
     func signIn(email: String, password: String) async throws -> FirebaseAuthUser {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
@@ -49,7 +42,49 @@ final class FirebaseAuthService: FirebaseAuthServiceProtocol {
         }
     }
 
-    
+    // MARK: - Google Sign-In
+
+    func signInWithGoogle() async throws -> FirebaseAuthUser {
+        let result: GIDSignInResult
+        do {
+            result = try await Task { @MainActor in
+                guard let rootViewController = self.rootViewController() else {
+                    throw AuthError.googleSignInFailed("Could not find root view controller.")
+                }
+                return try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)
+            }.value
+        } catch let error as AuthError {
+            throw error
+        } catch let error as NSError {
+            if error.code == GIDSignInError.canceled.rawValue {
+                throw AuthError.googleSignInCancelled
+            }
+            throw AuthError.googleSignInFailed(error.localizedDescription)
+        }
+
+        guard
+            let idToken = result.user.idToken?.tokenString
+        else {
+            throw AuthError.googleSignInFailed("Missing Google ID token.")
+        }
+
+        let accessToken = result.user.accessToken.tokenString
+        let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
+
+        do {
+            let firebaseResult = try await Auth.auth().signIn(with: credential)
+            return FirebaseAuthUser(
+                uid: firebaseResult.user.uid,
+                email: firebaseResult.user.email,
+                isEmailVerified: firebaseResult.user.isEmailVerified
+            )
+        } catch let error as NSError {
+            throw mapFirebaseError(error)
+        }
+    }
+
+    // MARK: - Profile
+
     func updateDisplayName(name: String) async throws {
         guard let currentUser = Auth.auth().currentUser else {
             throw AuthError.unknown("No authenticated user found.")
@@ -88,6 +123,17 @@ final class FirebaseAuthService: FirebaseAuthServiceProtocol {
         } catch let error as NSError {
             throw mapFirebaseError(error)
         }
+    }
+
+    // MARK: - Helpers
+
+    @MainActor
+    private func rootViewController() -> UIViewController? {
+        UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .first { $0.isKeyWindow }?
+            .rootViewController
     }
 
     private func mapFirebaseError(_ error: NSError) -> AuthError {

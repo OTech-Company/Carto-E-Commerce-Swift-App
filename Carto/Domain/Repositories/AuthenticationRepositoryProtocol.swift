@@ -1,16 +1,9 @@
-//
-//  AuthenticationRepositoryProtocol.swift
-//  Carto
-//
-//  Created by Mohamed Ayman on 29/06/2026.
-//
-
 import Foundation
 
 protocol AuthenticationRepositoryProtocol {
     func register(input: RegisterInput) async throws -> User
     func login(email: String, password: String) async throws -> User
-    func restoreSession() async -> SessionState
+    func signInWithGoogle() async throws -> User
     func continueAsGuest() async
     func signOut() async
     func sendEmailVerification() async throws

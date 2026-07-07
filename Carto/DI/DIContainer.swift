@@ -12,7 +12,6 @@ final class DIContainer {
     static let shared = DIContainer()
 
     let authRepository: AuthenticationRepositoryProtocol
-    let authSession: AuthSession
     let validator: AuthValidatorProtocol
     let appViewModel: AppViewModel
     let brandRemoteDataSource: BrandRemoteDataSourceProtocol
@@ -25,11 +24,10 @@ final class DIContainer {
 
     private init() {
         authRepository = AuthenticationRepositoryImpl()
-        authSession = AuthSession()
         validator = AuthValidatorImpl()
         brandRemoteDataSource = BrandRemoteDataSource()
         productRemoteDataSource = ProductsRemoteDataSourceImpl()
-        appViewModel = AppViewModel(authSession: authSession)
+        appViewModel = AppViewModel()
         addressRemoteDataSource = AddressGraphQLRemoteDataSource()
         favoritesLocalDataSource = FavoritesLocalDataSource()
         favoritesRemoteDataSource = FavoritesRemoteDataSource()
@@ -41,7 +39,6 @@ final class DIContainer {
         AuthLoginViewModel(
             validator: validator,
             repository: authRepository,
-            authSession: authSession,
             router: router
         )
     }
@@ -50,7 +47,6 @@ final class DIContainer {
         AuthRegisterViewModel(
             validator: validator,
             repository: authRepository,
-            authSession: authSession,
             router: router
         )
     }
@@ -59,7 +55,6 @@ final class DIContainer {
         VerificationViewModel(
             userEmail: userEmail,
             repository: authRepository,
-            authSession: authSession,
             router: router
         )
     }
@@ -120,7 +115,7 @@ final class DIContainer {
         let repo = FavoritesRepositoryImpl(
             local: favoritesLocalDataSource,
             remote: favoritesRemoteDataSource,
-            currentUserId: { [weak self] in self?.authSession.currentUser?.uid }
+            currentUserId: { AuthSession.shared.currentUser?.uid }
         )
         repo.bootstrapStore()
         return repo

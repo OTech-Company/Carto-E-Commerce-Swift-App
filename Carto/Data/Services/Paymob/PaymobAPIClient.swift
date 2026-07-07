@@ -3,9 +3,6 @@
 //  Carto
 //
 //  Created by Mohamed Ayman on 05/07/2026.
-//  Updated on 06/07/2026 to point at the Intention API and support
-//  request-scoped headers (needed for the `Authorization: Token <secret>`
-//  header the Intention endpoint requires).
 //
 
 import Foundation

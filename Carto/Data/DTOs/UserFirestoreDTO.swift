@@ -1,10 +1,3 @@
-//
-//  UserFirestoreDTO.swift
-//  Carto
-//
-//  Created by Mohamed Ayman on 30/06/2026.
-//
-
 import Foundation
 
 struct UserFirestoreDTO {
@@ -12,21 +5,35 @@ struct UserFirestoreDTO {
     let firstName: String
     let lastName: String
     let email: String
+    let shopifyCustomerId: String?
+    let customerAccessToken: String?
 
     var asDictionary: [String: Any] {
-        [
+        var dict: [String: Any] = [
             "uid": uid,
             "firstName": firstName,
             "lastName": lastName,
             "email": email
         ]
+        if let shopifyCustomerId { dict["shopifyCustomerId"] = shopifyCustomerId }
+        if let customerAccessToken { dict["customerAccessToken"] = customerAccessToken }
+        return dict
     }
 
-    init(uid: String, firstName: String, lastName: String, email: String) {
+    init(
+        uid: String,
+        firstName: String,
+        lastName: String,
+        email: String,
+        shopifyCustomerId: String? = nil,
+        customerAccessToken: String? = nil
+    ) {
         self.uid = uid
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
+        self.shopifyCustomerId = shopifyCustomerId
+        self.customerAccessToken = customerAccessToken
     }
 
     init?(dictionary: [String: Any]) {
@@ -42,5 +49,7 @@ struct UserFirestoreDTO {
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
+        self.shopifyCustomerId = dictionary["shopifyCustomerId"] as? String
+        self.customerAccessToken = dictionary["customerAccessToken"] as? String
     }
 }

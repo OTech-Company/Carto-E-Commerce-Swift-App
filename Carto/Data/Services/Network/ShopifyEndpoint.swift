@@ -6,6 +6,7 @@ enum ShopifyEndpoint: Sendable {
     case login
     case register
     case logout
+    case updateCustomer(id: String)
 
     // Products
     case products
@@ -53,6 +54,7 @@ enum ShopifyEndpoint: Sendable {
         case .login:                          return "/account/login"
         case .register:                       return "/account/register"
         case .logout:                         return "/account/logout"
+        case .updateCustomer(let id):         return "/customers/\(id).json"
         case .products:                       return "/products.json"
         case .productDetail(let id):          return "/products/\(id).json"
         case .productsByCategory(let id):    return "/collections/\(id)/products.json"
@@ -93,7 +95,7 @@ enum ShopifyEndpoint: Sendable {
             return "POST"
         case .removeFromCart, .deleteAddress:
             return "DELETE"
-        case .updateAddress, .setDefaultAddress:
+        case .updateAddress, .setDefaultAddress, .updateCustomer:
             return "PUT"
         default: return "GET"
         }

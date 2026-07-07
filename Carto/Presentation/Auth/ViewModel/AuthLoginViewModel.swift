@@ -31,18 +31,15 @@ final class AuthLoginViewModel: ObservableObject {
 
     private let validator: AuthValidatorProtocol
     private let repository: AuthenticationRepositoryProtocol
-    private let authSession: AuthSession
     private let router: AuthRouter
 
     init(
         validator: AuthValidatorProtocol,
         repository: AuthenticationRepositoryProtocol,
-        authSession: AuthSession,
         router: AuthRouter
     ) {
         self.validator = validator
         self.repository = repository
-        self.authSession = authSession
         self.router = router
     }
 
@@ -101,7 +98,6 @@ final class AuthLoginViewModel: ObservableObject {
             do {
                 try await Task.sleep(for: .seconds(1))
                 await repository.continueAsGuest()
-                await authSession.refreshSession()
             } catch {
                 generalErrorMessage = error.localizedDescription
             }
@@ -110,8 +106,23 @@ final class AuthLoginViewModel: ObservableObject {
     }
 
     func signInWithGoogle() {
-        //
+        isLoading = true
+        generalErrorMessage = nil
+
+        Task {
+            do {
+                let _ = try await repository.signInWithGoogle()
+            } catch AuthError.googleSignInCancelled {
+
+            } catch let error as AuthError {
+                generalErrorMessage = error.errorDescription
+            } catch {
+                generalErrorMessage = "Google Sign-In failed. Please try again."
+            }
+            isLoading = false
+        }
     }
+
     
     func signUpTapped() {
         router.showRegister()
