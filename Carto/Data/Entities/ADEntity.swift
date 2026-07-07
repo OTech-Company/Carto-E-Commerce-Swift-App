@@ -11,4 +11,6 @@ struct ADEntity: Identifiable {
     let title: String
     let description: String
     let imageName: String
+    let couponCode: String
+    let discountPercentage: Int
 }

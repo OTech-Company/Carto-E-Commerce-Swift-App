@@ -25,15 +25,15 @@ struct ContentView: View {
     }
     
     // MARK: - Tab Factories
-    @ViewBuilder
+    @ViewBuilder @MainActor
     private func makeHomeScreen() -> some View {
         HomeView()
-            .withRouter { route in
+            .withRouter { (route: AppRoute) in
                 routeDestination(for: route)
             }
     }
 
-    @ViewBuilder
+    @ViewBuilder @MainActor
     private func makeFavoritesScreen() -> some View {
         FavoritesView(
             viewModel: DIContainer.shared.makeFavoritesViewModel()
@@ -47,9 +47,9 @@ extension ContentView {
         let repository = ServiceLocator.shared.resolveCategoryRepository()
         let useCase = GetCategoryUseCase(repository: repository)
         let viewModel = CategoryListViewModel(getCategoryUseCase: useCase, fetchSubcategoriesUseCase: useCase)
-
+        
         CategoryListView(viewModel: viewModel)
-            .withRouter { route in
+            .withRouter {  (route: AppRoute) in
                 routeDestination(for: route)
             }
     }
@@ -95,6 +95,8 @@ extension ContentView {
             return AnyView(makeOrderHistoryScreen())
         case .aboutUs:
             return AnyView(AboutUsView())
+        case .cart:
+            return AnyView(CartView(viewModel: DIContainer.shared.makeCartViewModel()))
         }
     }
     

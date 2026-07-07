@@ -1,6 +1,7 @@
 //
 //  CartGraphQLRemoteDataSource.swift
 //  Carto
+//  CartRemoteDataSource.swift
 //
 //  Created by Mohamed Ayman on 04/07/2026.
 //
@@ -14,6 +15,7 @@ protocol CartRemoteDataSource {
     func updateLines(cartId: String, lines: [StorefrontCartLineUpdateInput]) async throws -> CartModel
     func removeLines(cartId: String, lineIds: [String]) async throws -> CartModel
     func updateDiscountCodes(cartId: String, discountCodes: [String]) async throws -> CartModel
+    func updateBuyerIdentity(cartId: String, buyerIdentity: StorefrontCartBuyerIdentityInput) async throws -> CartModel
 }
 
 final class CartGraphQLRemoteDataSource: CartRemoteDataSource {
@@ -73,7 +75,7 @@ final class CartGraphQLRemoteDataSource: CartRemoteDataSource {
         let response: StorefrontCartLinesRemoveResponse = try await client.request(request)
         return try response.cartLinesRemove.toDomain()
     }
-    
+
     func updateDiscountCodes(cartId: String, discountCodes: [String]) async throws -> CartModel {
         let request = GraphQLRequest(
             query: StorefrontCartQueries.updateDiscountCodes,
@@ -82,5 +84,15 @@ final class CartGraphQLRemoteDataSource: CartRemoteDataSource {
         )
         let response: StorefrontCartDiscountCodesUpdateResponse = try await client.request(request)
         return try response.cartDiscountCodesUpdate.toDomain()
+    }
+
+    func updateBuyerIdentity(cartId: String, buyerIdentity: StorefrontCartBuyerIdentityInput) async throws -> CartModel {
+        let request = GraphQLRequest(
+            query: StorefrontCartQueries.updateBuyerIdentity,
+            variables: StorefrontUpdateCartBuyerIdentityVariables(cartId: cartId, buyerIdentity: buyerIdentity),
+            operationName: "UpdateCartBuyerIdentity"
+        )
+        let response: StorefrontCartBuyerIdentityUpdateResponse = try await client.request(request)
+        return try response.cartBuyerIdentityUpdate.toDomain()
     }
 }

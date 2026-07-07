@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct AddToCartCounter: View {
-    @State private var quantity: Int = 0
+    let quantity: Int
+    let isOutOfStock: Bool
+    let onAdd: () -> Void
+    let onIncrement: () -> Void
+    let onDecrement: () -> Void
 
     var body: some View {
         ZStack {
@@ -29,38 +33,33 @@ struct AddToCartCounter: View {
         .animation(.spring(response: 0.35, dampingFraction: 0.7), value: quantity == 0)
     }
 
-   
     private var addButton: some View {
         Button {
             withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
-                quantity = 1
+                onAdd()
             }
         } label: {
             HStack(spacing: 5) {
                 Image(systemName: "cart")
                     .font(.system(size: 11, weight: .bold))
-                Text("add_to_cart_btn")
+                Text(isOutOfStock ? "Out of Stock" : "Add to Cart")
                     .font(.system(size: 10, weight: .bold))
             }
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
             .frame(height: 32)
-            .background(Color(red: 0.145, green: 0.388, blue: 0.922))
+            .background(isOutOfStock ? Color.gray : Color(red: 0.145, green: 0.388, blue: 0.922))
             .clipShape(Capsule())
         }
         .buttonStyle(PressableButtonStyle())
+        .disabled(isOutOfStock)
     }
 
-   
     private var counterView: some View {
         HStack(spacing: 0) {
             Button {
                 withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
-                    if quantity > 1 {
-                        quantity -= 1
-                    } else {
-                        quantity = 0
-                    }
+                    onDecrement()
                 }
             } label: {
                 Image(systemName: "minus")
@@ -78,14 +77,15 @@ struct AddToCartCounter: View {
 
             Button {
                 withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
-                    quantity += 1
+                    onIncrement()
                 }
             } label: {
                 Image(systemName: "plus")
                     .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(Color(red: 0.145, green: 0.388, blue: 0.922))
+                    .foregroundColor(isOutOfStock ? .gray : Color(red: 0.145, green: 0.388, blue: 0.922))
                     .frame(width: 30, height: 30)
             }
+            .disabled(isOutOfStock)
         }
         .frame(height: 32)
         .background(

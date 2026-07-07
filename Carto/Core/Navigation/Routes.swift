@@ -9,6 +9,7 @@ enum AppRoute: Hashable, Identifiable {
     case settings
     case orderHistory
     case aboutUs
+    case cart
 
     var id: String {
         switch self {
@@ -28,6 +29,8 @@ enum AppRoute: Hashable, Identifiable {
             return "orderHistory"
         case .aboutUs:
             return "aboutUs"
+        case .cart:
+            return "cart"
         }
     }
 }

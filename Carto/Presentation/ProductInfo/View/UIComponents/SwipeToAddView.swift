@@ -11,6 +11,8 @@ struct SwipeToAddView: View {
     let price: Double
     let compareAtPrice: Double?
     let discountPercentage: Int?
+    let isOutOfStock: Bool
+    let maxQuantity: Int
 
     @Binding var quantity: Int
     @State private var dragOffset: CGFloat = 0
@@ -43,6 +45,11 @@ struct SwipeToAddView: View {
                             .foregroundColor(.red)
                             .font(.subheadline)
                             .bold()
+                    }
+                    if isOutOfStock {
+                        Text("Out of Stock")
+                            .font(.caption.weight(.bold))
+                            .foregroundColor(.red)
                     }
                 }
 
@@ -101,29 +108,43 @@ struct SwipeToAddView: View {
                 .gesture(
                     DragGesture()
                         .onChanged { value in
-                            dragOffset = max(-threshold - 10, min(value.translation.height, threshold + 10))
+                            guard !isOutOfStock else { return }
+
+                            dragOffset = max(
+                                -threshold - 10,
+                                min(value.translation.height, threshold + 10)
+                            )
                         }
                         .onEnded { value in
+                            guard !isOutOfStock else {
+                                withAnimation(.spring()) {
+                                    dragOffset = 0
+                                }
+                                return
+                            }
                             let impact = UIImpactFeedbackGenerator(style: .medium)
-
                             if value.translation.height >= threshold {
-                                quantity += 1
-                                impact.impactOccurred()
-                                triggerAddedEffect()
+                                if quantity < maxQuantity {
+
+                                    quantity += 1
+                                    impact.impactOccurred()
+                                    triggerAddedEffect()
+
+                                }
                             } else if value.translation.height <= -threshold {
+
                                 if quantity > 0 {
                                     quantity -= 1
+                                    impact.impactOccurred()
                                 }
-                                impact.impactOccurred()
-                            }
 
+                            }
                             withAnimation(.spring()) {
                                 dragOffset = 0
                             }
+
                         }
                 )
-                .animation(.interactiveSpring(), value: dragOffset)
-
             Spacer(minLength: 0)
 
             VStack(spacing: -6) {

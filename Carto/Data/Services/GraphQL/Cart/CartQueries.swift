@@ -374,4 +374,66 @@ enum StorefrontCartQueries {
           }
         }
         """
+    
+    static let updateBuyerIdentity = """
+        mutation UpdateCartBuyerIdentity($cartId: ID!, $buyerIdentity: CartBuyerIdentityInput!) {
+          cartBuyerIdentityUpdate(cartId: $cartId, buyerIdentity: $buyerIdentity) {
+            cart {
+              id
+              checkoutUrl
+              totalQuantity
+              lines(first: 50) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        title
+                        price {
+                          amount
+                          currencyCode
+                        }
+                        product {
+                          title
+                          handle
+                        }
+                      }
+                    }
+                  }
+                }
+                pageInfo {
+                  hasNextPage
+                  hasPreviousPage
+                  startCursor
+                  endCursor
+                }
+              }
+              discountCodes {
+                code
+                applicable
+              }
+              cost {
+                subtotalAmount {
+                  amount
+                  currencyCode
+                }
+                totalAmount {
+                  amount
+                  currencyCode
+                }
+                totalTaxAmount {
+                  amount
+                  currencyCode
+                }
+              }
+            }
+            userErrors {
+              field
+              message
+            }
+          }
+        }
+        """
 }

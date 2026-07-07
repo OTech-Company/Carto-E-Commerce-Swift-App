@@ -9,7 +9,16 @@ enum NetworkConstants {
     static let storePassword = AppEnvironment.storePassword
     static let apiKey = AppEnvironment.apiKey
     static let apiSecretKey = AppEnvironment.apiSecretKey
-
+    static let paymobApiPublicKey = AppEnvironment.paymobApiPublicKey
+    static let paymobApiSecretKey = AppEnvironment.paymobApiSecretKey
+    static let paymobApiIntegrationId: Int = {
+        guard let integrationId = Int(AppEnvironment.paymobApiIntegrationId) else {
+            print("Paymob Integration ID is missing or not a valid integer in AppEnvironment.")
+            return 0
+        }
+        return integrationId
+    }()
+    
     /// Shopify Admin REST base URL.
     static let restBaseURL = "https://\(shopDomain)/admin/api/\(apiVersion)"
 
