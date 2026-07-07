@@ -28,7 +28,11 @@ extension ProductDTO {
                     price: $0.price ?? "0",
                     sku: $0.sku ?? "",
                     compareAtPrice: $0.compareAtPrice,
-                    inventoryQuantity: $0.inventoryQuantity ?? 0
+                    inventoryQuantity: $0.inventoryQuantity ?? 0,
+                    option1: $0.option1,
+                    option2: $0.option2,
+                    option3: $0.option3,
+                    adminGraphqlApiId: $0.adminGraphqlApiId
                 )
             } ?? [],
             images: images?.map {
@@ -73,7 +77,11 @@ extension Product {
                     price: $0.price ?? "0",
                     sku: $0.sku ?? "",
                     compareAtPrice: $0.compareAtPrice,
-                    inventoryQuantity: $0.inventoryQuantity ?? 0
+                    inventoryQuantity: $0.inventoryQuantity ?? 0,
+                    option1: $0.option1,
+                    option2: $0.option2,
+                    option3: $0.option3,
+                    adminGraphqlApiId: $0.adminGraphqlApiId
                 )
             } ?? []
 
@@ -108,6 +116,10 @@ extension ProductVariant {
         self.sku = dto.sku ?? ""
         self.compareAtPrice = dto.compareAtPrice
         self.inventoryQuantity = dto.inventoryQuantity ?? 0
+        self.option1 = dto.option1
+        self.option2 = dto.option2
+        self.option3 = dto.option3
+        self.adminGraphqlApiId = dto.adminGraphqlApiId
     }
 }
 

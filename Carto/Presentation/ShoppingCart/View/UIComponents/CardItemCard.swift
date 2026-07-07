@@ -12,6 +12,7 @@ struct CartItemCard: View {
     let item: CartItem
     let onIncrement: () -> Void
     let onDecrement: () -> Void
+    let onDelete: () -> Void
     let canIncrement: Bool
     let canDecrement: Bool
 
@@ -135,6 +136,20 @@ struct CartItemCard: View {
             x: 0,
             y: 5
         )
+        .overlay(alignment: .topTrailing) {
+            Button {
+                onDelete()
+            } label: {
+                Image(systemName: "trash.fill")
+                    .font(.system(size: 13))
+                    .foregroundStyle(.red)
+                    .frame(width: 34, height: 34)
+                    .background(Color.red.opacity(0.12))
+                    .clipShape(Circle())
+            }
+            .buttonStyle(.borderless)
+            .offset(x: -8, y: 8)
+        }
         .listRowBackground(Color.clear)
     }
 

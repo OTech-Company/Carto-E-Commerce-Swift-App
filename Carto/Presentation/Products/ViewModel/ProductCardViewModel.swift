@@ -35,7 +35,7 @@ final class ProductCardViewModel: ObservableObject {
 
         let variant = cartStore.selectedVariant(for: product.id, fallbackColor: product.colors.first ?? "", fallbackSize: product.sizes.first ?? "")
         self.cartQuantity = cartStore.item(productId: product.id, color: variant.color, size: variant.size)?.quantity ?? 0
-        self.isOutOfStock = (product.variants.first?.inventoryQuantity ?? 0) <= 0
+        self.isOutOfStock = (product.variantFor(color: variant.color, size: variant.size)?.inventoryQuantity ?? 0) <= 0
 
         favoritesStore.$favoriteIds
             .receive(on: DispatchQueue.main)

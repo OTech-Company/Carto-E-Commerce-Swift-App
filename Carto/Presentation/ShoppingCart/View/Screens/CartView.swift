@@ -35,6 +35,7 @@ struct CartView: View {
                             item: item,
                             onIncrement: { viewModel.increment(item) },
                             onDecrement: { viewModel.decrement(item) },
+                            onDelete: { viewModel.remove(item) },
                             canIncrement: viewModel.canIncrement(item),
                             canDecrement: viewModel.canDecrement(item)
                         )

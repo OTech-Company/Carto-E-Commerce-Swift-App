@@ -17,8 +17,12 @@ struct CartItem: Identifiable, Equatable {
 
     var id: String { "\(productId)_\(selectedColor)_\(selectedSize)" }
 
+    var selectedVariant: ProductVariant? {
+        product.variantFor(color: selectedColor, size: selectedSize)
+    }
+
     var availableStock: Int {
-        product.variants.first?.inventoryQuantity ?? 0
+        selectedVariant?.inventoryQuantity ?? 0
     }
 
     var isOutOfStock: Bool {

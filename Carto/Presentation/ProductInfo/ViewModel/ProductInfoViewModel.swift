@@ -51,7 +51,7 @@ final class ProductsInfoViewModel: ObservableObject {
 
         let existing = cartStore.item(productId: product.id, color: variant.color, size: variant.size)
         self.quantity = existing?.quantity ?? 0
-        self.isOutOfStock = (product.variants.first?.inventoryQuantity ?? 0) <= 0
+        self.isOutOfStock = (product.variantFor(color: variant.color, size: variant.size)?.inventoryQuantity ?? 0) <= 0
 
         favoritesStore.$favoriteIds
             .receive(on: DispatchQueue.main)
@@ -139,6 +139,7 @@ final class ProductsInfoViewModel: ObservableObject {
             isApplyingRemoteChange = false
         }
         cartStore.setSelectedVariant(productId: product.id, color: color, size: size)
+        isOutOfStock = (product.variantFor(color: color, size: size)?.inventoryQuantity ?? 0) <= 0
     }
 
     func toggleFavorite() {

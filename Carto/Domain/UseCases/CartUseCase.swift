@@ -26,7 +26,7 @@ final class CartUseCase: CartUseCaseProtocol {
     }
 
     func addToCart(product: Product, color: String, size: String) -> CartItem? {
-        let stock = product.variants.first?.inventoryQuantity ?? 0
+        let stock = product.variantFor(color: color, size: size)?.inventoryQuantity ?? 0
         guard stock > 0 else { return nil }
 
         if let existing = repository.cartItem(productId: product.id, color: color, size: size) {
@@ -77,7 +77,7 @@ final class CartUseCase: CartUseCaseProtocol {
 
         repository.remove(productId: currentItem.productId, color: currentItem.selectedColor, size: currentItem.selectedSize)
 
-        let stock = product.variants.first?.inventoryQuantity ?? 0
+        let stock = product.variantFor(color: color, size: size)?.inventoryQuantity ?? 0
         let clampedQuantity = min(currentItem.quantity, max(stock, 1))
         var moved = currentItem
         moved.selectedColor = color
