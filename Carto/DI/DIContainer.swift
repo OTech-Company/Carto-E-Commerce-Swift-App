@@ -17,6 +17,7 @@ final class DIContainer {
     let appViewModel: AppViewModel
     let brandRemoteDataSource: BrandRemoteDataSourceProtocol
     let productRemoteDataSource: ProductsRemoteDataSource
+    let addressRemoteDataSource: AddressRemoteDataSource
     let favoritesLocalDataSource: FavoritesLocalDataSourceProtocol
     let favoritesRemoteDataSource: FavoritesRemoteDataSourceProtocol
 
@@ -27,6 +28,7 @@ final class DIContainer {
         brandRemoteDataSource = BrandRemoteDataSource()
         productRemoteDataSource = ProductsRemoteDataSourceImpl()
         appViewModel = AppViewModel(authSession: authSession)
+        addressRemoteDataSource = AddressGraphQLRemoteDataSource()
         favoritesLocalDataSource = FavoritesLocalDataSource()
         favoritesRemoteDataSource = FavoritesRemoteDataSource()
     }
@@ -102,6 +104,14 @@ final class DIContainer {
         )
     }
 
+    func makeAddressRepo() -> AddressRepoProtocol {
+        AddressRepoImpl(remoteDataSource: addressRemoteDataSource)
+    }
+
+    func makeAddressViewModel() -> AddressViewModel {
+        AddressViewModel(repo: makeAddressRepo())
+    }
+    
     private(set) lazy var favoritesRepository: FavoritesRepository = {
         let repo = FavoritesRepositoryImpl(
             local: favoritesLocalDataSource,

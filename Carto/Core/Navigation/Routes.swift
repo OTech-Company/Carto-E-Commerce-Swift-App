@@ -1,6 +1,7 @@
 import Foundation
 
 enum AppRoute: Hashable, Identifiable {
+    case addresses
     case brands
     case brandProducts(brandId: Int, brandName: String)
     case categoryProducts(categoryId: String, categoryName: String)
@@ -8,6 +9,8 @@ enum AppRoute: Hashable, Identifiable {
 
     var id: String {
         switch self {
+        case .addresses:
+            return "addresses"
         case .brands:
             return "brands"
         case .brandProducts(let brandId, _):

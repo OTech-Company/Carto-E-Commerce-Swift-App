@@ -14,14 +14,6 @@ class ProductsRepositoryImpl: ProductsRepository {
     init(remoteDataSource: ProductsRemoteDataSource) {
         self.remoteDataSource = remoteDataSource
     }
-
-    func getProductInfo(productId: Int) async throws -> Product {
-        // 1. Fetch the flat REST DTO
-        let dto = try await remoteDataSource.getProductInfo(productId: productId)
-
-        // 2. Map directly to your clean ProductInfo domain entity
-        return Product(from: dto)
-    }
     
     func getProductsByBrand(brandId: Int) async throws -> [Product] {
         let productsDto = try await remoteDataSource.getProductsByBrand(brandId: brandId)

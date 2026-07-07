@@ -15,6 +15,7 @@ enum LoadState<T> {
     case failure(Error)
 }
 
+@MainActor
 final class HomeBrandsViewModel: ObservableObject {
     @Published private(set) var state: LoadState<[BrandEntity]> = .idle
     @Published private(set) var brands: [BrandEntity] = []
@@ -25,7 +26,6 @@ final class HomeBrandsViewModel: ObservableObject {
         self.useCase = useCase
     }
 
-    @MainActor
     func loadBrands() async {
         state = .loading
         do {
