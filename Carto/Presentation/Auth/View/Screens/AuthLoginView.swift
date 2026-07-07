@@ -18,11 +18,11 @@ struct LoginView: View {
                             .frame(width: 80, height: 80)
                         
                         VStack(spacing: 6) {
-                            Text("Welcome to Carto")
+                            Text("welcome_title")
                                 .font(.system(size: 24, weight: .bold))
                                 .foregroundColor(.black)
                             
-                            Text("Your premium shopping destination.")
+                            Text("premium_shopping_desc")
                                 .font(.system(size: 14))
                                 .foregroundColor(.gray)
                         }
@@ -56,7 +56,7 @@ struct LoginView: View {
                             
                             HStack {
                                 Toggle(isOn: $rememberMe) {
-                                    Text("Remember me")
+                                    Text("remember_me_checkbox")
                                         .font(.system(size: 14))
                                         .foregroundColor(.gray)
                                 }
@@ -66,7 +66,7 @@ struct LoginView: View {
                                 Spacer()
                                 
                                 Button(action: { viewModel.forgotPasswordTapped() }) {
-                                    Text("Forgot Password?")
+                                    Text("forgot_password_btn")
                                         .font(.system(size: 14, weight: .medium))
                                         .foregroundColor(Color(hex: "FF5A00"))
                                 }
@@ -77,7 +77,7 @@ struct LoginView: View {
                     .padding(.horizontal, 24)
                     
                     Button(action: { viewModel.login() }) {
-                        Text("Login")
+                        Text("login_btn")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
@@ -98,7 +98,7 @@ struct LoginView: View {
                     
                     HStack(spacing: 16) {
                         Rectangle().frame(height: 1).foregroundColor(Color(.systemGray5))
-                        Text("Or continue with")
+                        Text("or_continue_with")
                             .font(.system(size: 13))
                             .foregroundColor(.gray)
                         Rectangle().frame(height: 1).foregroundColor(Color(.systemGray5))
@@ -117,7 +117,7 @@ struct LoginView: View {
                     .padding(.bottom, 20)
                     
                     Button(action: { viewModel.continueAsGuest() }) {
-                        Text("Continue as Guest")
+                        Text("continue_as_guest_btn")
                             .font(.system(size: 15, weight: .semibold))
                             .foregroundColor(.gray)
                             .padding(.vertical, 8)
@@ -128,12 +128,12 @@ struct LoginView: View {
                     Spacer()
                     
                     HStack(spacing: 4) {
-                        Text("Don't have an account?")
+                        Text("dont_have_account")
                             .font(.system(size: 14))
                             .foregroundColor(.gray)
                         
                         Button(action: { viewModel.signUpTapped()}) {
-                            Text("Sign up")
+                            Text("sign_up_link")
                                 .font(.system(size: 14, weight: .bold))
                                 .foregroundColor(Color(hex: "FF5A00"))
                         }

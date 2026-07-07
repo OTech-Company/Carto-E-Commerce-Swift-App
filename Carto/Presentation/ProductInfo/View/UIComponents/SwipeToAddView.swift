@@ -39,7 +39,7 @@ struct SwipeToAddView: View {
                     }
 
                     if let discountPercentage = discountPercentage {
-                        Text("-\(discountPercentage)% OFF")
+                        Text("discount_format \(discountPercentage)")
                             .foregroundColor(.red)
                             .font(.subheadline)
                             .bold()
@@ -51,7 +51,7 @@ struct SwipeToAddView: View {
             .padding(.horizontal)
             .padding(.bottom, 8)
 
-            Text("Swipe up to remove")
+            Text("swipe_up_remove")
                 .font(.subheadline)
                 .bold()
                 .foregroundColor(dragOffset < 0 ? .black : .secondary)
@@ -144,7 +144,7 @@ struct SwipeToAddView: View {
             }
             .padding(.bottom, 0)
 
-            Text("Swipe down to add")
+            Text("swipe_down_add")
                 .font(.subheadline)
                 .bold()
                 .foregroundColor(dragOffset > 0 ? .black : .secondary)

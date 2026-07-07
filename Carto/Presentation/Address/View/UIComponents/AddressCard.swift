@@ -63,7 +63,7 @@ struct AddressCard: View {
         HStack(spacing: 4) {
             Image(systemName: "checkmark.seal.fill")
                 .font(.system(size: 10, weight: .bold))
-            Text("Default")
+            Text("default_label")
                 .font(.caption2.weight(.semibold))
         }
         .padding(.horizontal, 10)
@@ -108,7 +108,7 @@ struct AddressCard: View {
         HStack(spacing: 16) {
             if let onEdit = onEdit {
                 Button(action: onEdit) {
-                    Label("Edit", systemImage: "pencil")
+                    Label("edit_btn", systemImage: "pencil")
                         .font(.caption.weight(.semibold))
                 }
                 .foregroundColor(Color("PrimaryColor"))
@@ -118,7 +118,7 @@ struct AddressCard: View {
 
             if let onDelete = onDelete {
                 Button(action: onDelete) {
-                    Label("Delete", systemImage: "trash")
+                    Label("delete_btn", systemImage: "trash")
                         .font(.caption.weight(.semibold))
                 }
                 .foregroundColor(.red)
@@ -130,7 +130,7 @@ struct AddressCard: View {
     // MARK: Set as Default action
     private func setDefaultButton(action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            Text("Set as Default")
+            Text("set_as_default_btn")
                 .font(.caption.weight(.semibold))
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 8)

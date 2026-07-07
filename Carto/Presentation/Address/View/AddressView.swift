@@ -25,7 +25,7 @@ struct AddressView: View {
 
     var body: some View {
         content
-            .navigationTitle("Addresses")
+            .navigationTitle("addresses_title")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
@@ -47,7 +47,7 @@ struct AddressView: View {
                 isPresented: $showAlert,
                 presenting: addressToDelete
             ) { address in
-                Button("Delete", role: .destructive) {
+                Button("delete_btn", role: .destructive) {
                     Task {
                         await viewModel.deleteAddress(
                             String(address.id),
@@ -55,7 +55,7 @@ struct AddressView: View {
                         )
                     }
                 }
-                Button("Cancel", role: .cancel) {}
+                Button("cancel_btn", role: .cancel) {}
             } message: { address in
                 Text(
                     "Are you sure you want to delete this address? This action can't be undone."

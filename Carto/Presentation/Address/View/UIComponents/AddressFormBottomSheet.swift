@@ -124,7 +124,7 @@ struct AddressFormBottomSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
+                    Button("cancel_btn") { dismiss() }
                         .foregroundStyle(.secondary)
                 }
             }

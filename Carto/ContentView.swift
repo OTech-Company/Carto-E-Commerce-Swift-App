@@ -10,16 +10,16 @@ struct ContentView: View {
     var body: some View {
         TabView {
             makeHomeScreen()
-                .tabItem { Label("Home", systemImage: "house.fill") }
+                .tabItem { Label("home", systemImage: "house.fill") }
             
             makeCategoryListScreen()
-                .tabItem { Label("Categories", systemImage: "square.grid.2x2.fill") }
+                .tabItem { Label("categories", systemImage: "square.grid.2x2.fill") }
             
             makeFavoritesScreen()
-                .tabItem { Label("Favorites", systemImage: "heart.fill") }
+                .tabItem { Label("favorites", systemImage: "heart.fill") }
             
             makeProfileScreen()
-                .tabItem { Label("Profile", systemImage: "person.fill") }
+                .tabItem { Label("profile", systemImage: "person.fill") }
         }
         .tint(Color("PrimaryColor"))
     }

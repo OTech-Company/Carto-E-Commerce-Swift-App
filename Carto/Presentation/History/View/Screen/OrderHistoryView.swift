@@ -63,7 +63,7 @@ struct OrderHistoryView: View {
                 }
             }
         }
-        .navigationTitle("History")
+        .navigationTitle("history_title")
         .navigationBarTitleDisplayMode(.large)
         .navigationDestination(for: OrderEntity.self) { order in
             OrderHistoryDetailView(order: order)
@@ -104,7 +104,7 @@ struct OrderHistoryView: View {
             Image(systemName: "bag.badge.questionmark")
                 .font(.system(size: 48))
                 .foregroundColor(.gray.opacity(0.7))
-            Text("No \(selectedTab.rawValue) Orders")
+            Text("no_orders_format \(selectedTab.rawValue)")
                 .font(.headline)
                 .foregroundColor(.black)
             Spacer()

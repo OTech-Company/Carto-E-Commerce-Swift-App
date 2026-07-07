@@ -20,7 +20,7 @@ struct FilterSheetView: View {
                     
                     if !viewModel.productTypes.isEmpty {
 
-                        Text("Product Type")
+                        Text("product_type_label")
                             .font(.headline)
 
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
@@ -62,7 +62,7 @@ struct FilterSheetView: View {
                     
                     if !viewModel.brands.isEmpty {
                         
-                        Text("Brands")
+                        Text("brands_title")
                             .font(.headline)
                         
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 110))]) {
@@ -95,15 +95,15 @@ struct FilterSheetView: View {
                         
                         Divider()
                     }
-                    Text("Price Range")
+                    Text("price_range_label")
                         .font(.headline)
 
-                    Text("Minimum: $\(Int(viewModel.minPrice))")
+                    Text("min_price_format \(Int(viewModel.minPrice))")
 
                     Slider(value: $viewModel.minPrice,
                            in: 0...viewModel.maxPrice)
 
-                    Text("Maximum: $\(Int(viewModel.maxPrice))")
+                    Text("max_price_format \(Int(viewModel.maxPrice))")
 
                     Slider(value: $viewModel.maxPrice,
                            in: viewModel.minPrice...1000)
@@ -112,7 +112,7 @@ struct FilterSheetView: View {
 
                     if !viewModel.availableSizes.isEmpty {
 
-                        Text("Sizes")
+                        Text("sizes_label")
                             .font(.headline)
 
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))]) {
@@ -152,7 +152,7 @@ struct FilterSheetView: View {
                     
                     if !viewModel.availableColors.isEmpty {
 
-                        Text("Colors")
+                        Text("colors_label")
                             .font(.headline)
 
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
@@ -205,7 +205,7 @@ struct FilterSheetView: View {
 
                     } label: {
 
-                        Text("Apply Filters")
+                        Text("apply_filters_btn")
                             .bold()
                             .frame(maxWidth: .infinity)
                             .padding()
@@ -217,7 +217,7 @@ struct FilterSheetView: View {
                 }
                 .padding()
             }
-            .navigationTitle("Filters")
+            .navigationTitle("filters_title")
             .navigationBarTitleDisplayMode(.inline)
         }
     }

@@ -16,7 +16,7 @@ struct SizeView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Size")
+            Text("size_label")
                 .bold()
 
             ScrollView {

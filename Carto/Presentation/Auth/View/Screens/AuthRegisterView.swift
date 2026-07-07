@@ -17,11 +17,11 @@ struct RegisterView: View {
                         .frame(width: 70, height: 70)
                     
                     VStack(spacing: 6) {
-                        Text("Registration")
+                        Text("registration_title")
                             .font(.system(size: 24, weight: .bold))
                             .foregroundColor(.black)
                         
-                        Text("Enter the fields below to get started")
+                        Text("register_desc")
                             .font(.system(size: 14))
                             .foregroundColor(.gray)
                     }
@@ -75,7 +75,7 @@ struct RegisterView: View {
                         
                         HStack {
                             Toggle(isOn: $rememberMe) {
-                                Text("Remember me")
+                                Text("remember_me_checkbox")
                                     .font(.system(size: 14))
                                     .foregroundColor(.gray)
                             }
@@ -88,7 +88,7 @@ struct RegisterView: View {
                     .padding(.top, 4)
                     
                     Button(action: { viewModel.register() }) {
-                        Text("Create Account")
+                        Text("create_account_btn")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
@@ -109,7 +109,7 @@ struct RegisterView: View {
                     
                     HStack(spacing: 16) {
                         Rectangle().frame(height: 1).foregroundColor(Color(.systemGray5))
-                        Text("Or continue with")
+                        Text("or_continue_with")
                             .font(.system(size: 13))
                             .foregroundColor(.gray)
                         Rectangle().frame(height: 1).foregroundColor(Color(.systemGray5))
@@ -128,7 +128,7 @@ struct RegisterView: View {
                     .padding(.bottom, 16)
                     
                     Button(action: { viewModel.continueAsGuest()}) {
-                        Text("Continue as Guest")
+                        Text("continue_as_guest_btn")
                             .font(.system(size: 15, weight: .semibold))
                             .foregroundColor(.gray)
                             .padding(.vertical, 8)
@@ -140,12 +140,12 @@ struct RegisterView: View {
                 Spacer()
                 
                 HStack(spacing: 4) {
-                    Text("Already have an account?")
+                    Text("already_have_account")
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
                     
                     Button(action: { viewModel.signInTapped()}) {
-                        Text("Sign in")
+                        Text("sign_in_link")
                             .font(.system(size: 14, weight: .bold))
                             .foregroundColor(Color(hex: "FF5A00"))
                     }

@@ -46,7 +46,7 @@ struct CategoryCardView: View {
                     .font(.system(size: 13, weight: .medium))
                     .foregroundColor(.gray)
                 
-                Text("Shop Now")
+                Text("shop_now_btn")
                     .font(.system(size: 13, weight: .medium))
                     .foregroundColor(.gray)
             }

@@ -28,13 +28,13 @@ struct AboutUsView: View {
                     .padding(.top, 20)
                 
                 // Title
-                Text("About Us")
+                Text("about_us_title")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(Color("PrimaryColor"))
                 
                 // Summary
-                Text("We are a passionate iOS development team dedicated to crafting exceptional mobile experiences. Welcome to WearDear, our latest project combining sleek design with seamless functionality.")
+                Text("about_us_desc")
                     .font(.body)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.secondary)
@@ -42,7 +42,7 @@ struct AboutUsView: View {
                 
                 // Team Section
                 VStack(spacing: 12) {
-                    Text("Meet the Team")
+                    Text("meet_team_title")
                         .font(.title2)
                         .fontWeight(.semibold)
                         .padding(.bottom, 8)
@@ -71,7 +71,7 @@ struct AboutUsView: View {
                 Link(destination: URL(string: "https://github.com/OTech-Company/WearDear")!) {
                     HStack {
                         Image(systemName: "link.circle.fill")
-                        Text("View Project on GitHub")
+                        Text("view_project_github")
                     }
                     .font(.headline)
                     .foregroundColor(.white)
@@ -86,14 +86,14 @@ struct AboutUsView: View {
                 Spacer(minLength: 40)
                 
                 // Copyright
-                Text("© 2026 Carto. All rights reserved.")
+                Text("copyright_text")
                     .font(.footnote)
                     .foregroundColor(.gray)
                     .padding(.bottom, 20)
             }
         }
         .background(Color("BackgroundColor").edgesIgnoringSafeArea(.all))
-        .navigationTitle("About")
+        .navigationTitle("about_title")
         .navigationBarTitleDisplayMode(.inline)
     }
 }

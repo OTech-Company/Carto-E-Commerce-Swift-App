@@ -16,7 +16,7 @@ struct SettingsView: View {
             Section {
                 Toggle(isOn: $viewModel.isDarkMode) {
                     Label(
-                        "Dark Mode",
+                        "dark_mode",
                         systemImage: viewModel.isDarkMode
                             ? "moon.fill"
                             : "sun.max.fill"
@@ -25,7 +25,7 @@ struct SettingsView: View {
                 .tint(Color("PrimaryColor"))
                 .padding(.vertical, 4)
             } header: {
-                Text("Appearance")
+                Text("appearance_settings")
             }
 
             Section {
@@ -34,10 +34,10 @@ struct SettingsView: View {
                         Text(lang.displayName).tag(lang)
                     }
                 } label: {
-                    Label("Language", systemImage: "globe")
+                    Label("language_settings", systemImage: "globe")
                 }
             } header: {
-                Text("Language")
+                Text("language_settings")
             }
 
             Section {
@@ -46,14 +46,14 @@ struct SettingsView: View {
                         Text(cur.displayName).tag(cur)
                     }
                 } label: {
-                    Label("Currency", systemImage: "dollarsign.circle")
+                    Label("currency_settings", systemImage: "dollarsign.circle")
                 }
             } header: {
-                Text("Currency")
+                Text("currency_settings")
             }
         }
         .listStyle(.insetGrouped)
-        .navigationTitle("Settings")
+        .navigationTitle("settings_title")
         .id(viewModel.language)
     }
 }

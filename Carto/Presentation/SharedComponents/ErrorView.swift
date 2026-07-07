@@ -18,7 +18,7 @@ struct ErrorView: View {
                 .font(.system(size: 50))
                 .foregroundColor(.red)
 
-            Text("Oops!")
+            Text("oops_title")
                 .font(.title2)
                 .fontWeight(.bold)
 

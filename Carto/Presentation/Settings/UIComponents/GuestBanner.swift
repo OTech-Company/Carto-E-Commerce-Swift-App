@@ -12,7 +12,7 @@ struct GuestBanner: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("You're browsing as a Guest")
+            Text("browsing_as_guest")
                 .font(.headline)
                 .foregroundStyle(.white)
 
@@ -24,7 +24,7 @@ struct GuestBanner: View {
             .fixedSize(horizontal: false, vertical: true)
 
             Button(action: onLogin) {
-                Label("Login", systemImage: "arrow.right.circle.fill")
+                Label("login_btn", systemImage: "arrow.right.circle.fill")
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 10)

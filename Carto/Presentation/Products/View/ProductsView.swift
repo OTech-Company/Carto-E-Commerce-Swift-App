@@ -80,7 +80,7 @@ struct ProductsView: View {
                 }
             }
         }
-        .navigationTitle("Products")
+        .navigationTitle("products_title")
         .sheet(isPresented: $viewModel.showFilters) {
 
             FilterSheetView(viewModel: viewModel)

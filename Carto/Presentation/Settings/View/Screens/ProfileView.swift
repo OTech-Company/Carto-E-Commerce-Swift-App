@@ -38,7 +38,7 @@ struct ProfileView: View {
                 otherSection
             }
             .listStyle(.insetGrouped)
-            .navigationTitle("Profile")
+            .navigationTitle("profile_title")
         }
         .onAppear {
             currentUser = DIContainer.shared.authSession.currentUser
@@ -83,11 +83,11 @@ struct ProfileView: View {
     @ViewBuilder
     private var activitySection: some View {
         Section("Activity") {
-            Label("Order History", systemImage: "clock.arrow.circlepath")
+            Label("order_history_title", systemImage: "clock.arrow.circlepath")
                 .onTapGesture {
                     router.push(to: .orderHistory)
                 }
-            Label("Addresses", systemImage: "mappin.and.ellipse")
+            Label("addresses_title", systemImage: "mappin.and.ellipse")
                 .onTapGesture {
                     router.push(to: .addresses)
                 }
@@ -97,7 +97,7 @@ struct ProfileView: View {
     @ViewBuilder
     private var appSettingsSection: some View {
         Section("App") {
-            Label("Settings", systemImage: "gearshape")
+            Label("settings_title", systemImage: "gearshape")
                 .onTapGesture {
                     router.push(to: .settings)
                 }
@@ -107,7 +107,7 @@ struct ProfileView: View {
     @ViewBuilder
     private var otherSection: some View {
         Section("Other") {
-            Label("About Us", systemImage: "info.circle")
+            Label("about_us_title", systemImage: "info.circle")
                 .onTapGesture {
                     router.push(to: .aboutUs)
                 }
@@ -119,7 +119,7 @@ struct ProfileView: View {
                     }
                 } label: {
                     Label(
-                        "Log Out",
+                        "log_out",
                         systemImage: "rectangle.portrait.and.arrow.right"
                     )
                 }

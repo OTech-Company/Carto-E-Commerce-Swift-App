@@ -21,7 +21,7 @@ struct OrderHistoryDetailView: View {
                     // Order Meta Summary Header card
                     VStack(alignment: .leading, spacing: 10) {
                         HStack {
-                            Text("Status")
+                            Text("status_label")
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
                             Spacer()
@@ -34,7 +34,7 @@ struct OrderHistoryDetailView: View {
                         Divider()
                         
                         HStack {
-                            Text("Date")
+                            Text("date_label")
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
                             Spacer()
@@ -46,7 +46,7 @@ struct OrderHistoryDetailView: View {
                         Divider()
                         
                         HStack {
-                            Text("Total Amount")
+                            Text("total_amount_label")
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
                             Spacer()
@@ -61,7 +61,7 @@ struct OrderHistoryDetailView: View {
                     .cornerRadius(12)
                     .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.black.opacity(0.05), lineWidth: 1))
                     
-                    Text("ITEMS IN THIS ORDER")
+                    Text("items_in_order_label")
                         .font(.system(size: 13, weight: .bold))
                         .foregroundColor(.gray)
                         .padding(.horizontal, 4)
@@ -96,7 +96,7 @@ struct OrderHistoryDetailView: View {
                                         .foregroundColor(.black)
                                         .lineLimit(1)
                                     
-                                    Text("Qty: \(item.quantity)")
+                                    Text("quantity_format \(item.quantity)")
                                         .font(.system(size: 13))
                                         .foregroundColor(.gray)
                                 }

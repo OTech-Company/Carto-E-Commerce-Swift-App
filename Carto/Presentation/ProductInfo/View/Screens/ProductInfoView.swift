@@ -27,10 +27,10 @@ struct ProductsInfoView: View {
                     if viewModel.product.sizes.isEmpty {
                         VStack(alignment: .leading, spacing: 12) {
 
-                            Text("Availability")
+                            Text("availability_label")
                                 .bold()
 
-                            Text("✓ In Stock")
+                            Text("in_stock_label")
                                 .font(.caption)
                                 .foregroundColor(.red)
                                 .frame(width: 80, height: 40)

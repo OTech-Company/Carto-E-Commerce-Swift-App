@@ -71,7 +71,7 @@ struct HomeView: View {
                 }
 
                 HStack {
-                    Text("Brands")
+                    Text("brands_title")
                         .font(.system(size: 28, weight: .bold))
                         .foregroundColor(Color("PrimaryColor"))
 
@@ -80,7 +80,7 @@ struct HomeView: View {
                     Button {
                         router.push(to: .brands)
                     } label: {
-                        Text("see more")
+                        Text("see_more_btn")
                             .font(.system(size: 18, weight: .medium))
                             .foregroundColor(Color("PrimaryColor"))
                     }
@@ -92,7 +92,7 @@ struct HomeView: View {
 
                 Spacer(minLength: 20)
 
-                Text("Products")
+                Text("products_title")
                     .font(.system(size: 28, weight: .bold))
                     .foregroundColor(Color("PrimaryColor"))
 
