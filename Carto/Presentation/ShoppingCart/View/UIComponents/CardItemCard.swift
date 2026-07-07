@@ -32,6 +32,7 @@ struct CartItemCard: View {
                     .lineLimit(2)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.trailing, 34)
 
                 HStack(spacing: 8) {
 
@@ -141,9 +142,9 @@ struct CartItemCard: View {
                 onDelete()
             } label: {
                 Image(systemName: "trash.fill")
-                    .font(.system(size: 13))
+                    .font(.system(size: 15))
                     .foregroundStyle(.red)
-                    .frame(width: 34, height: 34)
+                    .frame(width: 38, height: 38)
                     .background(Color.red.opacity(0.12))
                     .clipShape(Circle())
             }

@@ -93,6 +93,10 @@ struct ProductCard: View {
     @StateObject private var viewModel: ProductCardViewModel
     var onFavoriteTap: (() -> Void)? = nil
 
+    @State private var appeared = false
+    @State private var favBounce = false
+    @State private var isPressed = false
+
     init(product: Product, onFavoriteTap: (() -> Void)? = nil) {
         self.product = product
         _viewModel = StateObject(wrappedValue: DIContainer.shared.makeProductCardViewModel(product: product))
@@ -100,68 +104,146 @@ struct ProductCard: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
+        VStack(alignment: .leading, spacing: 0) {
+
+            // MARK: - Image Section (fills top of card)
+            ZStack(alignment: .topLeading) {
+                imageView
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 160)
+                    .clipped()
+
+                // Fav icon overlay on image — prominent style
                 Button {
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.5)) {
+                        favBounce = true
+                    }
                     onFavoriteTap?() ?? viewModel.toggleFavorite(for: product)
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                        favBounce = false
+                    }
                 } label: {
                     Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart")
-                        .font(.system(size: 18))
-                        .foregroundColor(viewModel.isFavorite ? .red : .gray)
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(viewModel.isFavorite ? .white : .gray.opacity(0.7))
+                        .frame(width: 34, height: 34)
+                        .background(
+                            Circle()
+                                .fill(viewModel.isFavorite
+                                      ? Color.red
+                                      : Color.white.opacity(0.92))
+                                .shadow(
+                                    color: viewModel.isFavorite
+                                        ? Color.red.opacity(0.4)
+                                        : Color.black.opacity(0.08),
+                                    radius: viewModel.isFavorite ? 8 : 4,
+                                    x: 0,
+                                    y: 2
+                                )
+                        )
+                        .overlay(
+                            Circle()
+                                .stroke(
+                                    viewModel.isFavorite
+                                        ? Color.red.opacity(0.3)
+                                        : Color.gray.opacity(0.2),
+                                    lineWidth: 1.5
+                                )
+                        )
+                        .scaleEffect(favBounce ? 1.3 : 1.0)
+                        .rotationEffect(.degrees(favBounce ? -12 : 0))
                 }
                 .buttonStyle(.plain)
-
-                Spacer()
+                .padding(8)
+                .animation(.spring(response: 0.35, dampingFraction: 0.5), value: viewModel.isFavorite)
             }
 
-            imageView
-                .frame(height: 115)
-                .frame(maxWidth: .infinity)
-                .clipped()
-                .clipShape(RoundedRectangle(cornerRadius: 16))
+            // MARK: - Info Section
+            VStack(alignment: .leading, spacing: 6) {
 
-            Text(product.title)
-                .font(.system(size: 14, weight: .bold))
-                .lineLimit(3)
+                Text(product.title)
+                    .font(.system(size: 13, weight: .bold))
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
 
-            VStack(alignment: .leading, spacing: 2) {
+                // Price row + color circles
                 HStack(spacing: 6) {
-                    Text("$\(product.price, specifier: "%.2f")")
-                        .font(.system(size: 12, weight: .bold))
-                        .foregroundColor(.blue)
+                    VStack(alignment: .leading, spacing: 2) {
+                        HStack(spacing: 5) {
+                            Text("$\(product.price, specifier: "%.2f")")
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundColor(.blue)
 
-                    if let compareAtPrice = product.compareAtPrice {
-                        Text("$\(compareAtPrice, specifier: "%.2f")")
-                            .font(.system(size: 12))
-                            .foregroundColor(.secondary)
-                            .strikethrough()
+                            if let compareAtPrice = product.compareAtPrice {
+                                Text("$\(compareAtPrice, specifier: "%.2f")")
+                                    .font(.system(size: 11))
+                                    .foregroundColor(.secondary)
+                                    .strikethrough()
+                            }
+                        }
+
+                        if let discount = product.discountPercentage {
+                            Text("\(discount)% OFF")
+                                .font(.system(size: 10, weight: .bold))
+                                .foregroundColor(.red)
+                        }
+                    }
+
+                    Spacer()
+
+                    if !product.colors.isEmpty {
+                        ProductColorsView(colorNames: product.colors)
                     }
                 }
 
-                if let discount = product.discountPercentage {
-                    Text("\(discount)% OFF")
-                        .font(.system(size: 11, weight: .bold))
-                        .foregroundColor(.red)
-                }
+                AddToCartCounter(
+                    quantity: viewModel.cartQuantity,
+                    isOutOfStock: viewModel.isOutOfStock,
+                    onAdd: { viewModel.addToCart() },
+                    onIncrement: { viewModel.incrementQuantity() },
+                    onDecrement: { viewModel.decrementQuantity() }
+                )
             }
-
-            AddToCartCounter(
-                quantity: viewModel.cartQuantity,
-                isOutOfStock: viewModel.isOutOfStock,
-                onAdd: { viewModel.addToCart() },
-                onIncrement: { viewModel.incrementQuantity() },
-                onDecrement: { viewModel.decrementQuantity() }
-            )
+            .padding(.horizontal, 10)
+            .padding(.top, 8)
+            .padding(.bottom, 10)
         }
         .onAppear {
             print("Title: \(product.title)")
             print("Image URL: \(product.imageURL)")
+
+            withAnimation(
+                .spring(response: 0.6, dampingFraction: 0.75)
+                .delay(Double.random(in: 0...0.15))
+            ) {
+                appeared = true
+            }
         }
-        .padding(12)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(.systemGray6))
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: .black.opacity(0.05), radius: 6, x: 0, y: 3)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 18))
+        .shadow(
+            color: .black.opacity(0.04),
+            radius: 6,
+            x: 0,
+            y: 3
+        )
+        .shadow(
+            color: Color.orange.opacity(0.12),
+            radius: 16,
+            x: 0,
+            y: 6
+        )
+        // Appear animation: fade + slide up
+        .opacity(appeared ? 1 : 0)
+        .offset(y: appeared ? 0 : 18)
+        // Press interaction
+        .scaleEffect(isPressed ? 0.97 : 1.0)
+        .animation(.easeOut(duration: 0.15), value: isPressed)
+        .onLongPressGesture(minimumDuration: .infinity, pressing: { pressing in
+            isPressed = pressing
+        }, perform: {})
     }
 
     @ViewBuilder
@@ -178,5 +260,6 @@ struct ProductCard: View {
             .font(.system(size: 28))
             .foregroundColor(.gray.opacity(0.4))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(.systemGray6))
     }
 }
