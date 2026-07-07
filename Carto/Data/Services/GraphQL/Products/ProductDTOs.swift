@@ -10,15 +10,21 @@ import Foundation
 // MARK: - Variables
 
 struct StorefrontProductsVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let first: Int
     let after: String?
 }
 
 struct StorefrontProductByHandleVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let handle: String
 }
 
 struct StorefrontSearchProductsVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let query: String
     let first: Int
 }

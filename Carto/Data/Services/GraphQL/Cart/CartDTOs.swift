@@ -33,29 +33,41 @@ struct StorefrontCartInput: Encodable {
 // MARK: - Variables
 
 struct StorefrontFetchCartVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let id: String
 }
 
 struct StorefrontCreateCartVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let input: StorefrontCartInput?
 }
 
 struct StorefrontAddToCartVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let cartId: String
     let lines: [StorefrontCartLineInput]
 }
 
 struct StorefrontUpdateCartLinesVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let cartId: String
     let lines: [StorefrontCartLineUpdateInput]
 }
 
 struct StorefrontRemoveCartLinesVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let cartId: String
     let lineIds: [String]
 }
 
 struct StorefrontUpdateDiscountCodesVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let cartId: String
     let discountCodes: [String]
 }

@@ -10,6 +10,8 @@ import Foundation
 // MARK: - Variables
 
 struct StorefrontCustomerVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let customerAccessToken: String
 }
 
@@ -19,10 +21,14 @@ struct StorefrontCustomerAccessTokenCreateInput: Encodable {
 }
 
 struct StorefrontCustomerAccessTokenCreateVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let input: StorefrontCustomerAccessTokenCreateInput
 }
 
 struct StorefrontCustomerAccessTokenDeleteVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let customerAccessToken: String
 }
 
@@ -34,6 +40,8 @@ struct StorefrontCustomerCreateInput: Encodable {
 }
 
 struct StorefrontCustomerCreateVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let input: StorefrontCustomerCreateInput
 }
 

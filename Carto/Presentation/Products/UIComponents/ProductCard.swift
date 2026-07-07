@@ -92,7 +92,8 @@ struct ProductCard: View {
     let product: Product
     @StateObject private var viewModel: ProductCardViewModel
     var onFavoriteTap: (() -> Void)? = nil
-
+    @AppStorage("app_currency") var appCurrency: AppCurrency = .egyptianPound
+    
     init(product: Product, onFavoriteTap: (() -> Void)? = nil) {
         self.product = product
         _viewModel = StateObject(wrappedValue: DIContainer.shared.makeProductCardViewModel(productId: product.id))
@@ -126,12 +127,12 @@ struct ProductCard: View {
 
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 6) {
-                    Text("$\(product.price, specifier: "%.2f")")
+                    Text("\(appCurrency.symbol) \(product.price, specifier: "%.2f")")
                         .font(.system(size: 12, weight: .bold))
                         .foregroundColor(.blue)
 
                     if let compareAtPrice = product.compareAtPrice {
-                        Text("$\(compareAtPrice, specifier: "%.2f")")
+                        Text("\(appCurrency.symbol) \(compareAtPrice, specifier: "%.2f")")
                             .font(.system(size: 12))
                             .foregroundColor(.secondary)
                             .strikethrough()
