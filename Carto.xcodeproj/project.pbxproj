@@ -48,6 +48,34 @@
 		6FB176392FEFE3140008DDDC /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175142FEFE3140008DDDC /* ServiceLocator.swift */; };
 		6FB176E22FEFE3140008DDDC /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175132FEFE3140008DDDC /* AppContainer.swift */; };
 		6FB176EC2FEFE3140008DDDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB1761A2FEFE3140008DDDC /* Assets.xcassets */; };
+		6FB3B7F42FFE4D99005D1C03 /* CartoAIInsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7EC2FFE4D99005D1C03 /* CartoAIInsightsView.swift */; };
+		6FB3B7F52FFE4D99005D1C03 /* CartoAIAssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7DD2FFE4D99005D1C03 /* CartoAIAssistantView.swift */; };
+		6FB3B7F62FFE4D99005D1C03 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7D42FFE4D99005D1C03 /* ChatBubbleView.swift */; };
+		6FB3B7F72FFE4D99005D1C03 /* ProductMiniCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7E32FFE4D99005D1C03 /* ProductMiniCard.swift */; };
+		6FB3B7F82FFE4D99005D1C03 /* CartoAIOutfitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7E92FFE4D99005D1C03 /* CartoAIOutfitViewModel.swift */; };
+		6FB3B7F92FFE4D99005D1C03 /* ChatHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7D52FFE4D99005D1C03 /* ChatHeaderView.swift */; };
+		6FB3B7FA2FFE4D99005D1C03 /* ComparisonResultDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7E12FFE4D99005D1C03 /* ComparisonResultDashboard.swift */; };
+		6FB3B7FB2FFE4D99005D1C03 /* ChatInputBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7D62FFE4D99005D1C03 /* ChatInputBar.swift */; };
+		6FB3B7FC2FFE4D99005D1C03 /* OutfitGridItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7EA2FFE4D99005D1C03 /* OutfitGridItemCard.swift */; };
+		6FB3B7FD2FFE4D99005D1C03 /* CartoAIComparisonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7E62FFE4D99005D1C03 /* CartoAIComparisonViewModel.swift */; };
+		6FB3B7FE2FFE4D99005D1C03 /* CartoAIAssistantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7DE2FFE4D99005D1C03 /* CartoAIAssistantViewModel.swift */; };
+		6FB3B7FF2FFE4D99005D1C03 /* CartoAIInsightsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7ED2FFE4D99005D1C03 /* CartoAIInsightsViewModel.swift */; };
+		6FB3B8002FFE4D99005D1C03 /* SuggestionChipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7D72FFE4D99005D1C03 /* SuggestionChipsView.swift */; };
+		6FB3B8012FFE4D99005D1C03 /* AIFeatureSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7DA2FFE4D99005D1C03 /* AIFeatureSheetViewModel.swift */; };
+		6FB3B8022FFE4D99005D1C03 /* CartoAIComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7E52FFE4D99005D1C03 /* CartoAIComparisonView.swift */; };
+		6FB3B8032FFE4D99005D1C03 /* ImageSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7EF2FFE4D99005D1C03 /* ImageSearchView.swift */; };
+		6FB3B8042FFE4D99005D1C03 /* ComparisonVisualHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7E22FFE4D99005D1C03 /* ComparisonVisualHeader.swift */; };
+		6FB3B8052FFE4D99005D1C03 /* ImageSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7F02FFE4D99005D1C03 /* ImageSearchViewModel.swift */; };
+		6FB3B8062FFE4D99005D1C03 /* AmbientBlobBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7D32FFE4D99005D1C03 /* AmbientBlobBackground.swift */; };
+		6FB3B8072FFE4D99005D1C03 /* CartoAIOutfitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7E82FFE4D99005D1C03 /* CartoAIOutfitView.swift */; };
+		6FB3B8082FFE4D99005D1C03 /* ComparisonInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7E02FFE4D99005D1C03 /* ComparisonInputField.swift */; };
+		6FB3B8092FFE4D99005D1C03 /* AIFeatureSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B7D22FFE4D99005D1C03 /* AIFeatureSheet.swift */; };
+		6FB3B80B2FFE4DD5005D1C03 /* ImageSearchRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B80A2FFE4DD5005D1C03 /* ImageSearchRepositoryImpl.swift */; };
+		6FB3B80D2FFE4DFD005D1C03 /* FindSimilarProductFromImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B80C2FFE4DFD005D1C03 /* FindSimilarProductFromImageUseCase.swift */; };
+		6FB3B80F2FFE4E14005D1C03 /* ImageSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B80E2FFE4E14005D1C03 /* ImageSearchRepository.swift */; };
+		6FF819DB2FFE56B100705803 /* PaymobSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF819DA2FFE56B100705803 /* PaymobSDK.xcframework */; };
+		6FF819DC2FFE56B100705803 /* PaymobSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF819DA2FFE56B100705803 /* PaymobSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6FF819DE2FFE579300705803 /* ImgSearch+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF819DD2FFE579300705803 /* ImgSearch+Extensions.swift */; };
 		D57F105F2FF6AC6A00F421D4 /* BrandsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F105E2FF6AC6A00F421D4 /* BrandsScreen.swift */; };
 		D57F10612FF6ACA900F421D4 /* HomeBrandsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F10602FF6ACA900F421D4 /* HomeBrandsViewModel.swift */; };
 		D59EBD482FF6D1B500883859 /* BrandsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59EBD472FF6D1B500883859 /* BrandsUseCase.swift */; };
@@ -108,8 +136,6 @@
 		D96CAD082FFD8DAD00263097 /* ShopifyAuthenticationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CAD052FFD8DAD00263097 /* ShopifyAuthenticationServiceProtocol.swift */; };
 		D96CAD092FFD8DAD00263097 /* ShopifyAdminCustomerDTOs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CAD062FFD8DAD00263097 /* ShopifyAdminCustomerDTOs.swift */; };
 		D96CAD0A2FFD8DAD00263097 /* ShopifyAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CAD072FFD8DAD00263097 /* ShopifyAuthenticationService.swift */; };
-		D96CAD0E2FFDCCD200263097 /* PaymobSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D7F13A22FFDA79500B97687 /* PaymobSDK.xcframework */; };
-		D96CAD0F2FFDCCD200263097 /* PaymobSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6D7F13A22FFDA79500B97687 /* PaymobSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D96CAD122FFDFF4C00263097 /* PaymobRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CAD112FFDFF4C00263097 /* PaymobRepositoryProtocol.swift */; };
 		D96CAD142FFDFFC800263097 /* PaymobRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CAD132FFDFFC800263097 /* PaymobRepositoryImpl.swift */; };
 		D97785E02FFD10FB00CE8275 /* DeliveryAddressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97785DF2FFD10FB00CE8275 /* DeliveryAddressCard.swift */; };
@@ -322,16 +348,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D96CAD102FFDCCD200263097 /* Embed Frameworks */ = {
+		6FF819D82FFE531800705803 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D96CAD0F2FFDCCD200263097 /* PaymobSDK.xcframework in Embed Frameworks */,
+				6FF819DC2FFE56B100705803 /* PaymobSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -379,6 +405,33 @@
 		6FB175132FEFE3140008DDDC /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 		6FB175142FEFE3140008DDDC /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		6FB1761A2FEFE3140008DDDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6FB3B7D22FFE4D99005D1C03 /* AIFeatureSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIFeatureSheet.swift; sourceTree = "<group>"; };
+		6FB3B7D32FFE4D99005D1C03 /* AmbientBlobBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbientBlobBackground.swift; sourceTree = "<group>"; };
+		6FB3B7D42FFE4D99005D1C03 /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
+		6FB3B7D52FFE4D99005D1C03 /* ChatHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHeaderView.swift; sourceTree = "<group>"; };
+		6FB3B7D62FFE4D99005D1C03 /* ChatInputBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputBar.swift; sourceTree = "<group>"; };
+		6FB3B7D72FFE4D99005D1C03 /* SuggestionChipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionChipsView.swift; sourceTree = "<group>"; };
+		6FB3B7DA2FFE4D99005D1C03 /* AIFeatureSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIFeatureSheetViewModel.swift; sourceTree = "<group>"; };
+		6FB3B7DD2FFE4D99005D1C03 /* CartoAIAssistantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIAssistantView.swift; sourceTree = "<group>"; };
+		6FB3B7DE2FFE4D99005D1C03 /* CartoAIAssistantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIAssistantViewModel.swift; sourceTree = "<group>"; };
+		6FB3B7E02FFE4D99005D1C03 /* ComparisonInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonInputField.swift; sourceTree = "<group>"; };
+		6FB3B7E12FFE4D99005D1C03 /* ComparisonResultDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonResultDashboard.swift; sourceTree = "<group>"; };
+		6FB3B7E22FFE4D99005D1C03 /* ComparisonVisualHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonVisualHeader.swift; sourceTree = "<group>"; };
+		6FB3B7E32FFE4D99005D1C03 /* ProductMiniCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductMiniCard.swift; sourceTree = "<group>"; };
+		6FB3B7E52FFE4D99005D1C03 /* CartoAIComparisonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIComparisonView.swift; sourceTree = "<group>"; };
+		6FB3B7E62FFE4D99005D1C03 /* CartoAIComparisonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIComparisonViewModel.swift; sourceTree = "<group>"; };
+		6FB3B7E82FFE4D99005D1C03 /* CartoAIOutfitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIOutfitView.swift; sourceTree = "<group>"; };
+		6FB3B7E92FFE4D99005D1C03 /* CartoAIOutfitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIOutfitViewModel.swift; sourceTree = "<group>"; };
+		6FB3B7EA2FFE4D99005D1C03 /* OutfitGridItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitGridItemCard.swift; sourceTree = "<group>"; };
+		6FB3B7EC2FFE4D99005D1C03 /* CartoAIInsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIInsightsView.swift; sourceTree = "<group>"; };
+		6FB3B7ED2FFE4D99005D1C03 /* CartoAIInsightsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartoAIInsightsViewModel.swift; sourceTree = "<group>"; };
+		6FB3B7EF2FFE4D99005D1C03 /* ImageSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchView.swift; sourceTree = "<group>"; };
+		6FB3B7F02FFE4D99005D1C03 /* ImageSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchViewModel.swift; sourceTree = "<group>"; };
+		6FB3B80A2FFE4DD5005D1C03 /* ImageSearchRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchRepositoryImpl.swift; sourceTree = "<group>"; };
+		6FB3B80C2FFE4DFD005D1C03 /* FindSimilarProductFromImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindSimilarProductFromImageUseCase.swift; sourceTree = "<group>"; };
+		6FB3B80E2FFE4E14005D1C03 /* ImageSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchRepository.swift; sourceTree = "<group>"; };
+		6FF819DA2FFE56B100705803 /* PaymobSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = PaymobSDK.xcframework; path = ../../../Downloads/PaymobSDK.xcframework; sourceTree = "<group>"; };
+		6FF819DD2FFE579300705803 /* ImgSearch+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImgSearch+Extensions.swift"; sourceTree = "<group>"; };
 		D57F105E2FF6AC6A00F421D4 /* BrandsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsScreen.swift; sourceTree = "<group>"; };
 		D57F10602FF6ACA900F421D4 /* HomeBrandsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBrandsViewModel.swift; sourceTree = "<group>"; };
 		D59EBD472FF6D1B500883859 /* BrandsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsUseCase.swift; sourceTree = "<group>"; };
@@ -641,7 +694,7 @@
 				D9E5F8612FF5DE6E0014DD91 /* FirebaseAuth in Frameworks */,
 				D96CAD012FFD8C7700263097 /* GoogleSignIn in Frameworks */,
 				D9E5F8632FF5DE6E0014DD91 /* FirebaseFirestore in Frameworks */,
-				D96CAD0E2FFDCCD200263097 /* PaymobSDK.xcframework in Frameworks */,
+				6FF819DB2FFE56B100705803 /* PaymobSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -720,6 +773,123 @@
 				6FB1761E2FEFE3140008DDDC /* Localization */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		6FB3B7D82FFE4D99005D1C03 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				6FB3B7D22FFE4D99005D1C03 /* AIFeatureSheet.swift */,
+				6FB3B7D32FFE4D99005D1C03 /* AmbientBlobBackground.swift */,
+				6FB3B7D42FFE4D99005D1C03 /* ChatBubbleView.swift */,
+				6FB3B7D52FFE4D99005D1C03 /* ChatHeaderView.swift */,
+				6FB3B7D62FFE4D99005D1C03 /* ChatInputBar.swift */,
+				6FB3B7D72FFE4D99005D1C03 /* SuggestionChipsView.swift */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		6FB3B7D92FFE4D99005D1C03 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6FB3B7D82FFE4D99005D1C03 /* UIComponents */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6FB3B7DB2FFE4D99005D1C03 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6FB3B7DA2FFE4D99005D1C03 /* AIFeatureSheetViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6FB3B7DC2FFE4D99005D1C03 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				6FB3B7D92FFE4D99005D1C03 /* View */,
+				6FB3B7DB2FFE4D99005D1C03 /* ViewModel */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		6FB3B7DF2FFE4D99005D1C03 /* AiAssistantChat */ = {
+			isa = PBXGroup;
+			children = (
+				6FB3B7DD2FFE4D99005D1C03 /* CartoAIAssistantView.swift */,
+				6FB3B7DE2FFE4D99005D1C03 /* CartoAIAssistantViewModel.swift */,
+			);
+			path = AiAssistantChat;
+			sourceTree = "<group>";
+		};
+		6FB3B7E42FFE4D99005D1C03 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				6FB3B7E02FFE4D99005D1C03 /* ComparisonInputField.swift */,
+				6FB3B7E12FFE4D99005D1C03 /* ComparisonResultDashboard.swift */,
+				6FB3B7E22FFE4D99005D1C03 /* ComparisonVisualHeader.swift */,
+				6FB3B7E32FFE4D99005D1C03 /* ProductMiniCard.swift */,
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		6FB3B7E72FFE4D99005D1C03 /* AiComaprison */ = {
+			isa = PBXGroup;
+			children = (
+				6FB3B7E42FFE4D99005D1C03 /* UIComponents */,
+				6FB3B7E52FFE4D99005D1C03 /* CartoAIComparisonView.swift */,
+				6FB3B7E62FFE4D99005D1C03 /* CartoAIComparisonViewModel.swift */,
+			);
+			path = AiComaprison;
+			sourceTree = "<group>";
+		};
+		6FB3B7EB2FFE4D99005D1C03 /* AiOutfitGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				6FB3B7E82FFE4D99005D1C03 /* CartoAIOutfitView.swift */,
+				6FB3B7E92FFE4D99005D1C03 /* CartoAIOutfitViewModel.swift */,
+				6FB3B7EA2FFE4D99005D1C03 /* OutfitGridItemCard.swift */,
+			);
+			path = AiOutfitGenerator;
+			sourceTree = "<group>";
+		};
+		6FB3B7EE2FFE4D99005D1C03 /* AiShoppingInsights */ = {
+			isa = PBXGroup;
+			children = (
+				6FB3B7EC2FFE4D99005D1C03 /* CartoAIInsightsView.swift */,
+				6FB3B7ED2FFE4D99005D1C03 /* CartoAIInsightsViewModel.swift */,
+			);
+			path = AiShoppingInsights;
+			sourceTree = "<group>";
+		};
+		6FB3B7F12FFE4D99005D1C03 /* ImageSearch */ = {
+			isa = PBXGroup;
+			children = (
+				6FB3B7EF2FFE4D99005D1C03 /* ImageSearchView.swift */,
+				6FB3B7F02FFE4D99005D1C03 /* ImageSearchViewModel.swift */,
+			);
+			path = ImageSearch;
+			sourceTree = "<group>";
+		};
+		6FB3B7F22FFE4D99005D1C03 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				6FB3B7DF2FFE4D99005D1C03 /* AiAssistantChat */,
+				6FB3B7E72FFE4D99005D1C03 /* AiComaprison */,
+				6FB3B7EB2FFE4D99005D1C03 /* AiOutfitGenerator */,
+				6FB3B7EE2FFE4D99005D1C03 /* AiShoppingInsights */,
+				6FB3B7F12FFE4D99005D1C03 /* ImageSearch */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		6FB3B7F32FFE4D99005D1C03 /* AIChatBot */ = {
+			isa = PBXGroup;
+			children = (
+				6FB3B7DC2FFE4D99005D1C03 /* Common */,
+				6FB3B7F22FFE4D99005D1C03 /* Features */,
+			);
+			path = AIChatBot;
 			sourceTree = "<group>";
 		};
 		D59EBD502FF6D23C00883859 /* SharedComponents */ = {
@@ -862,6 +1032,7 @@
 		D927DA9F2FFB44E000417D9C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6FF819DA2FFE56B100705803 /* PaymobSDK.xcframework */,
 				6D7F13A22FFDA79500B97687 /* PaymobSDK.xcframework */,
 			);
 			name = Frameworks;
@@ -1088,6 +1259,7 @@
 		D9E5F62C2FF5DCAF0014DD91 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				6FB3B80A2FFE4DD5005D1C03 /* ImageSearchRepositoryImpl.swift */,
 				D96CAD132FFDFFC800263097 /* PaymobRepositoryImpl.swift */,
 				6D89EE702FFD956F00E55931 /* CartRepositoryImpl.swift */,
 				D977861C2FFD339300CE8275 /* AddressRepoImpl.swift */,
@@ -1229,6 +1401,7 @@
 		D9E5F6712FF5DCAF0014DD91 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				6FB3B7F32FFE4D99005D1C03 /* AIChatBot */,
 				D977862E2FFD35BC00CE8275 /* Address */,
 				D927DA782FFB043000417D9C /* Payment */,
 				D5B150F22FF7467D00641EE4 /* Products */,
@@ -1754,6 +1927,7 @@
 		D9E5F75D2FF5DCAF0014DD91 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6FF819DD2FFE579300705803 /* ImgSearch+Extensions.swift */,
 				D977863E2FFD372D00CE8275 /* Product+Firestore.swift */,
 				6F6DD8532FF7F6520099872E /* AI+Extensions.swift */,
 				6D76EAA22FF69E2B00C6938C /* String+HTML.swift */,
@@ -1788,6 +1962,7 @@
 		D9E5F7672FF5DCB00014DD91 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				6FB3B80E2FFE4E14005D1C03 /* ImageSearchRepository.swift */,
 				D96CAD112FFDFF4C00263097 /* PaymobRepositoryProtocol.swift */,
 				6D89EE6E2FFD956200E55931 /* CartRepository.swift */,
 				D97786172FFD312200CE8275 /* AddressRepoProtocol.swift */,
@@ -1837,6 +2012,7 @@
 		D9E5F7752FF5DCB00014DD91 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				6FB3B80C2FFE4DFD005D1C03 /* FindSimilarProductFromImageUseCase.swift */,
 				6D89EE782FFD95AE00E55931 /* CartUseCase.swift */,
 				6F6DD83E2FF7F1C80099872E /* AI */,
 				D59EBD472FF6D1B500883859 /* BrandsUseCase.swift */,
@@ -1924,7 +2100,7 @@
 				D9EB9A732FEFD04D005CE9A4 /* Sources */,
 				D9EB9A742FEFD04D005CE9A4 /* Frameworks */,
 				D9EB9A752FEFD04D005CE9A4 /* Resources */,
-				D96CAD102FFDCCD200263097 /* Embed Frameworks */,
+				6FF819D82FFE531800705803 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2095,6 +2271,7 @@
 				D9E5F77E2FF5DCB00014DD91 /* OrderRepositoryImpl.swift in Sources */,
 				D9E5F7D92FF5DCB00014DD91 /* AuthLoginViewModel.swift in Sources */,
 				D9E5F8562FF5DCB00014DD91 /* RegisterInput.swift in Sources */,
+				6FB3B80F2FFE4E14005D1C03 /* ImageSearchRepository.swift in Sources */,
 				D9E5F7D82FF5DCB00014DD91 /* SplashScreen.swift in Sources */,
 				D9E5F8572FF5DCB00014DD91 /* SessionState.swift in Sources */,
 				D927DA952FFB043000417D9C /* PaymentSuccessView.swift in Sources */,
@@ -2116,11 +2293,34 @@
 				D991BDE42FFBDFD8007D2299 /* PaymobCheckoutCoordinator.swift in Sources */,
 				D97786122FFD300F00CE8275 /* FavoritesRemoteDataSource.swift in Sources */,
 				D9E5F8282FF5DCB00014DD91 /* ColorView.swift in Sources */,
+				6FB3B80B2FFE4DD5005D1C03 /* ImageSearchRepositoryImpl.swift in Sources */,
 				D991BDD72FFBDB5A007D2299 /* AdminOrderDTOs.swift in Sources */,
 				D9E5F7A92FF5DCB00014DD91 /* NotificationSettingEntity.swift in Sources */,
 				D946FDBB2FFA0B3400FBC3E1 /* Cart.swift in Sources */,
 				D9E5F7AE2FF5DCB00014DD91 /* ThemeEntity.swift in Sources */,
 				D9E5F83A2FF5DCB00014DD91 /* OnboardingLayoutBottom.swift in Sources */,
+				6FB3B7F42FFE4D99005D1C03 /* CartoAIInsightsView.swift in Sources */,
+				6FB3B7F52FFE4D99005D1C03 /* CartoAIAssistantView.swift in Sources */,
+				6FB3B7F62FFE4D99005D1C03 /* ChatBubbleView.swift in Sources */,
+				6FB3B7F72FFE4D99005D1C03 /* ProductMiniCard.swift in Sources */,
+				6FB3B7F82FFE4D99005D1C03 /* CartoAIOutfitViewModel.swift in Sources */,
+				6FB3B7F92FFE4D99005D1C03 /* ChatHeaderView.swift in Sources */,
+				6FB3B7FA2FFE4D99005D1C03 /* ComparisonResultDashboard.swift in Sources */,
+				6FB3B7FB2FFE4D99005D1C03 /* ChatInputBar.swift in Sources */,
+				6FB3B7FC2FFE4D99005D1C03 /* OutfitGridItemCard.swift in Sources */,
+				6FB3B7FD2FFE4D99005D1C03 /* CartoAIComparisonViewModel.swift in Sources */,
+				6FB3B7FE2FFE4D99005D1C03 /* CartoAIAssistantViewModel.swift in Sources */,
+				6FB3B7FF2FFE4D99005D1C03 /* CartoAIInsightsViewModel.swift in Sources */,
+				6FB3B8002FFE4D99005D1C03 /* SuggestionChipsView.swift in Sources */,
+				6FB3B8012FFE4D99005D1C03 /* AIFeatureSheetViewModel.swift in Sources */,
+				6FB3B8022FFE4D99005D1C03 /* CartoAIComparisonView.swift in Sources */,
+				6FB3B8032FFE4D99005D1C03 /* ImageSearchView.swift in Sources */,
+				6FB3B8042FFE4D99005D1C03 /* ComparisonVisualHeader.swift in Sources */,
+				6FB3B8052FFE4D99005D1C03 /* ImageSearchViewModel.swift in Sources */,
+				6FB3B8062FFE4D99005D1C03 /* AmbientBlobBackground.swift in Sources */,
+				6FB3B8072FFE4D99005D1C03 /* CartoAIOutfitView.swift in Sources */,
+				6FB3B8082FFE4D99005D1C03 /* ComparisonInputField.swift in Sources */,
+				6FB3B8092FFE4D99005D1C03 /* AIFeatureSheet.swift in Sources */,
 				D9E5F7862FF5DCB00014DD91 /* UserFirestoreDTO.swift in Sources */,
 				D946FDB02FFA0AF100FBC3E1 /* StorefrontCustomerMapper.swift in Sources */,
 				D97785FF2FFD2FE700CE8275 /* NewAddress.swift in Sources */,
@@ -2204,6 +2404,7 @@
 				D927DA9E2FFB21A000417D9C /* PaymentDemoViewModel.swift in Sources */,
 				D9E5F7B02FF5DCB00014DD91 /* LanguageEntity.swift in Sources */,
 				D9E5F7E52FF5DCB00014DD91 /* AuthTextField.swift in Sources */,
+				6FB3B80D2FFE4DFD005D1C03 /* FindSimilarProductFromImageUseCase.swift in Sources */,
 				D9E5F7982FF5DCB00014DD91 /* ShopifyResponse.swift in Sources */,
 				D9E5F8582FF5DCB00014DD91 /* AuthError.swift in Sources */,
 				D9E5F84F2FF5DCB00014DD91 /* ProductsRepositoryProtocol.swift in Sources */,
@@ -2227,6 +2428,7 @@
 				D9E5F7AC2FF5DCB00014DD91 /* BrandEntity.swift in Sources */,
 				D97786142FFD300F00CE8275 /* StorefrontProductsRemoteDataSource.swift in Sources */,
 				6D89EE6F2FFD956200E55931 /* CartRepository.swift in Sources */,
+				6FF819DE2FFE579300705803 /* ImgSearch+Extensions.swift in Sources */,
 				D946FD852FF9859100FBC3E1 /* GraphQLStorefrontRequestBuilder.swift in Sources */,
 				D9E5F8342FF5DCB00014DD91 /* OnboardingScreen.swift in Sources */,
 				6F6DD84F2FF7F22C0099872E /* AppEnvironment.swift in Sources */,
@@ -2529,6 +2731,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2559,6 +2762,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

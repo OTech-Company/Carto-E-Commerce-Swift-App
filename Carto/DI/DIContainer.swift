@@ -11,18 +11,23 @@ import Foundation
 final class DIContainer {
     static let shared = DIContainer()
 
+    // MARK: - Core & Auth Properties
     let authRepository: AuthenticationRepositoryProtocol
     let validator: AuthValidatorProtocol
     let appViewModel: AppViewModel
+    
+    // MARK: - Feature Data Sources
     let brandRemoteDataSource: BrandRemoteDataSourceProtocol
     let productRemoteDataSource: ProductsRemoteDataSource
     let addressRemoteDataSource: AddressRemoteDataSource
     let favoritesLocalDataSource: FavoritesLocalDataSourceProtocol
     let favoritesRemoteDataSource: FavoritesRemoteDataSourceProtocol
+    let imageSearchRepository: ImageSearchRepository
     let cartLocalDataSource: CartLocalDataSourceProtocol
     let cartRemoteDataSource: CartFirestoreRemoteDataSourceProtocol
 
     private init() {
+        imageSearchRepository = ImageSearchRepositoryImpl()
         authRepository = AuthenticationRepositoryImpl()
         validator = AuthValidatorImpl()
         brandRemoteDataSource = BrandRemoteDataSource()
@@ -35,6 +40,7 @@ final class DIContainer {
         cartRemoteDataSource = CartFirestoreRemoteDataSource()
     }
 
+    // MARK: - Auth ViewModels
     func makeLoginViewModel(router: AuthRouter) -> AuthLoginViewModel {
         AuthLoginViewModel(
             validator: validator,
@@ -66,19 +72,21 @@ final class DIContainer {
             router: router
         )
     }
-
+    
+    // MARK: - Brands Feature
     func makeBrandsRepo() -> BrandsRepoProtocol {
         BrandsRepoImpl(remoteDataSource: brandRemoteDataSource)
     }
-
+    
     func makeBrandsUseCase() -> BrandsUseCaseProtocol {
         BrandsUseCase(repository: makeBrandsRepo())
     }
-
+    
+    // MARK: - Home Feature
     func makeHomeProductsViewModel() -> HomeProductsViewModel {
         HomeProductsViewModel(useCase: makeProductsUseCase())
     }
-
+    
     func makeHomeViewModel() -> HomeViewModel {
         HomeViewModel(
             brandVM: HomeBrandsViewModel(useCase: makeBrandsUseCase()),
@@ -86,6 +94,7 @@ final class DIContainer {
         )
     }
 
+    // MARK: - Products Feature
     func makeProductRepo() -> ProductsRepository {
         ProductsRepositoryImpl(remoteDataSource: productRemoteDataSource)
     }
@@ -103,6 +112,7 @@ final class DIContainer {
         )
     }
 
+    // MARK: - Address Feature
     func makeAddressRepo() -> AddressRepoProtocol {
         AddressRepoImpl(remoteDataSource: addressRemoteDataSource)
     }
@@ -111,6 +121,7 @@ final class DIContainer {
         AddressViewModel(repo: makeAddressRepo())
     }
     
+    // MARK: - Favorites Feature
     private(set) lazy var favoritesRepository: FavoritesRepository = {
         let repo = FavoritesRepositoryImpl(
             local: favoritesLocalDataSource,
@@ -133,6 +144,24 @@ final class DIContainer {
         )
     }
     
+    // MARK: - AI Feature Injection Dependencies
+    func makeAIRepo() -> AIRepository {
+        let client = GroqClient(apiKey: AppEnvironment.groqApiKey)
+        let aiRepository = AIRepositoryImpl(client: client)
+        return aiRepository
+    }
+    
+    func makeCompareProductsUseCase() -> CompareProductsUseCase {
+        CompareProductsUseCase(repository: makeAIRepo())
+    }
+    
+    func makeFindSimilarProductFromImageUseCase() -> FindSimilarProductFromImageUseCase {
+        FindSimilarProductFromImageUseCaseImpl(
+            repository: imageSearchRepository
+        )
+    }
+    
+    // MARK: - Cart & Checkout Feature
     private(set) lazy var cartRepository: CartRepository = {
         let repo = CartRepositoryImpl(
             local: cartLocalDataSource,

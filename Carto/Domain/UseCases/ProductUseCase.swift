@@ -8,6 +8,7 @@
 import Foundation
 
 protocol ProductUseCaseProtocol{
+    func execute(productId: Int) async throws -> Product
     func execute(brandId: Int) async throws -> [Product]
     func execute() async throws -> [Product]
 }
@@ -18,6 +19,10 @@ struct ProductsUseCase: ProductUseCaseProtocol {
     
     init(repository: ProductsRepository) {
         self.repository = repository
+    }
+    
+    func execute(productId: Int) async throws -> Product {
+        return try await repository.getProductInfo(productId: productId)
     }
     
     func execute(brandId: Int) async throws -> [Product] {

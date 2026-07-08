@@ -11,4 +11,6 @@ protocol ProductsRepository{
     
     func getAllProducts() async throws -> [Product]
     
+    func getProductInfo(productId: Int) async throws -> Product
+
 }

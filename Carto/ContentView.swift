@@ -4,6 +4,7 @@
 //
 //  Created by Mohamed Ayman on 27/06/2026.
 //
+
 import SwiftUI
 
 struct ContentView: View {
@@ -69,44 +70,108 @@ extension ContentView {
             return AnyView(BrandsScreen(
                 viewModel: HomeBrandsViewModel(useCase: DIContainer.shared.makeBrandsUseCase())
             ))
+            
         case .brandProducts(let brandId, let brandName):
             return AnyView(ProductsView(
                 brandID: brandId,
                 viewModel: DIContainer.shared.makeCategoryProductViewModel()
             )
             .navigationTitle(brandName))
+            
         case .categoryProducts(let categoryId, let categoryName):
             return AnyView(ProductsView(
                 categoryId: categoryId,
                 viewModel: DIContainer.shared.makeCategoryProductViewModel()
             )
             .navigationTitle(categoryName))
+            
         case .productDetails(let product):
             return AnyView(
                 ProductsInfoView(
                     viewModel: DIContainer.shared.makeProductsInfoViewModel(product: product)
                 )
             )
+            
         case .addresses:
             return AnyView(AddressView())
+            
         case .settings:
             return AnyView(SettingsView())
+            
         case .orderHistory:
             return AnyView(makeOrderHistoryScreen())
+            
         case .aboutUs:
             return AnyView(AboutUsView())
+            
         case .cart:
             return AnyView(CartView(viewModel: DIContainer.shared.makeCartViewModel()))
+            
         case .payment(let cart):
             return AnyView(PaymentView(viewModel: DIContainer.shared.makePaymentViewModel(cart: cart)))
+            
+        case .aiChat:
+            let aiRepository = DIContainer.shared.makeAIRepo()
+            let runShoppingAssistantUseCase = RunShoppingAssistantUseCase(repository: aiRepository)
+            
+            return AnyView(
+                CartoAIAssistantView(runShoppingAssistantUseCase: runShoppingAssistantUseCase)
+                    .toolbar(.hidden, for: .navigationBar)
+            )
+            
+        case .aiComparison:
+            let aiRepo = DIContainer.shared.makeAIRepo()
+            let productRepo = DIContainer.shared.makeProductRepo()
+            
+            let runComparisonUseCaseInstance = CompareProductsUseCase(repository: aiRepo)
+            let structuralProductsUseCase = ProductsUseCase(repository: productRepo)
+            
+            return AnyView(
+                CartoAIComparisonView(
+                    compareUseCase: runComparisonUseCaseInstance,
+                    productsUseCase: structuralProductsUseCase
+                )
+                .toolbar(.hidden, for: .navigationBar)
+            )
+            
+        case .aiOutfit:
+            let aiRepo = DIContainer.shared.makeAIRepo()
+            let productRepo = DIContainer.shared.makeProductRepo()
+            
+            let runOutfitSuggestionsUseCase = GenerateOutfitSuggestionsUseCase(repository: aiRepo)
+            let structuralProductsUseCase = ProductsUseCase(repository: productRepo)
+            
+            return AnyView(
+                CartoAIOutfitView(
+                    runOutfitSuggestionsUseCase: runOutfitSuggestionsUseCase,
+                    productsUseCase: structuralProductsUseCase
+                )
+                .toolbar(.hidden, for: .navigationBar)
+            )
+            
+        case .imageSearch:
+            let productRepo = DIContainer.shared.makeProductRepo()
+            let structuralProductsUseCase = ProductsUseCase(repository: productRepo)
+
+            let imageSearchUsecase = DIContainer.shared
+                .makeFindSimilarProductFromImageUseCase()
+
+            return AnyView(
+                ImageSearchView(
+                    findSimilarProductUseCase: imageSearchUsecase,
+                    productUseCase: structuralProductsUseCase
+                )
+                .toolbar(.hidden, for: .navigationBar)
+            )
         }
     }
+    
     @MainActor
     func makeOrderHistoryScreen() -> some View {
-            let repository = ServiceLocator.shared.resolveOrderRepository()
-            let useCase = GetOrderHistoryUseCase(repository: repository)
-            let viewModel = OrderHistoryViewModel(getOrderHistoryUseCase: useCase)
+        let repository = ServiceLocator.shared.resolveOrderRepository()
+        let useCase = GetOrderHistoryUseCase(repository: repository)
+        let viewModel = OrderHistoryViewModel(getOrderHistoryUseCase: useCase)
 
-            return OrderHistoryView(viewModel: viewModel)
-        }
+        return OrderHistoryView(viewModel: viewModel)
+    }
 }

@@ -6,6 +6,10 @@ enum AppRoute: Hashable, Identifiable {
     case brandProducts(brandId: Int, brandName: String)
     case categoryProducts(categoryId: String, categoryName: String)
     case productDetails(product: Product)
+    case aiChat
+    case aiComparison
+    case aiOutfit
+    case imageSearch
     case settings
     case orderHistory
     case aboutUs
@@ -24,6 +28,14 @@ enum AppRoute: Hashable, Identifiable {
             return "categoryProducts-\(categoryId)"
         case .productDetails(let product):
             return "productDetails-\(product.id)"
+        case .aiChat:
+            return "aiChat"
+        case .aiComparison:
+            return "aiComparison"
+        case .aiOutfit :
+            return "aiOutfit"
+        case .imageSearch:
+            return "imageSearch"
         case .settings:
             return "settings"
         case .orderHistory:

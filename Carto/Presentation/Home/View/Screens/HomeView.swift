@@ -34,6 +34,7 @@ struct HomeView: View {
     ]
 
     @State private var currentIndex: Int = 0
+    @State private var isShowingAISheet: Bool = false // State tracking the AI feature modal sheet
     @StateObject private var viewModel = DIContainer.shared.makeHomeViewModel()
     @EnvironmentObject private var router: Router<AppRoute>
     
@@ -49,94 +50,150 @@ struct HomeView: View {
     ]
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                HStack {
-                    Spacer()
-                    Button {
-                        router.push(to: .cart)
-                    } label: {
-                        Image(systemName: "cart.fill")
-                            .font(.system(size: 24))
-                            .foregroundStyle(Color("PrimaryColor"))
-                    }
-                }
-                TabView(selection: $currentIndex) {
-                    ForEach(0..<ads.count, id: \.self) { index in
-                        HomeBannerView(ad: ads[index])
-                            .tag(index)
-                    }
-                }
-                .frame(height: 200)
-                .tabViewStyle(
-                    PageTabViewStyle(indexDisplayMode: .never)
-                )
-                .overlay(alignment: .bottom) {
-                    HStack(spacing: 8) {
-                        ForEach(0..<ads.count, id: \.self) { index in
-                            Circle()
-                                .fill(index == currentIndex ? Color("PrimaryColor") : Color.gray.opacity(0.5))
-                                .frame(width: 8, height: 8)
-                                .shadow(color: index == currentIndex ? Color("PrimaryColor").opacity(0.6) : .clear, radius: 3)
+        ZStack(alignment: .bottomTrailing) {
+            ScrollView {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Spacer()
+                        Button {
+                            router.push(to: .cart)
+                        } label: {
+                            Image(systemName: "cart.fill")
+                                .font(.system(size: 24))
+                                .foregroundStyle(Color("PrimaryColor"))
                         }
                     }
-                    .padding(.bottom, 16)
-                }
-                .onReceive(timer) { _ in
-                    withAnimation {
-                        currentIndex = (currentIndex + 1) % ads.count
+                    
+                    TabView(selection: $currentIndex) {
+                        ForEach(0..<ads.count, id: \.self) { index in
+                            HomeBannerView(ad: ads[index])
+                                .tag(index)
+                        }
                     }
-                }
+                    .frame(height: 200)
+                    .tabViewStyle(
+                        PageTabViewStyle(indexDisplayMode: .never)
+                    )
+                    .overlay(alignment: .bottom) {
+                        HStack(spacing: 8) {
+                            ForEach(0..<ads.count, id: \.self) { index in
+                                Circle()
+                                    .fill(index == currentIndex ? Color("PrimaryColor") : Color.gray.opacity(0.5))
+                                    .frame(width: 8, height: 8)
+                                    .shadow(color: index == currentIndex ? Color("PrimaryColor").opacity(0.6) : .clear, radius: 3)
+                            }
+                        }
+                        .padding(.bottom, 16)
+                    }
+                    .onReceive(timer) { _ in
+                        withAnimation {
+                            currentIndex = (currentIndex + 1) % ads.count
+                        }
+                    }
 
-                HStack {
-                    Text("brands_title")
+                    HStack {
+                        Text("brands_title")
+                            .font(.system(size: 22, weight: .bold))
+                            .foregroundColor(Color("PrimaryColor"))
+
+                        Spacer()
+
+                        Button {
+                            router.push(to: .brands)
+                        } label: {
+                            Text("see_more_btn")
+                                .font(.system(size: 18, weight: .medium))
+                                .foregroundColor(Color("PrimaryColor"))
+                        }
+                    }
+
+                    HomeBrandView(
+                        viewModel: viewModel.brandVM
+                    )
+
+                    Spacer(minLength: 20)
+
+                    Text("products_title")
                         .font(.system(size: 22, weight: .bold))
                         .foregroundColor(Color("PrimaryColor"))
 
-                    Spacer()
-
-                    Button {
-                        router.push(to: .brands)
-                    } label: {
-                        Text("see_more_btn")
-                            .font(.system(size: 18, weight: .medium))
-                            .foregroundColor(Color("PrimaryColor"))
-                    }
-                }
-
-                HomeBrandView(
-                    viewModel: viewModel.brandVM
-                )
-
-                Spacer(minLength: 20)
-
-                Text("products_title")
-                    .font(.system(size: 22, weight: .bold))
-                    .foregroundColor(Color("PrimaryColor"))
-
-                switch viewModel.productVM.state {
-                case .loading, .idle:
-                    LoadingView(width: .infinity)
-                        .padding(.top, 40)
-                case .failure(let error):
-                    ErrorView(width: .infinity, message: error.localizedDescription)
-                case .success(let products):
-                    LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(products, id: \.id) { product in
-                            Button {
-                                router.push(to: .productDetails(product: product))
-                            } label: {
-                                ProductCard(product: product)
+                    switch viewModel.productVM.state {
+                    case .loading, .idle:
+                        LoadingView(width: .infinity)
+                            .padding(.top, 40)
+                    case .failure(let error):
+                        ErrorView(width: .infinity, message: error.localizedDescription)
+                            .padding(.top, 40)
+                    case .success(let products):
+                        LazyVGrid(columns: columns, spacing: 20) {
+                            ForEach(products, id: \.id) { product in
+                                Button {
+                                    router.push(to: .productDetails(product: product))
+                                } label: {
+                                    ProductCard(product: product)
+                                }
+                                .buttonStyle(.plain)
                             }
-                            .buttonStyle(.plain)
                         }
                     }
                 }
+                .padding(.horizontal, 16)
             }
-            .padding(.horizontal, 16)
+            
+            // MARK: - Floating AI Assistant Action Trigger
+            Button(action: {
+                isShowingAISheet = true
+            }) {
+                Image(systemName: "sparkles.rectangle.stack.fill")
+                    .font(.title2)
+                    .foregroundColor(.white)
+                    .padding(16)
+                    .background(
+                        LinearGradient(
+                            colors: [Color.blue, Color.cyan],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .clipShape(Circle())
+                    .shadow(color: Color.blue.opacity(0.3), radius: 8, x: 0, y: 4)
+            }
+            .padding(.trailing, 20)
+            .padding(.bottom, 20)
         }
         .task {
             await viewModel.loadAllData()
+        }
+        .sheet(isPresented: $isShowingAISheet) {
+            AIFeatureSheet {
+                // 1. Dismiss assistant sheet first
+                isShowingAISheet = false
+                
+                // 2. Small delay to let sheet slide down completely before pushing
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    router.push(to: .aiChat)
+                }
+            } onNavigateToComparison: {
+                isShowingAISheet = false
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    router.push(to: .aiComparison)
+                }
+            } onNavigateToOutfit: {
+                isShowingAISheet = false
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    router.push(to: .aiOutfit)
+                }
+            } onNavigateToImageSearch: {
+                isShowingAISheet = false
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    router.push(to: .imageSearch)
+                }
+            }
+            .presentationDetents([.medium, .large])
+            .presentationDragIndicator(.visible)
         }
     }
 }
