@@ -101,14 +101,6 @@ struct PaymentSuccessView: View {
     }
 }
 
-
-//
-//  PaymentFailureView.swift
-//  Carto
-//
-//  Created by Mohamed Ayman on 05/07/2026.
-//
-
 import SwiftUI
 
 struct PaymentFailureView: View {

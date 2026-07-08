@@ -41,9 +41,9 @@ struct ProfileView: View {
             .navigationTitle("profile_title")
         }
         .onAppear {
-            currentUser = DIContainer.shared.authSession.currentUser
+            currentUser = AuthSession.shared.currentUser
         }
-        .onReceive(DIContainer.shared.authSession.sessionPublisher) {
+        .onReceive(AuthSession.shared.sessionPublisher) {
             state in
             currentUser = state.user
         }

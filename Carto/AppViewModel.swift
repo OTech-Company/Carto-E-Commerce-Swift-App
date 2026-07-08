@@ -16,8 +16,8 @@ final class AppViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let authSession: AuthSession
 
-    init(authSession: AuthSession) {
-        self.authSession = authSession
+    init() {
+        self.authSession = AuthSession.shared
         authSession.sessionPublisher
             .receive(on: DispatchQueue.main)
             .sink { [weak self] sessionState in

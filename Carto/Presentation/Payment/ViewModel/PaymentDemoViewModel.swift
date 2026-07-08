@@ -4,10 +4,6 @@
 //
 //  Created by Mohamed Ayman on 05/07/2026.
 //
-//  Builds a real, working cart for demo/testing purposes by pulling an
-//  actual product from the store and adding it via the existing Cart
-//  RemoteDataSource — no hardcoded sample data, no mock network calls.
-//
 
 import Foundation
 
@@ -86,8 +82,6 @@ final class PaymentDemoViewModel: ObservableObject {
 
     // MARK: - Helpers
 
-    /// Prefers an in-stock variant across the fetched products; falls back to
-    /// the first variant of the first product if none are marked available.
     private func firstPurchasableVariant(in products: [STProduct]) -> STVariant? {
         for product in products {
             if let available = product.variants.first(where: { $0.availableForSale }) {

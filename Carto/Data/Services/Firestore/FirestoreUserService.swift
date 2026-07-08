@@ -1,10 +1,3 @@
-//
-//  FirestoreUserService.swift
-//  Carto
-//
-//  Created by Mohamed Ayman on 30/06/2026.
-//
-
 import Foundation
 import FirebaseFirestore
 
@@ -27,6 +20,10 @@ final class FirestoreUserService: FirestoreUserServiceProtocol {
         }
     }
 
+    func deleteUser(uid: String) async throws {
+        try await firestore.collection(collectionName).document(uid).delete()
+    }
+    
     func fetchUser(uid: String) async throws -> UserFirestoreDTO {
         do {
             let snapshot = try await firestore.collection(collectionName)
@@ -44,7 +41,7 @@ final class FirestoreUserService: FirestoreUserServiceProtocol {
             throw AuthError.firestoreWriteFailed
         }
     }
-    
+
     func isEmailRegistered(_ email: String) async throws -> Bool {
         let snapshot = try await Firestore.firestore()
             .collection("users")
@@ -53,5 +50,22 @@ final class FirestoreUserService: FirestoreUserServiceProtocol {
             .getDocuments()
 
         return !snapshot.documents.isEmpty
+    }
+
+    func updateShopifyData(
+        uid: String,
+        shopifyCustomerId: String,
+        customerAccessToken: String
+    ) async throws {
+        do {
+            try await firestore.collection(collectionName)
+                .document(uid)
+                .updateData([
+                    "shopifyCustomerId": shopifyCustomerId,
+                    "customerAccessToken": customerAccessToken
+                ])
+        } catch {
+            throw AuthError.firestoreWriteFailed
+        }
     }
 }

@@ -117,14 +117,43 @@ struct RegisterView: View {
                     .padding(.horizontal, 24)
                     .padding(.vertical, 16)
                     
-                    HStack(spacing: 24) {
-                        SocialIconButton(iconName: "g.circle.fill", isSystem: true) { viewModel.signInWithGoogle() }
-                            .disabled(viewModel.isLoading)
-                        SocialIconButton(iconName: "applelogo", isSystem: true) {}
-                            .disabled(viewModel.isLoading)
-                        SocialIconButton(iconName: "f.circle.fill", isSystem: true) {}
-                            .disabled(viewModel.isLoading)
+                    HStack(spacing: 12) {
+                        Button(action: { viewModel.signInWithGoogle() }) {
+                            HStack(spacing: 10) {
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.white)
+                                        .frame(width: 22, height: 22)
+                                    Image(systemName: "g.circle.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 22, height: 22)
+                                        .foregroundStyle(
+                                            LinearGradient(
+                                                colors: [.blue, .red, .yellow, .green],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            )
+                                        )
+                                }
+                                Text("Sign in with Google")
+                                    .font(.system(size: 15, weight: .semibold))
+                                    .foregroundColor(.black.opacity(0.75))
+                            }
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50)
+                            .background(Color.white)
+                            .cornerRadius(12)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(Color(.systemGray4), lineWidth: 1)
+                            )
+                            .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
+                        }
+                        .disabled(viewModel.isLoading)
                     }
+                    .padding(.horizontal, 24)
+
                     .padding(.bottom, 16)
                     
                     Button(action: { viewModel.continueAsGuest()}) {

@@ -13,6 +13,8 @@ struct User {
     let lastName: String
     let email: String
     let isEmailVerified: Bool
+    let shopifyCustomerId: String?
+    let customerAccessToken: String?
 
     var fullName: String { "\(firstName) \(lastName)" }
 }

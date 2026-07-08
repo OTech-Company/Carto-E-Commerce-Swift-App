@@ -31,6 +31,7 @@ struct CartoApp: App {
     
     var body: some Scene {
         WindowGroup {
+
             Group {
                 switch appViewModel.sessionState {
                 case .loading:
@@ -43,7 +44,7 @@ struct CartoApp: App {
                     if user.isEmailVerified {
                         ContentView()
                     } else {
-                        ContentView()
+                        AuthCoordinator(container: DIContainer.shared)
                     }
                 }
             }

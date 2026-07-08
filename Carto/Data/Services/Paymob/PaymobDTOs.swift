@@ -3,8 +3,6 @@
 //  Carto
 //
 //  Created by Mohamed Ayman on 05/07/2026.
-//  Updated on 06/07/2026 to use the Paymob Intention API instead of the
-//  legacy Authenticate → Register Order → Payment Key (Accept) flow.
 //
 
 import Foundation

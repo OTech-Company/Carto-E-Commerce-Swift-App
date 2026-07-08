@@ -54,7 +54,7 @@ extension ContentView {
             }
     }
 
-    @ViewBuilder
+    @ViewBuilder @MainActor
     func makeProfileScreen() -> some View {
         ProfileView()
             .withRouter { route in
@@ -99,7 +99,7 @@ extension ContentView {
             return AnyView(CartView(viewModel: DIContainer.shared.makeCartViewModel()))
         }
     }
-    
+    @MainActor
     func makeOrderHistoryScreen() -> some View {
             let repository = ServiceLocator.shared.resolveOrderRepository()
             let useCase = GetOrderHistoryUseCase(repository: repository)

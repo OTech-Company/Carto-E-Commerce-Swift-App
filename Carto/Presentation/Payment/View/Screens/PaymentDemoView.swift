@@ -4,9 +4,6 @@
 //
 //  Created by Mohamed Ayman on 05/07/2026.
 //
-//  Real entry point for testing the Payment feature: fetches an actual
-//  product and creates an actual Shopify cart via the existing GraphQL
-//  layer, then hands the real STCart to PaymentView.
 //
 
 import SwiftUI

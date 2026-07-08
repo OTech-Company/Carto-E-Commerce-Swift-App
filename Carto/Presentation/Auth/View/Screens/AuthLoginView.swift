@@ -18,11 +18,11 @@ struct LoginView: View {
                             .frame(width: 80, height: 80)
                         
                         VStack(spacing: 6) {
-                            Text("welcome_title")
+                            Text("Welcome to Carto")
                                 .font(.system(size: 24, weight: .bold))
                                 .foregroundColor(.black)
                             
-                            Text("premium_shopping_desc")
+                            Text("Your premium shopping destination.")
                                 .font(.system(size: 14))
                                 .foregroundColor(.gray)
                         }
@@ -55,18 +55,11 @@ struct LoginView: View {
                             .disabled(viewModel.isLoading)
                             
                             HStack {
-                                Toggle(isOn: $rememberMe) {
-                                    Text("remember_me_checkbox")
-                                        .font(.system(size: 14))
-                                        .foregroundColor(.gray)
-                                }
-                                .toggleStyle(CheckboxToggleStyle())
-                                .disabled(viewModel.isLoading)
                                 
                                 Spacer()
                                 
                                 Button(action: { viewModel.forgotPasswordTapped() }) {
-                                    Text("forgot_password_btn")
+                                    Text("Forgot Password?")
                                         .font(.system(size: 14, weight: .medium))
                                         .foregroundColor(Color(hex: "FF5A00"))
                                 }
@@ -77,7 +70,7 @@ struct LoginView: View {
                     .padding(.horizontal, 24)
                     
                     Button(action: { viewModel.login() }) {
-                        Text("login_btn")
+                        Text("Login")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
@@ -98,7 +91,7 @@ struct LoginView: View {
                     
                     HStack(spacing: 16) {
                         Rectangle().frame(height: 1).foregroundColor(Color(.systemGray5))
-                        Text("or_continue_with")
+                        Text("Or continue with")
                             .font(.system(size: 13))
                             .foregroundColor(.gray)
                         Rectangle().frame(height: 1).foregroundColor(Color(.systemGray5))
@@ -106,18 +99,47 @@ struct LoginView: View {
                     .padding(.horizontal, 24)
                     .padding(.vertical, 20)
                     
-                    HStack(spacing: 24) {
-                        SocialIconButton(iconName: "g.circle.fill", isSystem: true) { viewModel.signInWithGoogle() }
-                            .disabled(viewModel.isLoading)
-                        SocialIconButton(iconName: "applelogo", isSystem: true) {}
-                            .disabled(viewModel.isLoading)
-                        SocialIconButton(iconName: "f.circle.fill", isSystem: true) {}
-                            .disabled(viewModel.isLoading)
+                    HStack(spacing: 12) {
+                        Button(action: { viewModel.signInWithGoogle() }) {
+                            HStack(spacing: 10) {
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.white)
+                                        .frame(width: 22, height: 22)
+                                    Image(systemName: "g.circle.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 22, height: 22)
+                                        .foregroundStyle(
+                                            LinearGradient(
+                                                colors: [.blue, .red, .yellow, .green],
+                                                startPoint: .topLeading,
+                                                endPoint: .bottomTrailing
+                                            )
+                                        )
+                                }
+                                Text("Sign in with Google")
+                                    .font(.system(size: 15, weight: .semibold))
+                                    .foregroundColor(.black.opacity(0.75))
+                            }
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50)
+                            .background(Color.white)
+                            .cornerRadius(12)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(Color(.systemGray4), lineWidth: 1)
+                            )
+                            .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
+                        }
+                        .disabled(viewModel.isLoading)
                     }
+                    .padding(.horizontal, 24)
+
                     .padding(.bottom, 20)
                     
                     Button(action: { viewModel.continueAsGuest() }) {
-                        Text("continue_as_guest_btn")
+                        Text("Continue as Guest")
                             .font(.system(size: 15, weight: .semibold))
                             .foregroundColor(.gray)
                             .padding(.vertical, 8)
@@ -128,12 +150,12 @@ struct LoginView: View {
                     Spacer()
                     
                     HStack(spacing: 4) {
-                        Text("dont_have_account")
+                        Text("Don't have an account?")
                             .font(.system(size: 14))
                             .foregroundColor(.gray)
                         
                         Button(action: { viewModel.signUpTapped()}) {
-                            Text("sign_up_link")
+                            Text("Sign up")
                                 .font(.system(size: 14, weight: .bold))
                                 .foregroundColor(Color(hex: "FF5A00"))
                         }
