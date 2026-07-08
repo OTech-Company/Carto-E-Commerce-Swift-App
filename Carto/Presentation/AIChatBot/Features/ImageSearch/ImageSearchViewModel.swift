@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+
+
 @MainActor
 final class ImageSearchViewModel: ObservableObject {
     @Published var selectedImage: UIImage?
@@ -71,7 +73,7 @@ enum ImageSearchError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidImage: return "Couldn't process the selected image."
-        case .noMatchFound: return "No matching product was found."
+        case .noMatchFound: return "We couldn't find this item in our store. Try a clearer photo or a different angle."
         }
     }
 }

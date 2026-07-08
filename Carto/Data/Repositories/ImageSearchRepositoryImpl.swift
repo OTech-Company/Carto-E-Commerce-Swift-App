@@ -11,6 +11,10 @@ import CoreML
 
 final class ImageSearchRepositoryImpl: ImageSearchRepository {
 
+    /// Maximum acceptable distance between feature prints for a match to be considered valid.
+    /// Lower distance = more similar. Anything above this is treated as "no match in store".
+    private let maxAcceptableDistance: Float = 0.85
+
     func findMostSimilarProduct(
         to imageData: Data,
         from products: [Product]
@@ -37,7 +41,6 @@ final class ImageSearchRepositoryImpl: ImageSearchRepository {
                 continue
             }
 
-            // NOTE: still synchronous/blocking — see note below about moving to URLSession
             guard let data = try? Data(contentsOf: url) else {
                 print("❌ Couldn't download image")
                 continue
@@ -65,6 +68,13 @@ final class ImageSearchRepositoryImpl: ImageSearchRepository {
         }
 
         print("Best distance:", bestDistance)
+
+        // Reject the match if it's too dissimilar to be considered "in the store"
+        guard bestDistance <= maxAcceptableDistance else {
+            print("❌ Best distance \(bestDistance) exceeds threshold \(maxAcceptableDistance) — treating as no match")
+            return nil
+        }
+
         return bestProduct
     }
 }
