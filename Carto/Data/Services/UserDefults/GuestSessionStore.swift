@@ -20,7 +20,8 @@ final class GuestSessionStore: GuestSessionStoreProtocol {
         defaults.bool(forKey: key)
     }
 
-    func setGuest(_ isGuest: Bool) {
+    func setGuest(_ isGuest: Bool) async {
         defaults.set(isGuest, forKey: key)
+        await AuthSession.shared.refreshSession()
     }
 }

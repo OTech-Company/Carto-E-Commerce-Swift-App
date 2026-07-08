@@ -56,6 +56,7 @@ struct CustomerAddress: Identifiable, Hashable {
             && !city.trimmingCharacters(in: .whitespaces).isEmpty
             && !country.trimmingCharacters(in: .whitespaces).isEmpty
             && !zip.trimmingCharacters(in: .whitespaces).isEmpty
+            && !phone.trimmingCharacters(in: .whitespaces).isEmpty
     }
 }
 

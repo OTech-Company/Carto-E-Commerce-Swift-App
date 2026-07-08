@@ -1,10 +1,3 @@
-//
-//  FirebaseUserMapper.swift
-//  Carto
-//
-//  Created by Mohamed Ayman on 30/06/2026.
-//
-
 import Foundation
 
 struct FirebaseUserMapper {
@@ -18,7 +11,9 @@ struct FirebaseUserMapper {
             firstName: firestoreData.firstName,
             lastName: firestoreData.lastName,
             email: authResult.email ?? firestoreData.email,
-            isEmailVerified: authResult.isEmailVerified
+            isEmailVerified: authResult.isEmailVerified,
+            shopifyCustomerId: firestoreData.shopifyCustomerId,
+            customerAccessToken: firestoreData.customerAccessToken
         )
     }
 }

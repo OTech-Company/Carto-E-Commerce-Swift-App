@@ -15,7 +15,7 @@ struct ExpandableText: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Description")
+            Text("description_label")
                 .font(.headline)
 
             ScrollView {

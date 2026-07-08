@@ -42,7 +42,6 @@ final class AuthRegisterViewModel: ObservableObject {
 
     private let validator: AuthValidatorProtocol
     private let repository: AuthenticationRepositoryProtocol
-    private let authSession: AuthSession
     private let router: AuthRouter
     
     // MARK: - Initialization
@@ -50,12 +49,10 @@ final class AuthRegisterViewModel: ObservableObject {
     init(
         validator: AuthValidatorProtocol,
         repository: AuthenticationRepositoryProtocol,
-        authSession: AuthSession,
         router: AuthRouter
     ) {
         self.validator = validator
         self.repository = repository
-        self.authSession = authSession
         self.router = router
     }
 
@@ -138,24 +135,31 @@ final class AuthRegisterViewModel: ObservableObject {
     }
 
     func signInWithGoogle() {
-       //
-    }
+        isLoading = true
+        generalErrorMessage = nil
 
-    func signInWithApple() {
-        //
+        Task {
+            do {
+                _ = try await repository.signInWithGoogle()
+            } catch AuthError.googleSignInCancelled {
+
+            } catch let error as AuthError {
+                generalErrorMessage = error.errorDescription
+            } catch {
+                generalErrorMessage = "Google Sign-In failed. Please try again."
+            }
+            isLoading = false
+        }
     }
 
     func continueAsGuest() {
         Task {
             isLoading = true
-            do {
-                try await Task.sleep(for: .seconds(1))
-                repository.continueAsGuest()
-                await authSession.refreshSession()
-                isLoading = false
-            } catch {
-                isLoading = false
-            }
+            
+            try await Task.sleep(for: .seconds(1))
+            await repository.continueAsGuest()
+            
+            isLoading = false
         }
     }
     

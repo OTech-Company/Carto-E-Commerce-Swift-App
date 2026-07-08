@@ -15,7 +15,7 @@ struct CustomCategoryNavigationBar: View {
     var body: some View {
         HStack(spacing: 12) {
             if !isSearchActive {
-                Text("Categories")
+                Text("categories_title")
                     .font(.system(size: 34, weight: .bold, design: .rounded))
                     .foregroundColor(Color(hex: "#2B7FD4"))
                     .transition(.move(edge: .leading).combined(with: .opacity))
@@ -54,7 +54,7 @@ struct CustomCategoryNavigationBar: View {
             .clipShape(Capsule())
             
             if isSearchActive {
-                Button("Cancel") {
+                Button("cancel_btn") {
                     withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
                         searchText = ""
                         isSearchActive = false

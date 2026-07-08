@@ -29,12 +29,12 @@ struct ForgotPasswordView: View {
                         .padding(.top, 40)
 
                         VStack(spacing: 12) {
-                            Text("Forgot Password")
+                            Text("forgot_password_title")
                                 .font(.system(size: 26, weight: .bold))
                                 .foregroundColor(.black)
                                 .multilineTextAlignment(.center)
 
-                            Text("Enter the email address associated with your account and we'll send you a secure password reset link.")
+                            Text("forgot_password_desc")
                                 .font(.system(size: 15))
                                 .foregroundColor(.gray)
                                 .multilineTextAlignment(.center)
@@ -56,7 +56,7 @@ struct ForgotPasswordView: View {
                             .disabled(viewModel.isLoading)
 
                             Button(action: { viewModel.sendResetLink() }) {
-                                Text("Send Reset Link")
+                                Text("send_reset_link_btn")
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(.white)
                                     .frame(maxWidth: .infinity)
@@ -83,12 +83,12 @@ struct ForgotPasswordView: View {
                 Spacer()
 
                 HStack(spacing: 4) {
-                    Text("Remember your password?")
+                    Text("remember_password_link")
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
 
                     Button(action: { viewModel.navigateToSignIn() }) {
-                        Text("Back to Sign In")
+                        Text("back_to_signin_btn")
                             .font(.system(size: 14, weight: .bold))
                             .foregroundColor(Color(hex: "FF5A00"))
                             .frame(minWidth: 44, minHeight: 44)

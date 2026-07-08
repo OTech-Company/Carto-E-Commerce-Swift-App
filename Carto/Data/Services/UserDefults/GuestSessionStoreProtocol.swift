@@ -9,7 +9,7 @@ import Foundation
 
 protocol GuestSessionStoreProtocol {
     var isGuest: Bool { get }
-    func setGuest(_ isGuest: Bool)
+    func setGuest(_ isGuest: Bool) async
 }
 
 

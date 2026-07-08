@@ -10,12 +10,16 @@ import Foundation
 // MARK: - Variables
 
 struct StorefrontOrdersVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let customerAccessToken: String
     let first: Int
     let after: String?
 }
 
 struct StorefrontOrderDetailVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let id: String
 }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CartModel {
+struct CartModel: Hashable {
     let id: String
     let checkoutURL: String
     let totalQuantity: Int
@@ -19,12 +19,12 @@ struct CartModel {
     let currencyCode: String
 }
 
-struct CartDiscountCode {
+struct CartDiscountCode: Hashable {
     let code: String
     let isApplicable: Bool
 }
 
-struct CartLine {
+struct CartLine: Hashable {
     let id: String
     let variantId: String
     let productTitle: String

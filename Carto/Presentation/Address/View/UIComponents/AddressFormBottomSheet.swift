@@ -111,6 +111,7 @@ struct AddressFormBottomSheet: View {
                     // MARK: - Contact Info
                     AddressField(
                         title: "Phone",
+                        isRequired: true,
                         text: $formData.phone,
                         keyboardType: .phonePad,
                         textContentType: .telephoneNumber
@@ -124,7 +125,7 @@ struct AddressFormBottomSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
+                    Button("cancel_btn") { dismiss() }
                         .foregroundStyle(.secondary)
                 }
             }

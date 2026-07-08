@@ -10,7 +10,7 @@ import Foundation
 enum StorefrontOrderQueries {
 
     static let fetchOrders = """
-        query FetchOrders($customerAccessToken: String!, $first: Int!, $after: String) {
+        query FetchOrders($customerAccessToken: String!, $first: Int!, $after: String, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           customer(customerAccessToken: $customerAccessToken) {
             orders(first: $first, after: $after, sortKey: PROCESSED_AT, reverse: true) {
               edges {
@@ -52,7 +52,7 @@ enum StorefrontOrderQueries {
         """
 
     static let fetchOrderDetail = """
-        query FetchOrderDetail($id: ID!) {
+        query FetchOrderDetail($id: ID!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           node(id: $id) {
             ... on Order {
               id

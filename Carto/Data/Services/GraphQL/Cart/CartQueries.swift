@@ -10,7 +10,7 @@ import Foundation
 enum StorefrontCartQueries {
 
     static let fetchCart = """
-        query FetchCart($id: ID!) {
+        query FetchCart($id: ID!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           cart(id: $id) {
             id
             checkoutUrl
@@ -66,7 +66,7 @@ enum StorefrontCartQueries {
         """
 
     static let createCart = """
-        mutation CreateCart($input: CartInput) {
+        mutation CreateCart($input: CartInput, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           cartCreate(input: $input) {
             cart {
               id
@@ -128,7 +128,7 @@ enum StorefrontCartQueries {
         """
 
     static let addToCart = """
-        mutation AddToCart($cartId: ID!, $lines: [CartLineInput!]!) {
+        mutation AddToCart($cartId: ID!, $lines: [CartLineInput!]!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           cartLinesAdd(cartId: $cartId, lines: $lines) {
             cart {
               id
@@ -190,7 +190,7 @@ enum StorefrontCartQueries {
         """
 
     static let updateCartLines = """
-        mutation UpdateCartLines($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+        mutation UpdateCartLines($cartId: ID!, $lines: [CartLineUpdateInput!]!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           cartLinesUpdate(cartId: $cartId, lines: $lines) {
             cart {
               id
@@ -252,7 +252,7 @@ enum StorefrontCartQueries {
         """
 
     static let removeCartLines = """
-        mutation RemoveCartLines($cartId: ID!, $lineIds: [ID!]!) {
+        mutation RemoveCartLines($cartId: ID!, $lineIds: [ID!]!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
             cart {
               id
@@ -314,8 +314,70 @@ enum StorefrontCartQueries {
         """
 
     static let updateDiscountCodes = """
-        mutation UpdateDiscountCodes($cartId: ID!, $discountCodes: [String!]!) {
+        mutation UpdateDiscountCodes($cartId: ID!, $discountCodes: [String!]!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           cartDiscountCodesUpdate(cartId: $cartId, discountCodes: $discountCodes) {
+            cart {
+              id
+              checkoutUrl
+              totalQuantity
+              lines(first: 50) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        title
+                        price {
+                          amount
+                          currencyCode
+                        }
+                        product {
+                          title
+                          handle
+                        }
+                      }
+                    }
+                  }
+                }
+                pageInfo {
+                  hasNextPage
+                  hasPreviousPage
+                  startCursor
+                  endCursor
+                }
+              }
+              discountCodes {
+                code
+                applicable
+              }
+              cost {
+                subtotalAmount {
+                  amount
+                  currencyCode
+                }
+                totalAmount {
+                  amount
+                  currencyCode
+                }
+                totalTaxAmount {
+                  amount
+                  currencyCode
+                }
+              }
+            }
+            userErrors {
+              field
+              message
+            }
+          }
+        }
+        """
+    
+    static let updateBuyerIdentity = """
+        mutation UpdateCartBuyerIdentity($cartId: ID!, $buyerIdentity: CartBuyerIdentityInput!) {
+          cartBuyerIdentityUpdate(cartId: $cartId, buyerIdentity: $buyerIdentity) {
             cart {
               id
               checkoutUrl

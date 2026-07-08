@@ -11,30 +11,30 @@ struct ContentView: View {
     var body: some View {
         TabView {
             makeHomeScreen()
-                .tabItem { Label("Home", systemImage: "house.fill") }
+                .tabItem { Label("home", systemImage: "house.fill") }
             
             makeCategoryListScreen()
-                .tabItem { Label("Categories", systemImage: "square.grid.2x2.fill") }
+                .tabItem { Label("categories", systemImage: "square.grid.2x2.fill") }
             
             makeFavoritesScreen()
-                .tabItem { Label("Favorites", systemImage: "heart.fill") }
+                .tabItem { Label("favorites", systemImage: "heart.fill") }
             
-            makeSettingsScreen()
-                .tabItem { Label("Settings", systemImage: "gearshape.fill") }
+            makeProfileScreen()
+                .tabItem { Label("profile", systemImage: "person.fill") }
         }
         .tint(Color("PrimaryColor"))
     }
     
     // MARK: - Tab Factories
-    @ViewBuilder
+    @ViewBuilder @MainActor
     private func makeHomeScreen() -> some View {
         HomeView()
-            .withRouter { route in
+            .withRouter { (route: AppRoute) in
                 routeDestination(for: route)
             }
     }
 
-    @ViewBuilder
+    @ViewBuilder @MainActor
     private func makeFavoritesScreen() -> some View {
         FavoritesView(
             viewModel: DIContainer.shared.makeFavoritesViewModel()
@@ -48,16 +48,16 @@ extension ContentView {
         let repository = ServiceLocator.shared.resolveCategoryRepository()
         let useCase = GetCategoryUseCase(repository: repository)
         let viewModel = CategoryListViewModel(getCategoryUseCase: useCase, fetchSubcategoriesUseCase: useCase)
-
+        
         CategoryListView(viewModel: viewModel)
-            .withRouter { route in
+            .withRouter {  (route: AppRoute) in
                 routeDestination(for: route)
             }
     }
 
-    @ViewBuilder
-    func makeSettingsScreen() -> some View {
-        SettingsView()
+    @ViewBuilder @MainActor
+    func makeProfileScreen() -> some View {
+        ProfileView()
             .withRouter { route in
                 routeDestination(for: route)
             }
@@ -66,9 +66,6 @@ extension ContentView {
     @MainActor
     private func routeDestination(for route: AppRoute) -> AnyView {
         switch route {
-        case .addresses:
-            return AnyView(AddressView())
-            
         case .brands:
             return AnyView(BrandsScreen(
                 viewModel: HomeBrandsViewModel(useCase: DIContainer.shared.makeBrandsUseCase())
@@ -94,6 +91,24 @@ extension ContentView {
                     viewModel: DIContainer.shared.makeProductsInfoViewModel(product: product)
                 )
             )
+            
+        case .addresses:
+            return AnyView(AddressView())
+            
+        case .settings:
+            return AnyView(SettingsView())
+            
+        case .orderHistory:
+            return AnyView(makeOrderHistoryScreen())
+            
+        case .aboutUs:
+            return AnyView(AboutUsView())
+            
+        case .cart:
+            return AnyView(CartView(viewModel: DIContainer.shared.makeCartViewModel()))
+            
+        case .payment(let cart):
+            return AnyView(PaymentView(viewModel: DIContainer.shared.makePaymentViewModel(cart: cart)))
             
         case .aiChat:
             let aiRepository = DIContainer.shared.makeAIRepo()
@@ -148,19 +163,15 @@ extension ContentView {
                 )
                 .toolbar(.hidden, for: .navigationBar)
             )
-            
         }
     }
     
-//    func makeOrderHistoryScreen() -> some View {
-//        let repository = ServiceLocator.shared.resolveOrderRepository()
-//        let useCase = GetOrderHistoryUseCase(repository: repository)
-//        let viewModel = OrderHistoryViewModel(getOrderHistoryUseCase: useCase)
-//
-//        if #available(iOS 17.0, *) {
-//            OrderHistoryView(viewModel: viewModel)
-//        } else {
-//            Text("Please upgrade to iOS 17.")
-//        }
-//    }
+    @MainActor
+    func makeOrderHistoryScreen() -> some View {
+        let repository = ServiceLocator.shared.resolveOrderRepository()
+        let useCase = GetOrderHistoryUseCase(repository: repository)
+        let viewModel = OrderHistoryViewModel(getOrderHistoryUseCase: useCase)
+
+        return OrderHistoryView(viewModel: viewModel)
+    }
 }

@@ -13,7 +13,6 @@ final class DIContainer {
 
     // MARK: - Core & Auth Properties
     let authRepository: AuthenticationRepositoryProtocol
-    let authSession: AuthSession
     let validator: AuthValidatorProtocol
     let appViewModel: AppViewModel
     
@@ -24,20 +23,21 @@ final class DIContainer {
     let favoritesLocalDataSource: FavoritesLocalDataSourceProtocol
     let favoritesRemoteDataSource: FavoritesRemoteDataSourceProtocol
     let imageSearchRepository: ImageSearchRepository
-
+    let cartLocalDataSource: CartLocalDataSourceProtocol
+    let cartRemoteDataSource: CartFirestoreRemoteDataSourceProtocol
 
     private init() {
-        imageSearchRepository =
-            ImageSearchRepositoryImpl()
+        imageSearchRepository = ImageSearchRepositoryImpl()
         authRepository = AuthenticationRepositoryImpl()
-        authSession = AuthSession()
         validator = AuthValidatorImpl()
         brandRemoteDataSource = BrandRemoteDataSource()
         productRemoteDataSource = ProductsRemoteDataSourceImpl()
-        appViewModel = AppViewModel(authSession: authSession)
+        appViewModel = AppViewModel()
         addressRemoteDataSource = AddressGraphQLRemoteDataSource()
         favoritesLocalDataSource = FavoritesLocalDataSource()
         favoritesRemoteDataSource = FavoritesRemoteDataSource()
+        cartLocalDataSource = CartLocalDataSource()
+        cartRemoteDataSource = CartFirestoreRemoteDataSource()
     }
 
     // MARK: - Auth ViewModels
@@ -45,7 +45,6 @@ final class DIContainer {
         AuthLoginViewModel(
             validator: validator,
             repository: authRepository,
-            authSession: authSession,
             router: router
         )
     }
@@ -54,7 +53,6 @@ final class DIContainer {
         AuthRegisterViewModel(
             validator: validator,
             repository: authRepository,
-            authSession: authSession,
             router: router
         )
     }
@@ -63,7 +61,6 @@ final class DIContainer {
         VerificationViewModel(
             userEmail: userEmail,
             repository: authRepository,
-            authSession: authSession,
             router: router
         )
     }
@@ -129,7 +126,7 @@ final class DIContainer {
         let repo = FavoritesRepositoryImpl(
             local: favoritesLocalDataSource,
             remote: favoritesRemoteDataSource,
-            currentUserId: { [weak self] in self?.authSession.currentUser?.uid }
+            currentUserId: { AuthSession.shared.currentUser?.uid }
         )
         repo.bootstrapStore()
         return repo
@@ -139,17 +136,11 @@ final class DIContainer {
         FavoritesViewModel(repository: favoritesRepository)
     }
 
-    func makeProductCardViewModel(productId: Int) -> ProductCardViewModel {
-        ProductCardViewModel(
-            productId: productId,
-            repository: favoritesRepository
-        )
-    }
-
     func makeProductsInfoViewModel(product: Product) -> ProductsInfoViewModel {
         ProductsInfoViewModel(
             product: product,
-            repository: favoritesRepository
+            favoritesRepository: favoritesRepository,
+            cartUseCase: makeCartUseCase()
         )
     }
     
@@ -170,4 +161,54 @@ final class DIContainer {
         )
     }
     
+    // MARK: - Cart & Checkout Feature
+    private(set) lazy var cartRepository: CartRepository = {
+        let repo = CartRepositoryImpl(
+            local: cartLocalDataSource,
+            remote: cartRemoteDataSource,
+            currentUserId: { AuthSession.shared.currentUser?.uid }
+        )
+        repo.bootstrapStore()
+        return repo
+    }()
+
+    func makeCartUseCase() -> CartUseCaseProtocol {
+        CartUseCase(repository: cartRepository)
+    }
+
+    func makeCartViewModel() -> CartViewModel {
+        CartViewModel(
+            useCase: makeCartUseCase(),
+            repository: cartRepository
+        )
+    }
+
+    func makePaymobRepository() -> PaymobRepositoryProtocol {
+        PaymobRepositoryImpl()
+    }
+
+    func makePaymobCheckoutCoordinator() -> PaymobCheckoutCoordinator {
+        PaymobCheckoutCoordinator(repository: makePaymobRepository())
+    }
+
+    func makePaymentViewModel(cart: CartModel) -> PaymentViewModel {
+        PaymentViewModel(
+            cart: cart,
+            addressRepo: makeAddressRepo(),
+            orderRepository: ServiceLocator.shared.resolveOrderRepository(),
+            paymobCoordinator: makePaymobCheckoutCoordinator()
+        )
+    }
+
+    func makeProductCardViewModel(product: Product) -> ProductCardViewModel {
+        ProductCardViewModel(
+            product: product,
+            repository: favoritesRepository,
+            cartUseCase: makeCartUseCase()
+        )
+    }
+    
+    func makeProfileViewModel() -> ProfileViewModel {
+        ProfileViewModel(authRepo: authRepository)
+    }
 }

@@ -10,4 +10,5 @@ import Foundation
 
 protocol OrderRepositoryProtocol {
     func fetchOrderHistory() async throws -> [OrderEntity]
+    func createOrder(cart: CartModel, paymentMethod: PaymentMethod, isPaid: Bool) async throws -> AdminOrder
 }

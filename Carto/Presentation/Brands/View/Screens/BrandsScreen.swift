@@ -40,7 +40,7 @@ struct BrandsScreen: View {
                 }
             }.padding(16)
         }
-        .navigationTitle("Brands")
+        .navigationTitle("brands_title")
         .searchable(text: $searchText, prompt: "Search brands")
         .task {
             if viewModel.brands.isEmpty {

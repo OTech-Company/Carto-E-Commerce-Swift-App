@@ -20,7 +20,7 @@ struct CountryField: View {
                 .foregroundStyle(.secondary)
 
             Picker(title, selection: $selectedCountry) {
-                Text("Select Country").tag("")
+                Text("select_country_placeholder").tag("")
 
                 ForEach(countries, id: \.self) { country in
                     Text(country)
