@@ -1,5 +1,5 @@
 //
-//  CheckoutViewModel.swift
+//  PaymentViewModel.swift
 //  Carto
 //
 //  Created by Mohamed Ayman on 05/07/2026.
@@ -9,8 +9,6 @@ import Foundation
 
 @MainActor
 final class PaymentViewModel: ObservableObject {
-
-    // MARK: - Phase
 
     enum Phase: Equatable {
         case reviewing
@@ -33,36 +31,37 @@ final class PaymentViewModel: ObservableObject {
         }
     }
 
-    // MARK: - Published State
-
     @Published private(set) var phase: Phase = .reviewing
     @Published var selectedPaymentMethod: PaymentMethod = .cashOnDelivery
     @Published private(set) var completedOrder: AdminOrder?
     @Published private(set) var lastPaymentMethodUsed: PaymentMethod?
 
-    // MARK: - Injected Cart (never re-fetched)
+    @Published private(set) var addresses: [CustomerAddress] = []
+    @Published var selectedAddress: CustomerAddress?
+    @Published private(set) var isLoadingAddresses = false
+    @Published var addressError: String?
 
     let cart: CartModel
 
-    // MARK: - Dependencies
-
-    private let adminOrderDataSource: AdminOrderRemoteDataSource
+    private let orderRepository: OrderRepositoryProtocol
     private let paymobCoordinator: PaymobCheckoutCoordinator
-    private let billingProvider: () -> PaymobBillingData
+    private let addressRepo: AddressRepoProtocol
+
+    private var customerAccessToken: String? {
+        AuthSession.shared.currentUser?.customerAccessToken
+    }
 
     init(
         cart: CartModel,
-        adminOrderDataSource: AdminOrderRemoteDataSource = ShopifyAdminOrderRemoteDataSource(),
-        paymobCoordinator: PaymobCheckoutCoordinator?,
-        billingProvider: @escaping () -> PaymobBillingData = placeholderBilling
+        addressRepo: AddressRepoProtocol,
+        orderRepository: OrderRepositoryProtocol,
+        paymobCoordinator: PaymobCheckoutCoordinator
     ) {
         self.cart = cart
-        self.adminOrderDataSource = adminOrderDataSource
-        self.paymobCoordinator = paymobCoordinator ?? PaymobCheckoutCoordinator(remoteDataSource: PaymobAPIRemoteDataSource(), sdkPresenter: PaymobSDKAdapter())
-        self.billingProvider = billingProvider
+        self.addressRepo = addressRepo
+        self.orderRepository = orderRepository
+        self.paymobCoordinator = paymobCoordinator
     }
-
-    // MARK: - Derived Display Values (all real, sourced from cart)
 
     var itemCount: Int {
         cart.lines.reduce(0) { $0 + $1.quantity }
@@ -86,16 +85,74 @@ final class PaymentViewModel: ObservableObject {
         phase == .processingPaymob || phase == .creatingOrder
     }
 
-    // MARK: - Actions
+    var canPlaceOrder: Bool {
+        selectedAddress != nil && !isProcessing
+    }
+
+    func loadAddresses() async {
+        guard let token = customerAccessToken else {
+            addressError = "Please sign in to manage addresses."
+            return
+        }
+
+        isLoadingAddresses = true
+        addressError = nil
+
+        do {
+            addresses = try await addressRepo.getAllAddresses(for: token)
+            if selectedAddress == nil {
+                selectedAddress = addresses.first(where: { $0.isDefault }) ?? addresses.first
+            }
+        } catch {
+            addressError = error.localizedDescription
+        }
+
+        isLoadingAddresses = false
+    }
+
+    func selectAddress(_ address: CustomerAddress) {
+        selectedAddress = address
+    }
+
+    func addAddress(_ address: CustomerAddress) async {
+        guard let token = customerAccessToken else { return }
+
+        do {
+            let created = try await addressRepo.addAddress(address, for: token)
+            await loadAddresses()
+            selectedAddress = created
+        } catch {
+            addressError = error.localizedDescription
+        }
+    }
+
+    func editAddress(id: String, address: CustomerAddress) async {
+        guard let token = customerAccessToken else { return }
+
+        do {
+            let updated = try await addressRepo.updateAddress(for: token, addressID: id, address: address)
+            await loadAddresses()
+            selectedAddress = updated
+        } catch {
+            addressError = error.localizedDescription
+        }
+    }
 
     func placeOrder() async {
+        guard let address = selectedAddress else {
+            phase = .failed(PaymentError.missingShippingAddress.localizedDescription)
+            return
+        }
+
+        let billing = buildBillingData(from: address)
+
         switch selectedPaymentMethod {
         case .cashOnDelivery:
             await createShopifyOrder(isPaid: false, paymentMethod: .cashOnDelivery)
 
         case .paymob:
             phase = .processingPaymob
-            let result = await paymobCoordinator.pay(cart: cart, billing: billingProvider())
+            let result = await paymobCoordinator.pay(cart: cart, billing: billing)
 
             switch result {
             case .success:
@@ -112,12 +169,10 @@ final class PaymentViewModel: ObservableObject {
         phase = .reviewing
     }
 
-    // MARK: - Private
-
     private func createShopifyOrder(isPaid: Bool, paymentMethod: PaymentMethod) async {
         phase = .creatingOrder
         do {
-            let order = try await adminOrderDataSource.createOrder(
+            let order = try await orderRepository.createOrder(
                 cart: cart,
                 paymentMethod: paymentMethod,
                 isPaid: isPaid
@@ -130,17 +185,22 @@ final class PaymentViewModel: ObservableObject {
         }
     }
 
-    /// Placeholder billing data for Paymob — replace with real customer
-    /// info (name/email/phone/address) once wired to your Customer/Address
-    /// data sources.
-   
-}
-
-private func placeholderBilling() -> PaymobBillingData {
-    PaymobBillingData(
-        first_name: "NA", last_name: "NA", email: "guest@example.com",
-        phone_number: "NA", apartment: "NA", floor: "NA", street: "NA",
-        building: "NA", shipping_method: "NA", postal_code: "NA",
-        city: "NA", country: "NA", state: "NA"
-    )
+    private func buildBillingData(from address: CustomerAddress) -> PaymobBillingData {
+        let user = AuthSession.shared.currentUser
+        return PaymobBillingData(
+            first_name: address.firstName,
+            last_name: address.lastName,
+            email: user?.email ?? "",
+            phone_number: address.phone,
+            apartment: address.address2 ?? "NA",
+            floor: "NA",
+            street: address.address1,
+            building: "NA",
+            shipping_method: "NA",
+            postal_code: address.zip,
+            city: address.city,
+            country: address.country,
+            state: address.province
+        )
+    }
 }

@@ -10,6 +10,7 @@ enum AppRoute: Hashable, Identifiable {
     case orderHistory
     case aboutUs
     case cart
+    case payment(cart: CartModel)
 
     var id: String {
         switch self {
@@ -31,6 +32,8 @@ enum AppRoute: Hashable, Identifiable {
             return "aboutUs"
         case .cart:
             return "cart"
+        case .payment(let cart):
+            return "payment-\(cart.id)"
         }
     }
 }

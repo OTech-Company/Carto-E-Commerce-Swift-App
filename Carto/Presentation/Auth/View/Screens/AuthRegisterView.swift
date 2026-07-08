@@ -120,22 +120,10 @@ struct RegisterView: View {
                     HStack(spacing: 12) {
                         Button(action: { viewModel.signInWithGoogle() }) {
                             HStack(spacing: 10) {
-                                ZStack {
-                                    Circle()
-                                        .fill(Color.white)
-                                        .frame(width: 22, height: 22)
-                                    Image(systemName: "g.circle.fill")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 22, height: 22)
-                                        .foregroundStyle(
-                                            LinearGradient(
-                                                colors: [.blue, .red, .yellow, .green],
-                                                startPoint: .topLeading,
-                                                endPoint: .bottomTrailing
-                                            )
-                                        )
-                                }
+                                Image("google_icon")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 22, height: 22)
                                 Text("Sign in with Google")
                                     .font(.system(size: 15, weight: .semibold))
                                     .foregroundColor(.black.opacity(0.75))

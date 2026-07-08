@@ -110,6 +110,8 @@
 		D96CAD0A2FFD8DAD00263097 /* ShopifyAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CAD072FFD8DAD00263097 /* ShopifyAuthenticationService.swift */; };
 		D96CAD0E2FFDCCD200263097 /* PaymobSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D7F13A22FFDA79500B97687 /* PaymobSDK.xcframework */; };
 		D96CAD0F2FFDCCD200263097 /* PaymobSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6D7F13A22FFDA79500B97687 /* PaymobSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D96CAD122FFDFF4C00263097 /* PaymobRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CAD112FFDFF4C00263097 /* PaymobRepositoryProtocol.swift */; };
+		D96CAD142FFDFFC800263097 /* PaymobRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CAD132FFDFFC800263097 /* PaymobRepositoryImpl.swift */; };
 		D97785E02FFD10FB00CE8275 /* DeliveryAddressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97785DF2FFD10FB00CE8275 /* DeliveryAddressCard.swift */; };
 		D97785E22FFD110600CE8275 /* EmptyAddressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97785E12FFD110600CE8275 /* EmptyAddressCard.swift */; };
 		D97785E42FFD111400CE8275 /* PaymentMethodCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97785E32FFD111400CE8275 /* PaymentMethodCard.swift */; };
@@ -436,6 +438,8 @@
 		D96CAD052FFD8DAD00263097 /* ShopifyAuthenticationServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopifyAuthenticationServiceProtocol.swift; sourceTree = "<group>"; };
 		D96CAD062FFD8DAD00263097 /* ShopifyAdminCustomerDTOs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopifyAdminCustomerDTOs.swift; sourceTree = "<group>"; };
 		D96CAD072FFD8DAD00263097 /* ShopifyAuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopifyAuthenticationService.swift; sourceTree = "<group>"; };
+		D96CAD112FFDFF4C00263097 /* PaymobRepositoryProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymobRepositoryProtocol.swift; sourceTree = "<group>"; };
+		D96CAD132FFDFFC800263097 /* PaymobRepositoryImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymobRepositoryImpl.swift; sourceTree = "<group>"; };
 		D97785DF2FFD10FB00CE8275 /* DeliveryAddressCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryAddressCard.swift; sourceTree = "<group>"; };
 		D97785E12FFD110600CE8275 /* EmptyAddressCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyAddressCard.swift; sourceTree = "<group>"; };
 		D97785E32FFD111400CE8275 /* PaymentMethodCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodCard.swift; sourceTree = "<group>"; };
@@ -1086,6 +1090,7 @@
 		D9E5F62C2FF5DCAF0014DD91 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				D96CAD132FFDFFC800263097 /* PaymobRepositoryImpl.swift */,
 				6D89EE702FFD956F00E55931 /* CartRepositoryImpl.swift */,
 				D977861C2FFD339300CE8275 /* AddressRepoImpl.swift */,
 				D977861D2FFD339300CE8275 /* FavoritesRepositoryImpl.swift */,
@@ -1785,6 +1790,7 @@
 		D9E5F7672FF5DCB00014DD91 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				D96CAD112FFDFF4C00263097 /* PaymobRepositoryProtocol.swift */,
 				6D89EE6E2FFD956200E55931 /* CartRepository.swift */,
 				D97786172FFD312200CE8275 /* AddressRepoProtocol.swift */,
 				D97786162FFD312200CE8275 /* FavoritesRepository.swift */,
@@ -2064,6 +2070,7 @@
 				D977860E2FFD300F00CE8275 /* OrderRemoteDataSource.swift in Sources */,
 				D9E5F7DA2FF5DCB00014DD91 /* VerificationViewModel.swift in Sources */,
 				D97786182FFD312200CE8275 /* FavoritesRepository.swift in Sources */,
+				D96CAD142FFDFFC800263097 /* PaymobRepositoryImpl.swift in Sources */,
 				D9E5F8112FF5DCB00014DD91 /* OrderCardRow.swift in Sources */,
 				D9E5F85C2FF5DCB00014DD91 /* GetOrderHistoryUseCase.swift in Sources */,
 				D9E5F7872FF5DCB00014DD91 /* CouponDTO.swift in Sources */,
@@ -2071,6 +2078,7 @@
 				D97786242FFD33E100CE8275 /* FavoritesViewModel.swift in Sources */,
 				D9E5F84A2FF5DCB00014DD91 /* ProductDTO+Mapper.swift in Sources */,
 				D9E5F78C2FF5DCB00014DD91 /* SearchDTO.swift in Sources */,
+				D96CAD122FFDFF4C00263097 /* PaymobRepositoryProtocol.swift in Sources */,
 				D97786132FFD300F00CE8275 /* AddressRemoteDataSource.swift in Sources */,
 				D97786102FFD300F00CE8275 /* ProductsRemoteDataSource.swift in Sources */,
 				D9E5F8152FF5DCB00014DD91 /* CartViewModel.swift in Sources */,

@@ -148,7 +148,27 @@ final class DIContainer {
     }
 
     func makeCartViewModel() -> CartViewModel {
-        CartViewModel(useCase: makeCartUseCase(), repository: cartRepository)
+        CartViewModel(
+            useCase: makeCartUseCase(),
+            repository: cartRepository
+        )
+    }
+
+    func makePaymobRepository() -> PaymobRepositoryProtocol {
+        PaymobRepositoryImpl()
+    }
+
+    func makePaymobCheckoutCoordinator() -> PaymobCheckoutCoordinator {
+        PaymobCheckoutCoordinator(repository: makePaymobRepository())
+    }
+
+    func makePaymentViewModel(cart: CartModel) -> PaymentViewModel {
+        PaymentViewModel(
+            cart: cart,
+            addressRepo: makeAddressRepo(),
+            orderRepository: ServiceLocator.shared.resolveOrderRepository(),
+            paymobCoordinator: makePaymobCheckoutCoordinator()
+        )
     }
 
     func makeProductCardViewModel(product: Product) -> ProductCardViewModel {
