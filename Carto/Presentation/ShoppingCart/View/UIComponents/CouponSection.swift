@@ -10,7 +10,12 @@ import SwiftUI
 struct CouponSection: View {
 
     @State private var coupon = ""
+    @ObservedObject var viewModel: CartViewModel
     @ObservedObject private var cartStore = CartStateStore.shared
+
+    var isCouponApplied: Bool {
+        !(viewModel.cart?.discountCodes.filter { $0.isApplicable }.isEmpty ?? true)
+    }
 
     var body: some View {
 
@@ -22,8 +27,8 @@ struct CouponSection: View {
                 
                 Spacer()
                 
-                if let code = cartStore.appliedCouponCode, !cartStore.isCouponApplied, !code.isEmpty {
-                    Text("\(code) ready!")
+                if let code = viewModel.cart?.discountCodes.first(where: { $0.isApplicable })?.code, !code.isEmpty {
+                    Text("\(code) applied!")
                         .font(.caption.weight(.bold))
                         .foregroundColor(.white)
                         .padding(.horizontal, 8)
@@ -43,12 +48,7 @@ struct CouponSection: View {
                     TextField("Enter coupon code", text: $coupon)
                         .textInputAutocapitalization(.characters)
                         .autocorrectionDisabled()
-                        .disabled(cartStore.isCouponApplied)
-                        .onChange(of: coupon) { newValue in
-                            if !cartStore.isCouponApplied {
-                                cartStore.appliedCouponCode = newValue
-                            }
-                        }
+                        .disabled(isCouponApplied)
                 }
                 .padding(.horizontal, 14)
                 .frame(height: 52)
@@ -57,17 +57,17 @@ struct CouponSection: View {
 
                 Button {
                     withAnimation {
-                        if cartStore.isCouponApplied {
-                            cartStore.clearCoupon()
+                        if isCouponApplied {
+                            viewModel.removeDiscount()
                             coupon = ""
+                            cartStore.clearCoupon()
                         } else {
-                            cartStore.appliedCouponCode = coupon
-                            cartStore.applyCoupon()
+                            viewModel.applyDiscount(code: coupon)
                         }
                     }
                 } label: {
 
-                    Text(cartStore.isCouponApplied ? "Undo" : "Apply")
+                    Text(isCouponApplied ? "Undo" : "Apply")
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.white)
                         .frame(width: 84, height: 52)
@@ -75,10 +75,10 @@ struct CouponSection: View {
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                 }
                 .buttonStyle(PressableButtonStyle())
-                .disabled(coupon.isEmpty)
+                .disabled(coupon.isEmpty && !isCouponApplied)
             }
 
-            if cartStore.isCouponApplied {
+            if isCouponApplied {
 
                 HStack {
 
@@ -96,10 +96,18 @@ struct CouponSection: View {
                 .padding(.top, 2)
             }
         }
+        // Pre-fill from existing applied code on the cart
         .onAppear {
-            if let applied = cartStore.appliedCouponCode {
+            if let applied = viewModel.cart?.discountCodes.first(where: { $0.isApplicable })?.code {
                 coupon = applied
+            } else if !cartStore.suggestedCouponCode.isEmpty {
+                coupon = cartStore.suggestedCouponCode
             }
+        }
+        // React to banner tapping "Get Offer" — auto-fill the text field
+        .onChange(of: cartStore.suggestedCouponCode) { newCode in
+            guard !isCouponApplied, !newCode.isEmpty else { return }
+            withAnimation { coupon = newCode }
         }
         .padding()
         .background(Color(.systemBackground))

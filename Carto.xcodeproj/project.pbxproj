@@ -10,12 +10,10 @@
 		6D76EA9F2FF68ECB00C6938C /* AddToCartCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76EA9C2FF68ECB00C6938C /* AddToCartCounter.swift */; };
 		6D76EAA02FF68ECB00C6938C /* ProductCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76EA9D2FF68ECB00C6938C /* ProductCard.swift */; };
 		6D76EAA32FF69E2B00C6938C /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D76EAA22FF69E2B00C6938C /* String+HTML.swift */; };
+		6D79DF132FFE858E00035BE8 /* PaymobSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D7F13A22FFDA79500B97687 /* PaymobSDK.xcframework */; };
 		6D89EE6D2FFD954300E55931 /* CartStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89EE6C2FFD954300E55931 /* CartStateStore.swift */; };
 		6D89EE6F2FFD956200E55931 /* CartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89EE6E2FFD956200E55931 /* CartRepository.swift */; };
 		6D89EE712FFD956F00E55931 /* CartRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89EE702FFD956F00E55931 /* CartRepositoryImpl.swift */; };
-		6D89EE732FFD958000E55931 /* CartLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89EE722FFD958000E55931 /* CartLocalDataSource.swift */; };
-		6D89EE752FFD958A00E55931 /* CartFireStoreRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89EE742FFD958A00E55931 /* CartFireStoreRemoteDataSource.swift */; };
-		6D89EE772FFD959D00E55931 /* CartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89EE762FFD959D00E55931 /* CartItem.swift */; };
 		6D89EE792FFD95AE00E55931 /* CartUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89EE782FFD95AE00E55931 /* CartUseCase.swift */; };
 		6D89EE7F2FFD95E000E55931 /* EmptyCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89EE7C2FFD95E000E55931 /* EmptyCartView.swift */; };
 		6D89EE802FFD95E000E55931 /* CardItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89EE7A2FFD95E000E55931 /* CardItemCard.swift */; };
@@ -73,8 +71,6 @@
 		6FB3B80B2FFE4DD5005D1C03 /* ImageSearchRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B80A2FFE4DD5005D1C03 /* ImageSearchRepositoryImpl.swift */; };
 		6FB3B80D2FFE4DFD005D1C03 /* FindSimilarProductFromImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B80C2FFE4DFD005D1C03 /* FindSimilarProductFromImageUseCase.swift */; };
 		6FB3B80F2FFE4E14005D1C03 /* ImageSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3B80E2FFE4E14005D1C03 /* ImageSearchRepository.swift */; };
-		6FF819DB2FFE56B100705803 /* PaymobSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF819DA2FFE56B100705803 /* PaymobSDK.xcframework */; };
-		6FF819DC2FFE56B100705803 /* PaymobSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF819DA2FFE56B100705803 /* PaymobSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FF819DE2FFE579300705803 /* ImgSearch+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF819DD2FFE579300705803 /* ImgSearch+Extensions.swift */; };
 		D57F105F2FF6AC6A00F421D4 /* BrandsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F105E2FF6AC6A00F421D4 /* BrandsScreen.swift */; };
 		D57F10612FF6ACA900F421D4 /* HomeBrandsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F10602FF6ACA900F421D4 /* HomeBrandsViewModel.swift */; };
@@ -232,7 +228,6 @@
 		D9E5F7AA2FF5DCB00014DD91 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E5F6632FF5DCAF0014DD91 /* CategoryEntity.swift */; };
 		D9E5F7AB2FF5DCB00014DD91 /* AddressEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E5F6642FF5DCAF0014DD91 /* AddressEntity.swift */; };
 		D9E5F7AC2FF5DCB00014DD91 /* BrandEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E5F6652FF5DCAF0014DD91 /* BrandEntity.swift */; };
-		D9E5F7AD2FF5DCB00014DD91 /* CartItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E5F6662FF5DCAF0014DD91 /* CartItemEntity.swift */; };
 		D9E5F7AE2FF5DCB00014DD91 /* ThemeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E5F6672FF5DCAF0014DD91 /* ThemeEntity.swift */; };
 		D9E5F7AF2FF5DCB00014DD91 /* PaymentMethodEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E5F6682FF5DCAF0014DD91 /* PaymentMethodEntity.swift */; };
 		D9E5F7B02FF5DCB00014DD91 /* LanguageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E5F6692FF5DCAF0014DD91 /* LanguageEntity.swift */; };
@@ -354,7 +349,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6FF819DC2FFE56B100705803 /* PaymobSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 1;
@@ -369,9 +363,6 @@
 		6D89EE6C2FFD954300E55931 /* CartStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartStateStore.swift; sourceTree = "<group>"; };
 		6D89EE6E2FFD956200E55931 /* CartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartRepository.swift; sourceTree = "<group>"; };
 		6D89EE702FFD956F00E55931 /* CartRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartRepositoryImpl.swift; sourceTree = "<group>"; };
-		6D89EE722FFD958000E55931 /* CartLocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartLocalDataSource.swift; sourceTree = "<group>"; };
-		6D89EE742FFD958A00E55931 /* CartFireStoreRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartFireStoreRemoteDataSource.swift; sourceTree = "<group>"; };
-		6D89EE762FFD959D00E55931 /* CartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItem.swift; sourceTree = "<group>"; };
 		6D89EE782FFD95AE00E55931 /* CartUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartUseCase.swift; sourceTree = "<group>"; };
 		6D89EE7A2FFD95E000E55931 /* CardItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardItemCard.swift; sourceTree = "<group>"; };
 		6D89EE7B2FFD95E000E55931 /* CouponSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponSection.swift; sourceTree = "<group>"; };
@@ -430,7 +421,6 @@
 		6FB3B80A2FFE4DD5005D1C03 /* ImageSearchRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchRepositoryImpl.swift; sourceTree = "<group>"; };
 		6FB3B80C2FFE4DFD005D1C03 /* FindSimilarProductFromImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindSimilarProductFromImageUseCase.swift; sourceTree = "<group>"; };
 		6FB3B80E2FFE4E14005D1C03 /* ImageSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchRepository.swift; sourceTree = "<group>"; };
-		6FF819DA2FFE56B100705803 /* PaymobSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = PaymobSDK.xcframework; path = ../../../Downloads/PaymobSDK.xcframework; sourceTree = "<group>"; };
 		6FF819DD2FFE579300705803 /* ImgSearch+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImgSearch+Extensions.swift"; sourceTree = "<group>"; };
 		D57F105E2FF6AC6A00F421D4 /* BrandsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsScreen.swift; sourceTree = "<group>"; };
 		D57F10602FF6ACA900F421D4 /* HomeBrandsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBrandsViewModel.swift; sourceTree = "<group>"; };
@@ -586,7 +576,6 @@
 		D9E5F6632FF5DCAF0014DD91 /* CategoryEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
 		D9E5F6642FF5DCAF0014DD91 /* AddressEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressEntity.swift; sourceTree = "<group>"; };
 		D9E5F6652FF5DCAF0014DD91 /* BrandEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrandEntity.swift; sourceTree = "<group>"; };
-		D9E5F6662FF5DCAF0014DD91 /* CartItemEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartItemEntity.swift; sourceTree = "<group>"; };
 		D9E5F6672FF5DCAF0014DD91 /* ThemeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeEntity.swift; sourceTree = "<group>"; };
 		D9E5F6682FF5DCAF0014DD91 /* PaymentMethodEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodEntity.swift; sourceTree = "<group>"; };
 		D9E5F6692FF5DCAF0014DD91 /* LanguageEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageEntity.swift; sourceTree = "<group>"; };
@@ -690,11 +679,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D79DF132FFE858E00035BE8 /* PaymobSDK.xcframework in Frameworks */,
 				D96CAD032FFD8C7700263097 /* GoogleSignInSwift in Frameworks */,
 				D9E5F8612FF5DE6E0014DD91 /* FirebaseAuth in Frameworks */,
 				D96CAD012FFD8C7700263097 /* GoogleSignIn in Frameworks */,
 				D9E5F8632FF5DE6E0014DD91 /* FirebaseFirestore in Frameworks */,
-				6FF819DB2FFE56B100705803 /* PaymobSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1032,7 +1021,6 @@
 		D927DA9F2FFB44E000417D9C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6FF819DA2FFE56B100705803 /* PaymobSDK.xcframework */,
 				6D7F13A22FFDA79500B97687 /* PaymobSDK.xcframework */,
 			);
 			name = Frameworks;
@@ -1137,7 +1125,6 @@
 		D97786022FFD300F00CE8275 /* Remote */ = {
 			isa = PBXGroup;
 			children = (
-				6D89EE742FFD958A00E55931 /* CartFireStoreRemoteDataSource.swift */,
 				D991BDDA2FFBDBBE007D2299 /* AdminOrderRemoteDataSource.swift */,
 				D991BDE12FFBDF96007D2299 /* PaymobRemoteDataSource.swift */,
 				D97786032FFD300F00CE8275 /* BrandRemoteDataSource.swift */,
@@ -1155,7 +1142,6 @@
 		D977860B2FFD300F00CE8275 /* Local */ = {
 			isa = PBXGroup;
 			children = (
-				6D89EE722FFD958000E55931 /* CartLocalDataSource.swift */,
 				D977860C2FFD300F00CE8275 /* FavoritesLocalDataSource.swift */,
 			);
 			path = Local;
@@ -1384,7 +1370,6 @@
 				D9E5F6632FF5DCAF0014DD91 /* CategoryEntity.swift */,
 				D9E5F6642FF5DCAF0014DD91 /* AddressEntity.swift */,
 				D9E5F6652FF5DCAF0014DD91 /* BrandEntity.swift */,
-				D9E5F6662FF5DCAF0014DD91 /* CartItemEntity.swift */,
 				D9E5F6672FF5DCAF0014DD91 /* ThemeEntity.swift */,
 				D9E5F6682FF5DCAF0014DD91 /* PaymentMethodEntity.swift */,
 				D9E5F6692FF5DCAF0014DD91 /* LanguageEntity.swift */,
@@ -1981,7 +1966,6 @@
 		D9E5F76D2FF5DCB00014DD91 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6D89EE762FFD959D00E55931 /* CartItem.swift */,
 				D97785FE2FFD2FE700CE8275 /* FavoriteItem.swift */,
 				D97785FC2FFD2FE700CE8275 /* NewAddress.swift */,
 				D97785FD2FFD2FE700CE8275 /* ProductInfo.swift */,
@@ -2359,7 +2343,6 @@
 				D97785E42FFD111400CE8275 /* PaymentMethodCard.swift in Sources */,
 				D9E5F7D22FF5DCB00014DD91 /* HomeView.swift in Sources */,
 				6F6DD8462FF7F1D70099872E /* AiRepository.swift in Sources */,
-				6D89EE772FFD959D00E55931 /* CartItem.swift in Sources */,
 				D977862D2FFD356E00CE8275 /* ProductCardViewModel.swift in Sources */,
 				D946FDAE2FFA0AF100FBC3E1 /* CartDTOs.swift in Sources */,
 				6F6DD8372FF7F1B40099872E /* AiRepositoryImpl.swift in Sources */,
@@ -2424,7 +2407,6 @@
 				D9E5F7942FF5DCB00014DD91 /* FirestoreUserService.swift in Sources */,
 				D9E5F7D42FF5DCB00014DD91 /* HomeBannerView.swift in Sources */,
 				D9E5F7912FF5DCB00014DD91 /* CartDTO.swift in Sources */,
-				6D89EE732FFD958000E55931 /* CartLocalDataSource.swift in Sources */,
 				D9E5F7AC2FF5DCB00014DD91 /* BrandEntity.swift in Sources */,
 				D97786142FFD300F00CE8275 /* StorefrontProductsRemoteDataSource.swift in Sources */,
 				6D89EE6F2FFD956200E55931 /* CartRepository.swift in Sources */,
@@ -2491,7 +2473,6 @@
 				D9E5F8542FF5DCB00014DD91 /* Product.swift in Sources */,
 				D9E5F77F2FF5DCB00014DD91 /* ProductsRepositoryImpl.swift in Sources */,
 				D9E5F7B12FF5DCB00014DD91 /* ReviewEntity.swift in Sources */,
-				6D89EE752FFD958A00E55931 /* CartFireStoreRemoteDataSource.swift in Sources */,
 				D59EBD482FF6D1B500883859 /* BrandsUseCase.swift in Sources */,
 				D97785F02FFD115E00CE8275 /* AddressListView.swift in Sources */,
 				D9E5F7ED2FF5DCB00014DD91 /* BrandsHeaderView.swift in Sources */,
@@ -2508,7 +2489,6 @@
 				D9E5F8292FF5DCB00014DD91 /* SizeView.swift in Sources */,
 				D991BDD32FFBD937007D2299 /* AdminGraphQLClient.swift in Sources */,
 				D946FDC22FFA118300FBC3E1 /* StorefrontOrderMapper.swift in Sources */,
-				D9E5F7AD2FF5DCB00014DD91 /* CartItemEntity.swift in Sources */,
 				D946FDBE2FFA0EB900FBC3E1 /* OrderQueries.swift in Sources */,
 				D59EBD4C2FF6D1EA00883859 /* BrandsRepoImpl.swift in Sources */,
 				D991BDE22FFBDF96007D2299 /* PaymobRemoteDataSource.swift in Sources */,

@@ -7,68 +7,26 @@
 
 import Foundation
 
-enum StorefrontCartQueries {
-
-    static let fetchCart = """
-        query FetchCart($id: ID!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
-          cart(id: $id) {
-            id
-            checkoutUrl
-            totalQuantity
-            lines(first: 50) {
-              edges {
-                node {
-                  id
-                  quantity
-                  merchandise {
-                    ... on ProductVariant {
-                      id
-                      title
-                      price {
-                        amount
-                        currencyCode
-                      }
-                      product {
+private let merchandiseFragment = """
+                      ... on ProductVariant {
+                        id
                         title
-                        handle
+                        image {
+                          url
+                        }
+                        price {
+                          amount
+                          currencyCode
+                        }
+                        product {
+                          id
+                          title
+                          handle
+                        }
                       }
-                    }
-                  }
-                }
-              }
-              pageInfo {
-                hasNextPage
-                hasPreviousPage
-                startCursor
-                endCursor
-              }
-            }
-            discountCodes {
-              code
-              applicable
-            }
-            cost {
-              subtotalAmount {
-                amount
-                currencyCode
-              }
-              totalAmount {
-                amount
-                currencyCode
-              }
-              totalTaxAmount {
-                amount
-                currencyCode
-              }
-            }
-          }
-        }
-        """
+"""
 
-    static let createCart = """
-        mutation CreateCart($input: CartInput, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
-          cartCreate(input: $input) {
-            cart {
+private let cartBodyFragment = """
               id
               checkoutUrl
               totalQuantity
@@ -78,18 +36,7 @@ enum StorefrontCartQueries {
                     id
                     quantity
                     merchandise {
-                      ... on ProductVariant {
-                        id
-                        title
-                        price {
-                          amount
-                          currencyCode
-                        }
-                        product {
-                          title
-                          handle
-                        }
-                      }
+\(merchandiseFragment)
                     }
                   }
                 }
@@ -118,6 +65,23 @@ enum StorefrontCartQueries {
                   currencyCode
                 }
               }
+"""
+
+enum StorefrontCartQueries {
+
+    static let fetchCart = """
+        query FetchCart($id: ID!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
+          cart(id: $id) {
+        \(cartBodyFragment)
+          }
+        }
+        """
+
+    static let createCart = """
+        mutation CreateCart($input: CartInput, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
+          cartCreate(input: $input) {
+            cart {
+        \(cartBodyFragment)
             }
             userErrors {
               field
@@ -131,55 +95,7 @@ enum StorefrontCartQueries {
         mutation AddToCart($cartId: ID!, $lines: [CartLineInput!]!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           cartLinesAdd(cartId: $cartId, lines: $lines) {
             cart {
-              id
-              checkoutUrl
-              totalQuantity
-              lines(first: 50) {
-                edges {
-                  node {
-                    id
-                    quantity
-                    merchandise {
-                      ... on ProductVariant {
-                        id
-                        title
-                        price {
-                          amount
-                          currencyCode
-                        }
-                        product {
-                          title
-                          handle
-                        }
-                      }
-                    }
-                  }
-                }
-                pageInfo {
-                  hasNextPage
-                  hasPreviousPage
-                  startCursor
-                  endCursor
-                }
-              }
-              discountCodes {
-                code
-                applicable
-              }
-              cost {
-                subtotalAmount {
-                  amount
-                  currencyCode
-                }
-                totalAmount {
-                  amount
-                  currencyCode
-                }
-                totalTaxAmount {
-                  amount
-                  currencyCode
-                }
-              }
+        \(cartBodyFragment)
             }
             userErrors {
               field
@@ -193,55 +109,7 @@ enum StorefrontCartQueries {
         mutation UpdateCartLines($cartId: ID!, $lines: [CartLineUpdateInput!]!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           cartLinesUpdate(cartId: $cartId, lines: $lines) {
             cart {
-              id
-              checkoutUrl
-              totalQuantity
-              lines(first: 50) {
-                edges {
-                  node {
-                    id
-                    quantity
-                    merchandise {
-                      ... on ProductVariant {
-                        id
-                        title
-                        price {
-                          amount
-                          currencyCode
-                        }
-                        product {
-                          title
-                          handle
-                        }
-                      }
-                    }
-                  }
-                }
-                pageInfo {
-                  hasNextPage
-                  hasPreviousPage
-                  startCursor
-                  endCursor
-                }
-              }
-              discountCodes {
-                code
-                applicable
-              }
-              cost {
-                subtotalAmount {
-                  amount
-                  currencyCode
-                }
-                totalAmount {
-                  amount
-                  currencyCode
-                }
-                totalTaxAmount {
-                  amount
-                  currencyCode
-                }
-              }
+        \(cartBodyFragment)
             }
             userErrors {
               field
@@ -255,55 +123,7 @@ enum StorefrontCartQueries {
         mutation RemoveCartLines($cartId: ID!, $lineIds: [ID!]!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
             cart {
-              id
-              checkoutUrl
-              totalQuantity
-              lines(first: 50) {
-                edges {
-                  node {
-                    id
-                    quantity
-                    merchandise {
-                      ... on ProductVariant {
-                        id
-                        title
-                        price {
-                          amount
-                          currencyCode
-                        }
-                        product {
-                          title
-                          handle
-                        }
-                      }
-                    }
-                  }
-                }
-                pageInfo {
-                  hasNextPage
-                  hasPreviousPage
-                  startCursor
-                  endCursor
-                }
-              }
-              discountCodes {
-                code
-                applicable
-              }
-              cost {
-                subtotalAmount {
-                  amount
-                  currencyCode
-                }
-                totalAmount {
-                  amount
-                  currencyCode
-                }
-                totalTaxAmount {
-                  amount
-                  currencyCode
-                }
-              }
+        \(cartBodyFragment)
             }
             userErrors {
               field
@@ -317,55 +137,7 @@ enum StorefrontCartQueries {
         mutation UpdateDiscountCodes($cartId: ID!, $discountCodes: [String!]!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           cartDiscountCodesUpdate(cartId: $cartId, discountCodes: $discountCodes) {
             cart {
-              id
-              checkoutUrl
-              totalQuantity
-              lines(first: 50) {
-                edges {
-                  node {
-                    id
-                    quantity
-                    merchandise {
-                      ... on ProductVariant {
-                        id
-                        title
-                        price {
-                          amount
-                          currencyCode
-                        }
-                        product {
-                          title
-                          handle
-                        }
-                      }
-                    }
-                  }
-                }
-                pageInfo {
-                  hasNextPage
-                  hasPreviousPage
-                  startCursor
-                  endCursor
-                }
-              }
-              discountCodes {
-                code
-                applicable
-              }
-              cost {
-                subtotalAmount {
-                  amount
-                  currencyCode
-                }
-                totalAmount {
-                  amount
-                  currencyCode
-                }
-                totalTaxAmount {
-                  amount
-                  currencyCode
-                }
-              }
+        \(cartBodyFragment)
             }
             userErrors {
               field
@@ -374,60 +146,12 @@ enum StorefrontCartQueries {
           }
         }
         """
-    
+
     static let updateBuyerIdentity = """
         mutation UpdateCartBuyerIdentity($cartId: ID!, $buyerIdentity: CartBuyerIdentityInput!) {
           cartBuyerIdentityUpdate(cartId: $cartId, buyerIdentity: $buyerIdentity) {
             cart {
-              id
-              checkoutUrl
-              totalQuantity
-              lines(first: 50) {
-                edges {
-                  node {
-                    id
-                    quantity
-                    merchandise {
-                      ... on ProductVariant {
-                        id
-                        title
-                        price {
-                          amount
-                          currencyCode
-                        }
-                        product {
-                          title
-                          handle
-                        }
-                      }
-                    }
-                  }
-                }
-                pageInfo {
-                  hasNextPage
-                  hasPreviousPage
-                  startCursor
-                  endCursor
-                }
-              }
-              discountCodes {
-                code
-                applicable
-              }
-              cost {
-                subtotalAmount {
-                  amount
-                  currencyCode
-                }
-                totalAmount {
-                  amount
-                  currencyCode
-                }
-                totalTaxAmount {
-                  amount
-                  currencyCode
-                }
-              }
+        \(cartBodyFragment)
             }
             userErrors {
               field

@@ -23,8 +23,7 @@ final class DIContainer {
     let favoritesLocalDataSource: FavoritesLocalDataSourceProtocol
     let favoritesRemoteDataSource: FavoritesRemoteDataSourceProtocol
     let imageSearchRepository: ImageSearchRepository
-    let cartLocalDataSource: CartLocalDataSourceProtocol
-    let cartRemoteDataSource: CartFirestoreRemoteDataSourceProtocol
+
 
     private init() {
         imageSearchRepository = ImageSearchRepositoryImpl()
@@ -36,8 +35,7 @@ final class DIContainer {
         addressRemoteDataSource = AddressGraphQLRemoteDataSource()
         favoritesLocalDataSource = FavoritesLocalDataSource()
         favoritesRemoteDataSource = FavoritesRemoteDataSource()
-        cartLocalDataSource = CartLocalDataSource()
-        cartRemoteDataSource = CartFirestoreRemoteDataSource()
+
     }
 
     // MARK: - Auth ViewModels
@@ -161,15 +159,8 @@ final class DIContainer {
         )
     }
     
-    // MARK: - Cart & Checkout Feature
     private(set) lazy var cartRepository: CartRepository = {
-        let repo = CartRepositoryImpl(
-            local: cartLocalDataSource,
-            remote: cartRemoteDataSource,
-            currentUserId: { AuthSession.shared.currentUser?.uid }
-        )
-        repo.bootstrapStore()
-        return repo
+        CartRepositoryImpl(remote: CartGraphQLRemoteDataSource())
     }()
 
     func makeCartUseCase() -> CartUseCaseProtocol {
@@ -179,7 +170,7 @@ final class DIContainer {
     func makeCartViewModel() -> CartViewModel {
         CartViewModel(
             useCase: makeCartUseCase(),
-            repository: cartRepository
+            productsRepository: makeProductRepo()
         )
     }
 

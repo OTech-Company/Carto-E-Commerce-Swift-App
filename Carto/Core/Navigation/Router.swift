@@ -26,7 +26,6 @@ public class Router<Route: Hashable & Identifiable>: ObservableObject {
     }
     
     public func popToRoot() {
-        // Safe check to avoid popping an empty path
         guard !path.isEmpty else { return }
         path.removeLast(path.count)
     }

@@ -10,76 +10,98 @@ import Combine
 
 @MainActor
 final class CartViewModel: ObservableObject {
-    @Published private(set) var cartItems: [CartItem] = []
-    @Published var navigateToProduct: Product?
-    @Published var discount: Double = 0
+    @Published private(set) var cart: CartModel?
+    @Published var isLoading: Bool = false
+    @Published var errorMessage: String?
 
     private let useCase: CartUseCaseProtocol
-    private let repository: CartRepository
+    private let productsRepository: ProductsRepository
     private var cancellables = Set<AnyCancellable>()
 
-    init(useCase: CartUseCaseProtocol, repository: CartRepository, store: CartStateStore = .shared) {
+    var lines: [CartLine] { cart?.lines ?? [] }
+    var hasItems: Bool { !lines.isEmpty }
+
+    var subtotal: Double { Double(cart?.subtotal ?? "0") ?? 0 }
+    var total: Double { Double(cart?.total ?? "0") ?? 0 }
+    var tax: Double { Double(cart?.tax ?? "0") ?? 0 }
+    var checkoutURL: URL? { cart.flatMap { URL(string: $0.checkoutURL) } }
+
+    init(useCase: CartUseCaseProtocol, productsRepository: ProductsRepository, store: CartStateStore = .shared) {
         self.useCase = useCase
-        self.repository = repository
-        self.cartItems = store.allItems
+        self.productsRepository = productsRepository
 
-        Task { [weak self] in
-            await self?.repository.syncFromRemote()
+        store.$cart
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$cart)
+
+        Task { await loadCart() }
+    }
+
+    func fetchProduct(for line: CartLine) async -> Product? {
+        isLoading = true
+        defer { isLoading = false }
+        do {
+            let product = try await productsRepository.getProductInfo(productId: line.productId)
+            return product
+        } catch {
+            print("Failed to load product: \(error)")
+            errorMessage = "Could not load product details."
+            return nil
         }
-
-        store.$items
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.cartItems = store.allItems
-                self?.recalculateDiscount()
-            }
-            .store(in: &cancellables)
-            
-        store.$isCouponApplied
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.recalculateDiscount()
-            }
-            .store(in: &cancellables)
     }
 
-    private func recalculateDiscount() {
-        discount = CartStateStore.shared.discountAmount
+    func loadCart() async {
+        isLoading = true
+        do {
+            _ = try await useCase.fetchCart()
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+        isLoading = false
     }
 
-    var subtotal: Double {
-        CartStateStore.shared.subtotal
+    func increment(_ line: CartLine) {
+        Task {
+            isLoading = true
+            do { _ = try await useCase.incrementLine(line) }
+            catch { errorMessage = error.localizedDescription }
+            isLoading = false
+        }
     }
 
-    var hasItems: Bool {
-        !cartItems.isEmpty
+    func decrement(_ line: CartLine) {
+        Task {
+            isLoading = true
+            do { _ = try await useCase.decrementLine(line) }
+            catch { errorMessage = error.localizedDescription }
+            isLoading = false
+        }
     }
 
-    var deliveryFee: Double {
-        CartStateStore.shared.deliveryFee
+    func remove(_ line: CartLine) {
+        Task {
+            isLoading = true
+            do { _ = try await useCase.removeLine(lineId: line.id) }
+            catch { errorMessage = error.localizedDescription }
+            isLoading = false
+        }
     }
 
-    func increment(_ item: CartItem) {
-        _ = useCase.incrementQuantity(item)
+    func applyDiscount(code: String) {
+        Task {
+            isLoading = true
+            do { _ = try await useCase.applyDiscount(code: code) }
+            catch { errorMessage = error.localizedDescription }
+            isLoading = false
+        }
     }
 
-    func decrement(_ item: CartItem) {
-        _ = useCase.decrementQuantity(item)
-    }
-
-    func remove(_ item: CartItem) {
-        useCase.removeFromCart(item)
-    }
-
-    func canIncrement(_ item: CartItem) -> Bool {
-        useCase.canIncrement(item)
-    }
-
-    func canDecrement(_ item: CartItem) -> Bool {
-        item.quantity > 1
-    }
-
-    func didTapItem(_ item: CartItem) {
-        navigateToProduct = item.product
+    func removeDiscount() {
+        Task {
+            isLoading = true
+            do { _ = try await useCase.removeDiscount() }
+            catch { errorMessage = error.localizedDescription }
+            isLoading = false
+        }
     }
 }

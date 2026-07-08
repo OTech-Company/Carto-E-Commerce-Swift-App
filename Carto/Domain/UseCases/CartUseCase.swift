@@ -8,14 +8,14 @@
 import Foundation
 
 protocol CartUseCaseProtocol {
-    func addToCart(product: Product, color: String, size: String) -> CartItem?
-    func updateQuantity(_ item: CartItem, to newQuantity: Int) -> CartItem
-    func incrementQuantity(_ item: CartItem) -> CartItem
-    func decrementQuantity(_ item: CartItem) -> CartItem
-    func removeFromCart(_ item: CartItem)
-    func selectVariant(product: Product, color: String, size: String, in items: [CartItem]) -> CartItem?
-    func canIncrement(_ item: CartItem) -> Bool
-    func canDecrement(_ item: CartItem) -> Bool
+    func fetchCart() async throws -> CartModel?
+    func addToCart(product: Product, color: String, size: String) async throws -> CartModel
+    func updateLine(lineId: String, quantity: Int) async throws -> CartModel
+    func incrementLine(_ line: CartLine) async throws -> CartModel
+    func decrementLine(_ line: CartLine) async throws -> CartModel
+    func removeLine(lineId: String) async throws -> CartModel
+    func applyDiscount(code: String) async throws -> CartModel
+    func removeDiscount() async throws -> CartModel
 }
 
 final class CartUseCase: CartUseCaseProtocol {
@@ -25,73 +25,57 @@ final class CartUseCase: CartUseCaseProtocol {
         self.repository = repository
     }
 
-    func addToCart(product: Product, color: String, size: String) -> CartItem? {
-        let stock = product.variantFor(color: color, size: size)?.inventoryQuantity ?? 0
-        guard stock > 0 else { return nil }
+    func fetchCart() async throws -> CartModel? {
+        try await repository.fetchCart()
+    }
 
-        if let existing = repository.cartItem(productId: product.id, color: color, size: size) {
-            let clampedQuantity = min(existing.quantity + 1, stock)
-            var updated = existing
-            updated.quantity = clampedQuantity
-            repository.addOrUpdate(updated)
-            return updated
+    func addToCart(product: Product, color: String, size: String) async throws -> CartModel {
+        guard let variant = product.variantFor(color: color, size: size) else {
+            throw CartUseCaseError.variantNotFound
         }
+        let variantId = variant.adminGraphqlApiId
+            ?? "gid://shopify/ProductVariant/\(variant.id)"
 
-        let newItem = CartItem(product: product, selectedColor: color, selectedSize: size, quantity: 1)
-        repository.addOrUpdate(newItem)
-        return newItem
+        return try await repository.addLine(variantId: variantId, quantity: 1)
     }
 
-    func updateQuantity(_ item: CartItem, to newQuantity: Int) -> CartItem {
-        let clamped = max(1, min(newQuantity, item.availableStock))
-        var updated = item
-        updated.quantity = clamped
-        repository.addOrUpdate(updated)
-        return updated
-    }
-
-    func incrementQuantity(_ item: CartItem) -> CartItem {
-        guard canIncrement(item) else { return item }
-        return updateQuantity(item, to: item.quantity + 1)
-    }
-
-    func decrementQuantity(_ item: CartItem) -> CartItem {
-        if item.quantity == 1 {
-            repository.remove(
-                productId: item.productId,
-                color: item.selectedColor,
-                size: item.selectedSize
-            )
-            return item
+    func updateLine(lineId: String, quantity: Int) async throws -> CartModel {
+        if quantity <= 0 {
+            return try await repository.removeLine(lineId: lineId)
         }
-
-        return updateQuantity(item, to: item.quantity - 1)
+        return try await repository.updateLine(lineId: lineId, quantity: quantity)
     }
 
-    func removeFromCart(_ item: CartItem) {
-        repository.remove(productId: item.productId, color: item.selectedColor, size: item.selectedSize)
+    func incrementLine(_ line: CartLine) async throws -> CartModel {
+        try await repository.updateLine(lineId: line.id, quantity: line.quantity + 1)
     }
 
-    func selectVariant(product: Product, color: String, size: String, in items: [CartItem]) -> CartItem? {
-        guard let currentItem = items.first(where: { $0.productId == product.id }) else { return nil }
-
-        repository.remove(productId: currentItem.productId, color: currentItem.selectedColor, size: currentItem.selectedSize)
-
-        let stock = product.variantFor(color: color, size: size)?.inventoryQuantity ?? 0
-        let clampedQuantity = min(currentItem.quantity, max(stock, 1))
-        var moved = currentItem
-        moved.selectedColor = color
-        moved.selectedSize = size
-        moved.quantity = clampedQuantity
-        repository.addOrUpdate(moved)
-        return moved
+    func decrementLine(_ line: CartLine) async throws -> CartModel {
+        if line.quantity <= 1 {
+            return try await repository.removeLine(lineId: line.id)
+        }
+        return try await repository.updateLine(lineId: line.id, quantity: line.quantity - 1)
     }
 
-    func canIncrement(_ item: CartItem) -> Bool {
-        item.quantity < item.availableStock
+    func removeLine(lineId: String) async throws -> CartModel {
+        try await repository.removeLine(lineId: lineId)
     }
 
-    func canDecrement(_ item: CartItem) -> Bool {
-        item.quantity > 0
+    func applyDiscount(code: String) async throws -> CartModel {
+        try await repository.applyDiscountCodes([code])
+    }
+    
+    func removeDiscount() async throws -> CartModel {
+        try await repository.applyDiscountCodes([])
+    }
+}
+
+enum CartUseCaseError: LocalizedError {
+    case variantNotFound
+
+    var errorDescription: String? {
+        switch self {
+        case .variantNotFound: return "The selected variant was not found for this product."
+        }
     }
 }

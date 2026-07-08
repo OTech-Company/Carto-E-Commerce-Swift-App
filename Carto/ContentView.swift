@@ -23,6 +23,11 @@ struct ContentView: View {
                 .tabItem { Label("profile", systemImage: "person.fill") }
         }
         .tint(Color("PrimaryColor"))
+        .onAppear {
+            Task {
+                _ = try? await DIContainer.shared.cartRepository.fetchCart()
+            }
+        }
     }
     
     // MARK: - Tab Factories
