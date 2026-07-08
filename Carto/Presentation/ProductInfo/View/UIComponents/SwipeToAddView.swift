@@ -13,6 +13,7 @@ struct SwipeToAddView: View {
     let discountPercentage: Int?
     let isOutOfStock: Bool
     let maxQuantity: Int
+    let currencySymbol: String
 
     @Binding var quantity: Int
     @State private var dragOffset: CGFloat = 0
@@ -27,13 +28,13 @@ struct SwipeToAddView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     HStack(spacing: 8) {
-                        Text(String(format: "$%.2f", price))
+                        Text("\(currencySymbol) \(price, specifier: "%.2f")")
                             .font(.title2)
                             .bold()
                             .foregroundColor(.blue)
 
                         if let compareAtPrice = compareAtPrice, compareAtPrice > price {
-                            Text(String(format: "$%.2f", compareAtPrice))
+                            Text("\(currencySymbol) \(compareAtPrice, specifier: "%.2f")")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                                 .strikethrough()

@@ -10,6 +10,7 @@ import SwiftUI
 struct ProductsInfoView: View {
 
     @StateObject private var viewModel: ProductsInfoViewModel
+    @AppStorage("app_currency") var appCurrency: AppCurrency = .egyptianPound
 
     init(viewModel: ProductsInfoViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -99,7 +100,8 @@ struct ProductsInfoView: View {
                 discountPercentage: viewModel.product.discountPercentage,
                 isOutOfStock: viewModel.isOutOfStock,
                 maxQuantity: viewModel.product.variants.first?.inventoryQuantity ?? 0,
-                quantity: $viewModel.quantity
+                currencySymbol: appCurrency.symbol,
+                quantity: $viewModel.quantity,
             )
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
