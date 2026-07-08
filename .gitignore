@@ -6,6 +6,7 @@
 *Secrets.plist
 *Config.plist
 *.xcconfig
+Catro/Core/Constants/Development.xcconfig
 
 # =========================================================================
 # Xcode User Settings & Metadata

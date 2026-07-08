@@ -103,9 +103,6 @@ extension ContentView {
         case .settings:
             return AnyView(SettingsView())
             
-        case .orderHistory:
-            return AnyView(makeOrderHistoryScreen())
-            
         case .aboutUs:
             return AnyView(AboutUsView())
             
@@ -168,15 +165,23 @@ extension ContentView {
                 )
                 .toolbar(.hidden, for: .navigationBar)
             )
+        case .orderDetail(let id):
+            let repository = ServiceLocator.shared.resolveOrderRepository()
+            let useCase = OrderUseCase(repository: repository)
+            let viewModel = OrderHistoryDetailViewModel(orderUseCase: useCase, orderId: id)
+            
+            return AnyView(
+                OrderHistoryDetailView(viewModel: viewModel)
+            )
+        case .orderHistory:
+            let repository = ServiceLocator.shared.resolveOrderRepository()
+            let useCase = OrderUseCase(repository: repository)
+            let viewModel = OrderHistoryViewModel(orderUseCase: useCase)
+            
+            return AnyView(
+                OrderHistoryView(viewModel: viewModel)
+            )
         }
     }
     
-    @MainActor
-    func makeOrderHistoryScreen() -> some View {
-        let repository = ServiceLocator.shared.resolveOrderRepository()
-        let useCase = GetOrderHistoryUseCase(repository: repository)
-        let viewModel = OrderHistoryViewModel(getOrderHistoryUseCase: useCase)
-
-        return OrderHistoryView(viewModel: viewModel)
-    }
 }

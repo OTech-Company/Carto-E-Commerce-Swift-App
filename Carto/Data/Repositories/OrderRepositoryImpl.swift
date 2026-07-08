@@ -9,35 +9,48 @@ import Foundation
 final class OrderRepositoryImpl: OrderRepositoryProtocol {
     
     private let adminOrderDataSource: AdminOrderRemoteDataSource
+    private let remoteDataSource: OrderRemoteDataSource
     
-    init(adminOrderDataSource: AdminOrderRemoteDataSource = ShopifyAdminOrderRemoteDataSource()) {
+    init(
+        adminOrderDataSource: AdminOrderRemoteDataSource = ShopifyAdminOrderRemoteDataSource(),
+        remoteDataSource: OrderRemoteDataSource = OrderGraphQLRemoteDataSource()
+    ) {
         self.adminOrderDataSource = adminOrderDataSource
+        self.remoteDataSource = remoteDataSource
     }
     
-    func fetchOrderHistory() async throws -> [OrderEntity] {
+    // MARK: - Fetch Orders (Storefront)
+    func fetchOrderHistory(accessToken: String, first: Int = 20, after: String? = nil) async throws -> StorefrontPage<CustomerOrder> {
         do {
-            
-            // 2. Call the client
-            let response: OrdersResponse = try await ShopifyAPIClient.shared.requestREST(
-                endpoint: .orders,
-                queryParams: ["status": "any"]
+            let storefrontPage = try await remoteDataSource.fetchOrders(
+                accessToken: accessToken,
+                first: first,
+                after: after
             )
             
-            let dtos = response.orders ?? []
-            
             print("=================")
-            print("Successfully Decoded Orders DTOs Count: \(dtos.count)")
+            print("Successfully Fetched Orders Count: \(storefrontPage.items.count)")
             print("=================")
             
-            // 4. Map directly to domain models using your mapper setup
-            return dtos.map { $0.toDomain() }
-            
+            return storefrontPage
         } catch {
-            print("❌ Order Repository Error:", error)
+            print("❌ Order Repository Error (Fetch Orders):", error)
             throw error
         }
     }
     
+    // MARK: - Fetch Order Detail (Storefront)
+    func fetchOrderDetail(id: String) async throws -> CustomerOrderDetail? {
+        do {
+            let orderDetail = try await remoteDataSource.fetchOrderDetail(id: id)
+            return orderDetail
+        } catch {
+            print("❌ Order Repository Error (Fetch Order Detail):", error)
+            throw error
+        }
+    }
+    
+    // MARK: - Create Order (Admin)
     func createOrder(cart: CartModel, paymentMethod: PaymentMethod, isPaid: Bool) async throws -> AdminOrder {
         return try await adminOrderDataSource.createOrder(
             cart: cart,
