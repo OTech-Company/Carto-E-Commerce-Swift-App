@@ -156,6 +156,12 @@ struct HomeView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     router.push(to: .aiOutfit)
                 }
+            } onNavigateToImageSearch: {
+                isShowingAISheet = false
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    router.push(to: .imageSearch)
+                }
             }
             .presentationDetents([.medium, .large])
             .presentationDragIndicator(.visible)

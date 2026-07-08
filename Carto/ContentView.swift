@@ -133,6 +133,22 @@ extension ContentView {
                 )
                 .toolbar(.hidden, for: .navigationBar)
             )
+            
+        case .imageSearch:
+            let productRepo = DIContainer.shared.makeProductRepo()
+            let structuralProductsUseCase = ProductsUseCase(repository: productRepo)
+
+            let imageSearchUsecase = DIContainer.shared
+                .makeFindSimilarProductFromImageUseCase()
+
+            return AnyView(
+                ImageSearchView(
+                    findSimilarProductUseCase: imageSearchUsecase,
+                    productUseCase: structuralProductsUseCase
+                )
+                .toolbar(.hidden, for: .navigationBar)
+            )
+            
         }
     }
     

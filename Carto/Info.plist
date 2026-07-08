@@ -8,6 +8,11 @@
 	<string>Carto needs speech recognition permission to dictate your AI queries.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Carto needs microphone access to record your voice for text dictation.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>   Carto needs camera access to let you search for products by taking a photo.
+   Carto needs camera access to let you search for products by taking a photo.
+   Carto needs camera access to let you search for products by taking a photo.
+Carto needs camera access to let you search for products by taking a photo.</string>
 	<key>GroqAPIKey</key>
 	<string>$(GROQ_API_KEY)</string>
 	<key>ShopifyShopDomain</key>

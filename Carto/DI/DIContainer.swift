@@ -23,8 +23,12 @@ final class DIContainer {
     let addressRemoteDataSource: AddressRemoteDataSource
     let favoritesLocalDataSource: FavoritesLocalDataSourceProtocol
     let favoritesRemoteDataSource: FavoritesRemoteDataSourceProtocol
+    let imageSearchRepository: ImageSearchRepository
+
 
     private init() {
+        imageSearchRepository =
+            ImageSearchRepositoryImpl()
         authRepository = AuthenticationRepositoryImpl()
         authSession = AuthSession()
         validator = AuthValidatorImpl()
@@ -159,4 +163,11 @@ final class DIContainer {
     func makeCompareProductsUseCase() -> CompareProductsUseCase {
         CompareProductsUseCase(repository: makeAIRepo())
     }
+    
+    func makeFindSimilarProductFromImageUseCase() -> FindSimilarProductFromImageUseCase {
+        FindSimilarProductFromImageUseCaseImpl(
+            repository: imageSearchRepository
+        )
+    }
+    
 }
