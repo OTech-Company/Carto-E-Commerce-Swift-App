@@ -9,6 +9,7 @@ import SwiftUI
 
 struct VerificationView: View {
     @StateObject var viewModel: VerificationViewModel
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         ZStack {
@@ -22,7 +23,7 @@ struct VerificationView: View {
                         if let warningMessage = viewModel.warningMessage {
                             HStack(spacing: 12) {
                                 Image(systemName: "exclamationmark.triangle.fill")
-                                    .foregroundColor(Color(hex: "FF5A00"))
+                                    .foregroundColor(Color("PrimaryColor")) // Corporate branding orange asset
                                     .font(.system(size: 16, weight: .semibold))
 
                                 Text(warningMessage)
@@ -32,22 +33,22 @@ struct VerificationView: View {
                             }
                             .padding(.horizontal, 16)
                             .padding(.vertical, 14)
-                            .background(Color(hex: "FF5A00").opacity(0.1))
-                            .cornerRadius(12)
+                            .background(Color("PrimaryColor").opacity(colorScheme == .dark ? 0.18 : 0.1)) // Enhanced dark mode visibility
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                             .transition(.move(edge: .top).combined(with: .opacity))
                             .accessibilityElement(children: .combine)
                         }
 
                         ZStack {
                             Circle()
-                                .fill(Color(hex: "FF5A00").opacity(0.08))
+                                .fill(Color("PrimaryColor").opacity(colorScheme == .dark ? 0.12 : 0.08)) // Smooth background glow
                                 .frame(width: 140, height: 140)
 
                             Image(systemName: "envelope.badge.shield.half.filled")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 70, height: 70)
-                                .foregroundColor(Color(hex: "FF5A00"))
+                                .foregroundColor(Color("PrimaryColor")) // Corporate branding orange asset
                         }
                         .padding(.top, 40)
 
@@ -60,7 +61,7 @@ struct VerificationView: View {
                             VStack(spacing: 6) {
                                 Text("verification_sent_desc")
                                     .font(.system(size: 15))
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(.secondary) // Updated from static .gray to adaptive semantic color
 
                                 Text(viewModel.userEmail)
                                     .font(.system(size: 16, weight: .bold))
@@ -72,7 +73,7 @@ struct VerificationView: View {
 
                             Text("Please open your inbox and click the verification link. After verifying your email, return to the app and tap Continue.")
                                 .font(.system(size: 14))
-                                .foregroundColor(.gray)
+                                .foregroundColor(.secondary) // Updated from static .gray to adaptive semantic color
                                 .multilineTextAlignment(.center)
                                 .lineSpacing(4)
                                 .padding(.horizontal, 12)
@@ -83,18 +84,18 @@ struct VerificationView: View {
                             Button(action: { viewModel.checkVerificationStatus() }) {
                                 Text("continue_btn")
                                     .font(.system(size: 16, weight: .bold))
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Color(.systemBackground)) // High contrast button label token
                                     .frame(maxWidth: .infinity)
                                     .frame(height: 54)
-                                    .background(Color(hex: "FF5A00"))
-                                    .cornerRadius(12)
+                                    .background(Color("PrimaryColor")) // Corporate branding orange asset
+                                    .clipShape(RoundedRectangle(cornerRadius: 12))
                             }
                             .accessibilityLabel("Continue check verification")
 
                             Button(action: { viewModel.resendVerificationEmail() }) {
                                 Text(viewModel.isResendDisabled ? "Resend in \(viewModel.countdownValue)s" : "Resend Verification Email")
                                     .font(.system(size: 15, weight: .semibold))
-                                    .foregroundColor(viewModel.isResendDisabled ? .gray : Color(hex: "FF5A00"))
+                                    .foregroundColor(viewModel.isResendDisabled ? Color(.placeholderText) : Color("PrimaryColor"))
                                     .frame(maxWidth: .infinity)
                                     .frame(height: 44)
                             }
@@ -110,12 +111,12 @@ struct VerificationView: View {
                 HStack(spacing: 4) {
                     Text("wrong_email_link")
                         .font(.system(size: 14))
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary) // Updated from static .gray
 
                     Button(action: { viewModel.goBack() }) {
                         Text("go_back_btn")
                             .font(.system(size: 14, weight: .bold))
-                            .foregroundColor(Color(hex: "FF5A00"))
+                            .foregroundColor(Color("PrimaryColor")) // Corporate branding orange asset
                             .frame(minWidth: 44, minHeight: 44)
                     }
                 }
@@ -125,16 +126,16 @@ struct VerificationView: View {
             .animation(.easeInOut, value: viewModel.warningMessage)
 
             if viewModel.isLoading {
-                Color.black.opacity(0.12)
+                Color.black.opacity(colorScheme == .dark ? 0.4 : 0.12)
                     .ignoresSafeArea()
 
                 ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: "FF5A00")))
+                    .progressViewStyle(CircularProgressViewStyle(tint: Color("PrimaryColor")))
                     .scaleEffect(1.4)
                     .frame(width: 80, height: 80)
-                    .background(Color(.systemBackground))
-                    .cornerRadius(16)
-                    .shadow(color: Color.black.opacity(0.08), radius: 10)
+                    .background(Color(.secondarySystemGroupedBackground)) // Clean panel container color across themes
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .shadow(color: .black.opacity(colorScheme == .dark ? 0.3 : 0.08), radius: 10)
             }
         }
         .navigationBarBackButtonHidden(true)

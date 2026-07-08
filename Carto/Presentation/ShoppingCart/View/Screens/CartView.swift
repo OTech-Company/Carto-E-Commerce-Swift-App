@@ -71,8 +71,9 @@ struct CartView: View {
                     .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                     .listRowBackground(Color.clear)
                     
+                    // MARK: - Primary Action Button Block
                     Button {
-                        
+                        // Triggers transition flow execution
                     } label: {
                         HStack(spacing: 8) {
                             Image(systemName: "lock.fill")
@@ -82,12 +83,15 @@ struct CartView: View {
                             
                             Image(systemName: "arrow.right")
                         }
-                        .foregroundStyle(.white)
+                        // Text updates color automatically matching light/dark context high-contrast variants
+                        .foregroundStyle(Color(.systemBackground))
                         .frame(maxWidth: .infinity)
                         .frame(height: 56)
-                        .background(Color.orange)
+                        // Updated from explicit Color.orange to custom theme asset identity
+                        .background(Color("PrimaryColor"))
                         .clipShape(RoundedRectangle(cornerRadius: 18))
                     }
+                    .buttonStyle(.plain) // Prevents the whole List cell row selection visual flashing
                     .listRowSeparator(.hidden)
                     .listRowInsets(EdgeInsets(top: 12, leading: 16, bottom: 20, trailing: 16))
                     .listRowBackground(Color.clear)
@@ -96,6 +100,7 @@ struct CartView: View {
                 .scrollContentBackground(.hidden)
             }
         }
+ 
         .background(Color(.systemGroupedBackground))
         .navigationTitle("My Cart")
         .navigationBarTitleDisplayMode(.inline)

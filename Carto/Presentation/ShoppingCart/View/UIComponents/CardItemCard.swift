@@ -129,13 +129,14 @@ struct CartItemCard: View {
         .background(Color(.secondarySystemGroupedBackground))
         .clipShape(RoundedRectangle(cornerRadius: 18))
         .shadow(
-            color: .black.opacity(0.02),
+            color: .black.opacity(colorScheme == .dark ? 0.2 : 0.02),
             radius: 4,
             x: 0,
             y: 2
         )
+        // Softened brand drop shadow to fit Light and Dark view scopes natively
         .shadow(
-            color: Color("PrimaryColor").opacity(0.2),
+            color: Color("PrimaryColor").opacity(colorScheme == .dark ? 0.08 : 0.15),
             radius: 12,
             x: 0,
             y: 5
@@ -148,7 +149,7 @@ struct CartItemCard: View {
                     .font(.system(size: 15))
                     .foregroundStyle(.red)
                     .frame(width: 38, height: 38)
-                    .background(Color.red.opacity(0.12))
+                    .background(Color.red.opacity(colorScheme == .dark ? 0.20 : 0.12))
                     .clipShape(Circle())
             }
             .buttonStyle(.borderless)
@@ -192,7 +193,7 @@ struct CartItemCard: View {
         case "yellow":
             return .yellow
         case "orange":
-            return .orange
+            return Color("PrimaryColor") // Uses your custom branding orange instead of system orange
         case "brown":
             return .brown
         case "purple":

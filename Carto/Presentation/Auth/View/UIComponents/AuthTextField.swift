@@ -1,10 +1,3 @@
-//
-//  AuthTextField.swift
-//  Carto
-//
-//  Created by Mohamed Ayman on 27/06/2026.
-//
-
 import SwiftUI
 
 struct AuthTextField: View {
@@ -26,17 +19,17 @@ struct AuthTextField: View {
             
             HStack {
                 if isSecure && !isPasswordVisible {
-                    SecureField("", text: $text, prompt: Text(placeholder).foregroundColor(.gray.opacity(0.6)))
-                        .tint(Color(hex: "FF5A00"))
+                    SecureField("", text: $text, prompt: Text(placeholder).foregroundColor(.secondary.opacity(0.6)))
+                        .tint(Color("PrimaryColor"))
                 } else {
-                    TextField("", text: $text, prompt: Text(placeholder).foregroundColor(.gray.opacity(0.6)))
-                        .tint(Color(hex: "FF5A00"))
+                    TextField("", text: $text, prompt: Text(placeholder).foregroundColor(.secondary.opacity(0.6)))
+                        .tint(Color("PrimaryColor"))
                 }
                 
                 if isSecure {
                     Button(action: { isPasswordVisible.toggle() }) {
                         Image(systemName: isPasswordVisible ? "eye.fill" : "eye.slash.fill")
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                     }
                 }
             }
@@ -44,12 +37,12 @@ struct AuthTextField: View {
             .font(.system(size: 14))
             .padding(.horizontal, 16)
             .frame(height: 50)
-            .background(Color(.systemBackground))
-            .cornerRadius(12)
+            .background(Color(.secondarySystemGroupedBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 12))
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(
-                        error != nil ? Color.red : (isFocused ? Color(hex: "FF5A00") : Color(.systemGray5)),
+                        error != nil ? Color.red : (isFocused ? Color("PrimaryColor") : Color(.systemGray5)),
                         lineWidth: isFocused || error != nil ? 1.5 : 1.0
                     )
             )
@@ -73,7 +66,7 @@ struct CheckboxToggleStyle: ToggleStyle {
         Button(action: { configuration.isOn.toggle() }) {
             HStack(spacing: 8) {
                 Image(systemName: configuration.isOn ? "checkmark.square.fill" : "square")
-                    .foregroundColor(configuration.isOn ? Color(hex: "FF5A00") : .gray)
+                    .foregroundColor(configuration.isOn ? Color("PrimaryColor") : .secondary)
                     .font(.system(size: 18))
                 configuration.label
             }

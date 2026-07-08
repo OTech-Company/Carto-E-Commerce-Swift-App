@@ -35,6 +35,7 @@ struct HomeView: View {
 
     @State private var currentIndex: Int = 0
     @State private var isShowingAISheet: Bool = false // State tracking the AI feature modal sheet
+    @State private var searchText: String = "" // State tracking search queries
     @StateObject private var viewModel = DIContainer.shared.makeHomeViewModel()
     @EnvironmentObject private var router: Router<AppRoute>
     
@@ -51,18 +52,47 @@ struct HomeView: View {
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
+            Color(.systemBackground)
+                .ignoresSafeArea()
+            
             ScrollView {
-                VStack(alignment: .leading) {
-                    HStack {
-                        Spacer()
+                VStack(alignment: .leading, spacing: 20) {
+                    
+                    // Header Block containing Logo, Middle Search Bar, and Cart action
+                    HStack(spacing: 12) {
+                        HStack(spacing: 4) {
+                            Image("app_logo")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 48, height: 48)
+                        }
+                        
+                        // Top Middle: Search Bar Field
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.secondary)
+                                .font(.system(size: 14))
+                            
+                            TextField("Search...", text: $searchText)
+                                .font(.system(size: 14))
+                                .foregroundColor(.primary)
+                        }
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 8)
+                        .background(Color(.systemGray6))
+                        .clipShape(Capsule())
+                        
+                        // Top Right: Cart Trigger Button
                         Button {
                             router.push(to: .cart)
                         } label: {
                             Image(systemName: "cart.fill")
-                                .font(.system(size: 24))
-                                .foregroundStyle(Color("PrimaryColor"))
+                                .font(.system(size: 20))
+                                .foregroundColor(.accentColor)
                         }
                     }
+                    .padding(.top, 8)
+                    .padding(.bottom, 4)
                     
                     TabView(selection: $currentIndex) {
                         ForEach(0..<ads.count, id: \.self) { index in
@@ -78,9 +108,9 @@ struct HomeView: View {
                         HStack(spacing: 8) {
                             ForEach(0..<ads.count, id: \.self) { index in
                                 Circle()
-                                    .fill(index == currentIndex ? Color("PrimaryColor") : Color.gray.opacity(0.5))
+                                    .fill(index == currentIndex ? Color.accentColor : Color.gray.opacity(0.5))
                                     .frame(width: 8, height: 8)
-                                    .shadow(color: index == currentIndex ? Color("PrimaryColor").opacity(0.6) : .clear, radius: 3)
+                                    .shadow(color: index == currentIndex ? Color.accentColor.opacity(0.6) : .clear, radius: 3)
                             }
                         }
                         .padding(.bottom, 16)
@@ -94,7 +124,7 @@ struct HomeView: View {
                     HStack {
                         Text("brands_title")
                             .font(.system(size: 22, weight: .bold))
-                            .foregroundColor(Color("PrimaryColor"))
+                            .foregroundColor(.primary)
 
                         Spacer()
 
@@ -103,7 +133,7 @@ struct HomeView: View {
                         } label: {
                             Text("see_more_btn")
                                 .font(.system(size: 18, weight: .medium))
-                                .foregroundColor(Color("PrimaryColor"))
+                                .foregroundColor(.accentColor)
                         }
                     }
 
@@ -111,11 +141,11 @@ struct HomeView: View {
                         viewModel: viewModel.brandVM
                     )
 
-                    Spacer(minLength: 20)
+                    Spacer(minLength: 5)
 
                     Text("products_title")
                         .font(.system(size: 22, weight: .bold))
-                        .foregroundColor(Color("PrimaryColor"))
+                        .foregroundColor(.primary)
 
                     switch viewModel.productVM.state {
                     case .loading, .idle:
@@ -166,28 +196,22 @@ struct HomeView: View {
         }
         .sheet(isPresented: $isShowingAISheet) {
             AIFeatureSheet {
-                // 1. Dismiss assistant sheet first
                 isShowingAISheet = false
-                
-                // 2. Small delay to let sheet slide down completely before pushing
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     router.push(to: .aiChat)
                 }
             } onNavigateToComparison: {
                 isShowingAISheet = false
-                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     router.push(to: .aiComparison)
                 }
             } onNavigateToOutfit: {
                 isShowingAISheet = false
-                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     router.push(to: .aiOutfit)
                 }
             } onNavigateToImageSearch: {
                 isShowingAISheet = false
-                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     router.push(to: .imageSearch)
                 }

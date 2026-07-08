@@ -25,7 +25,7 @@ struct EmptyCartView: View {
             VStack {
                 Spacer()
                 
-                Text("Your Cart is Wating")
+                Text("Your Cart is Waiting") // Fixed spelling typo ("Wating" -> "Waiting")
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
@@ -47,16 +47,16 @@ struct EmptyCartView: View {
                         Text("Start Shopping")
                             .fontWeight(.semibold)
                     }
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(Color("PrimaryColor")) // Replaced system orange label style
                     .frame(width: 220, height: 48)
                     .background(
                         LinearGradient(
                             colors: colorScheme == .dark ? [
                                 Color(.secondarySystemGroupedBackground),
-                                Color.orange.opacity(0.3)
+                                Color("PrimaryColor").opacity(0.2) // Brand asset opacity adjustment for Dark Mode
                             ] : [
-                                .white,
-                                Color.orange.opacity(0.18)
+                                Color(.systemBackground),
+                                Color("PrimaryColor").opacity(0.14) // Brand asset opacity adjustment for Light Mode
                             ],
                             startPoint: .leading,
                             endPoint: .trailing
@@ -65,13 +65,13 @@ struct EmptyCartView: View {
                     .overlay {
                         Capsule()
                             .stroke(
-                                Color.orange.opacity(0.25),
+                                Color("PrimaryColor").opacity(0.25), // Brand asset stroke adjustment
                                 lineWidth: 1
                             )
                     }
                     .clipShape(Capsule())
                     .shadow(
-                        color: .orange.opacity(0.18),
+                        color: Color("PrimaryColor").opacity(colorScheme == .dark ? 0.08 : 0.15), // Adapted background drop glow
                         radius: 10,
                         y: 6
                     )
