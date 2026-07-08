@@ -14,16 +14,16 @@ struct OrderCardRow: View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(alignment: .top, spacing: 16) {
                 
-                // Item Descriptive Information Block (Clean, Text-Only Layout)
+                // Item Descriptive Information Block
                 VStack(alignment: .leading, spacing: 6) {
                     Text("order_number_format \(order.orderNumber)")
                         .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary) // Theme-adaptive primary text
                         .lineLimit(1)
                     
                     Text(order.processedAt)
                         .font(.system(size: 14))
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary) // Theme-adaptive secondary text
                     
                     // Financial & Fulfillment Status Combo
                     HStack(spacing: 8) {
@@ -32,42 +32,49 @@ struct OrderCardRow: View {
                             .foregroundColor(order.fulfillmentStatus.uppercased() == "FULFILLED" ? .green : .orange)
                         
                         Text("•")
-                            .foregroundColor(.gray.opacity(0.5))
+                            .foregroundColor(.secondary.opacity(0.5))
                         
                         Text(order.financialStatus.capitalized)
                             .font(.system(size: 14))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                     }
                     
                     Text("\(order.currencyCode) \(order.totalPrice)")
                         .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                         .padding(.top, 2)
                 }
                 
                 Spacer()
             }
             
-            // Primary Functional Blue Action Button
+            // Primary Functional Action Button matching App Accent/Tint Color
             Button {
                 // Action logic to handle item re-ordering
             } label: {
                 Text("reorder_btn")
                     .font(.system(size: 15, weight: .semibold))
-                    .foregroundColor(.white)
+                    .foregroundColor(Color(.systemBackground)) // Adapts to contrast properly
                     .frame(maxWidth: .infinity)
                     .frame(height: 44)
-                    .background(Color.blue)
+                    .background(Color.accentColor) // Tracks primary accent color asset configuration
                     .cornerRadius(10)
             }
         }
         .padding(.all, 16)
-        .background(Color.white)
+        .background(Color(.secondarySystemGroupedBackground)) // Secondary card background layer
         .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.02), radius: 6, x: 0, y: 3)
+        .shadow(color: Color.black.opacity(Color.currentAppearanceOpacity), radius: 6, x: 0, y: 3)
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(Color.black.opacity(0.06), lineWidth: 1)
+                .stroke(Color(.separator), lineWidth: 0.5) // Adaptive divider/border line
         )
+    }
+}
+
+// MARK: - Dynamic Adaptive Shadow Helper
+private extension Color {
+    @MainActor static var currentAppearanceOpacity: Double {
+        UITraitCollection.current.userInterfaceStyle == .dark ? 0.15 : 0.02
     }
 }

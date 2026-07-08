@@ -44,13 +44,14 @@ struct OrderHistoryDetailView: View {
     
     var body: some View {
         ZStack {
-            Color(red: 0.96, green: 0.96, blue: 0.97)
+            // Theme Adaptive Grouped Background (Light & Dark compatible)
+            Color(.systemGroupedBackground)
                 .ignoresSafeArea()
             
             Group {
                 if viewModel.isLoading {
                     ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                        .progressViewStyle(CircularProgressViewStyle(tint: .accentColor))
                 } else if let error = viewModel.errorMessage {
                     errorStateView(message: error)
                 } else if let detail = viewModel.orderDetail {
@@ -78,12 +79,12 @@ struct OrderHistoryDetailView: View {
                     HStack {
                         Text("status_label")
                             .font(.subheadline)
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                         Spacer()
                         Text(detail.fulfillmentStatus.uppercased() == "FULFILLED" ? "Delivered" : "In Progress")
                             .font(.subheadline)
                             .fontWeight(.semibold)
-                            .foregroundColor(detail.fulfillmentStatus.uppercased() == "FULFILLED" ? .green : .blue)
+                            .foregroundColor(detail.fulfillmentStatus.uppercased() == "FULFILLED" ? .green : .accentColor)
                     }
                     
                     Divider()
@@ -91,11 +92,11 @@ struct OrderHistoryDetailView: View {
                     HStack {
                         Text("date_label")
                             .font(.subheadline)
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                         Spacer()
                         Text(detail.processedAt)
                             .font(.subheadline)
-                            .foregroundColor(.black)
+                            .foregroundColor(.primary)
                     }
                     
                     Divider()
@@ -103,22 +104,22 @@ struct OrderHistoryDetailView: View {
                     HStack {
                         Text("total_amount_label")
                             .font(.subheadline)
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                         Spacer()
                         Text("\(detail.currencyCode) \(detail.total)")
                             .font(.headline)
                             .fontWeight(.bold)
-                            .foregroundColor(.black)
+                            .foregroundColor(.primary)
                     }
                 }
                 .padding()
-                .background(Color.white)
+                .background(Color(.secondarySystemGroupedBackground))
                 .cornerRadius(12)
-                .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.black.opacity(0.05), lineWidth: 1))
+                .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color(.separator), lineWidth: 0.5))
                 
                 Text("items_in_order_label")
                     .font(.system(size: 13, weight: .bold))
-                    .foregroundColor(.gray)
+                    .foregroundColor(.secondary)
                     .padding(.horizontal, 4)
                     .padding(.top, 8)
                 
@@ -148,18 +149,18 @@ struct OrderHistoryDetailView: View {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(item.title)
                                     .font(.system(size: 15, weight: .semibold))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.primary)
                                     .lineLimit(1)
                                 
                                 if let variant = item.variantTitle {
                                     Text(variant)
                                         .font(.system(size: 13))
-                                        .foregroundColor(.gray)
+                                        .foregroundColor(.secondary)
                                 }
                                 
                                 Text("quantity_format \(item.quantity)")
                                     .font(.system(size: 13))
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(.secondary)
                             }
                             
                             Spacer()
@@ -167,13 +168,13 @@ struct OrderHistoryDetailView: View {
                             if let priceString = item.price {
                                 Text("\(detail.currencyCode) \(priceString)")
                                     .font(.system(size: 15, weight: .bold))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.accentColor) // Tracks primary accent/tint style
                             }
                         }
                         .padding()
-                        .background(Color.white)
+                        .background(Color(.secondarySystemGroupedBackground))
                         .cornerRadius(12)
-                        .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.black.opacity(0.04), lineWidth: 1))
+                        .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color(.separator), lineWidth: 0.5))
                     }
                 }
             }
@@ -184,11 +185,11 @@ struct OrderHistoryDetailView: View {
     
     private var itemFallbackPlaceholder: some View {
         RoundedRectangle(cornerRadius: 8)
-            .fill(Color(white: 0.95))
+            .fill(Color(.systemGray5))
             .frame(width: 56, height: 56)
             .overlay(
                 Image(systemName: "tag")
-                    .foregroundColor(.gray.opacity(0.5))
+                    .foregroundColor(.secondary.opacity(0.6))
                     .font(.system(size: 16))
             )
     }
