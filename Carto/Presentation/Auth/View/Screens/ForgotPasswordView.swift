@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ForgotPasswordView: View {
     @StateObject private var viewModel: ForgotPasswordViewModel
+    @Environment(\.colorScheme) var colorScheme
 
     init(viewModel: ForgotPasswordViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -17,14 +18,14 @@ struct ForgotPasswordView: View {
                     VStack(spacing: 32) {
                         ZStack {
                             Circle()
-                                .fill(Color(hex: "FF5A00").opacity(0.08))
+                                .fill(Color("PrimaryColor").opacity(0.08))
                                 .frame(width: 140, height: 140)
 
                             Image(systemName: "lock.rotation")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 64, height: 64)
-                                .foregroundColor(Color(hex: "FF5A00"))
+                                .foregroundColor(Color("PrimaryColor"))
                         }
                         .padding(.top, 40)
 
@@ -58,11 +59,11 @@ struct ForgotPasswordView: View {
                             Button(action: { viewModel.sendResetLink() }) {
                                 Text("send_reset_link_btn")
                                     .font(.system(size: 16, weight: .bold))
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Color(.systemBackground))
                                     .frame(maxWidth: .infinity)
                                     .frame(height: 52)
-                                    .background(Color(hex: "FF5A00"))
-                                    .cornerRadius(12)
+                                    .background(Color("PrimaryColor"))
+                                    .clipShape(RoundedRectangle(cornerRadius: 12))
                             }
                             .disabled(viewModel.isLoading)
 
@@ -85,12 +86,12 @@ struct ForgotPasswordView: View {
                 HStack(spacing: 4) {
                     Text("remember_password_link")
                         .font(.system(size: 14))
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
 
                     Button(action: { viewModel.navigateToSignIn() }) {
                         Text("back_to_signin_btn")
                             .font(.system(size: 14, weight: .bold))
-                            .foregroundColor(Color(hex: "FF5A00"))
+                            .foregroundColor(Color("PrimaryColor"))
                             .frame(minWidth: 44, minHeight: 44)
                     }
                 }
@@ -100,16 +101,16 @@ struct ForgotPasswordView: View {
             .animation(.easeInOut, value: viewModel.generalErrorMessage)
 
             if viewModel.isLoading {
-                Color.black.opacity(0.15)
+                Color.black.opacity(colorScheme == .dark ? 0.4 : 0.15)
                     .ignoresSafeArea()
 
                 ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: "FF5A00")))
+                    .progressViewStyle(CircularProgressViewStyle(tint: Color("PrimaryColor")))
                     .scaleEffect(1.5)
                     .frame(width: 80, height: 80)
-                    .background(Color(.systemBackground))
-                    .cornerRadius(16)
-                    .shadow(color: Color.black.opacity(0.1), radius: 10)
+                    .background(Color(.secondarySystemGroupedBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.3 : 0.1), radius: 10)
             }
         }
         .navigationBarBackButtonHidden(true)

@@ -4,6 +4,12 @@
 //
 //  Created by Manona on 05/07/2026.
 //
+//
+//  CartItemCard.swift
+//  Carto
+//
+//  Created by Manona on 05/07/2026.
+//
 
 import SwiftUI
 
@@ -15,6 +21,7 @@ struct CartItemCard: View {
     let onDelete: () -> Void
 
     @AppStorage("app_currency") var appCurrency: AppCurrency = .egyptianPound
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         HStack(alignment: .top, spacing: 14) {
@@ -98,8 +105,19 @@ struct CartItemCard: View {
         .padding(14)
         .background(Color(.secondarySystemGroupedBackground))
         .clipShape(RoundedRectangle(cornerRadius: 18))
-        .shadow(color: .black.opacity(0.02), radius: 4, x: 0, y: 2)
-        .shadow(color: Color("PrimaryColor").opacity(0.2), radius: 12, x: 0, y: 5)
+        .shadow(
+            color: .black.opacity(colorScheme == .dark ? 0.2 : 0.02),
+            radius: 4,
+            x: 0,
+            y: 2
+        )
+        // Softened brand drop shadow to fit Light and Dark view scopes natively
+        .shadow(
+            color: Color("PrimaryColor").opacity(colorScheme == .dark ? 0.08 : 0.15),
+            radius: 12,
+            x: 0,
+            y: 5
+        )
         .overlay(alignment: .topTrailing) {
             Button {
                 onDelete()
@@ -108,7 +126,7 @@ struct CartItemCard: View {
                     .font(.system(size: 15))
                     .foregroundStyle(.red)
                     .frame(width: 38, height: 38)
-                    .background(Color.red.opacity(0.12))
+                    .background(Color.red.opacity(colorScheme == .dark ? 0.20 : 0.12))
                     .clipShape(Circle())
             }
             .buttonStyle(.borderless)

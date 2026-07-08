@@ -4,6 +4,7 @@ struct RegisterView: View {
     @StateObject var viewModel: AuthRegisterViewModel
     @EnvironmentObject var appViewModel: AppViewModel
     @State private var rememberMe = false
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         ZStack {
@@ -77,7 +78,7 @@ struct RegisterView: View {
                             Toggle(isOn: $rememberMe) {
                                 Text("remember_me_checkbox")
                                     .font(.system(size: 14))
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(.secondary)
                             }
                             .toggleStyle(CheckboxToggleStyle())
                             .disabled(viewModel.isLoading)
@@ -90,11 +91,11 @@ struct RegisterView: View {
                     Button(action: { viewModel.register() }) {
                         Text("create_account_btn")
                             .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(.white)
+                            .foregroundColor(Color(.systemBackground))
                             .frame(maxWidth: .infinity)
                             .frame(height: 52)
-                            .background(Color(hex: "FF5A00"))
-                            .cornerRadius(12)
+                            .background(Color("PrimaryColor"))
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                     .disabled(viewModel.isLoading)
                     .padding(.horizontal, 24)
@@ -111,7 +112,7 @@ struct RegisterView: View {
                         Rectangle().frame(height: 1).foregroundColor(Color(.systemGray5))
                         Text("or_continue_with")
                             .font(.system(size: 13))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                         Rectangle().frame(height: 1).foregroundColor(Color(.systemGray5))
                     }
                     .padding(.horizontal, 24)
@@ -130,24 +131,23 @@ struct RegisterView: View {
                             }
                             .frame(maxWidth: .infinity)
                             .frame(height: 50)
-                            .background(Color(.systemBackground))
-                            .cornerRadius(12)
+                            .background(Color(.secondarySystemGroupedBackground))
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12)
                                     .stroke(Color(.systemGray4), lineWidth: 1)
                             )
-                            .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
+                            .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.15 : 0.05), radius: 4, x: 0, y: 2)
                         }
                         .disabled(viewModel.isLoading)
                     }
                     .padding(.horizontal, 24)
-
                     .padding(.bottom, 16)
                     
                     Button(action: { viewModel.continueAsGuest()}) {
                         Text("continue_as_guest_btn")
                             .font(.system(size: 15, weight: .semibold))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                             .padding(.vertical, 8)
                     }
                     .disabled(viewModel.isLoading)
@@ -159,12 +159,12 @@ struct RegisterView: View {
                 HStack(spacing: 4) {
                     Text("already_have_account")
                         .font(.system(size: 14))
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
                     
                     Button(action: { viewModel.signInTapped()}) {
                         Text("sign_in_link")
                             .font(.system(size: 14, weight: .bold))
-                            .foregroundColor(Color(hex: "FF5A00"))
+                            .foregroundColor(Color("PrimaryColor"))
                     }
                     .disabled(viewModel.isLoading)
                 }
@@ -174,16 +174,16 @@ struct RegisterView: View {
             .navigationBarBackButtonHidden(true)
             
             if viewModel.isLoading {
-                Color.black.opacity(0.15)
+                Color.black.opacity(colorScheme == .dark ? 0.4 : 0.15)
                     .ignoresSafeArea()
                 
                 ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: "FF5A00")))
+                    .progressViewStyle(CircularProgressViewStyle(tint: Color("PrimaryColor")))
                     .scaleEffect(1.5)
                     .frame(width: 80, height: 80)
-                    .background(Color(.systemBackground))
-                    .cornerRadius(16)
-                    .shadow(color: Color.black.opacity(0.1), radius: 10)
+                    .background(Color(.secondarySystemGroupedBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.3 : 0.1), radius: 10)
             }
         }
     }

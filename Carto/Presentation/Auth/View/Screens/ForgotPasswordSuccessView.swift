@@ -3,7 +3,7 @@ import SwiftUI
 struct ForgotPasswordSuccessView: View {
     private var authRouter: AuthRouter
     
-    init(authRouter:AuthRouter) {
+    init(authRouter: AuthRouter) {
         self.authRouter = authRouter
     }
     
@@ -19,7 +19,7 @@ struct ForgotPasswordSuccessView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 72, height: 72)
-                    .foregroundColor(Color(hex: "FF5A00"))
+                    .foregroundColor(Color("PrimaryColor"))
 
                 VStack(spacing: 12) {
                     Text("check_your_email_title")
@@ -28,7 +28,7 @@ struct ForgotPasswordSuccessView: View {
 
                     Text("password_reset_sent_desc")
                         .font(.system(size: 15))
-                        .foregroundColor(.gray)
+                        .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                         .lineSpacing(4)
                         .padding(.horizontal, 24)
@@ -37,11 +37,11 @@ struct ForgotPasswordSuccessView: View {
                 Button(action: { authRouter.popToRoot() }) {
                     Text("back_to_signin_btn")
                         .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(.white)
+                        .foregroundColor(Color(.systemBackground))
                         .frame(maxWidth: .infinity)
                         .frame(height: 52)
-                        .background(Color(hex: "FF5A00"))
-                        .cornerRadius(12)
+                        .background(Color("PrimaryColor"))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
                 .padding(.horizontal, 24)
 

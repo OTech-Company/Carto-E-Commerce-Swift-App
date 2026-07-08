@@ -1,9 +1,17 @@
+//
+//  LoginView.swift
+//  Carto
+//
+//  Created by Mohamed Ayman on 30/06/2026.
+//
+
 import SwiftUI
 
 struct LoginView: View {
     @StateObject var viewModel: AuthLoginViewModel
     @State private var rememberMe = false
     @EnvironmentObject var appViewModel: AppViewModel
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         NavigationStack {
@@ -55,13 +63,12 @@ struct LoginView: View {
                             .disabled(viewModel.isLoading)
                             
                             HStack {
-                                
                                 Spacer()
                                 
                                 Button(action: { viewModel.forgotPasswordTapped() }) {
                                     Text("Forgot Password?")
                                         .font(.system(size: 14, weight: .medium))
-                                        .foregroundColor(Color(hex: "FF5A00"))
+                                        .foregroundColor(Color("PrimaryColor")) // Corporate branding orange asset
                                 }
                                 .disabled(viewModel.isLoading)
                             }
@@ -72,11 +79,11 @@ struct LoginView: View {
                     Button(action: { viewModel.login() }) {
                         Text("Login")
                             .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(.white)
+                            .foregroundColor(Color(.systemBackground)) // High contrast text on primary background block
                             .frame(maxWidth: .infinity)
                             .frame(height: 52)
-                            .background(Color(hex: "FF5A00"))
-                            .cornerRadius(12)
+                            .background(Color("PrimaryColor")) // Corporate branding orange asset
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                     .disabled(viewModel.isLoading)
                     .padding(.horizontal, 24)
@@ -93,7 +100,7 @@ struct LoginView: View {
                         Rectangle().frame(height: 1).foregroundColor(Color(.systemGray5))
                         Text("Or continue with")
                             .font(.system(size: 13))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary) // Swapped out hard gray text color
                         Rectangle().frame(height: 1).foregroundColor(Color(.systemGray5))
                     }
                     .padding(.horizontal, 24)
@@ -112,24 +119,23 @@ struct LoginView: View {
                             }
                             .frame(maxWidth: .infinity)
                             .frame(height: 50)
-                            .background(Color(.systemBackground))
-                            .cornerRadius(12)
+                            .background(Color(.secondarySystemGroupedBackground)) // Clean panel container background depth
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12)
                                     .stroke(Color(.systemGray4), lineWidth: 1)
                             )
-                            .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
+                            .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.15 : 0.05), radius: 4, x: 0, y: 2)
                         }
                         .disabled(viewModel.isLoading)
                     }
                     .padding(.horizontal, 24)
-
                     .padding(.bottom, 20)
                     
                     Button(action: { viewModel.continueAsGuest() }) {
                         Text("Continue as Guest")
                             .font(.system(size: 15, weight: .semibold))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary) // Swapped out hard gray text color
                             .padding(.vertical, 8)
                             .padding(.horizontal, 16)
                     }
@@ -140,12 +146,12 @@ struct LoginView: View {
                     HStack(spacing: 4) {
                         Text("Don't have an account?")
                             .font(.system(size: 14))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary) // Swapped out hard gray text color
                         
                         Button(action: { viewModel.signUpTapped()}) {
                             Text("Sign up")
                                 .font(.system(size: 14, weight: .bold))
-                                .foregroundColor(Color(hex: "FF5A00"))
+                                .foregroundColor(Color("PrimaryColor")) // Corporate branding orange asset
                         }
                         .disabled(viewModel.isLoading)
                     }
@@ -155,16 +161,16 @@ struct LoginView: View {
                 .background(Color(.systemBackground))
                 
                 if viewModel.isLoading {
-                    Color.black.opacity(0.15)
+                    Color.black.opacity(colorScheme == .dark ? 0.4 : 0.15)
                         .ignoresSafeArea()
                     
                     ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: "FF5A00")))
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color("PrimaryColor"))) // Adaptive asset tracking spinner tint
                         .scaleEffect(1.5)
                         .frame(width: 80, height: 80)
-                        .background(Color(.systemBackground))
-                        .cornerRadius(16)
-                        .shadow(color: Color.black.opacity(0.1), radius: 10)
+                        .background(Color(.secondarySystemGroupedBackground))
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.3 : 0.1), radius: 10)
                 }
             }
         }

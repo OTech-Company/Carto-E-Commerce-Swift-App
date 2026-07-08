@@ -13,6 +13,7 @@ struct FreeDeliveryBanner: View {
     let hasItems: Bool
     
     @AppStorage("app_currency") var appCurrency: AppCurrency = .egyptianPound
+    @Environment(\.colorScheme) var colorScheme
 
     private let freeDeliveryAmount: Double = 500
 
@@ -36,7 +37,7 @@ struct FreeDeliveryBanner: View {
             ZStack {
                 Image(systemName: reachedFreeDelivery ? "checkmark" : "box.truck.fill")
                     .font(.system(size: 24, weight: .semibold))
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(Color("PrimaryColor")) // Corporate branding orange asset
             }
 
             VStack(alignment: .leading, spacing: 8) {
@@ -57,11 +58,11 @@ struct FreeDeliveryBanner: View {
                             Text("You're ")
                             + Text(appCurrency.format(price: remaining))
                                 .fontWeight(.bold)
-                                .foregroundColor(.orange)
+                                .foregroundColor(Color("PrimaryColor")) // Corporate branding orange asset
                             + Text(" away from ")
                             + Text("FREE")
                                 .fontWeight(.bold)
-                                .foregroundColor(.orange)
+                                .foregroundColor(Color("PrimaryColor")) // Corporate branding orange asset
                             + Text(" delivery!")
                         )
                     }
@@ -76,15 +77,15 @@ struct FreeDeliveryBanner: View {
                     ZStack(alignment: .leading) {
 
                         Capsule()
-                            .fill(Color.orange.opacity(0.15))
+                            .fill(Color("PrimaryColor").opacity(colorScheme == .dark ? 0.12 : 0.15)) // Adapted bar track background tint
                             .frame(height: 8)
 
                         Capsule()
                             .fill(
                                 LinearGradient(
                                     colors: [
-                                        Color.orange.opacity(0.75),
-                                        Color.orange
+                                        Color("PrimaryColor").opacity(0.75),
+                                        Color("PrimaryColor")
                                     ],
                                     startPoint: .leading,
                                     endPoint: .trailing
@@ -103,7 +104,7 @@ struct FreeDeliveryBanner: View {
                         ? "Your order qualifies for free shipping"
                         : "Add more items to unlock free delivery"
                     )
-                    .foregroundStyle(.gray)
+                    .foregroundStyle(.secondary) // Converted from hard gray to responsive secondary label layer
 
                     Spacer()
 
@@ -111,7 +112,7 @@ struct FreeDeliveryBanner: View {
 
                         Text("\(appCurrency.format(price: remaining)) left")
                             .fontWeight(.semibold)
-                            .foregroundStyle(.orange)
+                            .foregroundStyle(Color("PrimaryColor")) // Corporate branding orange asset
                     }
                 }
                 .font(.system(size: 11))
@@ -120,9 +121,14 @@ struct FreeDeliveryBanner: View {
             }
         }
         .padding()
-        .background(Color(.systemBackground))
+        // Switched to semantic grouped background for optimal card style cell nesting inside Lists
+        .background(Color(.secondarySystemGroupedBackground))
         .clipShape(RoundedRectangle(cornerRadius: 18))
-        .shadow(color: .black.opacity(0.05), radius: 6, y: 3)
+        .shadow(
+            color: .black.opacity(colorScheme == .dark ? 0.2 : 0.04),
+            radius: 6,
+            y: 3
+        )
         .animation(.easeInOut(duration: 0.35), value: subtotal)
     }
 }

@@ -13,6 +13,8 @@ struct OrderSummarySection: View {
     let discount: Double
     let freeDeliveryThreshold: Double
     let deliveryCost: Double
+    
+    @Environment(\.colorScheme) var colorScheme
 
     private var hasFreeDelivery: Bool {
         subtotal >= freeDeliveryThreshold
@@ -37,7 +39,7 @@ struct OrderSummarySection: View {
 
             HStack {
                 Text("Delivery")
-                    .foregroundStyle(.green)
+                    .foregroundStyle(.secondary) // Changed text label to standard secondary token
 
                 Spacer()
 
@@ -47,7 +49,7 @@ struct OrderSummarySection: View {
                         .foregroundStyle(.green)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 5)
-                        .background(Color.green.opacity(0.12))
+                        .background(Color.green.opacity(colorScheme == .dark ? 0.20 : 0.12)) // Boosted for dark contrast balance
                         .clipShape(Capsule())
 
                 } else {
@@ -81,20 +83,20 @@ struct OrderSummarySection: View {
 
                 Text(String(format: "$%.2f", total))
                     .font(.title2.bold())
-                    .foregroundStyle(Color("PrimaryColor"))
+                    .foregroundStyle(Color("PrimaryColor")) // Corporate branding orange asset
             }
         }
         .padding()
-        .background(Color(.systemBackground))
+        .background(Color(.secondarySystemGroupedBackground))
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(
-            color: .black.opacity(0.04),
+            color: .black.opacity(colorScheme == .dark ? 0.2 : 0.04),
             radius: 6,
             x: 0,
             y: 3
         )
         .shadow(
-            color: Color.orange.opacity(0.18),
+            color: Color("PrimaryColor").opacity(colorScheme == .dark ? 0.04 : 0.08), // Reduced branding shadow intensity for dark surfaces
             radius: 20,
             x: 0,
             y: 8
@@ -133,12 +135,10 @@ private struct DashDivider: View {
                 path.addLine(to: CGPoint(x: geo.size.width, y: 0))
             }
             .stroke(
-                Color.gray.opacity(0.35),
+                Color(.systemGray4),
                 style: StrokeStyle(lineWidth: 1.5, dash: [6, 5])
             )
         }
         .frame(height: 1.5)
     }
 }
-
-

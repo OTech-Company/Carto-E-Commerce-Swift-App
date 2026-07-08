@@ -12,6 +12,7 @@ struct CouponSection: View {
     @State private var coupon = ""
     @ObservedObject var viewModel: CartViewModel
     @ObservedObject private var cartStore = CartStateStore.shared
+    @Environment(\.colorScheme) var colorScheme
 
     var isCouponApplied: Bool {
         !(viewModel.cart?.discountCodes.filter { $0.isApplicable }.isEmpty ?? true)
@@ -30,10 +31,10 @@ struct CouponSection: View {
                 if let code = viewModel.cart?.discountCodes.first(where: { $0.isApplicable })?.code, !code.isEmpty {
                     Text("\(code) applied!")
                         .font(.caption.weight(.bold))
-                        .foregroundColor(.white)
+                        .foregroundColor(Color(.systemBackground)) // High contrast text dynamic color
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
-                        .background(Color.orange)
+                        .background(Color("PrimaryColor")) // Corporate Orange asset
                         .clipShape(Capsule())
                 }
             }
@@ -43,7 +44,7 @@ struct CouponSection: View {
                 HStack(spacing: 10) {
 
                     Image(systemName: "ticket.fill")
-                        .foregroundStyle(.orange)
+                        .foregroundStyle(Color("PrimaryColor")) // Corporate Orange asset
 
                     TextField("Enter coupon code", text: $coupon)
                         .textInputAutocapitalization(.characters)
@@ -52,7 +53,7 @@ struct CouponSection: View {
                 }
                 .padding(.horizontal, 14)
                 .frame(height: 52)
-                .background(Color(.systemGray6))
+                .background(Color(.systemGray6)) // Dynamic sub-fill element
                 .clipShape(RoundedRectangle(cornerRadius: 16))
 
                 Button {
@@ -69,9 +70,9 @@ struct CouponSection: View {
 
                     Text(isCouponApplied ? "Undo" : "Apply")
                         .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(coupon.isEmpty ? Color(.placeholderText) : Color(.systemBackground))
                         .frame(width: 84, height: 52)
-                        .background(coupon.isEmpty ? Color.gray : Color.orange)
+                        .background(coupon.isEmpty ? Color(.systemGray4) : Color("PrimaryColor")) // Corporate Orange asset
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                 }
                 .buttonStyle(PressableButtonStyle())
@@ -110,16 +111,17 @@ struct CouponSection: View {
             withAnimation { coupon = newCode }
         }
         .padding()
-        .background(Color(.systemBackground))
+        // Updated to secondarySystemGroupedBackground to group properly inside Lists/ScrollViews across modes
+        .background(Color(.secondarySystemGroupedBackground))
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(
-            color: .black.opacity(0.02),
+            color: .black.opacity(colorScheme == .dark ? 0.2 : 0.02),
             radius: 4,
             x: 0,
             y: 2
         )
         .shadow(
-            color: Color.orange.opacity(0.08),
+            color: Color("PrimaryColor").opacity(colorScheme == .dark ? 0.04 : 0.08), // Softer branding glow in Dark Mode
             radius: 12,
             x: 0,
             y: 5
