@@ -137,7 +137,7 @@ final class DIContainer {
         let repo = CartRepositoryImpl(
             local: cartLocalDataSource,
             remote: cartRemoteDataSource,
-            currentUserId: { [weak self] in self?.authSession.currentUser?.uid }
+            currentUserId: { AuthSession.shared.currentUser?.uid }
         )
         repo.bootstrapStore()
         return repo

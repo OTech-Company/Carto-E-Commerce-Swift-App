@@ -59,8 +59,6 @@
 		D59EBD562FF6D28D00883859 /* HomeBrandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59EBD542FF6D28D00883859 /* HomeBrandView.swift */; };
 		D59EBD5A2FF6EBD900883859 /* BrandsProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59EBD592FF6EBCF00883859 /* BrandsProductsViewModel.swift */; };
 		D5B150F72FF7493300641EE4 /* HomeProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B150F62FF7492A00641EE4 /* HomeProductsViewModel.swift */; };
-		D5F0F9EB2FFDC395005FD0BC /* PaymobSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F0F9E82FFDC26A005FD0BC /* PaymobSDK.xcframework */; };
-		D5F0F9EC2FFDC395005FD0BC /* PaymobSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D5F0F9E82FFDC26A005FD0BC /* PaymobSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D5F0F9EF2FFDC53A005FD0BC /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F0F9EE2FFDC53A005FD0BC /* AppSettings.swift */; };
 		D5F0F9F22FFDC570005FD0BC /* AboutUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F0F9F02FFDC56F005FD0BC /* AboutUsView.swift */; };
 		D5F0F9F32FFDC570005FD0BC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F0F9F12FFDC56F005FD0BC /* ProfileView.swift */; };
@@ -110,6 +108,8 @@
 		D96CAD082FFD8DAD00263097 /* ShopifyAuthenticationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CAD052FFD8DAD00263097 /* ShopifyAuthenticationServiceProtocol.swift */; };
 		D96CAD092FFD8DAD00263097 /* ShopifyAdminCustomerDTOs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CAD062FFD8DAD00263097 /* ShopifyAdminCustomerDTOs.swift */; };
 		D96CAD0A2FFD8DAD00263097 /* ShopifyAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CAD072FFD8DAD00263097 /* ShopifyAuthenticationService.swift */; };
+		D96CAD0E2FFDCCD200263097 /* PaymobSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D7F13A22FFDA79500B97687 /* PaymobSDK.xcframework */; };
+		D96CAD0F2FFDCCD200263097 /* PaymobSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6D7F13A22FFDA79500B97687 /* PaymobSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D97785E02FFD10FB00CE8275 /* DeliveryAddressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97785DF2FFD10FB00CE8275 /* DeliveryAddressCard.swift */; };
 		D97785E22FFD110600CE8275 /* EmptyAddressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97785E12FFD110600CE8275 /* EmptyAddressCard.swift */; };
 		D97785E42FFD111400CE8275 /* PaymentMethodCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97785E32FFD111400CE8275 /* PaymentMethodCard.swift */; };
@@ -320,13 +320,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D5F0F9ED2FFDC395005FD0BC /* Embed Frameworks */ = {
+		D96CAD102FFDCCD200263097 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D5F0F9EC2FFDC395005FD0BC /* PaymobSDK.xcframework in Embed Frameworks */,
+				D96CAD0F2FFDCCD200263097 /* PaymobSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -638,7 +638,7 @@
 				D9E5F8612FF5DE6E0014DD91 /* FirebaseAuth in Frameworks */,
 				D96CAD012FFD8C7700263097 /* GoogleSignIn in Frameworks */,
 				D9E5F8632FF5DE6E0014DD91 /* FirebaseFirestore in Frameworks */,
-				D5F0F9EB2FFDC395005FD0BC /* PaymobSDK.xcframework in Frameworks */,
+				D96CAD0E2FFDCCD200263097 /* PaymobSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1920,7 +1920,7 @@
 				D9EB9A732FEFD04D005CE9A4 /* Sources */,
 				D9EB9A742FEFD04D005CE9A4 /* Frameworks */,
 				D9EB9A752FEFD04D005CE9A4 /* Resources */,
-				D5F0F9ED2FFDC395005FD0BC /* Embed Frameworks */,
+				D96CAD102FFDCCD200263097 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
