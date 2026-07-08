@@ -10,26 +10,40 @@ import SwiftUI
 struct EmptyCartView: View {
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         ZStack {
-
             Image("emptyCart")
                 .resizable()
                 .scaledToFit()
-                .frame(maxWidth: .infinity)
-                .background(.white)
-
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .padding(.horizontal, 40)
+                .padding(.top, 80)
+                .ignoresSafeArea()
+            
             VStack {
-
                 Spacer()
-
+                
+                Text("Your Cart is Wating")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.primary)
+                
+                Text("Add products to get started")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .padding(.top, 4)
+                
+                Spacer()
+                    .frame(height: 32)
+                
                 Button {
                     dismiss()
                 } label: {
                     HStack(spacing: 8) {
                         Image(systemName: "bag")
-
+                        
                         Text("Start Shopping")
                             .fontWeight(.semibold)
                     }
@@ -37,7 +51,10 @@ struct EmptyCartView: View {
                     .frame(width: 220, height: 48)
                     .background(
                         LinearGradient(
-                            colors: [
+                            colors: colorScheme == .dark ? [
+                                Color(.secondarySystemGroupedBackground),
+                                Color.orange.opacity(0.3)
+                            ] : [
                                 .white,
                                 Color.orange.opacity(0.18)
                             ],
@@ -59,12 +76,11 @@ struct EmptyCartView: View {
                         y: 6
                     )
                 }
-
+                
                 Spacer()
-                    .frame(height: 90)
+                    .frame(height: 140)
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(.systemGroupedBackground))
     }
 }

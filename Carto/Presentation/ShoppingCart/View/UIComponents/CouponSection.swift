@@ -102,7 +102,7 @@ struct CouponSection: View {
             }
         }
         .padding()
-        .background(Color.white)
+        .background(Color(.systemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .shadow(
             color: .black.opacity(0.02),

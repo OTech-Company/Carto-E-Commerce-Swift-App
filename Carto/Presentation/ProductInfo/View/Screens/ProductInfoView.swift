@@ -61,12 +61,12 @@ struct ProductsInfoView: View {
                             viewModel.toggleFavorite()
                         } label: {
                             Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart")
-                                .foregroundColor(viewModel.isFavorite ? .red : .black)
+                                .foregroundColor(viewModel.isFavorite ? .red : .primary)
                                 .frame(width: 44, height: 44)
-                                .background(Color.white)
+                                .background(Color(.systemBackground))
                                 .overlay {
                                     RoundedRectangle(cornerRadius: 12)
-                                        .stroke(Color.black.opacity(0.5), lineWidth: 0.5)
+                                        .stroke(Color.gray.opacity(0.4), lineWidth: 0.5)
                                 }
                         }
 
@@ -100,7 +100,6 @@ struct ProductsInfoView: View {
                 discountPercentage: viewModel.product.discountPercentage,
                 isOutOfStock: viewModel.isOutOfStock,
                 maxQuantity: viewModel.product.variants.first?.inventoryQuantity ?? 0,
-                currencySymbol: appCurrency.symbol,
                 quantity: $viewModel.quantity,
             )
         }

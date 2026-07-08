@@ -10,6 +10,7 @@ import SwiftUI
 struct ColorView: View {
     let colorNames: [String]
     @Binding var selectedColorIndex: Int
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         if colorNames.isEmpty {
@@ -36,7 +37,7 @@ struct ColorView: View {
                             .overlay {
                                 Circle()
                                     .stroke(
-                                        selectedColorIndex == index ? Color.black : Color.clear,
+                                        selectedColorIndex == index ? Color.primary : Color.clear,
                                         lineWidth: 2.5
                                     )
                                     .padding(-4)
@@ -50,13 +51,16 @@ struct ColorView: View {
     }
 
     private func borderColor(for name: String) -> Color {
-        name.lowercased() == "white"
-        ? Color.black.opacity(0.5)
-        : Color.gray.opacity(0.35)
+        if name.lowercased() == "white" {
+            return Color.black.opacity(0.5)
+        } else if name.lowercased() == "black" && colorScheme == .dark {
+            return Color.white.opacity(0.5)
+        }
+        return Color.gray.opacity(0.35)
     }
 
     private func borderWidth(for name: String) -> CGFloat {
-        name.lowercased() == "white" ? 1.5 : 1
+        (name.lowercased() == "white" || (name.lowercased() == "black" && colorScheme == .dark)) ? 1.5 : 1
     }
 
     private func colorFromName(_ name: String) -> Color {

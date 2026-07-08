@@ -19,11 +19,11 @@ struct RegisterView: View {
                     VStack(spacing: 6) {
                         Text("registration_title")
                             .font(.system(size: 24, weight: .bold))
-                            .foregroundColor(.black)
+                            .foregroundColor(.primary)
                         
                         Text("register_desc")
                             .font(.system(size: 14))
-                            .foregroundColor(.gray)
+                            .foregroundColor(.secondary)
                     }
                 }
                 .padding(.bottom, 20)
@@ -126,11 +126,11 @@ struct RegisterView: View {
                                     .frame(width: 22, height: 22)
                                 Text("Sign in with Google")
                                     .font(.system(size: 15, weight: .semibold))
-                                    .foregroundColor(.black.opacity(0.75))
+                                    .foregroundColor(.primary.opacity(0.75))
                             }
                             .frame(maxWidth: .infinity)
                             .frame(height: 50)
-                            .background(Color.white)
+                            .background(Color(.systemBackground))
                             .cornerRadius(12)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12)
@@ -170,7 +170,7 @@ struct RegisterView: View {
                 }
                 .padding(.bottom, 24)
             }
-            .background(Color(hex: "FAFAFA"))
+            .background(Color(.systemBackground))
             .navigationBarBackButtonHidden(true)
             
             if viewModel.isLoading {
@@ -181,7 +181,7 @@ struct RegisterView: View {
                     .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: "FF5A00")))
                     .scaleEffect(1.5)
                     .frame(width: 80, height: 80)
-                    .background(Color.white)
+                    .background(Color(.systemBackground))
                     .cornerRadius(16)
                     .shadow(color: Color.black.opacity(0.1), radius: 10)
             }

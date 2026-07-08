@@ -13,7 +13,7 @@ struct SwipeToAddView: View {
     let discountPercentage: Int?
     let isOutOfStock: Bool
     let maxQuantity: Int
-    let currencySymbol: String
+    @AppStorage("app_currency") var appCurrency: AppCurrency = .egyptianPound
 
     @Binding var quantity: Int
     @State private var dragOffset: CGFloat = 0
@@ -28,13 +28,13 @@ struct SwipeToAddView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     HStack(spacing: 8) {
-                        Text("\(currencySymbol) \(price, specifier: "%.2f")")
+                        Text(appCurrency.format(price: price))
                             .font(.title2)
                             .bold()
                             .foregroundColor(.blue)
 
                         if let compareAtPrice = compareAtPrice, compareAtPrice > price {
-                            Text("\(currencySymbol) \(compareAtPrice, specifier: "%.2f")")
+                            Text(appCurrency.format(price: compareAtPrice))
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                                 .strikethrough()
@@ -62,7 +62,7 @@ struct SwipeToAddView: View {
             Text("swipe_up_remove")
                 .font(.subheadline)
                 .bold()
-                .foregroundColor(dragOffset < 0 ? .black : .secondary)
+                .foregroundColor(dragOffset < 0 ? .primary : .secondary)
                 .scaleEffect(dragOffset < 0 ? 1.05 : 1)
                 .animation(.easeOut(duration: 0.2), value: dragOffset < 0)
                 .padding(.bottom, -4)
@@ -71,34 +71,34 @@ struct SwipeToAddView: View {
                 Image(systemName: "chevron.up")
                     .font(.title3)
                     .fontWeight(.bold)
-                    .foregroundColor(.black.opacity(0.2))
+                    .foregroundColor(.primary.opacity(0.2))
 
                 Image(systemName: "chevron.up")
                     .font(.title3)
                     .fontWeight(.bold)
-                    .foregroundColor(.black.opacity(0.4))
+                    .foregroundColor(.primary.opacity(0.4))
 
                 Image(systemName: "chevron.up")
                     .font(.title3)
                     .fontWeight(.bold)
-                    .foregroundColor(.black.opacity(0.6))
+                    .foregroundColor(.primary.opacity(0.6))
             }
             .padding(.top, 4)
             .padding(.bottom, -25)
 
             Circle()
-                .fill(Color.black)
+                .fill(Color.primary)
                 .frame(width: 50, height: 50)
                 .overlay {
                     if quantity > 0 {
                         Text("\(quantity)")
                             .font(.headline)
                             .fontWeight(.bold)
-                            .foregroundColor(.white)
+                            .foregroundColor(Color(.systemBackground))
                             .transition(.scale.combined(with: .opacity))
                     } else {
                         Image(systemName: "bag")
-                            .foregroundColor(.white)
+                            .foregroundColor(Color(.systemBackground))
                             .font(.title3)
                             .transition(.scale.combined(with: .opacity))
                     }
@@ -152,24 +152,24 @@ struct SwipeToAddView: View {
                 Image(systemName: "chevron.down")
                     .font(.title3)
                     .fontWeight(.bold)
-                    .foregroundColor(.black.opacity(0.6))
+                    .foregroundColor(.primary.opacity(0.6))
 
                 Image(systemName: "chevron.down")
                     .font(.title3)
                     .fontWeight(.bold)
-                    .foregroundColor(.black.opacity(0.4))
+                    .foregroundColor(.primary.opacity(0.4))
 
                 Image(systemName: "chevron.down")
                     .font(.title3)
                     .fontWeight(.bold)
-                    .foregroundColor(.black.opacity(0.2))
+                    .foregroundColor(.primary.opacity(0.2))
             }
             .padding(.bottom, 0)
 
             Text("swipe_down_add")
                 .font(.subheadline)
                 .bold()
-                .foregroundColor(dragOffset > 0 ? .black : .secondary)
+                .foregroundColor(dragOffset > 0 ? .primary : .secondary)
                 .scaleEffect(dragOffset > 0 ? 1.05 : 1)
                 .animation(.easeOut(duration: 0.2), value: dragOffset > 0)
                 .padding(.top, 4)
@@ -190,7 +190,7 @@ struct SwipeToAddView: View {
                         .foregroundColor(.white)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 4)
-                        .background(Color.black)
+                        .background(Color.primary)
                         .clipShape(Capsule())
                         .offset(y: addedEffectOffset)
                         .opacity(addedEffectOpacity)

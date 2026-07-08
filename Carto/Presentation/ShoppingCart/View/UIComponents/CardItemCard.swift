@@ -16,6 +16,9 @@ struct CartItemCard: View {
     let canIncrement: Bool
     let canDecrement: Bool
 
+    @AppStorage("app_currency") var appCurrency: AppCurrency = .egyptianPound
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
 
         HStack(alignment: .top, spacing: 14) {
@@ -42,8 +45,8 @@ struct CartItemCard: View {
                         .overlay {
                             Circle()
                                 .stroke(
-                                    item.selectedColor.lowercased() == "white"
-                                    ? Color.black.opacity(0.4)
+                                    (item.selectedColor.lowercased() == "white" || (item.selectedColor.lowercased() == "black" && colorScheme == .dark))
+                                    ? (colorScheme == .dark && item.selectedColor.lowercased() == "black" ? Color.white.opacity(0.5) : Color.black.opacity(0.4))
                                     : Color.clear,
                                     lineWidth: 1
                                 )
@@ -73,7 +76,7 @@ struct CartItemCard: View {
 
                 HStack(alignment: .center) {
 
-                    Text("$\(item.product.price, specifier: "%.2f")")
+                    Text(appCurrency.format(price: item.product.price))
                         .font(.system(size: 16, weight: .bold))
                         .lineLimit(1)
                         .minimumScaleFactor(0.65)
@@ -123,7 +126,7 @@ struct CartItemCard: View {
             }
         }
         .padding(14)
-        .background(Color.white)
+        .background(Color(.secondarySystemGroupedBackground))
         .clipShape(RoundedRectangle(cornerRadius: 18))
         .shadow(
             color: .black.opacity(0.02),
@@ -132,7 +135,7 @@ struct CartItemCard: View {
             y: 2
         )
         .shadow(
-            color: Color.orange.opacity(0.08),
+            color: Color("PrimaryColor").opacity(0.2),
             radius: 12,
             x: 0,
             y: 5

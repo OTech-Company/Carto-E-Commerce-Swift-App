@@ -35,7 +35,7 @@ struct ExpandableText: View {
                         Text(expanded ? "Show less" : "Show more")
                             .font(.caption)
                             .fontWeight(.semibold)
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("PrimaryColor"))
                     }
                 }
                 .padding(.bottom, expanded ? 12 : 0)
@@ -58,7 +58,7 @@ struct ExpandableText: View {
 
                         Image(systemName: "chevron.down")
                             .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(.black)
+                            .foregroundColor(.primary)
                             .padding(.bottom, 1)
                     }
                     .allowsHitTesting(false)

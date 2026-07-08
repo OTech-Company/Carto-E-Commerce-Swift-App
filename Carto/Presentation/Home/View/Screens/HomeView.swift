@@ -90,7 +90,7 @@ struct HomeView: View {
 
                 HStack {
                     Text("brands_title")
-                        .font(.system(size: 28, weight: .bold))
+                        .font(.system(size: 22, weight: .bold))
                         .foregroundColor(Color("PrimaryColor"))
 
                     Spacer()
@@ -111,17 +111,25 @@ struct HomeView: View {
                 Spacer(minLength: 20)
 
                 Text("products_title")
-                    .font(.system(size: 28, weight: .bold))
+                    .font(.system(size: 22, weight: .bold))
                     .foregroundColor(Color("PrimaryColor"))
 
-                LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(viewModel.productVM.products, id: \.id) { product in
-                        Button {
-                            router.push(to: .productDetails(product: product))
-                        } label: {
-                            ProductCard(product: product)
+                switch viewModel.productVM.state {
+                case .loading, .idle:
+                    LoadingView(width: .infinity)
+                        .padding(.top, 40)
+                case .failure(let error):
+                    ErrorView(width: .infinity, message: error.localizedDescription)
+                case .success(let products):
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(products, id: \.id) { product in
+                            Button {
+                                router.push(to: .productDetails(product: product))
+                            } label: {
+                                ProductCard(product: product)
+                            }
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
                     }
                 }
             }

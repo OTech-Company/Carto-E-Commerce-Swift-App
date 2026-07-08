@@ -54,6 +54,22 @@ enum AppCurrency: String, CaseIterable, Identifiable {
         case .egyptianPound: return "EG"
         }
     }
+    
+    var exchangeRate: Double {
+        switch self {
+        case .dollar: return 1.0
+        case .egyptianPound: return 50.0 
+        }
+    }
+    
+    func convert(price: Double) -> Double {
+        return price * exchangeRate
+    }
+    
+    func format(price: Double) -> String {
+        let converted = convert(price: price)
+        return String(format: "\(symbol) %.2f", converted)
+    }
 }
 
 struct AppSettings {

@@ -30,6 +30,7 @@ struct HomeBrandView: View {
                             router.push(to: .brandProducts(brandId: brand.id, brandName: brand.title))
                         } label: {
                             CircularNetworkImag(imagURL: brand.image ?? "")
+                                .shadow(color: Color("PrimaryColor").opacity(0.15), radius: 8, x: 0, y: 4)
                         }
                         .buttonStyle(.plain)
                     }

@@ -37,7 +37,7 @@ struct CategoryCardView: View {
             
             Text(category.title)
                 .font(.system(size: 20, weight: .bold))
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
                 .lineLimit(1)
                 .padding(.horizontal, 14)
             
@@ -54,8 +54,8 @@ struct CategoryCardView: View {
             .padding(.bottom, 14)
         }
         .frame(maxWidth: .infinity)
-        .background(Color.white)
+        .background(Color(.secondarySystemGroupedBackground))
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 4)
+        .shadow(color: Color("PrimaryColor").opacity(0.15), radius: 8, x: 0, y: 4)
     }
 }

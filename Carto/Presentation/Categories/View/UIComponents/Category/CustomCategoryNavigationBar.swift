@@ -16,8 +16,8 @@ struct CustomCategoryNavigationBar: View {
         HStack(spacing: 12) {
             if !isSearchActive {
                 Text("categories_title")
-                    .font(.system(size: 34, weight: .bold, design: .rounded))
-                    .foregroundColor(Color(hex: "#2B7FD4"))
+                    .font(.system(size: 22, weight: .bold))
+                    .foregroundColor(Color("PrimaryColor"))
                     .transition(.move(edge: .leading).combined(with: .opacity))
                 
                 Spacer()
@@ -26,7 +26,7 @@ struct CustomCategoryNavigationBar: View {
             HStack {
                 Image(systemName: "magnifyingglass")
                     .font(.system(size: 22, weight: .regular))
-                    .foregroundColor(.black)
+                    .foregroundColor(.primary)
                     .frame(width: 44, height: 44)
                     .onTapGesture {
                         withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
@@ -38,7 +38,7 @@ struct CustomCategoryNavigationBar: View {
                 if isSearchActive {
                     TextField("Search...", text: $searchText)
                         .focused(isSearchFieldFocused)
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                         .transition(.opacity)
                     
                     if !searchText.isEmpty {
@@ -61,7 +61,7 @@ struct CustomCategoryNavigationBar: View {
                         isSearchFieldFocused.wrappedValue = false
                     }
                 }
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
                 .transition(.move(edge: .trailing).combined(with: .opacity))
             }
         }

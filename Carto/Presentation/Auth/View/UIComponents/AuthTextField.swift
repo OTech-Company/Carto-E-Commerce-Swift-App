@@ -22,7 +22,7 @@ struct AuthTextField: View {
         VStack(alignment: .leading, spacing: 8) {
             Text(label)
                 .font(.system(size: 14, weight: .bold))
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
             
             HStack {
                 if isSecure && !isPasswordVisible {
@@ -44,7 +44,7 @@ struct AuthTextField: View {
             .font(.system(size: 14))
             .padding(.horizontal, 16)
             .frame(height: 50)
-            .background(Color.white)
+            .background(Color(.systemBackground))
             .cornerRadius(12)
             .overlay(
                 RoundedRectangle(cornerRadius: 12)

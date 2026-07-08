@@ -20,9 +20,9 @@ struct HeaderView: View {
                 dismiss()
             } label: {
                 Image(systemName: "arrow.left")
-                    .foregroundColor(.black)
+                    .foregroundColor(.primary)
                     .frame(width: 44, height: 44)
-                    .background(Color.white)
+                    .background(Color(.systemBackground))
                     .overlay {
                         RoundedRectangle(cornerRadius: 12)
                             .stroke(Color.gray.opacity(0.3), lineWidth: 1)
@@ -41,9 +41,9 @@ struct HeaderView: View {
 
             } label: {
                 Image(systemName: "cart")
-                    .foregroundColor(.black)
+                    .foregroundColor(.primary)
                     .frame(width: 44, height: 44)
-                    .background(Color.white)
+                    .background(Color(.systemBackground))
                     .overlay {
                         RoundedRectangle(cornerRadius: 12)
                             .stroke(Color.gray.opacity(0.3), lineWidth: 1)

@@ -20,7 +20,6 @@ struct CircularNetworkImag: View {
                     .resizable()
                     .scaledToFit()
                     
-
             case .success(let image):
                 image
                     .resizable()
@@ -38,11 +37,8 @@ struct CircularNetworkImag: View {
             }
         }
         .frame(width: width, height: height)
+        .background(Color(.secondarySystemGroupedBackground))
         .clipShape(Circle())
-        .overlay(
-            Circle()
-                .stroke(Color("PrimaryColor"), lineWidth: 2)
-        )
     }
 }
 
