@@ -44,13 +44,13 @@ struct FilterSheetView: View {
                                         .padding(.vertical, 8)
                                         .background(
                                             viewModel.selectedProductType == type
-                                            ? Color.black
+                                            ? Color.primary
                                             : Color.gray.opacity(0.15)
                                         )
                                         .foregroundStyle(
                                             viewModel.selectedProductType == type
-                                            ? .white
-                                            : .black
+                                            ? AnyShapeStyle(Color(.systemBackground))
+                                            : AnyShapeStyle(Color.primary)
                                         )
                                         .clipShape(RoundedRectangle(cornerRadius: 8))
                                 }
@@ -134,13 +134,13 @@ struct FilterSheetView: View {
                                         .padding(.vertical, 8)
                                         .background(
                                             viewModel.selectedSizes.contains(size)
-                                            ? .black
+                                            ? Color.primary
                                             : Color.gray.opacity(0.15)
                                         )
                                         .foregroundStyle(
                                             viewModel.selectedSizes.contains(size)
-                                            ? .white
-                                            : .black
+                                            ? AnyShapeStyle(Color(.systemBackground))
+                                            : AnyShapeStyle(Color.primary)
                                         )
                                         .clipShape(RoundedRectangle(cornerRadius: 8))
                                 }
@@ -182,13 +182,13 @@ struct FilterSheetView: View {
                                     .padding(.vertical, 8)
                                     .background(
                                         viewModel.selectedColors.contains(color)
-                                        ? Color.black
+                                        ? Color.primary
                                         : Color.gray.opacity(0.15)
                                     )
                                     .foregroundStyle(
                                         viewModel.selectedColors.contains(color)
-                                        ? .white
-                                        : .black
+                                        ? AnyShapeStyle(Color(.systemBackground))
+                                        : AnyShapeStyle(Color.primary)
                                     )
                                     .clipShape(Capsule())
                                 }

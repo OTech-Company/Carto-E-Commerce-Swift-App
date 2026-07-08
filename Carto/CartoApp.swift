@@ -36,6 +36,10 @@ struct CartoApp: App {
                 switch appViewModel.sessionState {
                 case .loading:
                     SplashView()
+                case .onboarding:
+                    OnboardingScreen(onGetStarted: {
+                        appViewModel.completeOnboarding()
+                    })
                 case .unauthenticated:
                     AuthCoordinator(container: DIContainer.shared)
                 case .guest:

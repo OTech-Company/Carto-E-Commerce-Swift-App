@@ -12,7 +12,7 @@ struct VerificationView: View {
 
     var body: some View {
         ZStack {
-            Color(hex: "FAFAFA")
+            Color(.systemBackground)
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {
@@ -27,7 +27,7 @@ struct VerificationView: View {
 
                                 Text(warningMessage)
                                     .font(.system(size: 14, weight: .medium))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.primary)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
                             .padding(.horizontal, 16)
@@ -54,7 +54,7 @@ struct VerificationView: View {
                         VStack(spacing: 12) {
                             Text("verify_email_title")
                                 .font(.system(size: 26, weight: .bold))
-                                .foregroundColor(.black)
+                                .foregroundColor(.primary)
                                 .multilineTextAlignment(.center)
 
                             VStack(spacing: 6) {
@@ -64,7 +64,7 @@ struct VerificationView: View {
 
                                 Text(viewModel.userEmail)
                                     .font(.system(size: 16, weight: .bold))
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.primary)
                                     .lineLimit(1)
                                     .minimumScaleFactor(0.8)
                             }
@@ -132,7 +132,7 @@ struct VerificationView: View {
                     .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: "FF5A00")))
                     .scaleEffect(1.4)
                     .frame(width: 80, height: 80)
-                    .background(Color.white)
+                    .background(Color(.systemBackground))
                     .cornerRadius(16)
                     .shadow(color: Color.black.opacity(0.08), radius: 10)
             }

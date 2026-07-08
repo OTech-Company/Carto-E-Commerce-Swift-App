@@ -7,7 +7,7 @@ struct OnboardingScreen: View {
     @State private var currentIndex  = 0
     @State private var imageVisible  = false
     @State private var textVisible   = false
-    @State private var showBags      = false   // ← new
+    @State private var showBags      = false
 
     private let screen = UIScreen.main.bounds
 
@@ -16,10 +16,8 @@ struct OnboardingScreen: View {
             Color(hex: "#2B7FD4").ignoresSafeArea()
 
             if showBags {
-                // MARK: - Bags transition screen
                 BagsTransitionView(onFinished: onGetStarted)
             } else {
-                // MARK: - Normal onboarding pages
                 if OnboardingData.pages[currentIndex].imageOnTop {
                     OnboardingLayoutTop(
                         page: OnboardingData.pages[currentIndex],
@@ -47,7 +45,6 @@ struct OnboardingScreen: View {
     // MARK: - Actions
     private func handleNext() {
         guard currentIndex < OnboardingData.pages.count - 1 else {
-            // Last page — show bags transition instead of going directly
             withAnimation(.easeInOut(duration: 0.3)) { showBags = true }
             return
         }

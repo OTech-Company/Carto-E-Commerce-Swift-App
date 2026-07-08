@@ -132,7 +132,7 @@ struct ProductCard: View {
                             Group {
                                 if !viewModel.isFavorite {
                                     Circle()
-                                        .fill(Color.white.opacity(0.92))
+                                        .fill(Color(.systemBackground).opacity(0.92))
                                         .shadow(
                                             color: Color.black.opacity(0.08),
                                             radius: 4,
@@ -175,12 +175,12 @@ struct ProductCard: View {
                 HStack(spacing: 6) {
                     VStack(alignment: .leading, spacing: 2) {
                         HStack(spacing: 5) {
-                            Text("\(appCurrency.symbol) \(product.price, specifier: "%.2f")")
+                            Text(appCurrency.format(price: product.price))
                                 .font(.system(size: 12, weight: .bold))
                                 .foregroundColor(.blue)
 
                             if let compareAtPrice = product.compareAtPrice {
-                                Text("\(appCurrency.symbol) \(compareAtPrice, specifier: "%.2f")")
+                                Text(appCurrency.format(price: compareAtPrice))
                                     .font(.system(size: 11))
                                     .foregroundColor(.secondary)
                                     .strikethrough()
@@ -225,13 +225,13 @@ struct ProductCard: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.white)
+        .background(Color(.secondarySystemGroupedBackground))
         .clipShape(RoundedRectangle(cornerRadius: 18))
         .shadow(
-            color: .black.opacity(0.04),
-            radius: 6,
+            color: Color("PrimaryColor").opacity(0.15),
+            radius: 8,
             x: 0,
-            y: 3
+            y: 4
         )
         .shadow(
             color: Color.orange.opacity(0.12),

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProductColorsView: View {
     let colorNames: [String]
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         HStack(spacing: 4) {
@@ -20,8 +21,8 @@ struct ProductColorsView: View {
                     .overlay(
                         Circle()
                             .stroke(
-                                colorNames[index].lowercased() == "white"
-                                    ? Color.black.opacity(0.5)
+                                (colorNames[index].lowercased() == "white" || (colorNames[index].lowercased() == "black" && colorScheme == .dark))
+                                    ? (colorScheme == .dark && colorNames[index].lowercased() == "black" ? Color.white.opacity(0.5) : Color.black.opacity(0.5))
                                     : Color.clear,
                                 lineWidth: 1
                             )

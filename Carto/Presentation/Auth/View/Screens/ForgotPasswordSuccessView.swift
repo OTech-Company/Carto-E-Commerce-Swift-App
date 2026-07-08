@@ -9,7 +9,7 @@ struct ForgotPasswordSuccessView: View {
     
     var body: some View {
         ZStack {
-            Color(hex: "FAFAFA")
+            Color(.systemBackground)
                 .ignoresSafeArea()
 
             VStack(spacing: 24) {
@@ -24,7 +24,7 @@ struct ForgotPasswordSuccessView: View {
                 VStack(spacing: 12) {
                     Text("check_your_email_title")
                         .font(.system(size: 26, weight: .bold))
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
 
                     Text("password_reset_sent_desc")
                         .font(.system(size: 15))

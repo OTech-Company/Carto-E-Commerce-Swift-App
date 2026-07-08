@@ -20,11 +20,11 @@ struct LoginView: View {
                         VStack(spacing: 6) {
                             Text("Welcome to Carto")
                                 .font(.system(size: 24, weight: .bold))
-                                .foregroundColor(.black)
+                                .foregroundColor(.primary)
                             
                             Text("Your premium shopping destination.")
                                 .font(.system(size: 14))
-                                .foregroundColor(.gray)
+                                .foregroundColor(.secondary)
                         }
                     }
                     .padding(.bottom, 32)
@@ -108,11 +108,11 @@ struct LoginView: View {
                                     .frame(width: 22, height: 22)
                                 Text("Sign in with Google")
                                     .font(.system(size: 15, weight: .semibold))
-                                    .foregroundColor(.black.opacity(0.75))
+                                    .foregroundColor(.primary.opacity(0.75))
                             }
                             .frame(maxWidth: .infinity)
                             .frame(height: 50)
-                            .background(Color.white)
+                            .background(Color(.systemBackground))
                             .cornerRadius(12)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12)
@@ -152,7 +152,7 @@ struct LoginView: View {
                     .disabled(viewModel.isLoading)
                     .padding(.bottom, 24)
                 }
-                .background(Color(hex: "FAFAFA"))
+                .background(Color(.systemBackground))
                 
                 if viewModel.isLoading {
                     Color.black.opacity(0.15)
@@ -162,7 +162,7 @@ struct LoginView: View {
                         .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: "FF5A00")))
                         .scaleEffect(1.5)
                         .frame(width: 80, height: 80)
-                        .background(Color.white)
+                        .background(Color(.systemBackground))
                         .cornerRadius(16)
                         .shadow(color: Color.black.opacity(0.1), radius: 10)
                 }

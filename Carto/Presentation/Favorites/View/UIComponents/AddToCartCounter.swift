@@ -48,7 +48,7 @@ struct AddToCartCounter: View {
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
             .frame(height: 32)
-            .background(isOutOfStock ? Color.gray : Color(red: 0.145, green: 0.388, blue: 0.922))
+            .background(isOutOfStock ? Color.gray : Color("PrimaryColor"))
             .clipShape(Capsule())
         }
         .buttonStyle(PressableButtonStyle())
@@ -64,13 +64,13 @@ struct AddToCartCounter: View {
             } label: {
                 Image(systemName: "minus")
                     .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(Color(red: 0.145, green: 0.388, blue: 0.922))
+                    .foregroundColor(Color("PrimaryColor"))
                     .frame(width: 30, height: 30)
             }
 
             Text("\(quantity)")
                 .font(.system(size: 13, weight: .heavy))
-                .foregroundColor(Color(red: 0.145, green: 0.388, blue: 0.922))
+                .foregroundColor(Color("PrimaryColor"))
                 .frame(maxWidth: .infinity)
                 .contentTransition(.numericText())
                 .id(quantity)
@@ -82,7 +82,7 @@ struct AddToCartCounter: View {
             } label: {
                 Image(systemName: "plus")
                     .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(isOutOfStock ? .gray : Color(red: 0.145, green: 0.388, blue: 0.922))
+                    .foregroundColor(isOutOfStock ? .gray : Color("PrimaryColor"))
                     .frame(width: 30, height: 30)
             }
             .disabled(isOutOfStock)
@@ -90,11 +90,11 @@ struct AddToCartCounter: View {
         .frame(height: 32)
         .background(
             Capsule()
-                .fill(Color(red: 0.145, green: 0.388, blue: 0.922).opacity(0.10))
+                .fill(Color("PrimaryColor").opacity(0.10))
         )
         .overlay(
             Capsule()
-                .stroke(Color(red: 0.145, green: 0.388, blue: 0.922).opacity(0.25), lineWidth: 1.5)
+                .stroke(Color("PrimaryColor").opacity(0.25), lineWidth: 1.5)
         )
         .background(.ultraThinMaterial, in: Capsule())
     }

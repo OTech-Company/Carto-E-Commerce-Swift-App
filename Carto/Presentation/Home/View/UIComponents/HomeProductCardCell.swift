@@ -12,6 +12,8 @@ struct HomeProductCardCell: View {
     let onTab: () -> Void
     let onAddToFav: () -> Void
     
+    @AppStorage("app_currency") var appCurrency: AppCurrency = .egyptianPound
+    
 
     var body: some View {
         VStack(alignment: .center, spacing: 16) {
@@ -31,7 +33,7 @@ struct HomeProductCardCell: View {
             HStack {
                 VStack(alignment: .leading) {
                     Text(product.handle)
-                    Text("$\(product.price, specifier: "%.2f")")
+                    Text(appCurrency.format(price: product.price))
                 }
 
                 Spacer()
@@ -48,7 +50,7 @@ struct HomeProductCardCell: View {
         .padding()
         .background(Color("CardBGColor"))
         .cornerRadius(20)
-        .shadow(radius: 3)
+        .shadow(color: Color("PrimaryColor").opacity(0.15), radius: 8, x: 0, y: 4)
         .onTapGesture {
             onTab()
         }

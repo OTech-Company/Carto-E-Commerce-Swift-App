@@ -41,9 +41,9 @@ struct BrandsCell: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
-        .background(Color("CardBGColor"))
+        .background(Color(.secondarySystemGroupedBackground))
         .cornerRadius(20)
-        .shadow(radius: 5)
+        .shadow(color: Color("PrimaryColor").opacity(0.15), radius: 8, x: 0, y: 4)
     }
 }
 //

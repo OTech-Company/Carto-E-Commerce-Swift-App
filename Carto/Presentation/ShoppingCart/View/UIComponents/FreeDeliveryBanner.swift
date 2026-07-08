@@ -11,6 +11,8 @@ struct FreeDeliveryBanner: View {
 
     let subtotal: Double
     let hasItems: Bool
+    
+    @AppStorage("app_currency") var appCurrency: AppCurrency = .egyptianPound
 
     private let freeDeliveryAmount: Double = 500
 
@@ -32,13 +34,8 @@ struct FreeDeliveryBanner: View {
         HStack(alignment: .top, spacing: 14) {
 
             ZStack {
-
-                Circle()
-                    .fill(Color.orange.opacity(0.12))
-                    .frame(width: 46, height: 46)
-
                 Image(systemName: reachedFreeDelivery ? "checkmark" : "box.truck.fill")
-                    .font(.system(size: 20, weight: .semibold))
+                    .font(.system(size: 24, weight: .semibold))
                     .foregroundStyle(.orange)
             }
 
@@ -58,7 +55,7 @@ struct FreeDeliveryBanner: View {
 
                         (
                             Text("You're ")
-                            + Text("$\(remaining, specifier: "%.2f")")
+                            + Text(appCurrency.format(price: remaining))
                                 .fontWeight(.bold)
                                 .foregroundColor(.orange)
                             + Text(" away from ")
@@ -112,7 +109,7 @@ struct FreeDeliveryBanner: View {
 
                     if hasItems && !reachedFreeDelivery {
 
-                        Text("$\(remaining, specifier: "%.2f") left")
+                        Text("\(appCurrency.format(price: remaining)) left")
                             .fontWeight(.semibold)
                             .foregroundStyle(.orange)
                     }
@@ -123,7 +120,7 @@ struct FreeDeliveryBanner: View {
             }
         }
         .padding()
-        .background(Color.white)
+        .background(Color(.systemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 18))
         .shadow(color: .black.opacity(0.05), radius: 6, y: 3)
         .animation(.easeInOut(duration: 0.35), value: subtotal)

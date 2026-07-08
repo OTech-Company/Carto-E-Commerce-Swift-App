@@ -25,24 +25,35 @@ struct FavoritesView: View {
                     .padding(.top)
 
                 if viewModel.favorites.isEmpty {
-                    GeometryReader { geometry in
+                    ZStack {
+                        Image("empty_favorites")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                            .padding(.horizontal, 40)
+                            .padding(.top, 80)
+                            .ignoresSafeArea()
+                        
                         VStack {
                             Spacer()
-
-                            Image("empty_favorites")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: geometry.size.width * 0.65)
-                                .offset(y: -30)
-
+                            
+                            Text("No Favorites Yet")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundColor(.primary)
+                                .padding(.top, 10)
+                            
+                            Text("Tap the heart icon to save items here")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                                .padding(.top, 4)
+                            
                             Spacer()
+                                .frame(height: 80)
                         }
-                        .frame(width: geometry.size.width,
-                               height: geometry.size.height)
                     }
-                    .frame(maxWidth: .infinity)
-                    .ignoresSafeArea(.container, edges: .horizontal)
-                }else {
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(viewModel.favorites) { item in

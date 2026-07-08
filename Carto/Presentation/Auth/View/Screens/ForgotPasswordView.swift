@@ -9,7 +9,7 @@ struct ForgotPasswordView: View {
 
     var body: some View {
         ZStack {
-            Color(hex: "FAFAFA")
+            Color(.systemBackground)
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {
@@ -31,12 +31,12 @@ struct ForgotPasswordView: View {
                         VStack(spacing: 12) {
                             Text("forgot_password_title")
                                 .font(.system(size: 26, weight: .bold))
-                                .foregroundColor(.black)
+                                .foregroundColor(.primary)
                                 .multilineTextAlignment(.center)
 
                             Text("forgot_password_desc")
                                 .font(.system(size: 15))
-                                .foregroundColor(.gray)
+                                .foregroundColor(.secondary)
                                 .multilineTextAlignment(.center)
                                 .lineSpacing(4)
                                 .padding(.horizontal, 16)
@@ -107,7 +107,7 @@ struct ForgotPasswordView: View {
                     .progressViewStyle(CircularProgressViewStyle(tint: Color(hex: "FF5A00")))
                     .scaleEffect(1.5)
                     .frame(width: 80, height: 80)
-                    .background(Color.white)
+                    .background(Color(.systemBackground))
                     .cornerRadius(16)
                     .shadow(color: Color.black.opacity(0.1), radius: 10)
             }
