@@ -97,7 +97,7 @@ struct CartView: View {
             Button {
                 router.push(to: .payment(cart: cart))
             } label: {
-                checkoutLabel(color: Color("PrimaryColor"))
+                checkoutLabel(color: .orange)
             }
         } else {
             Button {} label: {
@@ -115,7 +115,7 @@ struct CartView: View {
             Spacer()
             Image(systemName: "arrow.right")
         }
-        .foregroundStyle(color == Color("PrimaryColor") ? Color(.systemBackground) : .white)
+        .foregroundStyle(.white)
         .padding(.horizontal, 20)
         .frame(maxWidth: .infinity)
         .frame(height: 56)

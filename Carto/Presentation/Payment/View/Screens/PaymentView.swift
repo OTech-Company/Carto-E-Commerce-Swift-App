@@ -39,7 +39,7 @@ extension View {
 
 struct PaymentView: View {
     @StateObject private var viewModel: PaymentViewModel
-    
+    @EnvironmentObject private var router: Router<AppRoute>
     @State private var showAddressListSheet = false
     @State private var showAddAddressSheet = false
     @State private var showEditAddressSheet = false
@@ -110,7 +110,25 @@ struct PaymentView: View {
         }
         .fullScreenCover(isPresented: isShowingSuccess) {
             if let order = viewModel.completedOrder, let method = viewModel.lastPaymentMethodUsed {
-                PaymentSuccessView(order: order, paymentMethod: method) {}
+                PaymentSuccessView(
+                    order: order,
+                    paymentMethod: method,
+                    onContinueShopping: {
+                        viewModel.retry()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
+                            router.popToRoot()
+                        }
+                    },
+                    onViewOrders: {
+                        viewModel.retry()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.45) {
+                            router.popToRoot()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                router.push(to: .orderHistory)
+                            }
+                        }
+                    }
+                )
             }
         }
         .fullScreenCover(isPresented: isShowingFailure) {
@@ -162,7 +180,7 @@ struct OrderSummarySectionView: View {
 
             VStack(spacing: 0) {
                 ForEach(Array(lines.enumerated()), id: \.element.id) { index, line in
-                    OrderLineRow(line: line)
+                    PaymentProductItemView(line: line)
                     if index < lines.count - 1 {
                         Divider()
                             .padding(.leading, 70)
@@ -174,40 +192,6 @@ struct OrderSummarySectionView: View {
     }
 }
 
-private struct OrderLineRow: View {
-    let line: CartLine
-
-    var body: some View {
-        HStack(spacing: 14) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(Color(.systemGray6))
-                Image(systemName: "bag.fill")
-                    .foregroundColor(.gray.opacity(0.6))
-                    .font(.system(size: 20))
-            }
-            .frame(width: 54, height: 54)
-
-            VStack(alignment: .leading, spacing: 4) {
-                Text(line.productTitle)
-                    .font(.system(size: 14, weight: .bold, design: .rounded))
-                    .foregroundColor(.black)
-                    .lineLimit(1)
-                Text("\(line.variantTitle)  •  Qty: \(line.quantity)")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(.gray)
-            }
-
-            Spacer()
-
-            Text(line.price)
-                .font(.system(size: 15, weight: .heavy, design: .rounded))
-                .foregroundColor(.black)
-        }
-        .padding(.vertical, 12)
-        .background(Color.white)
-    }
-}
 
 // MARK: - Payment Method Section
 
@@ -322,6 +306,22 @@ struct PriceBreakdownSectionView: View {
                 row("Shipping", viewModel.shippingLabel, valueColor: .successGreen)
                 if let tax = viewModel.taxFormatted {
                     row("Estimated Tax", tax)
+                }
+                if let discount = viewModel.discountFormatted {
+                    HStack {
+                        HStack(spacing: 6) {
+                            Image(systemName: "tag.fill")
+                                .font(.system(size: 12))
+                                .foregroundColor(.successGreen)
+                            Text("Discount")
+                                .font(.system(size: 15))
+                                .foregroundColor(.gray)
+                        }
+                        Spacer()
+                        Text("-\(discount)")
+                            .font(.system(size: 15, weight: .bold, design: .rounded))
+                            .foregroundColor(.successGreen)
+                    }
                 }
 
                 Divider().padding(.vertical, 4)
