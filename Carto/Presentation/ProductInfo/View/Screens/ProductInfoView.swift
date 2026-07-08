@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ARProductViewer
 
 struct ProductsInfoView: View {
 
@@ -84,6 +85,26 @@ struct ProductsInfoView: View {
                     .frame(width: 60, height: 240, alignment: .top)
                 }
                 .padding(.horizontal)
+
+                if viewModel.isARAvailable {
+                    Button {
+                        viewModel.didTapARButton()
+                        guard let url = viewModel.arModelURL,
+                              let topVC = UIApplication.shared.topMostViewController else {
+                            print("AR DEBUG: missing url or top VC")
+                            return
+                        }
+                        ARQuickLookPresenter.shared.present(modelURL: url, from: topVC) {
+                            viewModel.isPresentingAR = false
+                        }
+                    } label: {
+                        Label("View in AR", systemImage: "arkit")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .padding(.horizontal)
+                    .padding(.top, 12)
+                }
 
                 if !viewModel.product.description.isEmpty {
                     ExpandableText(text: viewModel.product.description)

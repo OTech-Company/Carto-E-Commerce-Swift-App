@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -42,6 +42,7 @@
 		6F72AACD2FF9CD6C00848294 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F72AAC62FF9CD6C00848294 /* Router.swift */; };
 		6F72AACE2FF9CD6C00848294 /* RouterViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F72AAC72FF9CD6C00848294 /* RouterViewModifier.swift */; };
 		6F72AAD02FF9CD8800848294 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F72AACF2FF9CD8800848294 /* ContentView.swift */; };
+		6F8953072FFF129F005B78D2 /* ARProductViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 6F8953062FFF129F005B78D2 /* ARProductViewer */; };
 		6FB176392FEFE3140008DDDC /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175142FEFE3140008DDDC /* ServiceLocator.swift */; };
 		6FB176E22FEFE3140008DDDC /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB175132FEFE3140008DDDC /* AppContainer.swift */; };
 		6FB176EC2FEFE3140008DDDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB1761A2FEFE3140008DDDC /* Assets.xcassets */; };
@@ -80,6 +81,7 @@
 		6FC963222FFEC0CD0072ECE9 /* HomeProductGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC963212FFEC0CD0072ECE9 /* HomeProductGrid.swift */; };
 		6FC963242FFEC0E20072ECE9 /* HomeAISheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC963232FFEC0E20072ECE9 /* HomeAISheetView.swift */; };
 		6FC963262FFEC11F0072ECE9 /* View+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC963252FFEC1150072ECE9 /* View+Animation.swift */; };
+		6FC963302FFEFFC20072ECE9 /* AsicsTiger.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 6FC9632F2FFEFFC20072ECE9 /* AsicsTiger.usdz */; };
 		6FF819DE2FFE579300705803 /* ImgSearch+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF819DD2FFE579300705803 /* ImgSearch+Extensions.swift */; };
 		D57F105F2FF6AC6A00F421D4 /* BrandsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F105E2FF6AC6A00F421D4 /* BrandsScreen.swift */; };
 		D57F10612FF6ACA900F421D4 /* HomeBrandsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F10602FF6ACA900F421D4 /* HomeBrandsViewModel.swift */; };
@@ -447,6 +449,7 @@
 		6FC963212FFEC0CD0072ECE9 /* HomeProductGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProductGrid.swift; sourceTree = "<group>"; };
 		6FC963232FFEC0E20072ECE9 /* HomeAISheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAISheetView.swift; sourceTree = "<group>"; };
 		6FC963252FFEC1150072ECE9 /* View+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Animation.swift"; sourceTree = "<group>"; };
+		6FC9632F2FFEFFC20072ECE9 /* AsicsTiger.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = AsicsTiger.usdz; sourceTree = "<group>"; };
 		6FF819DA2FFE56B100705803 /* PaymobSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = PaymobSDK.xcframework; path = ../../../Downloads/PaymobSDK.xcframework; sourceTree = "<group>"; };
 		6FF819DD2FFE579300705803 /* ImgSearch+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImgSearch+Extensions.swift"; sourceTree = "<group>"; };
 		D57F105E2FF6AC6A00F421D4 /* BrandsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsScreen.swift; sourceTree = "<group>"; };
@@ -711,6 +714,7 @@
 				D96CAD012FFD8C7700263097 /* GoogleSignIn in Frameworks */,
 				D9E5F8632FF5DE6E0014DD91 /* FirebaseFirestore in Frameworks */,
 				6FC963122FFE71860072ECE9 /* PaymobSDK.xcframework in Frameworks */,
+				6F8953072FFF129F005B78D2 /* ARProductViewer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -785,6 +789,7 @@
 		6FB1761F2FEFE3140008DDDC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6FC9632E2FFEFF800072ECE9 /* ARModels */,
 				6FB1761B2FEFE3140008DDDC /* Assets */,
 				6FB1761E2FEFE3140008DDDC /* Localization */,
 			);
@@ -906,6 +911,14 @@
 				6FB3B7F22FFE4D99005D1C03 /* Features */,
 			);
 			path = AIChatBot;
+			sourceTree = "<group>";
+		};
+		6FC9632E2FFEFF800072ECE9 /* ARModels */ = {
+			isa = PBXGroup;
+			children = (
+				6FC9632F2FFEFFC20072ECE9 /* AsicsTiger.usdz */,
+			);
+			path = ARModels;
 			sourceTree = "<group>";
 		};
 		D59EBD502FF6D23C00883859 /* SharedComponents */ = {
@@ -2131,6 +2144,7 @@
 				D9E5F8622FF5DE6E0014DD91 /* FirebaseFirestore */,
 				D96CAD002FFD8C7700263097 /* GoogleSignIn */,
 				D96CAD022FFD8C7700263097 /* GoogleSignInSwift */,
+				6F8953062FFF129F005B78D2 /* ARProductViewer */,
 			);
 			productName = Carto;
 			productReference = D9EB9A772FEFD04D005CE9A4 /* Carto.app */;
@@ -2209,6 +2223,7 @@
 				D9E5F85F2FF5DE6E0014DD91 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				D927DA6D2FFAD6DA00417D9C /* XCRemoteSwiftPackageReference "checkout-sheet-kit-swift" */,
 				D96CACFF2FFD8B4A00263097 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				6F8953052FFF128F005B78D2 /* XCLocalSwiftPackageReference "Packages/ARProductViewer" */,
 			);
 			productRefGroup = D9EB9A782FEFD04D005CE9A4 /* Products */;
 			projectDirPath = "";
@@ -2230,6 +2245,7 @@
 				D9E5F83D2FF5DCB00014DD91 /* GoogleService-Info.plist in Resources */,
 				6FB176EC2FEFE3140008DDDC /* Assets.xcassets in Resources */,
 				D5F0FA012FFDC722005FD0BC /* Localizable.strings in Resources */,
+				6FC963302FFEFFC20072ECE9 /* AsicsTiger.usdz in Resources */,
 				D5F0FA022FFDC722005FD0BC /* Localizable.strings in Resources */,
 				6F6DD83F2FF7F1C80099872E /* ExampleUsage.md in Resources */,
 			);
@@ -2915,6 +2931,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		6F8953052FFF128F005B78D2 /* XCLocalSwiftPackageReference "Packages/ARProductViewer" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/ARProductViewer;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		D927DA6D2FFAD6DA00417D9C /* XCRemoteSwiftPackageReference "checkout-sheet-kit-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -2943,6 +2966,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6F8953062FFF129F005B78D2 /* ARProductViewer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F8953052FFF128F005B78D2 /* XCLocalSwiftPackageReference "Packages/ARProductViewer" */;
+			productName = ARProductViewer;
+		};
 		D96CAD002FFD8C7700263097 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D96CACFF2FFD8B4A00263097 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
