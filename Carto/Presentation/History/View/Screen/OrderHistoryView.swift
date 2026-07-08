@@ -9,7 +9,10 @@ import SwiftUI
 
 struct OrderHistoryView: View {
     @StateObject var viewModel: OrderHistoryViewModel
+    @EnvironmentObject private var router: Router<AppRoute>
     @State private var selectedTab: HistoryTab = .completed
+    
+    private let sampleAccessToken = AuthSession.shared.currentUser?.customerAccessToken
     
     enum HistoryTab: String, CaseIterable {
         case active = "Active"
@@ -53,7 +56,7 @@ struct OrderHistoryView: View {
                             .progressViewStyle(CircularProgressViewStyle(tint: .blue))
                             .padding(.top, 40)
                         Spacer()
-                    } else if let error = viewModel.errorMessage {
+                    } else if let error = viewModel.errorMessage, viewModel.orders.isEmpty {
                         errorView(message: error)
                     } else if filteredOrders.isEmpty {
                         emptyStateView
@@ -65,31 +68,45 @@ struct OrderHistoryView: View {
         }
         .navigationTitle("history_title")
         .navigationBarTitleDisplayMode(.large)
-        .navigationDestination(for: OrderEntity.self) { order in
-            OrderHistoryDetailView(order: order)
-        }
         .task {
-            await viewModel.fetchOrders()
+            await viewModel.fetchOrders(accessToken: sampleAccessToken ?? "")
         }
     }
     
-    private var filteredOrders: [OrderEntity] {
+    // MARK: - Filter Logic
+    private var filteredOrders: [CustomerOrder] {
         switch selectedTab {
         case .active:
-            return viewModel.orders.filter { $0.fulfillmentStatus != .fulfilled }
+            // Match against your CustomerOrder.fulfillmentStatus String profile
+            return viewModel.orders.filter { $0.fulfillmentStatus.uppercased() != "FULFILLED" }
         case .completed:
-            return viewModel.orders.filter { $0.fulfillmentStatus == .fulfilled }
+            return viewModel.orders.filter { $0.fulfillmentStatus.uppercased() == "FULFILLED" }
         }
     }
     
+    // MARK: - Components
     private var orderListView: some View {
         ScrollView {
             LazyVStack(spacing: 16) {
-                ForEach(filteredOrders) { order in
-                    NavigationLink(value: order) {
+                ForEach(filteredOrders, id: \.id) { order in
+                    Button {
+                        router.push(to: .orderDetail(id: order.id))
+                    } label: {
                         OrderCardRow(order: order)
                     }
                     .buttonStyle(PlainButtonStyle())
+                }
+                
+                // Infinite Scroll Trigger Zone
+                if !filteredOrders.isEmpty {
+                    ProgressView()
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                        .opacity(viewModel.isLoading ? 1.0 : 0.0)
+                        .onAppear {
+                            Task {
+                                await viewModel.fetchNextPageIfNeeded(accessToken: sampleAccessToken ?? "")
+                            }
+                        }
                 }
             }
             .padding(.horizontal, 16)
@@ -117,6 +134,8 @@ struct OrderHistoryView: View {
             Text(message)
                 .foregroundColor(.red)
                 .font(.subheadline)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 32)
             Spacer()
         }
     }

@@ -8,50 +8,41 @@
 import SwiftUI
 
 struct OrderCardRow: View {
-    let order: OrderEntity
+    let order: CustomerOrder // Uses the returned history model directly
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack(alignment: .top, spacing: 16) {
-                // Product Image Container View (with Dynamic Asynchronous Network Loader)
-                if let imageUrlString = order.items.first?.imageUrl, let url = URL(string: imageUrlString) {
-                    AsyncImage(url: url) { phase in
-                        switch phase {
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 84, height: 84)
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                        case .failure, .empty:
-                            fallbackPlaceholderView(width: 84, height: 84)
-                        @unknown default:
-                            fallbackPlaceholderView(width: 84, height: 84)
-                        }
-                    }
-                } else {
-                    fallbackPlaceholderView(width: 84, height: 84)
-                }
                 
-                // Item Descriptive Information Block
-                VStack(alignment: .leading, spacing: 4) {
+                // Item Descriptive Information Block (Clean, Text-Only Layout)
+                VStack(alignment: .leading, spacing: 6) {
                     Text("order_number_format \(order.orderNumber)")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.black)
                         .lineLimit(1)
                     
-                    Text(order.formattedDate)
+                    Text(order.processedAt)
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
                     
-                    Text(order.fulfillmentStatus == .fulfilled ? "Delivered" : "In Progress")
-                        .font(.system(size: 14))
-                        .foregroundColor(.gray)
-                        .padding(.bottom, 2)
+                    // Financial & Fulfillment Status Combo
+                    HStack(spacing: 8) {
+                        Text(order.fulfillmentStatus.uppercased() == "FULFILLED" ? "Delivered" : "In Progress")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(order.fulfillmentStatus.uppercased() == "FULFILLED" ? .green : .orange)
+                        
+                        Text("•")
+                            .foregroundColor(.gray.opacity(0.5))
+                        
+                        Text(order.financialStatus.capitalized)
+                            .font(.system(size: 14))
+                            .foregroundColor(.gray)
+                    }
                     
-                    Text("$\(order.totalPrice)")
+                    Text("\(order.currencyCode) \(order.totalPrice)")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.black)
+                        .padding(.top, 2)
                 }
                 
                 Spacer()
@@ -78,17 +69,5 @@ struct OrderCardRow: View {
             RoundedRectangle(cornerRadius: 16)
                 .stroke(Color.black.opacity(0.06), lineWidth: 1)
         )
-    }
-    
-    @ViewBuilder
-    private func fallbackPlaceholderView(width: CGFloat, height: CGFloat) -> some View {
-        RoundedRectangle(cornerRadius: 12)
-            .fill(Color(white: 0.95))
-            .frame(width: width, height: height)
-            .overlay(
-                Image(systemName: "tag")
-                    .foregroundColor(.gray.opacity(0.6))
-                    .font(.system(size: 24))
-            )
     }
 }

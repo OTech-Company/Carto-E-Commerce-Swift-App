@@ -1,23 +1,48 @@
 //
-//  OrderRepositoryProtocol.swift
+//  OrderUseCase.swift
 //  Carto
 //
-//  Created by Osama Hosam on 30/06/2026.
+//  Created by osama hosam on 08/07/2026.
 //
-
 
 import Foundation
 
-final class GetOrderHistoryUseCase {
+protocol OrderUseCaseProtocol {
+    func fetchHistory(accessToken: String, first: Int, after: String?) async throws -> StorefrontPage<CustomerOrder>
+    func fetchDetails(id: String) async throws -> CustomerOrderDetail?
+}
+
+final class OrderUseCase: OrderUseCaseProtocol {
+    
     private let repository: OrderRepositoryProtocol
     
     init(repository: OrderRepositoryProtocol) {
         self.repository = repository
     }
     
-    func execute() async throws -> [OrderEntity] {
-        let orders = try await repository.fetchOrderHistory()
-        // Core business rule logic: Always sort history with the newest orders appearing first
-        return orders.sorted { $0.id > $1.id }
+    func fetchHistory(accessToken: String, first: Int = 20, after: String? = nil) async throws -> StorefrontPage<CustomerOrder> {
+        guard !accessToken.isEmpty else {
+            throw OrderUseCaseError.invalidToken
+        }
+        
+        return try await repository.fetchOrderHistory(
+            accessToken: accessToken,
+            first: first,
+            after: after
+        )
     }
+    
+    func fetchDetails(id: String) async throws -> CustomerOrderDetail? {
+        guard !id.isEmpty else {
+            throw OrderUseCaseError.invalidOrderId
+        }
+        
+        return try await repository.fetchOrderDetail(id: id)
+    }
+}
+
+// MARK: - Use Case Errors
+enum OrderUseCaseError: Error {
+    case invalidToken
+    case invalidOrderId
 }
