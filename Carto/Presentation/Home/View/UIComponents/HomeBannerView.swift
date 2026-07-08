@@ -12,7 +12,7 @@ struct HomeBannerView: View {
     @ObservedObject private var cartStore = CartStateStore.shared
 
     private var isClaimed: Bool {
-        cartStore.appliedCouponCode == ad.couponCode
+        cartStore.suggestedCouponCode == ad.couponCode
     }
 
     var body: some View {

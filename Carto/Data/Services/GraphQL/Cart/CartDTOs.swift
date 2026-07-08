@@ -143,11 +143,17 @@ struct StorefrontCartLine: Decodable {
 struct StorefrontCartMerchandise: Decodable {
     let id: String
     let title: String
+    let image: StorefrontImageURL?
     let price: StorefrontMoney
     let product: StorefrontCartLineProduct
 }
 
+struct StorefrontImageURL: Decodable {
+    let url: String
+}
+
 struct StorefrontCartLineProduct: Decodable {
+    let id: String
     let title: String
     let handle: String
 }

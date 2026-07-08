@@ -43,3 +43,4 @@ Carto.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
 *.DS_Store
 *.xcconfig
 Carto/Data/Services/.DS_Store
+Carto/Core/Constants/Development.xcconfig

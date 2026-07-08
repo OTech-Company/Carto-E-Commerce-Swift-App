@@ -76,7 +76,7 @@ final class PaymentViewModel: ObservableObject {
     }
 
     var totalFormatted: String {
-        CurrencyFormatter.format(cart.total, currencyCode: cart.currencyCode)
+        CurrencyFormatter.format(String(CartStateStore.shared.finalTotal), currencyCode: cart.currencyCode)
     }
 
     let shippingLabel = "Free"
@@ -152,7 +152,8 @@ final class PaymentViewModel: ObservableObject {
 
         case .paymob:
             phase = .processingPaymob
-            let result = await paymobCoordinator.pay(cart: cart, billing: billing)
+            let finalAmount = String(CartStateStore.shared.finalTotal)
+            let result = await paymobCoordinator.pay(cart: cart, billing: billing, amount: finalAmount)
 
             switch result {
             case .success:

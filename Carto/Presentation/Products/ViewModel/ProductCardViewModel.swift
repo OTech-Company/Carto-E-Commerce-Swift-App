@@ -11,12 +11,11 @@ import Combine
 @MainActor
 final class ProductCardViewModel: ObservableObject {
     @Published private(set) var isFavorite: Bool
-    @Published private(set) var cartQuantity: Int
+    @Published private(set) var cartQuantity: Int = 0
     @Published private(set) var isOutOfStock: Bool
 
     private let repository: FavoritesRepository
     private let cartUseCase: CartUseCaseProtocol
-    private let cartStore: CartStateStore
     private let product: Product
     private var cancellables: Set<AnyCancellable> = []
 
@@ -30,27 +29,28 @@ final class ProductCardViewModel: ObservableObject {
         self.product = product
         self.repository = repository
         self.cartUseCase = cartUseCase
-        self.cartStore = cartStore
         self.isFavorite = favoritesStore.isFavorite(product.id)
 
-        let variant = cartStore.selectedVariant(for: product.id, fallbackColor: product.colors.first ?? "", fallbackSize: product.sizes.first ?? "")
-        self.cartQuantity = cartStore.item(productId: product.id, color: variant.color, size: variant.size)?.quantity ?? 0
-        self.isOutOfStock = (product.variantFor(color: variant.color, size: variant.size)?.inventoryQuantity ?? 0) <= 0
+        let firstVariant = product.variants.first
+        self.isOutOfStock = (firstVariant?.inventoryQuantity ?? 0) <= 0
 
         favoritesStore.$favoriteIds
             .receive(on: DispatchQueue.main)
             .sink { [weak self] ids in
-                guard let self else { return }
-                self.isFavorite = ids.contains(self.product.id)
+                self?.isFavorite = ids.contains(product.id)
             }
             .store(in: &cancellables)
 
-        cartStore.$items
+        cartStore.$cart
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
+            .sink { [weak self] cart in
                 guard let self else { return }
-                let variant = cartStore.selectedVariant(for: self.product.id, fallbackColor: self.product.colors.first ?? "", fallbackSize: self.product.sizes.first ?? "")
-                self.cartQuantity = cartStore.item(productId: self.product.id, color: variant.color, size: variant.size)?.quantity ?? 0
+                let variantIds = self.product.variants.compactMap {
+                    $0.adminGraphqlApiId ?? "gid://shopify/ProductVariant/\($0.id)"
+                }
+                self.cartQuantity = cart?.lines
+                    .filter { variantIds.contains($0.variantId) }
+                    .reduce(0) { $0 + $1.quantity } ?? 0
             }
             .store(in: &cancellables)
     }
@@ -64,33 +64,34 @@ final class ProductCardViewModel: ObservableObject {
     }
 
     func addToCart() {
-        let variant = cartStore.selectedVariant(for: product.id, fallbackColor: product.colors.first ?? "", fallbackSize: product.sizes.first ?? "")
-        _ = cartUseCase.addToCart(product: product, color: variant.color, size: variant.size)
+        let color = product.colors.first ?? ""
+        let size  = product.sizes.first ?? ""
+        Task {
+            do { _ = try await cartUseCase.addToCart(product: product, color: color, size: size) }
+            catch { print("addToCart failed: \(error)") }
+        }
     }
 
     func incrementQuantity() {
-        let variant = cartStore.selectedVariant(for: product.id, fallbackColor: product.colors.first ?? "", fallbackSize: product.sizes.first ?? "")
-        guard let item = cartStore.item(productId: product.id, color: variant.color, size: variant.size) else { return }
-        _ = cartUseCase.incrementQuantity(item)
+        guard let line = currentLine() else { addToCart(); return }
+        Task {
+            do { _ = try await cartUseCase.incrementLine(line) }
+            catch { print("increment failed: \(error)") }
+        }
     }
 
     func decrementQuantity() {
-        let variant = cartStore.selectedVariant(
-            for: product.id,
-            fallbackColor: product.colors.first ?? "",
-            fallbackSize: product.sizes.first ?? ""
-        )
-
-        guard let item = cartStore.item(
-            productId: product.id,
-            color: variant.color,
-            size: variant.size
-        ) else { return }
-
-        if item.quantity == 1 {
-            cartUseCase.removeFromCart(item)
-        } else {
-            _ = cartUseCase.decrementQuantity(item)
+        guard let line = currentLine() else { return }
+        Task {
+            do { _ = try await cartUseCase.decrementLine(line) }
+            catch { print("decrement failed: \(error)") }
         }
+    }
+
+    private func currentLine() -> CartLine? {
+        let variantIds = product.variants.compactMap {
+            $0.adminGraphqlApiId ?? "gid://shopify/ProductVariant/\($0.id)"
+        }
+        return CartStateStore.shared.cart?.lines.first { variantIds.contains($0.variantId) }
     }
 }

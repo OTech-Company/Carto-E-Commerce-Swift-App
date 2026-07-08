@@ -27,8 +27,11 @@ struct CartDiscountCode: Hashable {
 struct CartLine: Hashable {
     let id: String
     let variantId: String
+    let productId: Int
     let productTitle: String
     let variantTitle: String
     let quantity: Int
     let price: String
+    let imageUrl: String?
+    let productHandle: String
 }

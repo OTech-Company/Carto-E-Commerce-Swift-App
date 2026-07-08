@@ -21,9 +21,9 @@ final class PaymobCheckoutCoordinator {
         self.sdkPresenter = PaymobSDKAdapter()
     }
 
-    func pay(cart: CartModel, billing: PaymobBillingData) async -> PaymobCheckoutResult {
+    func pay(cart: CartModel, billing: PaymobBillingData, amount: String) async -> PaymobCheckoutResult {
         do {
-            let amountCents = Self.amountInCents(cart.total)
+            let amountCents = Self.amountInCents(amount)
             let items = cart.lines.map {
                 PaymobOrderItem(name: $0.productTitle, amount_cents: Self.amountInCents($0.price), quantity: $0.quantity)
             }

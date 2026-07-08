@@ -8,106 +8,78 @@
 import Foundation
 
 final class CartRepositoryImpl: CartRepository {
-    private let local: CartLocalDataSourceProtocol
-    private let remote: CartFirestoreRemoteDataSourceProtocol
-    private let store: CartStateStore
-    private let currentUserId: () -> String?
-    private let defaults: UserDefaults
-    private let lastSyncedUserIdKey = "cart_last_synced_uid"
 
-    private var lastSyncedUserId: String? {
-        get { defaults.string(forKey: lastSyncedUserIdKey) }
-        set { defaults.set(newValue, forKey: lastSyncedUserIdKey) }
+    private let remote: CartRemoteDataSource
+    private let store: CartStateStore
+    private let cartIdKey = "storefront_cart_id"
+
+    private var cartId: String? {
+        get { UserDefaults.standard.string(forKey: cartIdKey) }
+        set { UserDefaults.standard.set(newValue, forKey: cartIdKey) }
     }
 
-    init(
-        local: CartLocalDataSourceProtocol,
-        remote: CartFirestoreRemoteDataSourceProtocol,
-        store: CartStateStore = .shared,
-        defaults: UserDefaults = .standard,
-        currentUserId: @escaping () -> String?
-    ) {
-        self.local = local
+    init(remote: CartRemoteDataSource, store: CartStateStore = .shared) {
         self.remote = remote
         self.store = store
-        self.defaults = defaults
-        self.currentUserId = currentUserId
     }
 
-    func bootstrapStore() {
-        let items = local.fetchAll()
-        DispatchQueue.main.async { [weak store] in
-            store?.initializeCart(items)
-        }
+    func fetchCart() async throws -> CartModel? {
+        guard let id = cartId else { return nil }
+        let cart = try await remote.fetchCart(id: id)
+        await MainActor.run { store.cart = cart }
+        return cart
     }
 
-    func getCartItems() -> [CartItem] {
-        local.fetchAll()
+    func addLine(variantId: String, quantity: Int) async throws -> CartModel {
+        let line = StorefrontCartLineInput(merchandiseId: variantId, quantity: quantity, attributes: nil)
+
+        let cart: CartModel
+        if let existingId = cartId {
+            cart = try await remote.addLines(cartId: existingId, lines: [line])
+        } else {
+            cart = try await remote.createCart(lines: [line])
+            cartId = cart.id
+        }
+
+        await MainActor.run { store.cart = cart }
+        return cart
     }
 
-    func cartItem(productId: Int, color: String, size: String) -> CartItem? {
-        store.item(productId: productId, color: color, size: size)
+    func updateLine(lineId: String, quantity: Int) async throws -> CartModel {
+        guard let id = cartId else {
+            throw CartRepositoryError.noCartFound
+        }
+        let input = StorefrontCartLineUpdateInput(id: lineId, quantity: quantity, attributes: nil)
+        let cart = try await remote.updateLines(cartId: id, lines: [input])
+        await MainActor.run { store.cart = cart }
+        return cart
     }
 
-    func addOrUpdate(_ item: CartItem) {
-        local.save(item)
-        DispatchQueue.main.async { [weak store] in
-            store?.upsert(item)
+    func removeLine(lineId: String) async throws -> CartModel {
+        guard let id = cartId else {
+            throw CartRepositoryError.noCartFound
         }
-
-        guard let uid = currentUserId() else { return }
-
-        Task {
-            do {
-                try await remote.save(item, uid: uid)
-            } catch {
-                print("Firestore save failed for cart item \(item.id): \(error)")
-            }
-        }
+        let cart = try await remote.removeLines(cartId: id, lineIds: [lineId])
+        await MainActor.run { store.cart = cart }
+        return cart
     }
 
-    func remove(productId: Int, color: String, size: String) {
-        let id = CartItem.makeId(productId: productId, color: color, size: size)
-        local.delete(id: id)
-        DispatchQueue.main.async { [weak store] in
-            store?.remove(id: id)
+    func applyDiscountCodes(_ codes: [String]) async throws -> CartModel {
+        guard let id = cartId else {
+            throw CartRepositoryError.noCartFound
         }
-
-        guard let uid = currentUserId() else { return }
-
-        Task {
-            do {
-                try await remote.delete(id: id, uid: uid)
-            } catch {
-                print("Firestore delete failed for cart item \(id): \(error)")
-            }
-        }
+        let cart = try await remote.updateDiscountCodes(cartId: id, discountCodes: codes)
+        await MainActor.run { store.cart = cart }
+        return cart
     }
+}
 
-    func syncFromRemote() async {
-        let uid = currentUserId()
+enum CartRepositoryError: LocalizedError {
+    case noCartFound
 
-        guard uid != lastSyncedUserId else { return }
-
-        await local.deleteAll()
-        await MainActor.run { [weak store] in
-            store?.initializeCart([])
+    var errorDescription: String? {
+        switch self {
+        case .noCartFound: return "No active cart found. Please add items first."
         }
-
-        guard let uid else {
-            lastSyncedUserId = nil
-            return
-        }
-
-        guard let remoteItems = try? await remote.fetchAll(uid: uid) else {
-            lastSyncedUserId = uid
-            return
-        }
-
-        await local.saveAll(remoteItems)
-        await MainActor.run { [weak store] in
-            store?.initializeCart(remoteItems)
-        }
-        lastSyncedUserId = uid
     }
 }

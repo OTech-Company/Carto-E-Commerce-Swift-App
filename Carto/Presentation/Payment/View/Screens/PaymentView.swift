@@ -30,8 +30,8 @@ struct PremiumCardModifier: ViewModifier {
 }
 
 extension View {
-    func premiumCardStyle(padding: CGFloat = 20) -> some View { 
-        self.modifier(PremiumCardModifier(padding: padding)) 
+    func premiumCardStyle(padding: CGFloat = 20) -> some View {
+        self.modifier(PremiumCardModifier(padding: padding))
     }
 }
 
@@ -53,71 +53,69 @@ struct PaymentView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            ZStack(alignment: .bottom) {
-                Color.premiumBackground.ignoresSafeArea()
+        ZStack(alignment: .bottom) {
+            Color.premiumBackground.ignoresSafeArea()
 
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 28) {
-                        DeliveryAddressSectionView(
-                            viewModel: viewModel,
-                            onChangeAddress: { showAddressListSheet = true },
-                            onEditAddress: { showEditAddressSheet = true },
-                            onAddAddress: { showAddAddressSheet = true }
-                        )
-                        OrderSummarySectionView(lines: viewModel.cart.lines)
-                        PaymentMethodSectionView(selected: $viewModel.selectedPaymentMethod)
-                        PriceBreakdownSectionView(viewModel: viewModel)
-                        ShopifySecurityCardView()
-                            .padding(.bottom, 110)
-                    }
-                    .padding(20)
-                }
-
-                StickyPaymentFooterView(
-                    totalAmount: viewModel.totalFormatted,
-                    isLoading: viewModel.isProcessing,
-                    canPlaceOrder: viewModel.canPlaceOrder
-                ) {
-                    Task { await viewModel.placeOrder() }
-                }
-            }
-            .navigationTitle("Checkout")
-            .navigationBarTitleDisplayMode(.inline)
-            .task {
-                await viewModel.loadAddresses()
-            }
-            .sheet(isPresented: $showAddressListSheet) {
-                AddressListView(
-                    addresses: viewModel.addresses,
-                    onSelect: { viewModel.selectAddress($0) },
-                    onAddNew: { showAddAddressSheet = true }
-                )
-            }
-            .sheet(isPresented: $showAddAddressSheet) {
-                AddressFormBottomSheet(
-                    onAdd: { address in Task { await viewModel.addAddress(address) } },
-                    onEdit: { _ in }
-                )
-            }
-            .sheet(isPresented: $showEditAddressSheet) {
-                if let selected = viewModel.selectedAddress {
-                    AddressFormBottomSheet(
-                        address: selected,
-                        onAdd: { _ in },
-                        onEdit: { address in Task { await viewModel.editAddress(id: selected.id, address: address) } }
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 28) {
+                    DeliveryAddressSectionView(
+                        viewModel: viewModel,
+                        onChangeAddress: { showAddressListSheet = true },
+                        onEditAddress: { showEditAddressSheet = true },
+                        onAddAddress: { showAddAddressSheet = true }
                     )
+                    OrderSummarySectionView(lines: viewModel.cart.lines)
+                    PaymentMethodSectionView(selected: $viewModel.selectedPaymentMethod)
+                    PriceBreakdownSectionView(viewModel: viewModel)
+                    ShopifySecurityCardView()
+                        .padding(.bottom, 110)
                 }
+                .padding(20)
             }
-            .fullScreenCover(isPresented: isShowingSuccess) {
-                if let order = viewModel.completedOrder, let method = viewModel.lastPaymentMethodUsed {
-                    PaymentSuccessView(order: order, paymentMethod: method) {}
-                }
+
+            StickyPaymentFooterView(
+                totalAmount: viewModel.totalFormatted,
+                isLoading: viewModel.isProcessing,
+                canPlaceOrder: viewModel.canPlaceOrder
+            ) {
+                Task { await viewModel.placeOrder() }
             }
-            .fullScreenCover(isPresented: isShowingFailure) {
-                if case .failed(let message) = viewModel.phase {
-                    PaymentFailureView(message: message) { viewModel.retry() }
-                }
+        }
+        .navigationTitle("Checkout")
+        .navigationBarTitleDisplayMode(.inline)
+        .task {
+            await viewModel.loadAddresses()
+        }
+        .sheet(isPresented: $showAddressListSheet) {
+            AddressListView(
+                addresses: viewModel.addresses,
+                onSelect: { viewModel.selectAddress($0) },
+                onAddNew: { showAddAddressSheet = true }
+            )
+        }
+        .sheet(isPresented: $showAddAddressSheet) {
+            AddressFormBottomSheet(
+                onAdd: { address in Task { await viewModel.addAddress(address) } },
+                onEdit: { _ in }
+            )
+        }
+        .sheet(isPresented: $showEditAddressSheet) {
+            if let selected = viewModel.selectedAddress {
+                AddressFormBottomSheet(
+                    address: selected,
+                    onAdd: { _ in },
+                    onEdit: { address in Task { await viewModel.editAddress(id: selected.id, address: address) } }
+                )
+            }
+        }
+        .fullScreenCover(isPresented: isShowingSuccess) {
+            if let order = viewModel.completedOrder, let method = viewModel.lastPaymentMethodUsed {
+                PaymentSuccessView(order: order, paymentMethod: method) {}
+            }
+        }
+        .fullScreenCover(isPresented: isShowingFailure) {
+            if case .failed(let message) = viewModel.phase {
+                PaymentFailureView(message: message) { viewModel.retry() }
             }
         }
     }
