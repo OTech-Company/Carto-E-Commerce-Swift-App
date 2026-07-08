@@ -13,32 +13,39 @@ extension Color {
     static let brandAccent = Color(hex: "FF5A00")
     static let successGreen = Color(hex: "00BC7D")
     static let premiumCardBg = Color.white
-    static let premiumBackground = Color(hex: "FAFAFA")
+    static let premiumBackground = Color(hex: "F4F5F7")
     static let premiumSubheadline = Color(UIColor.secondaryLabel)
     static let premiumBorder = Color(UIColor.systemGray5)
 }
 
 struct PremiumCardModifier: ViewModifier {
+    var padding: CGFloat = 20
     func body(content: Content) -> some View {
         content
-            .padding(20)
+            .padding(padding)
             .background(Color.premiumCardBg)
             .cornerRadius(20)
-            .shadow(color: Color.black.opacity(0.02), radius: 12, x: 0, y: 6)
+            .shadow(color: Color.black.opacity(0.03), radius: 15, x: 0, y: 8)
     }
 }
 
 extension View {
-    func premiumCardStyle() -> some View { self.modifier(PremiumCardModifier()) }
+    func premiumCardStyle(padding: CGFloat = 20) -> some View { 
+        self.modifier(PremiumCardModifier(padding: padding)) 
+    }
 }
 
 // MARK: - PaymentView
 
 struct PaymentView: View {
     @StateObject private var viewModel: PaymentViewModel
+    
+    @State private var showAddressListSheet = false
+    @State private var showAddAddressSheet = false
+    @State private var showEditAddressSheet = false
 
     init(cart: CartModel) {
-        _viewModel = StateObject(wrappedValue: PaymentViewModel(cart: cart,paymobCoordinator: nil))
+        _viewModel = StateObject(wrappedValue: DIContainer.shared.makePaymentViewModel(cart: cart))
     }
 
     init(viewModel: PaymentViewModel) {
@@ -51,25 +58,57 @@ struct PaymentView: View {
                 Color.premiumBackground.ignoresSafeArea()
 
                 ScrollView(showsIndicators: false) {
-                    VStack(spacing: 20) {
+                    VStack(spacing: 28) {
+                        DeliveryAddressSectionView(
+                            viewModel: viewModel,
+                            onChangeAddress: { showAddressListSheet = true },
+                            onEditAddress: { showEditAddressSheet = true },
+                            onAddAddress: { showAddAddressSheet = true }
+                        )
                         OrderSummarySectionView(lines: viewModel.cart.lines)
                         PaymentMethodSectionView(selected: $viewModel.selectedPaymentMethod)
                         PriceBreakdownSectionView(viewModel: viewModel)
                         ShopifySecurityCardView()
                             .padding(.bottom, 110)
                     }
-                    .padding(16)
+                    .padding(20)
                 }
 
                 StickyPaymentFooterView(
                     totalAmount: viewModel.totalFormatted,
-                    isLoading: viewModel.isProcessing
+                    isLoading: viewModel.isProcessing,
+                    canPlaceOrder: viewModel.canPlaceOrder
                 ) {
                     Task { await viewModel.placeOrder() }
                 }
             }
-            .navigationTitle("Payment")
+            .navigationTitle("Checkout")
             .navigationBarTitleDisplayMode(.inline)
+            .task {
+                await viewModel.loadAddresses()
+            }
+            .sheet(isPresented: $showAddressListSheet) {
+                AddressListView(
+                    addresses: viewModel.addresses,
+                    onSelect: { viewModel.selectAddress($0) },
+                    onAddNew: { showAddAddressSheet = true }
+                )
+            }
+            .sheet(isPresented: $showAddAddressSheet) {
+                AddressFormBottomSheet(
+                    onAdd: { address in Task { await viewModel.addAddress(address) } },
+                    onEdit: { _ in }
+                )
+            }
+            .sheet(isPresented: $showEditAddressSheet) {
+                if let selected = viewModel.selectedAddress {
+                    AddressFormBottomSheet(
+                        address: selected,
+                        onAdd: { _ in },
+                        onEdit: { address in Task { await viewModel.editAddress(id: selected.id, address: address) } }
+                    )
+                }
+            }
             .fullScreenCover(isPresented: isShowingSuccess) {
                 if let order = viewModel.completedOrder, let method = viewModel.lastPaymentMethodUsed {
                     PaymentSuccessView(order: order, paymentMethod: method) {}
@@ -100,22 +139,40 @@ struct PaymentView: View {
     }
 }
 
+// MARK: - Section Headers
+
+struct SectionTitleView: View {
+    let title: String
+    
+    var body: some View {
+        Text(title.uppercased())
+            .font(.system(size: 13, weight: .bold, design: .rounded))
+            .foregroundColor(Color.gray)
+            .padding(.horizontal, 4)
+            .padding(.bottom, 2)
+    }
+}
+
 // MARK: - Order Summary Section
 
 struct OrderSummarySectionView: View {
     let lines: [CartLine]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Order Summary")
-                .font(.system(size: 15, weight: .bold))
-                .foregroundColor(.black)
+        VStack(alignment: .leading, spacing: 12) {
+            SectionTitleView(title: "Order Summary")
 
-            ForEach(lines, id: \.id) { line in
-                OrderLineRow(line: line)
+            VStack(spacing: 0) {
+                ForEach(Array(lines.enumerated()), id: \.element.id) { index, line in
+                    OrderLineRow(line: line)
+                    if index < lines.count - 1 {
+                        Divider()
+                            .padding(.leading, 70)
+                    }
+                }
             }
+            .premiumCardStyle(padding: 16)
         }
-        .premiumCardStyle()
     }
 }
 
@@ -123,59 +180,54 @@ private struct OrderLineRow: View {
     let line: CartLine
 
     var body: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 14) {
             ZStack {
-                RoundedRectangle(cornerRadius: 10)
+                RoundedRectangle(cornerRadius: 12)
                     .fill(Color(.systemGray6))
                 Image(systemName: "bag.fill")
-                    .foregroundColor(.gray.opacity(0.5))
+                    .foregroundColor(.gray.opacity(0.6))
+                    .font(.system(size: 20))
             }
-            .frame(width: 56, height: 56)
+            .frame(width: 54, height: 54)
 
-            VStack(alignment: .leading, spacing: 3) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(line.productTitle)
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.system(size: 14, weight: .bold, design: .rounded))
                     .foregroundColor(.black)
+                    .lineLimit(1)
                 Text("\(line.variantTitle)  •  Qty: \(line.quantity)")
-                    .font(.system(size: 12))
+                    .font(.system(size: 12, weight: .medium))
                     .foregroundColor(.gray)
             }
 
             Spacer()
 
             Text(line.price)
-                .font(.system(size: 14, weight: .bold))
+                .font(.system(size: 15, weight: .heavy, design: .rounded))
                 .foregroundColor(.black)
         }
-        .padding(.horizontal, 16)
         .padding(.vertical, 12)
         .background(Color.white)
-        .cornerRadius(14)
-        .overlay(
-            RoundedRectangle(cornerRadius: 14)
-                .stroke(Color.premiumBorder, lineWidth: 1)
-        )
     }
 }
 
-// MARK: - Payment Method Section (modern selection UI)
+// MARK: - Payment Method Section
 
 struct PaymentMethodSectionView: View {
     @Binding var selected: PaymentMethod
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            Text("Payment Method")
-                .font(.system(size: 15, weight: .bold))
-                .foregroundColor(.black)
+        VStack(alignment: .leading, spacing: 12) {
+            SectionTitleView(title: "Payment Method")
 
-            ForEach(PaymentMethod.allCases) { method in
-                PaymentMethodRow(method: method, isSelected: selected == method) {
-                    selected = method
+            VStack(spacing: 12) {
+                ForEach(PaymentMethod.allCases) { method in
+                    PaymentMethodRow(method: method, isSelected: selected == method) {
+                        selected = method
+                    }
                 }
             }
         }
-        .premiumCardStyle()
     }
 }
 
@@ -186,77 +238,75 @@ private struct PaymentMethodRow: View {
 
     var body: some View {
         Button(action: onSelect) {
-            HStack(spacing: 14) {
+            HStack(spacing: 16) {
                 ZStack {
                     Circle()
                         .fill(isSelected ? Color.brandAccent.opacity(0.12) : Color(.systemGray6))
-                        .frame(width: 42, height: 42)
+                        .frame(width: 44, height: 44)
                     Image(systemName: method.iconName)
-                        .font(.system(size: 17, weight: .semibold))
+                        .font(.system(size: 18, weight: .semibold))
                         .foregroundColor(isSelected ? .brandAccent : .gray)
                 }
 
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: 4) {
                     Text(method.displayName)
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.system(size: 15, weight: .bold, design: .rounded))
                         .foregroundColor(.black)
                     Text(method.subtitle)
-                        .font(.system(size: 12))
+                        .font(.system(size: 13))
                         .foregroundColor(.gray)
                 }
 
                 Spacer()
 
                 Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                    .font(.system(size: 20))
+                    .font(.system(size: 22))
                     .foregroundColor(isSelected ? .brandAccent : Color(.systemGray4))
             }
-            .padding(14)
-            .background(isSelected ? Color.brandAccent.opacity(0.05) : Color.white)
-            .cornerRadius(14)
+            .padding(16)
+            .background(Color.white)
+            .cornerRadius(16)
+            .shadow(color: Color.black.opacity(isSelected ? 0.04 : 0.02), radius: 10, x: 0, y: 4)
             .overlay(
-                RoundedRectangle(cornerRadius: 14)
-                    .stroke(isSelected ? Color.brandAccent : Color.premiumBorder, lineWidth: isSelected ? 1.5 : 1)
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(isSelected ? Color.brandAccent : Color.clear, lineWidth: 1.5)
             )
         }
         .buttonStyle(PremiumScaleButtonStyle())
     }
 }
 
-// MARK: - Shopify Security Card
+// MARK: - Delivery Address Section
 
-struct ShopifySecurityCardView: View {
+struct DeliveryAddressSectionView: View {
+    @ObservedObject var viewModel: PaymentViewModel
+    let onChangeAddress: () -> Void
+    let onEditAddress: () -> Void
+    let onAddAddress: () -> Void
+
     var body: some View {
-        VStack(spacing: 16) {
-            HStack {
-                Image("shopify").resizable().scaledToFit().frame(height: 22)
-                Spacer()
-                HStack(spacing: 6) {
-                    Image(systemName: "lock.shield.fill").font(.system(size: 12)).foregroundColor(.successGreen)
-                    Text("Encrypted").font(.system(size: 12, weight: .bold)).foregroundColor(.successGreen)
-                }
-                .padding(.horizontal, 10).padding(.vertical, 4)
-                .background(Color.successGreen.opacity(0.08))
-                .cornerRadius(8)
+        VStack(alignment: .leading, spacing: 12) {
+            SectionTitleView(title: "Delivery Address")
+            
+            if viewModel.isLoadingAddresses {
+                AddressSkeletonView()
+            } else if let address = viewModel.selectedAddress {
+                DeliveryAddressCard(
+                    address: address,
+                    onEdit: onEditAddress,
+                    onChange: onChangeAddress
+                )
+            } else {
+                EmptyAddressCard(onAddAddress: onAddAddress)
             }
-
-            Text("Your payment information is completely encrypted and securely processed.")
-                .font(.system(size: 13))
-                .foregroundColor(.gray)
-                .lineSpacing(3)
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-            HStack(spacing: 10) {
-                Image("visa").resizable().scaledToFit().frame(height: 24)
-                Image("master_card").resizable().scaledToFit().frame(height: 24)
-                Image("apple_pay").resizable().scaledToFit().frame(height: 24)
-                Image("paypal").resizable().scaledToFit().frame(height: 24)
-                Image("shoppay").resizable().scaledToFit().frame(height: 24)
+            
+            if let error = viewModel.addressError {
+                Text(error)
+                    .font(.system(size: 13))
+                    .foregroundColor(.red)
+                    .padding(.horizontal, 4)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.top, 4)
         }
-        .premiumCardStyle()
     }
 }
 
@@ -266,31 +316,82 @@ struct PriceBreakdownSectionView: View {
     @ObservedObject var viewModel: PaymentViewModel
 
     var body: some View {
-        VStack(spacing: 14) {
-            row("Subtotal", viewModel.subtotalFormatted)
-            row("Shipping", viewModel.shippingLabel, valueColor: .successGreen)
-            if let tax = viewModel.taxFormatted {
-                row("Estimated Tax", tax)
-            }
+        VStack(alignment: .leading, spacing: 12) {
+            SectionTitleView(title: "Payment Details")
 
-            Divider().padding(.vertical, 4)
+            VStack(spacing: 16) {
+                row("Subtotal", viewModel.subtotalFormatted)
+                row("Shipping", viewModel.shippingLabel, valueColor: .successGreen)
+                if let tax = viewModel.taxFormatted {
+                    row("Estimated Tax", tax)
+                }
 
-            HStack {
-                Text("Total").font(.system(size: 16, weight: .bold)).foregroundColor(.black)
-                Spacer()
-                Text(viewModel.totalFormatted)
-                    .font(.system(size: 22, weight: .bold))
-                    .foregroundColor(.brandAccent)
+                Divider().padding(.vertical, 4)
+
+                HStack {
+                    Text("Total")
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(.black)
+                    Spacer()
+                    Text(viewModel.totalFormatted)
+                        .font(.system(size: 24, weight: .black, design: .rounded))
+                        .foregroundColor(.brandAccent)
+                }
             }
+            .premiumCardStyle()
         }
-        .premiumCardStyle()
     }
 
     private func row(_ label: String, _ value: String, valueColor: Color = .black) -> some View {
         HStack {
-            Text(label).font(.system(size: 14)).foregroundColor(.gray)
+            Text(label).font(.system(size: 15)).foregroundColor(.gray)
             Spacer()
-            Text(value).font(.system(size: 14, weight: .medium)).foregroundColor(valueColor)
+            Text(value).font(.system(size: 15, weight: .bold, design: .rounded)).foregroundColor(valueColor)
+        }
+    }
+}
+
+// MARK: - Shopify Security Card
+
+struct ShopifySecurityCardView: View {
+    var body: some View {
+        VStack(spacing: 16) {
+            HStack(spacing: 12) {
+                ZStack {
+                    Circle()
+                        .fill(Color.successGreen.opacity(0.12))
+                        .frame(width: 40, height: 40)
+                    Image(systemName: "lock.shield.fill")
+                        .font(.system(size: 18))
+                        .foregroundColor(.successGreen)
+                }
+                
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Secure Checkout")
+                        .font(.system(size: 15, weight: .bold, design: .rounded))
+                        .foregroundColor(.black)
+                    Text("Encrypted & processed by Shopify")
+                        .font(.system(size: 12))
+                        .foregroundColor(.gray)
+                }
+                Spacer()
+                Image("shopify")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 24)
+            }
+            .padding(16)
+            .background(Color.white)
+            .cornerRadius(16)
+            .shadow(color: Color.black.opacity(0.02), radius: 10, x: 0, y: 4)
+
+            HStack(spacing: 14) {
+                Image("visa").resizable().scaledToFit().frame(height: 18)
+                Image("master_card").resizable().scaledToFit().frame(height: 18)
+                Image("apple_pay").resizable().scaledToFit().frame(height: 18)
+                Image("paypal").resizable().scaledToFit().frame(height: 18)
+            }
+            .opacity(0.5)
         }
     }
 }
@@ -300,41 +401,56 @@ struct PriceBreakdownSectionView: View {
 struct StickyPaymentFooterView: View {
     let totalAmount: String
     let isLoading: Bool
+    let canPlaceOrder: Bool
     let onAction: () -> Void
 
     var body: some View {
         VStack(spacing: 0) {
             Divider()
-            HStack(spacing: 20) {
+                .background(Color.premiumBorder)
+            HStack(spacing: 24) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Total Amount").font(.system(size: 13, weight: .medium)).foregroundColor(.gray)
-                    Text(totalAmount).font(.system(size: 22, weight: .bold)).foregroundColor(.black)
+                    Text("Total")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundColor(.gray)
+                    Text(totalAmount)
+                        .font(.system(size: 22, weight: .black, design: .rounded))
+                        .foregroundColor(.black)
                 }
 
                 Spacer()
 
                 Button(action: onAction) {
-                    HStack(spacing: 10) {
+                    HStack(spacing: 8) {
                         if isLoading {
                             ProgressView().tint(.white)
                         } else {
-                            Image(systemName: "creditcard.fill").font(.system(size: 16, weight: .semibold))
+                            Image(systemName: "bag.fill")
+                                .font(.system(size: 16, weight: .semibold))
                         }
-                        Text("Place Order").font(.system(size: 16, weight: .bold))
+                        Text("Place Order")
+                            .font(.system(size: 16, weight: .bold, design: .rounded))
                     }
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
-                    .frame(height: 48)
-                    .background(Color.brandAccent)
-                    .cornerRadius(16)
-                    .shadow(color: Color.brandAccent.opacity(0.2), radius: 12, x: 0, y: 6)
+                    .frame(height: 54)
+                    .background(
+                        LinearGradient(
+                            colors: [Color.brandAccent, Color(hex: "FF7A00")],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .cornerRadius(18)
+                    .shadow(color: Color.brandAccent.opacity(0.3), radius: 12, x: 0, y: 6)
                 }
                 .buttonStyle(PremiumScaleButtonStyle())
-                .disabled(isLoading)
+                .disabled(!canPlaceOrder)
+                .opacity(canPlaceOrder ? 1.0 : 0.6)
             }
             .padding(.horizontal, 24)
             .padding(.top, 16)
-            .padding(.bottom, 16)
+            .padding(.bottom, 20)
             .background(Color.white)
         }
         .ignoresSafeArea(.all, edges: .bottom)

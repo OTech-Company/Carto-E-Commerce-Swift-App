@@ -10,14 +10,14 @@ import UIKit
 @MainActor
 final class PaymobCheckoutCoordinator {
 
-    private let remoteDataSource: PaymobRemoteDataSource
+    private let repository: PaymobRepositoryProtocol
     private let sdkPresenter: PaymobCheckoutPresenting
 
     init(
-        remoteDataSource: PaymobRemoteDataSource = PaymobAPIRemoteDataSource(),
-        sdkPresenter: PaymobCheckoutPresenting?
+        repository: PaymobRepositoryProtocol,
+        sdkPresenter: PaymobCheckoutPresenting? = nil
     ) {
-        self.remoteDataSource = remoteDataSource
+        self.repository = repository
         self.sdkPresenter = PaymobSDKAdapter()
     }
 
@@ -28,7 +28,7 @@ final class PaymobCheckoutCoordinator {
                 PaymobOrderItem(name: $0.productTitle, amount_cents: Self.amountInCents($0.price), quantity: $0.quantity)
             }
 
-            let intention = try await remoteDataSource.createIntention(
+            let intention = try await repository.createIntention(
                 amountCents: amountCents,
                 currency: "EGP",
                 merchantOrderId: "\(cart.id)-\(UUID().uuidString)",

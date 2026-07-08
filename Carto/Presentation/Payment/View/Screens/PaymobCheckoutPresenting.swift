@@ -32,7 +32,6 @@ extension PaymobSDKAdapter: PaymobCheckoutPresenting {
         from presenter: UIViewController
     ) async -> PaymobCheckoutResult {
 
-        // Prevent multiple simultaneous payments
         guard continuation == nil else {
             return .failure("Another payment is already in progress.")
         }

@@ -111,6 +111,7 @@ struct AddressFormBottomSheet: View {
                     // MARK: - Contact Info
                     AddressField(
                         title: "Phone",
+                        isRequired: true,
                         text: $formData.phone,
                         keyboardType: .phonePad,
                         textContentType: .telephoneNumber

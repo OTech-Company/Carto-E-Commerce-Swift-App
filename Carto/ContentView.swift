@@ -97,6 +97,8 @@ extension ContentView {
             return AnyView(AboutUsView())
         case .cart:
             return AnyView(CartView(viewModel: DIContainer.shared.makeCartViewModel()))
+        case .payment(let cart):
+            return AnyView(PaymentView(viewModel: DIContainer.shared.makePaymentViewModel(cart: cart)))
         }
     }
     @MainActor
