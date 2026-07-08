@@ -76,6 +76,13 @@
 		6FC963122FFE71860072ECE9 /* PaymobSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF819DA2FFE56B100705803 /* PaymobSDK.xcframework */; };
 		6FC963132FFE71860072ECE9 /* PaymobSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF819DA2FFE56B100705803 /* PaymobSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FC963162FFE72100072ECE9 /* PaymobSDK.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6FF819DA2FFE56B100705803 /* PaymobSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6FC9631A2FFEC09B0072ECE9 /* HomeSearchHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC963192FFEC09A0072ECE9 /* HomeSearchHeader.swift */; };
+		6FC9631C2FFEC0AD0072ECE9 /* HomeSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC9631B2FFEC0AD0072ECE9 /* HomeSearchView.swift */; };
+		6FC9631E2FFEC0B70072ECE9 /* HomePromoBannerCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC9631D2FFEC0B70072ECE9 /* HomePromoBannerCarousel.swift */; };
+		6FC963202FFEC0C30072ECE9 /* HomeBrandSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC9631F2FFEC0C30072ECE9 /* HomeBrandSectionHeader.swift */; };
+		6FC963222FFEC0CD0072ECE9 /* HomeProductGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC963212FFEC0CD0072ECE9 /* HomeProductGrid.swift */; };
+		6FC963242FFEC0E20072ECE9 /* HomeAISheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC963232FFEC0E20072ECE9 /* HomeAISheetView.swift */; };
+		6FC963262FFEC11F0072ECE9 /* View+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC963252FFEC1150072ECE9 /* View+Animation.swift */; };
 		6FF819DE2FFE579300705803 /* ImgSearch+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF819DD2FFE579300705803 /* ImgSearch+Extensions.swift */; };
 		D57F105F2FF6AC6A00F421D4 /* BrandsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F105E2FF6AC6A00F421D4 /* BrandsScreen.swift */; };
 		D57F10612FF6ACA900F421D4 /* HomeBrandsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57F10602FF6ACA900F421D4 /* HomeBrandsViewModel.swift */; };
@@ -440,6 +447,13 @@
 		6FB3B80A2FFE4DD5005D1C03 /* ImageSearchRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchRepositoryImpl.swift; sourceTree = "<group>"; };
 		6FB3B80C2FFE4DFD005D1C03 /* FindSimilarProductFromImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindSimilarProductFromImageUseCase.swift; sourceTree = "<group>"; };
 		6FB3B80E2FFE4E14005D1C03 /* ImageSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchRepository.swift; sourceTree = "<group>"; };
+		6FC963192FFEC09A0072ECE9 /* HomeSearchHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchHeader.swift; sourceTree = "<group>"; };
+		6FC9631B2FFEC0AD0072ECE9 /* HomeSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSearchView.swift; sourceTree = "<group>"; };
+		6FC9631D2FFEC0B70072ECE9 /* HomePromoBannerCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePromoBannerCarousel.swift; sourceTree = "<group>"; };
+		6FC9631F2FFEC0C30072ECE9 /* HomeBrandSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBrandSectionHeader.swift; sourceTree = "<group>"; };
+		6FC963212FFEC0CD0072ECE9 /* HomeProductGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProductGrid.swift; sourceTree = "<group>"; };
+		6FC963232FFEC0E20072ECE9 /* HomeAISheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAISheetView.swift; sourceTree = "<group>"; };
+		6FC963252FFEC1150072ECE9 /* View+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Animation.swift"; sourceTree = "<group>"; };
 		6FF819DA2FFE56B100705803 /* PaymobSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = PaymobSDK.xcframework; path = ../../../Downloads/PaymobSDK.xcframework; sourceTree = "<group>"; };
 		6FF819DD2FFE579300705803 /* ImgSearch+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImgSearch+Extensions.swift"; sourceTree = "<group>"; };
 		D57F105E2FF6AC6A00F421D4 /* BrandsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsScreen.swift; sourceTree = "<group>"; };
@@ -1499,6 +1513,12 @@
 		D9E5F69D2FF5DCAF0014DD91 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				6FC963232FFEC0E20072ECE9 /* HomeAISheetView.swift */,
+				6FC963212FFEC0CD0072ECE9 /* HomeProductGrid.swift */,
+				6FC9631F2FFEC0C30072ECE9 /* HomeBrandSectionHeader.swift */,
+				6FC9631D2FFEC0B70072ECE9 /* HomePromoBannerCarousel.swift */,
+				6FC9631B2FFEC0AD0072ECE9 /* HomeSearchView.swift */,
+				6FC963192FFEC09A0072ECE9 /* HomeSearchHeader.swift */,
 				D9E5F69E2FF5DCAF0014DD91 /* HomeProductCardCell.swift */,
 				D9E5F69F2FF5DCAF0014DD91 /* HomeBannerView.swift */,
 			);
@@ -1936,6 +1956,7 @@
 		D9E5F75D2FF5DCAF0014DD91 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6FC963252FFEC1150072ECE9 /* View+Animation.swift */,
 				6FF819DD2FFE579300705803 /* ImgSearch+Extensions.swift */,
 				D977863E2FFD372D00CE8275 /* Product+Firestore.swift */,
 				6F6DD8532FF7F6520099872E /* AI+Extensions.swift */,
@@ -2269,6 +2290,7 @@
 				D977860D2FFD300F00CE8275 /* BrandRemoteDataSource.swift in Sources */,
 				D946FDC42FFA11BD00FBC3E1 /* Order.swift in Sources */,
 				D9E5F8322FF5DCB00014DD91 /* ProductCardView.swift in Sources */,
+				6FC963222FFEC0CD0072ECE9 /* HomeProductGrid.swift in Sources */,
 				D946FD6E2FF9513200FBC3E1 /* ProductDTOs.swift in Sources */,
 				D9E5F7DB2FF5DCB00014DD91 /* ForgotPasswordViewModel.swift in Sources */,
 				D9E5F78D2FF5DCB00014DD91 /* BrandDTO.swift in Sources */,
@@ -2277,6 +2299,7 @@
 				D57F105F2FF6AC6A00F421D4 /* BrandsScreen.swift in Sources */,
 				D9E5F8372FF5DCB00014DD91 /* View+OutlinedText.swift in Sources */,
 				D9E5F7D62FF5DCB00014DD91 /* SplashLogoView.swift in Sources */,
+				6FC9631A2FFEC09B0072ECE9 /* HomeSearchHeader.swift in Sources */,
 				6FB176392FEFE3140008DDDC /* ServiceLocator.swift in Sources */,
 				D9E5F77E2FF5DCB00014DD91 /* OrderRepositoryImpl.swift in Sources */,
 				D9E5F7D92FF5DCB00014DD91 /* AuthLoginViewModel.swift in Sources */,
@@ -2291,6 +2314,7 @@
 				D946FDCC2FFA1B6400FBC3E1 /* AddressDTOs.swift in Sources */,
 				D97786412FFD389F00CE8275 /* ProductColorsView.swift in Sources */,
 				D991BDE02FFBDF6F007D2299 /* PaymobDTOs.swift in Sources */,
+				6FC9631C2FFEC0AD0072ECE9 /* HomeSearchView.swift in Sources */,
 				D9E5F7DF2FF5DCB00014DD91 /* AuthRoute.swift in Sources */,
 				D946FDAD2FFA0AF100FBC3E1 /* StorefrontCartMapper.swift in Sources */,
 				D97785FA2FFD2DBA00CE8275 /* CoreDataStack.swift in Sources */,
@@ -2299,6 +2323,7 @@
 				D9E5F79C2FF5DCB00014DD91 /* GuestSessionStore.swift in Sources */,
 				D9E5F82F2FF5DCB00014DD91 /* ProductsView.swift in Sources */,
 				D9E5F83C2FF5DCB00014DD91 /* BagsTransitionView.swift in Sources */,
+				6FC9631E2FFEC0B70072ECE9 /* HomePromoBannerCarousel.swift in Sources */,
 				D9E5F7A72FF5DCB00014DD91 /* AppUserEntity.swift in Sources */,
 				D991BDE42FFBDFD8007D2299 /* PaymobCheckoutCoordinator.swift in Sources */,
 				D97786122FFD300F00CE8275 /* FavoritesRemoteDataSource.swift in Sources */,
@@ -2321,11 +2346,13 @@
 				6FB3B7FD2FFE4D99005D1C03 /* CartoAIComparisonViewModel.swift in Sources */,
 				6FB3B7FE2FFE4D99005D1C03 /* CartoAIAssistantViewModel.swift in Sources */,
 				6FB3B7FF2FFE4D99005D1C03 /* CartoAIInsightsViewModel.swift in Sources */,
+				6FC963202FFEC0C30072ECE9 /* HomeBrandSectionHeader.swift in Sources */,
 				6FB3B8002FFE4D99005D1C03 /* SuggestionChipsView.swift in Sources */,
 				6FB3B8012FFE4D99005D1C03 /* AIFeatureSheetViewModel.swift in Sources */,
 				6FB3B8022FFE4D99005D1C03 /* CartoAIComparisonView.swift in Sources */,
 				6FB3B8032FFE4D99005D1C03 /* ImageSearchView.swift in Sources */,
 				6FB3B8042FFE4D99005D1C03 /* ComparisonVisualHeader.swift in Sources */,
+				6FC963262FFEC11F0072ECE9 /* View+Animation.swift in Sources */,
 				6FB3B8052FFE4D99005D1C03 /* ImageSearchViewModel.swift in Sources */,
 				6FB3B8062FFE4D99005D1C03 /* AmbientBlobBackground.swift in Sources */,
 				6FB3B8072FFE4D99005D1C03 /* CartoAIOutfitView.swift in Sources */,
@@ -2457,6 +2484,7 @@
 				D59EBD5A2FF6EBD900883859 /* BrandsProductsViewModel.swift in Sources */,
 				D9E5F7AB2FF5DCB00014DD91 /* AddressEntity.swift in Sources */,
 				D97785EE2FFD114F00CE8275 /* AddressSkeletonView.swift in Sources */,
+				6FC963242FFEC0E20072ECE9 /* HomeAISheetView.swift in Sources */,
 				D9E5F7802FF5DCB00014DD91 /* CategoryRepositoryImpl.swift in Sources */,
 				D97786192FFD312200CE8275 /* AddressRepoProtocol.swift in Sources */,
 				D927DA752FFB034800417D9C /* PaymentRepository.swift in Sources */,
