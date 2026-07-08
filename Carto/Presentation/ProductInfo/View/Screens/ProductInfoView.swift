@@ -100,7 +100,7 @@ struct ProductsInfoView: View {
                 discountPercentage: viewModel.product.discountPercentage,
                 isOutOfStock: viewModel.isOutOfStock,
                 maxQuantity: viewModel.product.variants.first?.inventoryQuantity ?? 0,
-                quantity: $viewModel.quantity,
+                quantity: $viewModel.quantity
             )
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

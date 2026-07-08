@@ -75,8 +75,16 @@ final class PaymentViewModel: ObservableObject {
         cart.tax.map { CurrencyFormatter.format($0, currencyCode: cart.currencyCode) }
     }
 
+    var discountFormatted: String? {
+        let subtotal = Double(cart.subtotal) ?? 0
+        let total = Double(cart.total) ?? 0
+        let discount = subtotal - total
+        guard discount > 0.001 else { return nil }
+        return CurrencyFormatter.format(String(discount), currencyCode: cart.currencyCode)
+    }
+
     var totalFormatted: String {
-        CurrencyFormatter.format(String(CartStateStore.shared.finalTotal), currencyCode: cart.currencyCode)
+        CurrencyFormatter.format(cart.total, currencyCode: cart.currencyCode)
     }
 
     let shippingLabel = "Free"
@@ -152,8 +160,7 @@ final class PaymentViewModel: ObservableObject {
 
         case .paymob:
             phase = .processingPaymob
-            let finalAmount = String(CartStateStore.shared.finalTotal)
-            let result = await paymobCoordinator.pay(cart: cart, billing: billing, amount: finalAmount)
+            let result = await paymobCoordinator.pay(cart: cart, billing: billing, amount: cart.total)
 
             switch result {
             case .success:
