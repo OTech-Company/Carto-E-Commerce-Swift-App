@@ -7,17 +7,19 @@ enum AppRoute: Hashable, Identifiable {
     case categoryProducts(categoryId: String, categoryName: String)
     case productDetails(product: Product)
     case aiChat
+    case orderHistory
     case aiComparison
     case aiOutfit
     case imageSearch
     case settings
-    case orderHistory
     case aboutUs
     case cart
     case payment(cart: CartModel)
 
+    case orderDetail(id: String)
     var id: String {
         switch self {
+        case .orderDetail(let id): return id
         case .addresses:
             return "addresses"
         case .brands:
