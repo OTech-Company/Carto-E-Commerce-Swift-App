@@ -17,61 +17,59 @@ struct OrderHistoryView: View {
     }
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color(red: 0.96, green: 0.96, blue: 0.97)
-                    .ignoresSafeArea()
-                
-                VStack(spacing: 0) {
-                    // Custom Styled Top Segment Tab Bar
-                    HStack(spacing: 0) {
-                        ForEach(HistoryTab.allCases, id: \.self) { tab in
-                            Button {
-                                selectedTab = tab
-                            } label: {
-                                VStack(spacing: 8) {
-                                    Text(tab.rawValue)
-                                        .font(.system(size: 16, weight: .medium))
-                                        .foregroundColor(selectedTab == tab ? .black : .gray)
-                                    
-                                    Rectangle()
-                                        .fill(selectedTab == tab ? Color.black : Color.clear)
-                                        .frame(height: 2)
-                                }
+        ZStack {
+            Color(red: 0.96, green: 0.96, blue: 0.97)
+                .ignoresSafeArea()
+            
+            VStack(spacing: 0) {
+                // Custom Styled Top Segment Tab Bar
+                HStack(spacing: 0) {
+                    ForEach(HistoryTab.allCases, id: \.self) { tab in
+                        Button {
+                            selectedTab = tab
+                        } label: {
+                            VStack(spacing: 8) {
+                                Text(tab.rawValue)
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundColor(selectedTab == tab ? .black : .gray)
+                                
+                                Rectangle()
+                                    .fill(selectedTab == tab ? Color.black : Color.clear)
+                                    .frame(height: 2)
                             }
-                            .frame(maxWidth: .infinity)
                         }
+                        .frame(maxWidth: .infinity)
                     }
-                    .padding(.top, 8)
-                    .background(Color(red: 0.96, green: 0.96, blue: 0.97))
-                    
-                    Divider()
-                        .background(Color.black.opacity(0.08))
-                    
-                    Group {
-                        if viewModel.isLoading && viewModel.orders.isEmpty {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: .blue))
-                                .padding(.top, 40)
-                            Spacer()
-                        } else if let error = viewModel.errorMessage {
-                            errorView(message: error)
-                        } else if filteredOrders.isEmpty {
-                            emptyStateView
-                        } else {
-                            orderListView
-                        }
+                }
+                .padding(.top, 8)
+                .background(Color(red: 0.96, green: 0.96, blue: 0.97))
+                
+                Divider()
+                    .background(Color.black.opacity(0.08))
+                
+                Group {
+                    if viewModel.isLoading && viewModel.orders.isEmpty {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                            .padding(.top, 40)
+                        Spacer()
+                    } else if let error = viewModel.errorMessage {
+                        errorView(message: error)
+                    } else if filteredOrders.isEmpty {
+                        emptyStateView
+                    } else {
+                        orderListView
                     }
                 }
             }
-            .navigationTitle("History")
-            .navigationBarTitleDisplayMode(.large)
-            .navigationDestination(for: OrderEntity.self) { order in
-                OrderHistoryDetailView(order: order)
-            }
-            .task {
-                await viewModel.fetchOrders()
-            }
+        }
+        .navigationTitle("history_title")
+        .navigationBarTitleDisplayMode(.large)
+        .navigationDestination(for: OrderEntity.self) { order in
+            OrderHistoryDetailView(order: order)
+        }
+        .task {
+            await viewModel.fetchOrders()
         }
     }
     
@@ -106,7 +104,7 @@ struct OrderHistoryView: View {
             Image(systemName: "bag.badge.questionmark")
                 .font(.system(size: 48))
                 .foregroundColor(.gray.opacity(0.7))
-            Text("No \(selectedTab.rawValue) Orders")
+            Text("no_orders_format \(selectedTab.rawValue)")
                 .font(.headline)
                 .foregroundColor(.black)
             Spacer()

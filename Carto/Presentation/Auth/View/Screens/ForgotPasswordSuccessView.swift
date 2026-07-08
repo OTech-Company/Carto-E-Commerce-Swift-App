@@ -22,11 +22,11 @@ struct ForgotPasswordSuccessView: View {
                     .foregroundColor(Color(hex: "FF5A00"))
 
                 VStack(spacing: 12) {
-                    Text("Check Your Email")
+                    Text("check_your_email_title")
                         .font(.system(size: 26, weight: .bold))
                         .foregroundColor(.black)
 
-                    Text("We sent a password reset link to your email address. Follow the instructions in the email to reset your password.")
+                    Text("password_reset_sent_desc")
                         .font(.system(size: 15))
                         .foregroundColor(.gray)
                         .multilineTextAlignment(.center)
@@ -35,7 +35,7 @@ struct ForgotPasswordSuccessView: View {
                 }
 
                 Button(action: { authRouter.popToRoot() }) {
-                    Text("Back to Sign In")
+                    Text("back_to_signin_btn")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)

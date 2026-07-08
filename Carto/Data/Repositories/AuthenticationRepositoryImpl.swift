@@ -57,7 +57,7 @@ final class AuthenticationRepositoryImpl: AuthenticationRepositoryProtocol {
             throw AuthError.firestoreWriteFailed
         }
 
-        guestSessionStore.setGuest(false)
+        await guestSessionStore.setGuest(false)
 
         return FirebaseUserMapper.toDomain(
             authResult: authUser,
@@ -76,7 +76,7 @@ final class AuthenticationRepositoryImpl: AuthenticationRepositoryProtocol {
             uid: authUser.uid
         )
 
-        guestSessionStore.setGuest(false)
+        await guestSessionStore.setGuest(false)
 
         return FirebaseUserMapper.toDomain(
             authResult: authUser,
@@ -84,11 +84,11 @@ final class AuthenticationRepositoryImpl: AuthenticationRepositoryProtocol {
         )
     }
 
-    func signOut() {
+    func signOut() async {
 
         try? firebaseAuthService.signOut()
 
-        guestSessionStore.setGuest(false)
+        await guestSessionStore.setGuest(false)
     }
 
     // MARK: - Session
@@ -119,9 +119,9 @@ final class AuthenticationRepositoryImpl: AuthenticationRepositoryProtocol {
         }
     }
 
-    func continueAsGuest() {
+    func continueAsGuest() async {
         
-        guestSessionStore.setGuest(true)
+        await guestSessionStore.setGuest(true)
     }
 
     // MARK: - Email Verification

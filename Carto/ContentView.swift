@@ -10,16 +10,16 @@ struct ContentView: View {
     var body: some View {
         TabView {
             makeHomeScreen()
-                .tabItem { Label("Home", systemImage: "house.fill") }
+                .tabItem { Label("home", systemImage: "house.fill") }
             
             makeCategoryListScreen()
-                .tabItem { Label("Categories", systemImage: "square.grid.2x2.fill") }
+                .tabItem { Label("categories", systemImage: "square.grid.2x2.fill") }
             
             makeFavoritesScreen()
-                .tabItem { Label("Favorites", systemImage: "heart.fill") }
+                .tabItem { Label("favorites", systemImage: "heart.fill") }
             
-            makeSettingsScreen()
-                .tabItem { Label("Settings", systemImage: "gearshape.fill") }
+            makeProfileScreen()
+                .tabItem { Label("profile", systemImage: "person.fill") }
         }
         .tint(Color("PrimaryColor"))
     }
@@ -54,9 +54,9 @@ extension ContentView {
             }
     }
 
-    @ViewBuilder @MainActor
-    func makeSettingsScreen() -> some View {
-        SettingsView()
+    @ViewBuilder
+    func makeProfileScreen() -> some View {
+        ProfileView()
             .withRouter { route in
                 routeDestination(for: route)
             }
@@ -65,8 +65,6 @@ extension ContentView {
     @MainActor
     private func routeDestination(for route: AppRoute) -> AnyView {
         switch route {
-        case .addresses:
-            return AnyView(AddressView())
         case .brands:
             return AnyView(BrandsScreen(
                 viewModel: HomeBrandsViewModel(useCase: DIContainer.shared.makeBrandsUseCase())
@@ -89,20 +87,24 @@ extension ContentView {
                     viewModel: DIContainer.shared.makeProductsInfoViewModel(product: product)
                 )
             )
+        case .addresses:
+            return AnyView(AddressView())
+        case .settings:
+            return AnyView(SettingsView())
+        case .orderHistory:
+            return AnyView(makeOrderHistoryScreen())
+        case .aboutUs:
+            return AnyView(AboutUsView())
         case .cart:
             return AnyView(CartView(viewModel: DIContainer.shared.makeCartViewModel()))
         }
     }
     
-//    func makeOrderHistoryScreen() -> some View {
-//            let repository = ServiceLocator.shared.resolveOrderRepository()
-//            let useCase = GetOrderHistoryUseCase(repository: repository)
-//            let viewModel = OrderHistoryViewModel(getOrderHistoryUseCase: useCase)
-//
-//            if #available(iOS 17.0, *) {
-//                OrderHistoryView(viewModel: viewModel)
-//            } else {
-//                Text("Please upgrade to iOS 17.")
-//            }
-//        }
+    func makeOrderHistoryScreen() -> some View {
+            let repository = ServiceLocator.shared.resolveOrderRepository()
+            let useCase = GetOrderHistoryUseCase(repository: repository)
+            let viewModel = OrderHistoryViewModel(getOrderHistoryUseCase: useCase)
+
+            return OrderHistoryView(viewModel: viewModel)
+        }
 }

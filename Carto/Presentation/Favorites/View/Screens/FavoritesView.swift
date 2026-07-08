@@ -19,7 +19,7 @@ struct FavoritesView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                Text("Favorites")
+                Text("favorites_title")
                     .font(.title3)
                     .fontWeight(.bold)
                     .padding(.top)
@@ -63,14 +63,14 @@ struct FavoritesView: View {
                 viewModel.loadFavorites()
             }
             .alert("Remove from favorites?", isPresented: $viewModel.showDeleteConfirmation) {
-                Button("Cancel", role: .cancel) {
+                Button("cancel_btn", role: .cancel) {
                     viewModel.cancelDelete()
                 }
-                Button("Delete", role: .destructive) {
+                Button("delete_btn", role: .destructive) {
                     viewModel.confirmDelete()
                 }
             } message: {
-                Text("This item will be removed from your favorites.")
+                Text("remove_favorite_desc")
             }
             .navigationDestination(
                 isPresented: Binding(

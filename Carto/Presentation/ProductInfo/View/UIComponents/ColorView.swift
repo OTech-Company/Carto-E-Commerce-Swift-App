@@ -16,7 +16,7 @@ struct ColorView: View {
             Spacer()
         } else {
             VStack(spacing: 16) {
-                Text("Color")
+                Text("color_label")
                     .bold()
 
                 ForEach(colorNames.indices, id: \.self) { index in

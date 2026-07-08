@@ -10,7 +10,7 @@ import Foundation
 enum StorefrontAddressQueries {
 
     static let fetchAddresses = """
-        query FetchAddresses($customerAccessToken: String!) {
+        query FetchAddresses($customerAccessToken: String!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
             customer(customerAccessToken: $customerAccessToken) {
                 defaultAddress {
                     id
@@ -43,7 +43,7 @@ enum StorefrontAddressQueries {
         """
     
     static let createAddress = """
-        mutation CustomerAddressCreate($customerAccessToken: String!, $address: MailingAddressInput!) {
+        mutation CustomerAddressCreate($customerAccessToken: String!, $address: MailingAddressInput!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           customerAddressCreate(customerAccessToken: $customerAccessToken, address: $address) {
             customerAddress {
               id
@@ -67,7 +67,7 @@ enum StorefrontAddressQueries {
         """
 
     static let updateAddress = """
-        mutation CustomerAddressUpdate($customerAccessToken: String!, $id: ID!, $address: MailingAddressInput!) {
+        mutation CustomerAddressUpdate($customerAccessToken: String!, $id: ID!, $address: MailingAddressInput!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           customerAddressUpdate(customerAccessToken: $customerAccessToken, id: $id, address: $address) {
             customerAddress {
               id
@@ -91,7 +91,7 @@ enum StorefrontAddressQueries {
         """
 
     static let deleteAddress = """
-        mutation CustomerAddressDelete($customerAccessToken: String!, $id: ID!) {
+        mutation CustomerAddressDelete($customerAccessToken: String!, $id: ID!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           customerAddressDelete(customerAccessToken: $customerAccessToken, id: $id) {
             deletedCustomerAddressId
             customerUserErrors {
@@ -103,7 +103,7 @@ enum StorefrontAddressQueries {
         """
 
     static let setDefaultAddress = """
-        mutation CustomerDefaultAddressUpdate($customerAccessToken: String!, $addressId: ID!) {
+        mutation CustomerDefaultAddressUpdate($customerAccessToken: String!, $addressId: ID!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           customerDefaultAddressUpdate(customerAccessToken: $customerAccessToken, addressId: $addressId) {
             customer {
               id

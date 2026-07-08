@@ -24,26 +24,36 @@ struct StorefrontMailingAddressInput: Encodable {
 // MARK: - Variables
 
 struct StorefrontFetchAddressesVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let customerAccessToken: String
 }
 
 struct StorefrontCreateAddressVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let customerAccessToken: String
     let address: StorefrontMailingAddressInput
 }
 
 struct StorefrontUpdateAddressVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let customerAccessToken: String
     let id: String
     let address: StorefrontMailingAddressInput
 }
 
 struct StorefrontDeleteAddressVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let customerAccessToken: String
     let id: String
 }
 
 struct StorefrontSetDefaultAddressVariables: Encodable {
+    var country: String = AppSettings.shared.currentCountryCode
+    var language: String = AppSettings.shared.currentLanguageCode
     let customerAccessToken: String
     let addressId: String
 }

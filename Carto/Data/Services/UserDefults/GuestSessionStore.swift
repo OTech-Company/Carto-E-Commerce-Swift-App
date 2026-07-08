@@ -20,7 +20,11 @@ final class GuestSessionStore: GuestSessionStoreProtocol {
         defaults.bool(forKey: key)
     }
 
-    func setGuest(_ isGuest: Bool) {
+    @MainActor
+    func setGuest(_ isGuest: Bool) async {
+        let authSession: AuthSession = DIContainer.shared.authSession
+        
         defaults.set(isGuest, forKey: key)
+        await authSession.refreshSession()
     }
 }

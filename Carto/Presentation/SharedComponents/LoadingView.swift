@@ -19,7 +19,7 @@ struct LoadingView: View {
                 .scaleEffect(1.5)
                 .foregroundColor(Color("PrimaryColor"))
 
-            Text("Loading...")
+            Text("loading_text")
                 .font(.headline)
                 .foregroundColor(Color("PrimaryColor"))
         }

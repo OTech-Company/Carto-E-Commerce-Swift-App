@@ -35,7 +35,7 @@ struct OrderCardRow: View {
                 
                 // Item Descriptive Information Block
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Order #\(order.orderNumber)")
+                    Text("order_number_format \(order.orderNumber)")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.black)
                         .lineLimit(1)
@@ -61,7 +61,7 @@ struct OrderCardRow: View {
             Button {
                 // Action logic to handle item re-ordering
             } label: {
-                Text("Reorder")
+                Text("reorder_btn")
                     .font(.system(size: 15, weight: .semibold))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)

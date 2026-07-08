@@ -10,7 +10,7 @@ import Foundation
 enum StorefrontProductQueries {
 
     static let fetchProducts = """
-        query FetchProducts($first: Int!, $after: String) {
+        query FetchProducts($first: Int!, $after: String, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           products(first: $first, after: $after) {
             edges {
               node {
@@ -78,7 +78,7 @@ enum StorefrontProductQueries {
         """
 
     static let fetchProductByHandle = """
-        query FetchProductByHandle($handle: String!) {
+        query FetchProductByHandle($handle: String!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           productByHandle(handle: $handle) {
             id
             title
@@ -136,7 +136,7 @@ enum StorefrontProductQueries {
         """
 
     static let searchProducts = """
-        query SearchProducts($query: String!, $first: Int!) {
+        query SearchProducts($query: String!, $first: Int!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           products(query: $query, first: $first) {
             edges {
               node {

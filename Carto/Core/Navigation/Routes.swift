@@ -6,6 +6,9 @@ enum AppRoute: Hashable, Identifiable {
     case brandProducts(brandId: Int, brandName: String)
     case categoryProducts(categoryId: String, categoryName: String)
     case productDetails(product: Product)
+    case settings
+    case orderHistory
+    case aboutUs
     case cart
 
     var id: String {
@@ -20,6 +23,12 @@ enum AppRoute: Hashable, Identifiable {
             return "categoryProducts-\(categoryId)"
         case .productDetails(let product):
             return "productDetails-\(product.id)"
+        case .settings:
+            return "settings"
+        case .orderHistory:
+            return "orderHistory"
+        case .aboutUs:
+            return "aboutUs"
         case .cart:
             return "cart"
         }

@@ -10,7 +10,7 @@ import Foundation
 enum StorefrontCustomerQueries {
 
     static let fetchCustomer = """
-        query FetchCustomer($customerAccessToken: String!) {
+        query FetchCustomer($customerAccessToken: String!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           customer(customerAccessToken: $customerAccessToken) {
             id
             firstName
@@ -93,7 +93,7 @@ enum StorefrontCustomerQueries {
         """
 
     static let customerAccessTokenCreate = """
-        mutation CustomerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
+        mutation CustomerAccessTokenCreate($input: CustomerAccessTokenCreateInput!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           customerAccessTokenCreate(input: $input) {
             customerAccessToken {
               accessToken
@@ -108,7 +108,7 @@ enum StorefrontCustomerQueries {
         """
 
     static let customerAccessTokenDelete = """
-        mutation CustomerAccessTokenDelete($customerAccessToken: String!) {
+        mutation CustomerAccessTokenDelete($customerAccessToken: String!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           customerAccessTokenDelete(customerAccessToken: $customerAccessToken) {
             deletedAccessToken
             userErrors {
@@ -120,7 +120,7 @@ enum StorefrontCustomerQueries {
         """
 
     static let customerCreate = """
-        mutation CustomerCreate($input: CustomerCreateInput!) {
+        mutation CustomerCreate($input: CustomerCreateInput!, $country: CountryCode, $language: LanguageCode) @inContext(country: $country, language: $language) {
           customerCreate(input: $input) {
             customer {
               id

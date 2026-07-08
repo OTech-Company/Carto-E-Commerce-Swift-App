@@ -52,13 +52,13 @@ struct VerificationView: View {
                         .padding(.top, 40)
 
                         VStack(spacing: 12) {
-                            Text("Verify Your Email")
+                            Text("verify_email_title")
                                 .font(.system(size: 26, weight: .bold))
                                 .foregroundColor(.black)
                                 .multilineTextAlignment(.center)
 
                             VStack(spacing: 6) {
-                                Text("We've sent a verification link to")
+                                Text("verification_sent_desc")
                                     .font(.system(size: 15))
                                     .foregroundColor(.gray)
 
@@ -81,7 +81,7 @@ struct VerificationView: View {
 
                         VStack(spacing: 16) {
                             Button(action: { viewModel.checkVerificationStatus() }) {
-                                Text("Continue")
+                                Text("continue_btn")
                                     .font(.system(size: 16, weight: .bold))
                                     .foregroundColor(.white)
                                     .frame(maxWidth: .infinity)
@@ -108,12 +108,12 @@ struct VerificationView: View {
                 Spacer()
 
                 HStack(spacing: 4) {
-                    Text("Wrong email?")
+                    Text("wrong_email_link")
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
 
                     Button(action: { viewModel.goBack() }) {
-                        Text("Go Back")
+                        Text("go_back_btn")
                             .font(.system(size: 14, weight: .bold))
                             .foregroundColor(Color(hex: "FF5A00"))
                             .frame(minWidth: 44, minHeight: 44)

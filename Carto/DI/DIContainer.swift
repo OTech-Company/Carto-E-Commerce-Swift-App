@@ -163,4 +163,8 @@ final class DIContainer {
             cartUseCase: makeCartUseCase()
         )
     }
+    
+    func makeProfileViewModel() -> ProfileViewModel {
+        ProfileViewModel(authRepo: authRepository)
+    }
 }
