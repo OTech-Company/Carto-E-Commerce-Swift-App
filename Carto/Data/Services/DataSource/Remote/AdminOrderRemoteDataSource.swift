@@ -33,12 +33,15 @@ final class ShopifyAdminOrderRemoteDataSource: AdminOrderRemoteDataSource {
             gateway: paymentMethod.gatewayName
         )
 
+        let user = AuthSession.shared.currentUser
+
         let input = AdminOrderCreateInput(
             lineItems: lineItems,
             financialStatus: isPaid ? "PAID" : "PENDING",
             transactions: [transaction],
-            email: nil,
-            note: "Created via Carto iOS app — payment method: \(paymentMethod.displayName)"
+            email: user?.email,
+            note: "Created via Carto iOS app — payment method: \(paymentMethod.displayName)",
+            customerId: user?.shopifyCustomerId
         )
 
         let request = GraphQLRequest(

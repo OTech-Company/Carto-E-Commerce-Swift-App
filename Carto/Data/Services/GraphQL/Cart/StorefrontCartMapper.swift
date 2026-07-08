@@ -41,14 +41,11 @@ extension StorefrontCartDiscountCode {
 
 extension StorefrontCartLine {
     func toDomain() -> CartLine {
-        // Extract the integer ID from the GraphQL product ID (e.g. "gid://shopify/Product/123456789")
         let productIdString = merchandise.product.id.components(separatedBy: "/").last ?? "0"
-        let productId = Int(productIdString) ?? 0
-        
         return CartLine(
             id: id,
             variantId: merchandise.id,
-            productId: productId,
+            productId: Int(productIdString) ?? 0,
             productTitle: merchandise.product.title,
             variantTitle: merchandise.title,
             quantity: quantity,

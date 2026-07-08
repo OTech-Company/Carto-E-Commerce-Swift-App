@@ -36,6 +36,7 @@ struct AdminOrderCreateInput: Encodable {
     let transactions: [AdminOrderTransactionInput]?
     let email: String?
     let note: String?
+    let customerId: String?
 }
 
 struct AdminOrderCreateOptionsInput: Encodable {

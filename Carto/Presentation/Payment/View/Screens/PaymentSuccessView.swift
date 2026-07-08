@@ -11,8 +11,7 @@ struct PaymentSuccessView: View {
     let order: AdminOrder
     let paymentMethod: PaymentMethod
     let onContinueShopping: () -> Void
-
-    @Environment(\.dismiss) private var dismiss
+    let onViewOrders: () -> Void
 
     var body: some View {
         ZStack {
@@ -57,7 +56,7 @@ struct PaymentSuccessView: View {
                 Spacer()
 
                 VStack(spacing: 12) {
-                    Button(action: { onContinueShopping(); dismiss() }) {
+                    Button(action: onContinueShopping) {
                         Text("Continue Shopping")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(.white)
@@ -68,7 +67,7 @@ struct PaymentSuccessView: View {
                     }
                     .buttonStyle(PremiumScaleButtonStyle())
 
-                    Button(action: { /* Navigate to Orders list */ }) {
+                    Button(action: onViewOrders) {
                         Text("View Orders")
                             .font(.system(size: 15, weight: .semibold))
                             .foregroundColor(.black)
