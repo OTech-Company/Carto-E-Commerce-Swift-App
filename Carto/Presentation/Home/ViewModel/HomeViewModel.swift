@@ -14,6 +14,10 @@ final class HomeViewModel: ObservableObject {
     let productVM: HomeProductsViewModel
     
     private var cancellables = Set<AnyCancellable>()
+    @Published var showAuthAlert: Bool = false
+    private var isAuthenticated: Bool {
+        AuthSession.shared.sessionState.isAuthenticated
+    }
     
     init(brandVM: HomeBrandsViewModel, productVM: HomeProductsViewModel) {
         self.brandVM = brandVM
@@ -32,5 +36,18 @@ final class HomeViewModel: ObservableObject {
         async let brands: Void = brandVM.loadBrands()
         async let products: Void = productVM.loadProducts()
         _ = await (brands, products)
+    }
+    
+    func openCart(onSuccess: () -> Void) {
+        guard isAuthenticated else {
+            showAuthAlert = true
+            return
+        }
+
+        onSuccess()
+    }
+    
+    func logout() async {
+        await DIContainer.shared.authRepository.signOut()
     }
 }

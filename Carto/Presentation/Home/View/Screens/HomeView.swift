@@ -27,7 +27,7 @@ struct HomeView: View {
             
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    HomeSearchHeader(searchText: $searchText, isSearchFocused: _isSearchFocused)
+                    HomeSearchHeader(viewModel: viewModel,searchText: $searchText, isSearchFocused: _isSearchFocused)
                     
                     if isSearchFocused {
                         HomeSearchView(searchText: searchText, columns: columns)
@@ -50,6 +50,16 @@ struct HomeView: View {
             HomeAISheetView(isShowingAISheet: $isShowingAISheet)
         }
         .environmentObject(viewModel)
+        .alert("Login Required", isPresented: $viewModel.showAuthAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("Login") {
+                Task{
+                   await viewModel.logout()
+                }
+            }
+        } message: {
+            Text("Please log in to add items to your cart or manage your favorites.")
+        }
     }
     
     // MARK: - Default Content View

@@ -19,7 +19,7 @@ final class AuthSession: ObservableObject {
 
     private let firestoreUserService: FirestoreUserServiceProtocol
     private let guestSessionStore: GuestSessionStoreProtocol
-
+    var sessionState: SessionState = SessionState.loading
     // MARK: - Properties
 
     private let sessionSubject: CurrentValueSubject<SessionState, Never>
@@ -71,11 +71,13 @@ final class AuthSession: ObservableObject {
 
         if guestSessionStore.isGuest {
             sessionSubject.send(.guest)
+            self.sessionState = .guest
             return
         }
 
         guard let firebaseUser else {
             sessionSubject.send(.unauthenticated)
+            self.sessionState = .unauthenticated
             return
         }
 
@@ -85,8 +87,10 @@ final class AuthSession: ObservableObject {
             let user = try await currentUser(firebaseUser: firebaseUser)
 
             sessionSubject.send(.authenticated(user))
+            self.sessionState = .authenticated(user)
         } catch {
             sessionSubject.send(.unauthenticated)
+            self.sessionState = .unauthenticated
         }
     }
 
