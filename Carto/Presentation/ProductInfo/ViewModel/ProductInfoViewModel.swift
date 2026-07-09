@@ -7,6 +7,8 @@
 
 import Foundation
 import Combine
+import ARProductViewer
+import UIKit
 
 @MainActor
 final class ProductsInfoViewModel: ObservableObject {
@@ -22,6 +24,30 @@ final class ProductsInfoViewModel: ObservableObject {
     private let cartUseCase: CartUseCaseProtocol
     private var cancellables: Set<AnyCancellable> = []
 
+    // MARK: - AR
+    private let arService: ARPreviewServicing = ARPreviewService()
+    @Published var isPresentingAR = false
+    @Published private(set) var arModelURL: URL?
+
+    /// POC: only ASICS TIGER has a bundled AR asset. Must match the .usdz filename (no extension).
+    private let arModelName = "AsicsTiger"
+
+    var isARAvailable: Bool {
+        let match = product.id == 8357258199084
+        print("AR check — product.id: \(product.id), match: \(match)")
+        guard match else { return false }
+        let canPreview = arService.canPreviewAR(modelName: arModelName)
+        print("AR check — canPreviewAR: \(canPreview)")
+        return canPreview
+    }
+
+    
+    func didTapARButton() {
+        guard let url = arService.arModelURL(named: arModelName) else { return }
+        arModelURL = url
+        isPresentingAR = true
+    }
+    
     var selectedColor: String {
         guard product.colors.indices.contains(selectedColorIndex) else {
             return product.colors.first ?? ""
@@ -143,5 +169,22 @@ final class ProductsInfoViewModel: ObservableObject {
         let variant = product.variantFor(color: selectedColor, size: selectedSize)
         isOutOfStock = (variant?.inventoryQuantity ?? 0) <= 0
         syncQuantityFromCart(CartStateStore.shared.cart)
+    }
+}
+
+extension UIApplication {
+    var currentUIWindow: UIWindow? {
+        connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .first { $0.isKeyWindow }
+    }
+
+    var topMostViewController: UIViewController? {
+        guard var top = currentUIWindow?.rootViewController else { return nil }
+        while let presented = top.presentedViewController {
+            top = presented
+        }
+        return top
     }
 }
