@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PaymentProductItemView: View {
     let line: CartLine
+    @AppStorage("app_currency") var appCurrency: AppCurrency = .egyptianPound
 
     var body: some View {
         HStack(spacing: 14) {
@@ -40,7 +41,7 @@ struct PaymentProductItemView: View {
 
             Spacer()
 
-            Text(line.price)
+            Text(appCurrency.format(price: Double(line.price) ?? 0))
                 .font(.system(size: 15, weight: .heavy, design: .rounded))
                 .foregroundColor(.black)
         }

@@ -10,6 +10,7 @@ import SwiftUI
 struct ProductCard: View {
     
     let product: ProductInfo
+    @AppStorage("app_currency") var appCurrency: AppCurrency = .egyptianPound
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -40,12 +41,12 @@ struct ProductCard: View {
                 
                 HStack(spacing: 6) {
                     
-                    Text("$\(product.price, specifier: "%.2f")")
+                    Text(appCurrency.format(price: product.price))
                         .font(.system(size: 12, weight: .bold))
                         .foregroundColor(.blue)
                     
                     if let compareAtPrice = product.compareAtPrice {
-                        Text("$\(compareAtPrice, specifier: "%.2f")")
+                        Text(appCurrency.format(price: compareAtPrice))
                             .font(.system(size: 12))
                             .foregroundColor(.secondary)
                             .strikethrough()
