@@ -39,10 +39,6 @@ struct ProductsInfoView: View {
                     Spacer()
 
                     ZStack {
-                        Image("NIKE")
-                            .resizable()
-                            .scaledToFit()
-
                         AsyncImage(url: URL(string: viewModel.product.imageURL)) { image in
                             image
                                 .resizable()

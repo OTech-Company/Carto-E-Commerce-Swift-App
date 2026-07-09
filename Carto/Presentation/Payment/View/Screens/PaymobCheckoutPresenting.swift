@@ -46,12 +46,7 @@ extension PaymobSDKAdapter: PaymobCheckoutPresenting {
 
             theme.appName = "Carto"
             theme.appIcon = UIImage(named: "app_logo")
-            theme.buttonBackgroundColor = UIColor(
-                red: 1.0,
-                green: 0.35,
-                blue: 0.0,
-                alpha: 1.0
-            )
+            theme.buttonBackgroundColor = UIColor(named: "PrimaryColor") ?? .systemBlue
             theme.buttonTextColor = .white
             theme.isKeyboardHandlingEnabled = true
             theme.showSaveCard = false

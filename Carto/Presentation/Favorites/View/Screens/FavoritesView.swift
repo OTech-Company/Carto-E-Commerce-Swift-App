@@ -37,13 +37,13 @@ struct FavoritesView: View {
                         VStack {
                             Spacer()
                             
-                            Text("No Favorites Yet")
+                            Text("no_favorites_yet")
                                 .font(.title2)
                                 .fontWeight(.bold)
                                 .foregroundColor(.primary)
                                 .padding(.top, 10)
                             
-                            Text("Tap the heart icon to save items here")
+                            Text("no_fav_found_desc")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                                 .padding(.top, 4)

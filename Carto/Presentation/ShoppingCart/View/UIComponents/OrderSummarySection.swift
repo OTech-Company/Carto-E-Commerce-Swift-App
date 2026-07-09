@@ -15,6 +15,7 @@ struct OrderSummarySection: View {
     let deliveryCost: Double
     
     @Environment(\.colorScheme) var colorScheme
+    @AppStorage("app_currency") var appCurrency: AppCurrency = .egyptianPound
 
     private var hasFreeDelivery: Bool {
         subtotal >= freeDeliveryThreshold
@@ -34,7 +35,7 @@ struct OrderSummarySection: View {
 
             summaryRow(
                 title: "Subtotal",
-                value: String(format: "$%.2f", subtotal)
+                value: appCurrency.format(price: subtotal)
             )
 
             HStack {
@@ -54,14 +55,14 @@ struct OrderSummarySection: View {
 
                 } else {
 
-                    Text(String(format: "$%.2f", deliveryCost))
+                    Text(appCurrency.format(price: deliveryCost))
                         .fontWeight(.semibold)
                 }
             }
 
             summaryRow(
                 title: "Discount",
-                value: String(format: "-$%.2f", discount),
+                value: "-" + appCurrency.format(price: discount),
                 valueColor: .red
             )
 
@@ -81,7 +82,7 @@ struct OrderSummarySection: View {
 
                 Spacer()
 
-                Text(String(format: "$%.2f", total))
+                Text(appCurrency.format(price: total))
                     .font(.title2.bold())
                     .foregroundStyle(Color("PrimaryColor")) // Corporate branding orange asset
             }

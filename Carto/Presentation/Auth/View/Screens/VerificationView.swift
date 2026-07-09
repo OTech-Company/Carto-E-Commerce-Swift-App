@@ -71,7 +71,7 @@ struct VerificationView: View {
                             }
                             .multilineTextAlignment(.center)
 
-                            Text("Please open your inbox and click the verification link. After verifying your email, return to the app and tap Continue.")
+                            Text("verification_desc")
                                 .font(.system(size: 14))
                                 .foregroundColor(.secondary) // Updated from static .gray to adaptive semantic color
                                 .multilineTextAlignment(.center)
@@ -90,10 +90,10 @@ struct VerificationView: View {
                                     .background(Color("PrimaryColor")) // Corporate branding orange asset
                                     .clipShape(RoundedRectangle(cornerRadius: 12))
                             }
-                            .accessibilityLabel("Continue check verification")
+                            .accessibilityLabel("continue_check_verification")
 
                             Button(action: { viewModel.resendVerificationEmail() }) {
-                                Text(viewModel.isResendDisabled ? "Resend in \(viewModel.countdownValue)s" : "Resend Verification Email")
+                                Text(viewModel.isResendDisabled ? "resend_in \(viewModel.countdownValue)s" : "resend_verification_email")
                                     .font(.system(size: 15, weight: .semibold))
                                     .foregroundColor(viewModel.isResendDisabled ? Color(.placeholderText) : Color("PrimaryColor"))
                                     .frame(maxWidth: .infinity)
