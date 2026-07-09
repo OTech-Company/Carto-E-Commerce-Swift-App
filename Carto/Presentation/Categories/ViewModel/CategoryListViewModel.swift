@@ -30,7 +30,28 @@ final class CategoryListViewModel: ObservableObject {
         self.fetchSubcategoriesUseCase = fetchSubcategoriesUseCase
     }
     
-    func loadCategories() async {
+    /// Entry point to load all initial category data exactly once
+    func loadAllDataOnce() async {
+        // 💡 GUARD: If we already have a success state with categories, exit immediately
+        if case .success = state { return }
+        
+        // 1. Fetch main categories
+        await loadCategories()
+        
+        // 2. Only proceed if main categories loaded successfully
+        if case .success = state {
+            print("======")
+            await loadSubCategories()
+            print("======")
+            await loadSubcategories(for: "347833073708")
+            await loadSubcategories(for: "347833565228")
+        }
+    }
+    
+     func loadCategories() async {
+        // Double check guard inside the helper as well
+        if case .success = state { return }
+        
         state = .loading
         do {
             let categories = try await getCategoryUseCase.executegetCategories()
@@ -40,14 +61,14 @@ final class CategoryListViewModel: ObservableObject {
         }
     }
     
-    func loadSubCategories() async {
+    private func loadSubCategories() async {
         do {
             _ = try await getCategoryUseCase.execute()
-            
         } catch {
             state = .error(error.localizedDescription)
         }
     }
+    
     // Dynamic background loading for subcategories when a parent card appears or is tapped
     func loadSubcategories(for collectionId: String) async {
         guard subcategoriesByCollection[collectionId] == nil else { return } // Already cached

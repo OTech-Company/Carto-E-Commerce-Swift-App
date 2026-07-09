@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BrandsScreen: View {
-    @ObservedObject var viewModel: HomeBrandsViewModel
+    @StateObject var viewModel: HomeBrandsViewModel
     @State private var searchText: String = ""
     @EnvironmentObject private var router: Router<AppRoute>
     

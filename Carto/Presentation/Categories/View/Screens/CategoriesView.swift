@@ -3,13 +3,6 @@
 //  Carto
 //
 //  Created by osama hosam on 28/06/2026.
-//
-//
-//  CategoriesView.swift
-//  Carto
-//
-//  Created by osama hosam on 28/06/2026.
-//
 
 import SwiftUI
 
@@ -80,16 +73,12 @@ struct CategoryListView: View {
         }
         .background(Color(.systemGroupedBackground).opacity(0.3))
         .task {
-            await viewModel.loadCategories()
-            print("======")
-            await viewModel.loadSubCategories()
-            print("======")
-            await viewModel.loadSubcategories(for: "347833073708")
-            await viewModel.loadSubcategories(for: "347833565228")
-
-        }
-        .onAppear {
-            Task { await viewModel.loadCategories() }
-        }
+                    if case .success = viewModel.state {
+                        return // Exit early, data is already loaded!
+                    }
+                    
+                    await viewModel.loadCategories()
+ 
+                }
     }
 }

@@ -781,7 +781,6 @@
 		6FB1761F2FEFE3140008DDDC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6FC9632E2FFEFF800072ECE9 /* ARModels */,
 				6FB1761B2FEFE3140008DDDC /* Assets */,
 				6FB1761E2FEFE3140008DDDC /* Localization */,
 			);
@@ -2061,6 +2060,7 @@
 			isa = PBXGroup;
 			children = (
 				D9EB9A792FEFD04D005CE9A4 /* Carto */,
+				6FC9632E2FFEFF800072ECE9 /* ARModels */,
 				D9EB9A8F2FEFD058005CE9A4 /* CartoTests */,
 				D9EB9A992FEFD058005CE9A4 /* CartoUITests */,
 				D9EB9A782FEFD04D005CE9A4 /* Products */,

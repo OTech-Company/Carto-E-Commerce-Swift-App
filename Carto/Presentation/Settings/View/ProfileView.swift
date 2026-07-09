@@ -16,7 +16,7 @@ struct ProfileView: View {
         .makeProfileViewModel()
 
     private var isAuthenticated: Bool {
-        currentUser != nil
+        AuthSession.shared.sessionState.isAuthenticated
     }
 
     var body: some View {
@@ -32,8 +32,8 @@ struct ProfileView: View {
             List {
                 if isAuthenticated {
                     userInfoSection
+                    activitySection
                 }
-                activitySection
                 appSettingsSection
                 otherSection
             }

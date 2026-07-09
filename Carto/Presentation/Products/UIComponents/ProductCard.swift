@@ -246,6 +246,17 @@ struct ProductCard: View {
         .onLongPressGesture(minimumDuration: .infinity, pressing: { pressing in
             isPressed = pressing
         }, perform: {})
+        
+        .alert("Login Required", isPresented: $viewModel.showAuthAlert) {
+                    Button("Cancel", role: .cancel) { }
+                    Button("Login") {
+                        Task{
+                           await viewModel.logout()
+                        }
+                    }
+                } message: {
+                    Text("Please log in to add items to your cart or manage your favorites.")
+                }
     }
 
     @ViewBuilder
