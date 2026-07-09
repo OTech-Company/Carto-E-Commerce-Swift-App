@@ -5,7 +5,6 @@
 //  Created by Osama Hosam on 06/07/2026.
 //
 
-
 import Foundation
 import Combine
 
@@ -42,6 +41,9 @@ final class CartoAIComparisonViewModel: ObservableObject {
     private var allProductsCatalog: [Product] = []
     private var cancellables = Set<AnyCancellable>()
     
+    // Flag to stop selection text updates from re-triggering search dropdowns
+    private var isSelectingProduct: Bool = false
+    
     init(compareUseCase: CompareProductsUseCase, productsUseCase: ProductUseCaseProtocol) {
         self.compareUseCase = compareUseCase
         self.productsUseCase = productsUseCase
@@ -53,7 +55,6 @@ final class CartoAIComparisonViewModel: ObservableObject {
     // MARK: - Pre-fetch Catalog
     private func loadProductCatalog() async {
         do {
-            // Fetching baseline catalog data from Repository Layer via Domain Protocol Interactor
             self.allProductsCatalog = try await productsUseCase.execute()
         } catch {
             self.errorMessage = "Failed to synchronize product catalog records."
@@ -68,6 +69,8 @@ final class CartoAIComparisonViewModel: ObservableObject {
             .removeDuplicates()
             .sink { [weak self] query in
                 guard let self = self else { return }
+                // Bypass search if we just programmatically selected an item
+                if self.isSelectingProduct { return }
                 self.firstProductRecommendations = self.filterCatalog(for: query, excluding: self.selectedSecondProduct)
             }
             .store(in: &cancellables)
@@ -78,6 +81,8 @@ final class CartoAIComparisonViewModel: ObservableObject {
             .removeDuplicates()
             .sink { [weak self] query in
                 guard let self = self else { return }
+                // Bypass search if we just programmatically selected an item
+                if self.isSelectingProduct { return }
                 self.secondProductRecommendations = self.filterCatalog(for: query, excluding: self.selectedFirstProduct)
             }
             .store(in: &cancellables)
@@ -88,9 +93,14 @@ final class CartoAIComparisonViewModel: ObservableObject {
         guard !cleanQuery.isEmpty else { return [] }
         
         return allProductsCatalog.filter { product in
-            let matchesQuery = product.title.lowercased().contains(cleanQuery) ||
+            let displayTitle = self.cleanTitle(product.title).lowercased()
+            let rawTitle = product.title.lowercased()
+            
+            let matchesQuery = rawTitle.contains(cleanQuery) ||
+                               displayTitle.contains(cleanQuery) ||
                                product.vendor.lowercased().contains(cleanQuery) ||
                                product.productType.lowercased().contains(cleanQuery)
+            
             let isNotExcluded = product.id != excludedProduct?.id
             return matchesQuery && isNotExcluded
         }
@@ -101,15 +111,35 @@ final class CartoAIComparisonViewModel: ObservableObject {
         secondProductRecommendations = []
     }
     
+    // MARK: - Helper Formatting Logic
+    private func cleanTitle(_ title: String) -> String {
+        if let separatorIndex = title.firstIndex(of: "|") {
+            return title[title.index(after: separatorIndex)...].trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        return title
+    }
+    
     // MARK: - User Intent Actions
     func selectFirstProduct(_ product: Product) {
+        isSelectingProduct = true
         selectedFirstProduct = product
-        firstQuery = product.title
+        firstQuery = cleanTitle(product.title)
+        
+        // Reset flag after state settles
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.isSelectingProduct = false
+        }
     }
     
     func selectSecondProduct(_ product: Product) {
+        isSelectingProduct = true
         selectedSecondProduct = product
-        secondQuery = product.title
+        secondQuery = cleanTitle(product.title)
+        
+        // Reset flag after state settles
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.isSelectingProduct = false
+        }
     }
     
     func clearForm() {
@@ -133,7 +163,6 @@ final class CartoAIComparisonViewModel: ObservableObject {
         comparisonResult = nil
         
         do {
-            // Executing the analytical domain use case mapping array matrices directly to Groq Engine Repositories
             let response = try await compareUseCase.execute(productsToCompare: [first, second])
             self.comparisonResult = response
         } catch {

@@ -104,4 +104,17 @@ final class CartViewModel: ObservableObject {
             isLoading = false
         }
     }
+
+    func clearCart() {
+        Task {
+            isLoading = true
+            do {
+                // Communicates with your updated CartUseCaseProtocol to wipe line items
+                _ = try await useCase.clearCart()
+            } catch {
+                errorMessage = error.localizedDescription
+            }
+            isLoading = false
+        }
+    }
 }

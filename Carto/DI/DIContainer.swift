@@ -23,8 +23,7 @@ final class DIContainer {
     let favoritesLocalDataSource: FavoritesLocalDataSourceProtocol
     let favoritesRemoteDataSource: FavoritesRemoteDataSourceProtocol
     let imageSearchRepository: ImageSearchRepository
-
-
+    
     private init() {
         imageSearchRepository = ImageSearchRepositoryImpl()
         authRepository = AuthenticationRepositoryImpl()
@@ -35,10 +34,14 @@ final class DIContainer {
         addressRemoteDataSource = AddressGraphQLRemoteDataSource()
         favoritesLocalDataSource = FavoritesLocalDataSource()
         favoritesRemoteDataSource = FavoritesRemoteDataSource()
-
     }
 
-    // MARK: - Auth ViewModels
+    // MARK: - Shared State Accessors
+    var sharedCartViewModel: CartViewModel {
+        makeCartViewModel()
+    }
+
+    // MARK: - Auth Feature
     func makeLoginViewModel(router: AuthRouter) -> AuthLoginViewModel {
         AuthLoginViewModel(
             validator: validator,
@@ -46,7 +49,7 @@ final class DIContainer {
             router: router
         )
     }
-
+    
     func makeRegisterViewModel(router: AuthRouter) -> AuthRegisterViewModel {
         AuthRegisterViewModel(
             validator: validator,
@@ -159,6 +162,7 @@ final class DIContainer {
         )
     }
     
+    // MARK: - Cart Feature
     private(set) lazy var cartRepository: CartRepository = {
         CartRepositoryImpl(remote: CartGraphQLRemoteDataSource())
     }()
@@ -174,6 +178,7 @@ final class DIContainer {
         )
     }
 
+    // MARK: - Payment & Checkout Feature
     func makePaymobRepository() -> PaymobRepositoryProtocol {
         PaymobRepositoryImpl()
     }

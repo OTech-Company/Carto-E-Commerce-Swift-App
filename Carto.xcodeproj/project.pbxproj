@@ -37,6 +37,8 @@
 		6F6DD8512FF7F22C0099872E /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD84C2FF7F22C0099872E /* AppConstants.swift */; };
 		6F6DD8522FF7F22C0099872E /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD84D2FF7F22C0099872E /* NetworkConstants.swift */; };
 		6F6DD8542FF7F6520099872E /* AI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6DD8532FF7F6520099872E /* AI+Extensions.swift */; };
+		6F6F219E2FFF93F700BB79D0 /* PaymobSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F6F219C2FFF933000BB79D0 /* PaymobSDK.xcframework */; };
+		6F6F219F2FFF93F700BB79D0 /* PaymobSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6F6F219C2FFF933000BB79D0 /* PaymobSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F72AACB2FF9CD6C00848294 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F72AAC92FF9CD6C00848294 /* View+Extensions.swift */; };
 		6F72AACC2FF9CD6C00848294 /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F72AAC82FF9CD6C00848294 /* Routes.swift */; };
 		6F72AACD2FF9CD6C00848294 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F72AAC62FF9CD6C00848294 /* Router.swift */; };
@@ -142,8 +144,6 @@
 		D96CAD0A2FFD8DAD00263097 /* ShopifyAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CAD072FFD8DAD00263097 /* ShopifyAuthenticationService.swift */; };
 		D96CAD122FFDFF4C00263097 /* PaymobRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CAD112FFDFF4C00263097 /* PaymobRepositoryProtocol.swift */; };
 		D96CAD142FFDFFC800263097 /* PaymobRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CAD132FFDFFC800263097 /* PaymobRepositoryImpl.swift */; };
-		D96CAD252FFEE6F800263097 /* PaymobSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D96CAD242FFEE6F800263097 /* PaymobSDK.xcframework */; };
-		D96CAD262FFEE6F800263097 /* PaymobSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D96CAD242FFEE6F800263097 /* PaymobSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D96CAD2B2FFEECB100263097 /* PaymentProductItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CAD2A2FFEECB100263097 /* PaymentProductItemView.swift */; };
 		D97785E02FFD10FB00CE8275 /* DeliveryAddressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97785DF2FFD10FB00CE8275 /* DeliveryAddressCard.swift */; };
 		D97785E22FFD110600CE8275 /* EmptyAddressCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97785E12FFD110600CE8275 /* EmptyAddressCard.swift */; };
@@ -360,7 +360,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D96CAD262FFEE6F800263097 /* PaymobSDK.xcframework in Embed Frameworks */,
+				6F6F219F2FFF93F700BB79D0 /* PaymobSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,6 +399,7 @@
 		6F6DD84C2FF7F22C0099872E /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		6F6DD84D2FF7F22C0099872E /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		6F6DD8532FF7F6520099872E /* AI+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AI+Extensions.swift"; sourceTree = "<group>"; };
+		6F6F219C2FFF933000BB79D0 /* PaymobSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = PaymobSDK.xcframework; sourceTree = "<group>"; };
 		6F72AAC62FF9CD6C00848294 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		6F72AAC72FF9CD6C00848294 /* RouterViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterViewModifier.swift; sourceTree = "<group>"; };
 		6F72AAC82FF9CD6C00848294 /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
@@ -440,7 +441,6 @@
 		6FC963232FFEC0E20072ECE9 /* HomeAISheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAISheetView.swift; sourceTree = "<group>"; };
 		6FC963252FFEC1150072ECE9 /* View+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Animation.swift"; sourceTree = "<group>"; };
 		6FC9632F2FFEFFC20072ECE9 /* AsicsTiger.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = AsicsTiger.usdz; sourceTree = "<group>"; };
-		6FF819DA2FFE56B100705803 /* PaymobSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = PaymobSDK.xcframework; path = ../../../Downloads/PaymobSDK.xcframework; sourceTree = "<group>"; };
 		6FF819DD2FFE579300705803 /* ImgSearch+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImgSearch+Extensions.swift"; sourceTree = "<group>"; };
 		D57F105E2FF6AC6A00F421D4 /* BrandsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandsScreen.swift; sourceTree = "<group>"; };
 		D57F10602FF6ACA900F421D4 /* HomeBrandsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBrandsViewModel.swift; sourceTree = "<group>"; };
@@ -502,7 +502,6 @@
 		D96CAD072FFD8DAD00263097 /* ShopifyAuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopifyAuthenticationService.swift; sourceTree = "<group>"; };
 		D96CAD112FFDFF4C00263097 /* PaymobRepositoryProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymobRepositoryProtocol.swift; sourceTree = "<group>"; };
 		D96CAD132FFDFFC800263097 /* PaymobRepositoryImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymobRepositoryImpl.swift; sourceTree = "<group>"; };
-		D96CAD242FFEE6F800263097 /* PaymobSDK.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = PaymobSDK.xcframework; path = ../../Downloads/PaymobSDK.xcframework; sourceTree = "<group>"; };
 		D96CAD2A2FFEECB100263097 /* PaymentProductItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentProductItemView.swift; sourceTree = "<group>"; };
 		D97785DF2FFD10FB00CE8275 /* DeliveryAddressCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryAddressCard.swift; sourceTree = "<group>"; };
 		D97785E12FFD110600CE8275 /* EmptyAddressCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyAddressCard.swift; sourceTree = "<group>"; };
@@ -703,9 +702,9 @@
 			files = (
 				D96CAD032FFD8C7700263097 /* GoogleSignInSwift in Frameworks */,
 				D9E5F8612FF5DE6E0014DD91 /* FirebaseAuth in Frameworks */,
+				6F6F219E2FFF93F700BB79D0 /* PaymobSDK.xcframework in Frameworks */,
 				D96CAD012FFD8C7700263097 /* GoogleSignIn in Frameworks */,
 				D9E5F8632FF5DE6E0014DD91 /* FirebaseFirestore in Frameworks */,
-				6FC963122FFE71860072ECE9 /* PaymobSDK.xcframework in Frameworks */,
 				6F8953072FFF129F005B78D2 /* ARProductViewer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1053,7 +1052,7 @@
 		D927DA9F2FFB44E000417D9C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D96CAD242FFEE6F800263097 /* PaymobSDK.xcframework */,
+				6F6F219C2FFF933000BB79D0 /* PaymobSDK.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

@@ -16,9 +16,24 @@ protocol CartUseCaseProtocol {
     func removeLine(lineId: String) async throws -> CartModel
     func applyDiscount(code: String) async throws -> CartModel
     func removeDiscount() async throws -> CartModel
+    func clearCart() async throws -> CartModel?
 }
 
 final class CartUseCase: CartUseCaseProtocol {
+    func clearCart() async throws -> CartModel? {
+        guard let currentCart = try await repository.fetchCart(), !currentCart.lines.isEmpty else {
+            return nil
+        }
+        
+        var updatedCart: CartModel? = currentCart
+        
+        for line in currentCart.lines {
+            updatedCart = try await repository.removeLine(lineId: line.id)
+        }
+        
+        return updatedCart
+    }
+    
     private let repository: CartRepository
 
     init(repository: CartRepository) {

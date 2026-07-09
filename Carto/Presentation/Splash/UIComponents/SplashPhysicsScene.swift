@@ -63,10 +63,11 @@ class SplashPhysicsScene: SKScene {
         // Continuously rain items from the top
         let spawnTop = SKAction.run { [weak self] in self?.spawnItem() }
         
-        // Drop items steadily over the splash screen duration
+        // Tweaked for a 3-second splash: Spawns 8 items spaced 0.35s apart.
+        // Total animation time = ~2.8 seconds, cleanly fitting the timeline.
         let rainSequence = SKAction.repeat(
-            SKAction.sequence([spawnTop, SKAction.wait(forDuration: 0.25)]),
-            count: 30
+            SKAction.sequence([spawnTop, SKAction.wait(forDuration: 0.35)]),
+            count: 8
         )
 
         run(rainSequence)
@@ -93,8 +94,8 @@ class SplashPhysicsScene: SKScene {
         let maxX    = size.width - halfW - 16
         let randomX = minX < maxX ? CGFloat.random(in: minX...maxX) : size.width / 2
 
-        // Start items well above the visible screen so they fall into view naturally
-        let startY = size.height + halfH + CGFloat.random(in: 20...150)
+        // Start items slightly closer to the top view border so they fall into sight quicker
+        let startY = size.height + halfH + CGFloat.random(in: 10...50)
 
         sprite.position  = CGPoint(x: randomX, y: startY)
         sprite.zRotation = CGFloat.random(in: -0.5...0.5)
@@ -114,9 +115,6 @@ class SplashPhysicsScene: SKScene {
         ["leftWall", "rightWall"].forEach { childNode(withName: $0)?.removeFromParent() }
 
         let t: CGFloat = 50.0
-        
-        // ⚠️ THE FLOOR BOUNDARY HAS BEEN REMOVED HERE ⚠️
-        // Items will now fall freely out of the bottom of the screen.
 
         // We keep the side walls so items don't fly out the left/right sides
         addBoundary(name: "leftWall", size: CGSize(width: t, height: size.height * 3), pos: CGPoint(x: -t / 2, y: size.height / 2))
@@ -137,7 +135,6 @@ class SplashPhysicsScene: SKScene {
     }
 
     private func removeOffscreenItems() {
-        // Find nodes that have fallen completely out of view (y < -200) and destroy them
         children.forEach { node in
             if node.position.y < -200 {
                 node.removeFromParent()

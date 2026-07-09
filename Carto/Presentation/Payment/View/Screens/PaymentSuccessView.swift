@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct PaymentSuccessView: View {
+    // 1. Grab the shared cart view model from the environment environment
+    @EnvironmentObject var cartViewModel: CartViewModel
+    
     let order: AdminOrder
     let paymentMethod: PaymentMethod
     let onContinueShopping: () -> Void
@@ -56,7 +59,11 @@ struct PaymentSuccessView: View {
                 Spacer()
 
                 VStack(spacing: 12) {
-                    Button(action: onContinueShopping) {
+                    Button(action: {
+                        // Clear the active cart session before returning to store view contexts
+                        cartViewModel.clearCart()
+                        onContinueShopping()
+                    }) {
                         Text("Continue Shopping")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(.white)
@@ -67,7 +74,11 @@ struct PaymentSuccessView: View {
                     }
                     .buttonStyle(PremiumScaleButtonStyle())
 
-                    Button(action: onViewOrders) {
+                    Button(action: {
+                        // Clear the active cart session before entering the tracking screen profile view contexts
+                        cartViewModel.clearCart()
+                        onViewOrders()
+                    }) {
                         Text("View Orders")
                             .font(.system(size: 15, weight: .semibold))
                             .foregroundColor(.black)
@@ -100,8 +111,7 @@ struct PaymentSuccessView: View {
     }
 }
 
-import SwiftUI
-
+// MARK: - Payment Failure Screen Definition
 struct PaymentFailureView: View {
     let message: String
     let onRetry: () -> Void
