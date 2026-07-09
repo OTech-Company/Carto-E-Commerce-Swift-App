@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct HomeSearchHeader: View {
+    @ObservedObject var viewModel : HomeViewModel
     @Binding var searchText: String
     @FocusState var isSearchFocused: Bool
     @EnvironmentObject private var router: Router<AppRoute>
@@ -50,7 +51,9 @@ struct HomeSearchHeader: View {
                 .transition(.move(edge: .trailing).combined(with: .opacity))
             } else {
                 Button {
-                    router.push(to: .cart)
+                    viewModel.openCart {
+                        router.push(to: .cart)
+                    }
                 } label: {
                     Image(systemName: "cart.fill")
                         .font(.system(size: 20))

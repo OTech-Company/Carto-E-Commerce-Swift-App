@@ -1,3 +1,4 @@
+//payment
 //
 //  ProductCardViewModel.swift
 //  Carto
@@ -7,13 +8,17 @@
 
 import Foundation
 import Combine
-
 @MainActor
 final class ProductCardViewModel: ObservableObject {
     @Published private(set) var isFavorite: Bool
     @Published private(set) var cartQuantity: Int = 0
     @Published private(set) var isOutOfStock: Bool
-
+    
+    @Published var showAuthAlert: Bool = false
+    
+    private var isAuthenticated: Bool {
+        AuthSession.shared.sessionState.isAuthenticated
+    }
     private let repository: FavoritesRepository
     private let cartUseCase: CartUseCaseProtocol
     private let product: Product
@@ -56,6 +61,11 @@ final class ProductCardViewModel: ObservableObject {
     }
 
     func toggleFavorite(for product: Product) {
+        guard isAuthenticated else {
+            showAuthAlert = true
+            return
+        }
+        
         if isFavorite {
             repository.removeFavorite(productId: product.id)
         } else {
@@ -64,6 +74,11 @@ final class ProductCardViewModel: ObservableObject {
     }
 
     func addToCart() {
+        guard isAuthenticated else {
+            showAuthAlert = true
+            return
+        }
+        
         let color = product.colors.first ?? ""
         let size  = product.sizes.first ?? ""
         Task {
@@ -73,6 +88,11 @@ final class ProductCardViewModel: ObservableObject {
     }
 
     func incrementQuantity() {
+        guard isAuthenticated else {
+            showAuthAlert = true
+            return
+        }
+        
         guard let line = currentLine() else { addToCart(); return }
         Task {
             do { _ = try await cartUseCase.incrementLine(line) }
@@ -81,17 +101,26 @@ final class ProductCardViewModel: ObservableObject {
     }
 
     func decrementQuantity() {
+        guard isAuthenticated else {
+            showAuthAlert = true
+            return
+        }
+        
         guard let line = currentLine() else { return }
         Task {
             do { _ = try await cartUseCase.decrementLine(line) }
             catch { print("decrement failed: \(error)") }
         }
     }
-
+    
     private func currentLine() -> CartLine? {
         let variantIds = product.variants.compactMap {
             $0.adminGraphqlApiId ?? "gid://shopify/ProductVariant/\($0.id)"
         }
         return CartStateStore.shared.cart?.lines.first { variantIds.contains($0.variantId) }
+    }
+    
+    func logout() async {
+        await DIContainer.shared.authRepository.signOut()
     }
 }
