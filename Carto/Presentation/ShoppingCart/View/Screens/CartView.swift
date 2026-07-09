@@ -97,7 +97,7 @@ struct CartView: View {
             Button {
                 router.push(to: .payment(cart: cart))
             } label: {
-                checkoutLabel(color: .orange)
+                checkoutLabel(color: Color("PrimaryColor"))
             }
         } else {
             Button {} label: {
@@ -110,7 +110,7 @@ struct CartView: View {
     private func checkoutLabel(color: Color) -> some View {
         HStack(spacing: 8) {
             Image(systemName: "lock.fill")
-            Text("Proceed to Checkout")
+            Text("proceed_to_checkout")
                 .font(.subheadline.weight(.semibold))
             Spacer()
             Image(systemName: "arrow.right")
