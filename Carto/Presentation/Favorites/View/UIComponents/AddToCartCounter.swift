@@ -42,7 +42,7 @@ struct AddToCartCounter: View {
             HStack(spacing: 5) {
                 Image(systemName: "cart")
                     .font(.system(size: 11, weight: .bold))
-                Text(isOutOfStock ? "Out of Stock" : "Add to Cart")
+                Text(isOutOfStock ? "out_of_stock" : "add_to_cart")
                     .font(.system(size: 10, weight: .bold))
             }
             .foregroundColor(.white)

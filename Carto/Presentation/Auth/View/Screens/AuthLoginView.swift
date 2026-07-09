@@ -26,11 +26,11 @@ struct LoginView: View {
                             .frame(width: 80, height: 80)
                         
                         VStack(spacing: 6) {
-                            Text("Welcome to Carto")
+                            Text("welcome_to_carto")
                                 .font(.system(size: 24, weight: .bold))
                                 .foregroundColor(.primary)
                             
-                            Text("Your premium shopping destination.")
+                            Text("your_premium_shopping_destination")
                                 .font(.system(size: 14))
                                 .foregroundColor(.secondary)
                         }
@@ -39,8 +39,8 @@ struct LoginView: View {
                     
                     VStack(spacing: 20) {
                         AuthTextField(
-                            label: "Email",
-                            placeholder: "Enter your Email",
+                            label: "email",
+                            placeholder: "enter_your_email",
                             text: $viewModel.email,
                             error: viewModel.emailErrorMessage
                         ) {
@@ -52,8 +52,8 @@ struct LoginView: View {
                         
                         VStack(spacing: 12) {
                             AuthTextField(
-                                label: "Password",
-                                placeholder: "Enter your Password",
+                                label: "password",
+                                placeholder: "enter_your_password",
                                 text: $viewModel.password,
                                 error: viewModel.passwordErrorMessage,
                                 isSecure: true
@@ -66,7 +66,7 @@ struct LoginView: View {
                                 Spacer()
                                 
                                 Button(action: { viewModel.forgotPasswordTapped() }) {
-                                    Text("Forgot Password?")
+                                    Text("forgot_password")
                                         .font(.system(size: 14, weight: .medium))
                                         .foregroundColor(Color("PrimaryColor")) // Corporate branding orange asset
                                 }
@@ -77,7 +77,7 @@ struct LoginView: View {
                     .padding(.horizontal, 24)
                     
                     Button(action: { viewModel.login() }) {
-                        Text("Login")
+                        Text("login")
                             .font(.system(size: 16, weight: .bold))
                             .foregroundColor(Color(.systemBackground)) // High contrast text on primary background block
                             .frame(maxWidth: .infinity)
@@ -98,7 +98,7 @@ struct LoginView: View {
                     
                     HStack(spacing: 16) {
                         Rectangle().frame(height: 1).foregroundColor(Color(.systemGray5))
-                        Text("Or continue with")
+                        Text("or_continue_with")
                             .font(.system(size: 13))
                             .foregroundColor(.secondary) // Swapped out hard gray text color
                         Rectangle().frame(height: 1).foregroundColor(Color(.systemGray5))
@@ -113,7 +113,7 @@ struct LoginView: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 22, height: 22)
-                                Text("Sign in with Google")
+                                Text("sign_in_with_google")
                                     .font(.system(size: 15, weight: .semibold))
                                     .foregroundColor(.primary.opacity(0.75))
                             }
@@ -133,7 +133,7 @@ struct LoginView: View {
                     .padding(.bottom, 20)
                     
                     Button(action: { viewModel.continueAsGuest() }) {
-                        Text("Continue as Guest")
+                        Text("continue_as_guest")
                             .font(.system(size: 15, weight: .semibold))
                             .foregroundColor(.secondary) // Swapped out hard gray text color
                             .padding(.vertical, 8)
@@ -144,12 +144,12 @@ struct LoginView: View {
                     Spacer()
                     
                     HStack(spacing: 4) {
-                        Text("Don't have an account?")
+                        Text("dont_have_an_account")
                             .font(.system(size: 14))
                             .foregroundColor(.secondary) // Swapped out hard gray text color
                         
                         Button(action: { viewModel.signUpTapped()}) {
-                            Text("Sign up")
+                            Text("sign_up")
                                 .font(.system(size: 14, weight: .bold))
                                 .foregroundColor(Color("PrimaryColor")) // Corporate branding orange asset
                         }

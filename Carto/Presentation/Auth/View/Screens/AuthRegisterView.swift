@@ -32,8 +32,8 @@ struct RegisterView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 16) {
                         AuthTextField(
-                            label: "First Name",
-                            placeholder: "Enter your First Name",
+                            label: "first_name",
+                            placeholder: "enter_your_first_name",
                             text: $viewModel.firstName,
                             error: viewModel.firstNameErrorMessage
                         ) {
@@ -42,8 +42,8 @@ struct RegisterView: View {
                         .disabled(viewModel.isLoading)
                         
                         AuthTextField(
-                            label: "Last Name",
-                            placeholder: "Enter your Last Name",
+                            label: "last_name",
+                            placeholder: "enter_your_last_name",
                             text: $viewModel.lastName,
                             error: viewModel.lastNameErrorMessage
                         ) {
@@ -52,8 +52,8 @@ struct RegisterView: View {
                         .disabled(viewModel.isLoading)
                         
                         AuthTextField(
-                            label: "Email",
-                            placeholder: "Enter your Email",
+                            label: "email",
+                            placeholder: "enter_your_email",
                             text: $viewModel.email,
                             error: viewModel.emailErrorMessage
                         ) {
@@ -64,8 +64,8 @@ struct RegisterView: View {
                         .disabled(viewModel.isLoading)
                         
                         AuthTextField(
-                            label: "Password",
-                            placeholder: "Create Password",
+                            label: "password",
+                            placeholder: "create_password",
                             text: $viewModel.password,
                             error: viewModel.passwordErrorMessage,
                             isSecure: true
@@ -125,7 +125,7 @@ struct RegisterView: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 22, height: 22)
-                                Text("Sign in with Google")
+                                Text("sign_in_with_google")
                                     .font(.system(size: 15, weight: .semibold))
                                     .foregroundColor(.primary.opacity(0.75))
                             }

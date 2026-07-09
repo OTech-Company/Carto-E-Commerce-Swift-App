@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct AuthTextField: View {
-    let label: String
-    let placeholder: String
+    let label: LocalizedStringKey
+    let placeholder: LocalizedStringKey
     @Binding var text: String
     var error: String?
     var isSecure: Bool = false
