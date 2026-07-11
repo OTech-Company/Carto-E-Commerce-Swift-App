@@ -14,7 +14,7 @@ public final class ARQuickLookPresenter: NSObject {
     private var modelURL: URL?
     private var onDismiss: (() -> Void)?
 
-    public static let shared = ARQuickLookPresenter()
+    @MainActor public static let shared = ARQuickLookPresenter()
     private override init() {}
 
     @MainActor public func present(modelURL: URL, from viewController: UIViewController, onDismiss: @escaping () -> Void = {}) {
