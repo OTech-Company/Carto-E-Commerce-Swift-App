@@ -1,3 +1,4 @@
+//payment
 //
 //  ProductCardViewModel.swift
 //  Carto
@@ -111,7 +112,7 @@ final class ProductCardViewModel: ObservableObject {
             catch { print("decrement failed: \(error)") }
         }
     }
-
+    
     private func currentLine() -> CartLine? {
         let variantIds = product.variants.compactMap {
             $0.adminGraphqlApiId ?? "gid://shopify/ProductVariant/\($0.id)"

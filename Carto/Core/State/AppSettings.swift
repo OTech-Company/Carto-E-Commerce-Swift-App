@@ -57,7 +57,7 @@ enum AppCurrency: String, CaseIterable, Identifiable {
     
     var exchangeRate: Double {
         switch self {
-        case .dollar: return 1.0
+        case .dollar: return 1.0 / 48.0
         case .egyptianPound: return 1.0
         }
     }

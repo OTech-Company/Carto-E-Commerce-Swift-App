@@ -17,7 +17,7 @@ struct GuestBanner: View {
                 .foregroundStyle(.white)
 
             Text(
-                "Sign in to save your favorites, manage your cart, track orders, and enjoy the full experience."
+                "guest_banner_description"
             )
             .font(.subheadline)
             .foregroundStyle(.white.opacity(0.9))

@@ -41,6 +41,7 @@ final class OrderHistoryDetailViewModel: ObservableObject {
 // MARK: - View Structure
 struct OrderHistoryDetailView: View {
     @StateObject var viewModel: OrderHistoryDetailViewModel
+    @AppStorage("app_currency") var appCurrency: AppCurrency = .egyptianPound
     
     var body: some View {
         ZStack {
@@ -106,7 +107,7 @@ struct OrderHistoryDetailView: View {
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                         Spacer()
-                        Text("\(detail.currencyCode) \(detail.total)")
+                        Text(appCurrency.format(price: Double(detail.total) ?? 0))
                             .font(.headline)
                             .fontWeight(.bold)
                             .foregroundColor(.primary)
@@ -166,7 +167,7 @@ struct OrderHistoryDetailView: View {
                             Spacer()
                             
                             if let priceString = item.price {
-                                Text("\(detail.currencyCode) \(priceString)")
+                                Text(appCurrency.format(price: Double(priceString) ?? 0))
                                     .font(.system(size: 15, weight: .bold))
                                     .foregroundColor(.accentColor) // Tracks primary accent/tint style
                             }

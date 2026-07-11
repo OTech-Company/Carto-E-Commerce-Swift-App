@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - Design Tokens
 
 extension Color {
-    static let brandAccent = Color(hex: "FF5A00")
+    static let brandAccent = Color("PrimaryColor")
     static let successGreen = Color(hex: "00BC7D")
     static let premiumCardBg = Color.white
     static let premiumBackground = Color(hex: "F4F5F7")
@@ -434,7 +434,7 @@ struct StickyPaymentFooterView: View {
                     .frame(height: 54)
                     .background(
                         LinearGradient(
-                            colors: [Color.brandAccent, Color(hex: "FF7A00")],
+                            colors: [Color.brandAccent, Color.brandAccent.opacity(0.8)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )

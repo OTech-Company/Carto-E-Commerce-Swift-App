@@ -107,7 +107,6 @@ struct ProductCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-
             ZStack(alignment: .topLeading) {
                 imageView
                     .frame(maxWidth: .infinity)
@@ -166,7 +165,6 @@ struct ProductCard: View {
 
             // MARK: - Info Section
             VStack(alignment: .leading, spacing: 6) {
-
                 Text(product.title)
                     .font(.system(size: 13, weight: .bold))
                     .lineLimit(2)
@@ -246,17 +244,16 @@ struct ProductCard: View {
         .onLongPressGesture(minimumDuration: .infinity, pressing: { pressing in
             isPressed = pressing
         }, perform: {})
-        
         .alert("Login Required", isPresented: $viewModel.showAuthAlert) {
-                    Button("Cancel", role: .cancel) { }
-                    Button("Login") {
-                        Task{
-                           await viewModel.logout()
-                        }
-                    }
-                } message: {
-                    Text("Please log in to add items to your cart or manage your favorites.")
+            Button("Cancel", role: .cancel) { }
+            Button("Login") {
+                Task {
+                    await viewModel.logout()
                 }
+            }
+        } message: {
+            Text("Please log in to add items to your cart or manage your favorites.")
+        }
     }
 
     @ViewBuilder

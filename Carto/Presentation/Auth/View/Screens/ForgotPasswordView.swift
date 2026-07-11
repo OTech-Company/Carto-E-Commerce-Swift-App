@@ -45,8 +45,8 @@ struct ForgotPasswordView: View {
 
                         VStack(spacing: 24) {
                             AuthTextField(
-                                label: "Email",
-                                placeholder: "Enter your Email",
+                                label: "email",
+                                placeholder: "enter_your_email",
                                 text: $viewModel.email,
                                 error: viewModel.emailErrorMessage
                             ) {
